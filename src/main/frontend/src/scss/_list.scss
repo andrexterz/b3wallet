@@ -1,0 +1,45 @@
+/*
+================================================================================
+List component styles
+==============================================================================
+*/
+
+.list-group {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  list-style-type: none;
+  overflow: hidden;
+  border-radius: $form-control-border-radius;
+  margin: 0 $margin;
+  padding: 0;
+  border: 1px solid $list-border-color;
+
+  &-item {
+    display: flex;
+    flex: 1 0 calc(100% - #{$padding});
+    align-items: center;
+    background-color: $list-background-color;
+    transition: all .25s ease;
+
+    &.selected {
+      background-color: lighten($list-background-color, 10%);
+    }
+
+    &:hover {
+      transition: all .25s ease;
+      background-color: lighten($list-background-color, 5%);
+    }
+
+    & + & {
+      border-top: 1px solid $list-border-color;
+    }
+
+    .detail {
+      margin: $margin $margin $margin auto;
+      & > * {
+        margin: auto $margin;
+      }
+    }
+  }
+}

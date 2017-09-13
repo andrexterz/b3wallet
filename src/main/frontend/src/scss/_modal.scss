@@ -1,0 +1,59 @@
+/*
+================================================================================
+Modal component styles
+==============================================================================
+*/
+.modal {
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 2px 4px 10px $shadow-color, -2px -3px 20px lighten($shadow-color, 20%);
+  border-radius: $form-control-border-radius;
+  background: $container-background-color;
+  overflow: hidden;
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    margin: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(155, 155, 175, .75);
+  }
+
+  &-body {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 100%;
+    padding: $padding;
+  }
+
+  &-title {
+    display: flex;
+    flex: 1 0 100%;
+    align-items: center;
+    height: 60px;
+    padding: $padding;
+    background: darken($container-background-color, 5%);
+  }
+
+  &-close {
+    cursor: pointer;
+    margin-left: auto;
+    border: none;
+    color: $link-color;
+    background: none;
+    transition: all .25s ease;
+
+    &:focus, &:active, &:hover {
+      outline: none;
+      color: darken($link-color, 20%);
+      transition: all .25s ease;
+    }
+  }
+
+
+}

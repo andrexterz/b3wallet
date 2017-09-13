@@ -1,0 +1,42 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="left">Código</th>
+        <th class="left">Tipo</th>
+        <th class="right">Quantidade</th>
+        <th class="center">Data operação</th>
+        <th class="right">Preço</th>
+        <th class="right">Total Operação</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td class="right" colspan="6"><b>Total custódia: {{(precoMedioCompra/quantidadeCompra) * (quantidadeCompra - quantidadeVenda) | currency:'BRL':true:'1.2-2'}}</b></td>
+      </tr>
+      <tr>
+        <th class="right" colspan="6"><b>performance: {{getPerformance() || 0 | percent: '1.2-2'}}</b></th>
+      </tr>
+      <tr>
+        <th class="right" colspan="6"><b>Total custos operacionais: {{getCustosOperacionais() | currency:'BRL':true:'1.2-2'}}</b></th>
+      </tr>
+      <tr>
+        <th class="right" colspan="6">
+          <b *ngIf="precoMedioVenda">Lucro líquido: {{precoMedioVenda - (precoMedioCompra + getCustosOperacionais()) | currency:'BRL':true:'1.2-2'}}</b>
+          <b *ngIf="!precoMedioVenda">Lucro líquido: {{-getCustosOperacionais() | currency:'BRL':true:'1.2-2'}}</b>
+        </th>
+      </tr>
+
+    </tfoot>
+    <tbody>
+      <tr *ngFor="let operacao of operacoes">
+        <td class="left">{{operacao.acao.codigo}}</td>
+        <td class="left">{{operacao.operacao === 0 ? 'Compra': 'Venda'}}</td>
+        <td class="right">{{operacao.quantidade}}</td>
+        <td class="center">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</td>
+        <td class="right">{{operacao.valor | currency:'BRL':true:'1.2-2'}}</td>
+        <td class="right"><b>{{operacao.quantidade * operacao.valor | currency:'BRL':true:'1.2-2'}}</b></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

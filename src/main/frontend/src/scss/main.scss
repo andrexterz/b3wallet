@@ -1,0 +1,181 @@
+@import "reset";
+@import "variables";
+@import "list";
+@import "table";
+@import "form";
+@import "modal";
+/*
+================================================================================
+Tag styles
+==============================================================================
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Open-sans, sans-serif;
+}
+
+body {
+  background-color: #eeeeee;
+}
+
+/*
+================================================================================
+Grid component styles
+==============================================================================
+*/
+@for $g from 1 through $grid-divisor {
+  .g-#{$g} {
+    $size: $g/$grid-divisor * 100%;
+    width: calc(#{$size} - #{$margin*2});
+  }
+}
+
+
+/*
+================================================================================
+Generic component styles
+==============================================================================
+*/
+
+.title {
+  font-size: 2em;
+  margin: 0 0 $margin 0;
+  width: 100%;
+}
+
+.link {
+  cursor: pointer;
+  color: $link-color;
+  text-decoration: none;
+  &:hover {
+    color: darken($link-color, 20%);
+  }
+}
+
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: $circle-size;
+  height: $circle-size;
+  margin: $margin;
+  padding: $padding;
+  background: lighten($list-background-color, 5%);
+  border: 1px solid $list-border-color;
+}
+
+@each $alignment in (center, left, right, justify) {
+  .#{$alignment} {
+    text-align: $alignment;
+  }
+}
+
+
+/*
+================================================================================
+Navbar component styles
+==============================================================================
+*/
+.navbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: $nav-bar-height;
+  background: linear-gradient(90deg, lighten($nav-background-color, 5%) 0, $nav-background-color 10%);
+  border-bottom: 1px solid $nav-border-color;
+
+  &-brand {
+    flex: 0 0 auto;
+    margin: auto $margin;
+  }
+
+  &-collapse {
+    display: flex;
+    flex: 1 1 100%;
+  }
+
+  &-nav {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex: 1 0 auto;
+    align-items: flex-end;
+
+    .nav-item {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+
+      a {
+        color: darken($nav-item-color, 20%);
+        text-decoration: none;
+
+        &:hover {
+          color: $nav-item-color;
+        }
+      }
+
+      &:not(:first-child) {
+        margin-left: $margin * 2;
+      }
+    }
+  }
+
+  &-search {
+    display: flex;
+    padding: $padding;
+    input {
+      width: 15em;
+      padding: $padding;
+      border: $form-control-border;
+      border-radius: $form-control-border-radius 0 0 $form-control-border-radius;
+      transition: width .2s ease;
+
+      &:focus {
+        width: 30em;
+        transition: width .2s ease;
+      }
+    }
+
+    button {
+      width: 40px;
+      border-radius: 0 $form-control-border-radius $form-control-border-radius 0;
+    }
+  }
+}
+
+/*
+================================================================================
+Container component styles
+==============================================================================
+*/
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: $margin auto;
+  max-width: 1200px;
+  background: $container-background-color;
+  padding: $padding;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  margin: 0 $margin;
+  padding: $padding;
+  border-radius: $form-control-border-radius;
+  border: 1px solid $list-background-color;
+}
+
+
+.btn {
+  border-radius: $form-control-border-radius;
+  border: $form-control-border;
+  padding: $form-control-padding;
+}

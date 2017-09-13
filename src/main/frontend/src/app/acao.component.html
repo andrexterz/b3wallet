@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="form" *ngIf="acao">
+
+      <div class="title">
+          <span>Nome: </span> <strong>{{acao.nome}}</strong>
+      </div>
+
+      <div class="form-control">
+          <label>Código</label>
+          <input [(ngModel)]="acao.codigo" placeholder="código">
+      </div>
+      <button (click)="goBack()">Back</button>
+  </div>
+</div>

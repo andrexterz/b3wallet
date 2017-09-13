@@ -1,0 +1,27 @@
+
+/*
+================================================================================
+Table component styles
+==============================================================================
+*/
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    background-color: $list-background-color;
+  }
+
+  tfoot {
+    background-color: lighten($list-background-color, 5%);
+  }
+
+  tr {
+    border-top: 1px solid $list-border-color;
+  }
+
+  td, th {
+    padding: $padding;
+  }
+}

@@ -1,0 +1,19 @@
+/*
+================================================================================
+Form component styles
+==============================================================================
+*/
+.form {
+  &-inline {
+    display: flex;
+    flex: 1 1 auto;
+    padding: $margin;
+  }
+
+  &-control {
+    border-radius: $form-control-border-radius;
+    border: $form-control-border;
+    padding: $form-control-padding;
+    height: $form-control-height;
+  }
+}

@@ -1,0 +1,39 @@
+//=========================================================================
+//Generic component variables
+//=========================================================================
+$margin: 10px;
+$padding: 10px;
+$link-color: #777;
+$circle-size: 40px;
+$shadow-color: #999;
+
+//=========================================================================
+//Grid component variables
+//=========================================================================
+$grid-divisor: 12;
+//=========================================================================
+//Navbar component variables
+//=========================================================================
+$nav-background-color: #4d506b;
+$nav-border-color: darken($nav-background-color, 5%);
+$nav-bar-height: 60px;
+$nav-item-color: #eee;
+
+//=========================================================================
+//Form component variables
+//=========================================================================
+$form-control-border-color: #ccc;
+$form-control-border: 1px solid $form-control-border-color;
+$form-control-border-radius: 4px;
+$form-control-height: 28px;
+$form-control-padding: 4px;
+
+//=========================================================================
+//List component variables
+//=========================================================================
+$list-background-color: lighten($form-control-border-color, 10%);
+$list-border-color: $form-control-border-color;
+//=========================================================================
+//Container component variables
+//=========================================================================
+$container-background-color: #fefefe;
