@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.andrebarca.controllers.models;
+package com.andrebarca.models;
 
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,9 +22,22 @@ import javax.validation.constraints.Min;
 
 @Entity
 public class Operacao extends Base {
+
+    public Operacao() {
+    }
+
+    public Operacao(Acao acao, Double valor, Integer quantidade, Double custoOperacao, TipoOperacao tipoOperacao, Date dataOperacao) {
+        this.acao = acao;
+        this.valor = valor;
+        this.quantidade = quantidade;
+        this.custoOperacao = custoOperacao;
+        this.tipoOperacao = tipoOperacao;
+        this.dataOperacao = dataOperacao;
+    }
     
     
     @ManyToOne
+    @JoinColumn(name = "ACAO_ID")
     private Acao acao;
    
     private Double valor;

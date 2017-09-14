@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.andrebarca.controllers.models;
+package com.andrebarca.models;
+
+ /*
+ * @author andre
+ */
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-
-/**
- *
- * @author andre
- */
 
 @Entity
 public class Acao extends Base {
@@ -32,7 +32,7 @@ public class Acao extends Base {
     
     private String nome;
     
-    @OneToMany(mappedBy = "acao")
+    @OneToMany(mappedBy = "acao", cascade = CascadeType.ALL)
     private List<Operacao> operacaos;
 
     public String getCodigo() {
@@ -62,4 +62,8 @@ public class Acao extends Base {
         });
         this.operacaos = operacaos;
     }    
+    
+    public void addOperacao(Operacao operacao) {
+        this.operacaos.add(operacao);
+    }
 }

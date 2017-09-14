@@ -5,10 +5,13 @@
  */
 package com.andrebarca.controllers;
 
-import com.andrebarca.controllers.models.Acao;
+import com.andrebarca.models.Acao;
+import com.andrebarca.models.Operacao;
+import com.andrebarca.models.TipoOperacao;
 import com.andrebarca.repositories.AcaoRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +40,10 @@ public class Home {
     @PostConstruct
     public void runOnInit() {
         System.out.println("adicionando acao");
-        Acao acao = new Acao("PETR4", "Petrobras SA", new ArrayList<>());
+        Acao acao = new Acao("MGLU3", "Magazine Luiza SA", new ArrayList<>());
+        Operacao op = new Operacao(acao, 10.25, 100, 4.20, TipoOperacao.VENDA, Calendar.getInstance().getTime());
+        acao.addOperacao(op);
         System.out.println("Salvando entidade " + acao.toString());
         acaoRepository.save(acao);
-    }
+     }
 }

@@ -5,7 +5,7 @@
  */
 package com.andrebarca.repositories;
 
-import com.andrebarca.controllers.models.Operacao;
+import com.andrebarca.models.Operacao;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

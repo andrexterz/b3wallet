@@ -26,3 +26,4 @@ static/*
 node_modules/
 /nb-configuration.xml
 /nbactions.xml
+/src/main/resources/static/

@@ -5,7 +5,7 @@
  */
 package com.andrebarca.repositories;
 
-import com.andrebarca.controllers.models.Acao;
+import com.andrebarca.models.Acao;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
