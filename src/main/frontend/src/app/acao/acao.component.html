@@ -1,0 +1,31 @@
+<div class="container">
+    <ul class="list-group g-12">
+        <li *ngFor="let acao of acoes; let i = index" class="list-group-item">
+            <b>{{acao.nome}}</b> <a (click)="editAcao(acao, i)" class="detail link"><i class="fa fa-pencil"></i></a> 
+        </li>
+    </ul>
+    <div *ngIf="selectedAcao" class="modal-wrapper">
+        <div class="modal">
+            <header class="modal-title">
+                <h4>{{selectedAcao.nome}}</h4>
+                <button (click)="close()" class="modal-close"><i class="fa fa-close"></i></button>
+            </header>
+            <section class="modal-body">
+                <div class="form-inline">
+                    <div class="form-control g-4">
+                        <label>Código</label>
+                        <input [(ngModel)]="selectedAcao.codigo" placeholder="código">
+                    </div>
+                    <div class="form-control g-8">
+                        <label>Nome</label>
+                        <input [(ngModel)]="selectedAcao.nome" placeholder="código">
+                    </div>
+                    
+                    <button (click)="saveAcao()">salvar</button>
+                </div>
+            </section>
+        </div>
+
+    </div>
+</div>
+

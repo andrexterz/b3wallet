@@ -8,16 +8,19 @@ List component styles
   display: flex;
   flex: 1 1 auto;
   flex-wrap: wrap;
+  align-content: flex-start;
   list-style-type: none;
   overflow: hidden;
   border-radius: $form-control-border-radius;
-  margin: 0 $margin;
+  margin: 0 $margin auto;
   padding: 0;
   border: 1px solid $list-border-color;
 
   &-item {
     display: flex;
     flex: 1 0 calc(100% - #{$padding});
+    padding: $padding;
+    height: $list-height;   
     align-items: center;
     background-color: $list-background-color;
     transition: all .25s ease;

@@ -9,20 +9,22 @@ package com.andrebarca.models;
  * @author andre
  */
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Acao extends Base {
 
     public Acao() {
-        this.operacaos = new ArrayList<>();
+        this.operacaos = new HashSet<>();
     }
     
-    public Acao(String codigo, String nome, List<Operacao> operacoes) {
+    public Acao(String codigo, String nome,Set<Operacao> operacoes) {
         this.codigo = codigo;
         this.nome = nome;
         this.operacaos = operacoes;
@@ -32,8 +34,9 @@ public class Acao extends Base {
     
     private String nome;
     
-    @OneToMany(mappedBy = "acao", cascade = CascadeType.ALL)
-    private List<Operacao> operacaos;
+    @OneToMany(mappedBy = "acao", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private Set<Operacao> operacaos;
 
     public String getCodigo() {
         return codigo;
@@ -52,11 +55,11 @@ public class Acao extends Base {
     }
     
 
-    public List<Operacao> getOperacaos() {
+    public Set<Operacao> getOperacaos() {
         return operacaos;
     }
 
-    public void setOperacaos(List<Operacao> operacaos) {
+    public void setOperacaos(Set<Operacao> operacaos) {
         operacaos.forEach((operacao) -> {
             operacao.setAcao(this);
         });

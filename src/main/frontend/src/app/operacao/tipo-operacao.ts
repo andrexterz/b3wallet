@@ -1,4 +1,4 @@
-import { Acao } from "./acao";
+import { Acao } from "../acao/acao";
 import { OperacaoEnum } from './operacaoEnum';
 
 export class TipoOperacao {

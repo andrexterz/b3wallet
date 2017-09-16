@@ -1,4 +1,4 @@
-import { Acao } from './acao';
+import { Acao } from '../acao/acao';
 import {  TipoOperacao } from "./tipo-operacao";
 import {  OperacaoEnum } from "./operacaoEnum";
 

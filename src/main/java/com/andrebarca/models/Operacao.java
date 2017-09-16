@@ -5,6 +5,7 @@
  */
 package com.andrebarca.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -38,13 +39,14 @@ public class Operacao extends Base {
     
     @ManyToOne
     @JoinColumn(name = "ACAO_ID")
+    @JsonBackReference
     private Acao acao;
    
     private Double valor;
     
     @Min(value = 1)
     private Integer quantidade;
-    
+
     private Double custoOperacao;
     
     @Enumerated(EnumType.STRING)

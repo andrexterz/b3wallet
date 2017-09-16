@@ -4,27 +4,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule }   from '@angular/forms'
 
 import { AppComponent } from './app.component';
-import { AcaoComponent } from './acao.component';
-import { TipoOperacaoComponent } from './tipo-operacao.component';
-import { DashboardComponent } from './dashboard.component';
-import {AcaoService } from './acao.service';
-import {OperacaoService } from './tipo-operacao.service';
+import { AcaoComponent } from './acao/acao.component';
+import { TipoOperacaoComponent } from './operacao/tipo-operacao.component';
+import {AcaoService } from './acao/acao.service';
+import {OperacaoService } from './operacao/tipo-operacao.service';
+import { OperacaoComponent } from './operacao/operacao.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     AcaoComponent,
-    TipoOperacaoComponent
+    TipoOperacaoComponent,
+    OperacaoComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
-      {path: 'acao/edit/:id', component: AcaoComponent},
-      {path: 'dashboard', component: DashboardComponent},
-      {path: 'portfolio', component: TipoOperacaoComponent},
-      {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
+      {path: 'acoes', component: AcaoComponent},
+      {path: 'portfolio', component: TipoOperacaoComponent}
     ])
   ],
   providers: [AcaoService, OperacaoService],

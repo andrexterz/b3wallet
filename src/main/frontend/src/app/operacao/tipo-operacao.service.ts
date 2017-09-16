@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Acao } from './acao';
+import { Acao } from '../acao/acao';
 import { OPERACOES } from './operacoes.data';
 import { TipoOperacao } from "./tipo-operacao";
 

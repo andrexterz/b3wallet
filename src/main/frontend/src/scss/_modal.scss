@@ -10,6 +10,19 @@ Modal component styles
   border-radius: $form-control-border-radius;
   background: $container-background-color;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
+  
+  @media(min-width: $medium-device) {
+      width: 75%;
+      height: auto;
+  }
+  
+  @media(min-width: $large-device) {
+      width: 50%;
+      height: auto;
+  }
+  
 
   &-wrapper {
     display: flex;

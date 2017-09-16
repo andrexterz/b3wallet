@@ -6,7 +6,7 @@ import 'rxjs/add/operator/switchMap';
 import { OperacaoService } from './tipo-operacao.service';
 import { TipoOperacao } from "./tipo-operacao";
 import { OperacaoEnum } from "./operacaoEnum";
-import { Acao } from "./acao";
+import { Acao } from "../acao/acao";
 
 @Component({
   selector: 'tipo-operacao-component',
