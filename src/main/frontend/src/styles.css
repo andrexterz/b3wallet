@@ -3,6 +3,58 @@ body {
 
 /*
 ================================================================================
+Navbar component styles
+==============================================================================
+*/
+.navbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(90deg, #ff337d 0, #4d506b 20%);
+  border-bottom: 1px solid #42455c; }
+  .navbar-brand {
+    flex: 0 0 auto;
+    margin: auto 10px; }
+  .navbar-collapse {
+    display: flex;
+    flex: 1 1 100%; }
+  .navbar-nav {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex: 1 0 auto;
+    align-items: flex-end; }
+    .navbar-nav .nav-item {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center; }
+      .navbar-nav .nav-item a {
+        color: #bbbbbb;
+        text-decoration: none; }
+        .navbar-nav .nav-item a:hover {
+          color: #eee; }
+      .navbar-nav .nav-item:not(:first-child) {
+        margin-left: 20px; }
+  .navbar-search {
+    display: flex;
+    padding: 10px; }
+    .navbar-search input {
+      width: 15em;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+      transition: width .2s ease; }
+      .navbar-search input:focus {
+        width: 30em;
+        transition: width .2s ease; }
+    .navbar-search button {
+      width: 40px;
+      border: none;
+      border-radius: 0 4px 4px 0; }
+
+/*
+================================================================================
 List component styles
 ==============================================================================
 */
@@ -21,7 +73,7 @@ List component styles
     display: flex;
     flex: 1 0 calc(100% - 10px);
     padding: 10px;
-    height: 40px;
+    height: 50px;
     align-items: center;
     background-color: #e6e6e6;
     transition: all .25s ease; }
@@ -59,15 +111,66 @@ Table component styles
 Form component styles
 ==============================================================================
 */
-.form-inline {
+.form, .form-inline {
   display: flex;
+  flex-wrap: wrap;
   flex: 1 1 auto;
-  padding: 10px; }
-.form-control {
-  border-radius: 4px;
+  margin: 10px -10px; }
+  .form-inline {
+    flex-wrap: nowrap; }
+  .form-control {
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    height: 28px;
+    margin: 10px; }
+    .form-control input[type="text"] {
+      border-width: 0 0 1px 0;
+      border-color: #ccc;
+      height: 28px; }
+      .form-control input[type="text"]:required:valid, .form-control input[type="text"]:focus {
+        outline: none;
+        border-color: #999999; }
+        .form-control input[type="text"]:required:valid ~ label, .form-control input[type="text"]:focus ~ label {
+          font-size: 0.8em;
+          transform: translateY(-220%);
+          transition: all .1s linear; }
+      .form-control input[type="text"] ~ label {
+        cursor: text;
+        font-size: 1em;
+        height: 28px;
+        color: #888;
+        transform: translateY(-100%);
+        transition: all .1s linear; }
+
+/*
+================================================================================
+Form component styles
+==============================================================================
+*/
+.btn {
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #eee;
+  background-color: #8a7ca5;
   border: 1px solid #ccc;
-  padding: 4px;
-  height: 28px; }
+  border-radius: 4px;
+  padding: 5px 10px;
+  height: calc(30px + 5px); }
+  .btn + .btn {
+    margin: 0 5px; }
+  .btn:active {
+    background-color: #c0b8cf;
+    transition: all .1s ease-out; }
+  .btn-primary {
+    color: #fff;
+    background-color: #ff005d;
+    transition: all .1s ease-in; }
+    .btn-primary:active {
+      background-color: #ff669e;
+      transition: all .1s ease-out; }
 
 /*
 ================================================================================
@@ -102,18 +205,15 @@ Modal component styles
     right: 0;
     bottom: 0;
     background: rgba(155, 155, 175, 0.75); }
-  .modal-body {
-    display: flex;
-    flex-wrap: wrap;
-    flex: 1 1 100%;
-    padding: 10px; }
   .modal-title {
     display: flex;
     flex: 1 0 100%;
     align-items: center;
     height: 60px;
     padding: 10px;
-    background: #f1f1f1; }
+    color: #d6d7e1;
+    background: #42455c;
+    border-bottom: 1px solid #bebebe; }
   .modal-close {
     cursor: pointer;
     margin-left: auto;
@@ -125,6 +225,20 @@ Modal component styles
       outline: none;
       color: #444444;
       transition: all .25s ease; }
+  .modal-body {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex: 1 1 100%;
+    padding: 10px; }
+  .modal-footer {
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 10px;
+    background: #f1f1f1; }
 
 /*
 ================================================================================
@@ -181,15 +295,93 @@ Grid component styles
 .g-12 {
   width: calc(100% - 20px); }
 
+@media only screen and (min-width: 425px) {
+  .g-m-1 {
+    width: calc(8.33333% - 20px); }
+
+  .g-m-2 {
+    width: calc(16.66667% - 20px); }
+
+  .g-m-3 {
+    width: calc(25% - 20px); }
+
+  .g-m-4 {
+    width: calc(33.33333% - 20px); }
+
+  .g-m-5 {
+    width: calc(41.66667% - 20px); }
+
+  .g-m-6 {
+    width: calc(50% - 20px); }
+
+  .g-m-7 {
+    width: calc(58.33333% - 20px); }
+
+  .g-m-8 {
+    width: calc(66.66667% - 20px); }
+
+  .g-m-9 {
+    width: calc(75% - 20px); }
+
+  .g-m-10 {
+    width: calc(83.33333% - 20px); }
+
+  .g-m-11 {
+    width: calc(91.66667% - 20px); }
+
+  .g-m-12 {
+    width: calc(100% - 20px); } }
+@media only screen and (min-width: 768px) {
+  .g-l-1 {
+    width: calc(8.33333% - 20px); }
+
+  .g-l-2 {
+    width: calc(16.66667% - 20px); }
+
+  .g-l-3 {
+    width: calc(25% - 20px); }
+
+  .g-l-4 {
+    width: calc(33.33333% - 20px); }
+
+  .g-l-5 {
+    width: calc(41.66667% - 20px); }
+
+  .g-l-6 {
+    width: calc(50% - 20px); }
+
+  .g-l-7 {
+    width: calc(58.33333% - 20px); }
+
+  .g-l-8 {
+    width: calc(66.66667% - 20px); }
+
+  .g-l-9 {
+    width: calc(75% - 20px); }
+
+  .g-l-10 {
+    width: calc(83.33333% - 20px); }
+
+  .g-l-11 {
+    width: calc(91.66667% - 20px); }
+
+  .g-l-12 {
+    width: calc(100% - 20px); } }
 /*
 ================================================================================
 Generic component styles
 ==============================================================================
 */
 .title {
-  font-size: 2em;
-  margin: 0 0 10px 0;
-  width: 100%; }
+  display: flex;
+  font-size: 1.5em;
+  margin: 10px;
+  width: 100%;
+  font-weight: normal; }
+  .title .detail {
+    margin: 10px 10px 10px auto; }
+    .title .detail > * {
+      margin: auto 10px; }
 
 .link {
   cursor: pointer;
@@ -208,7 +400,8 @@ Generic component styles
   margin: 10px;
   padding: 10px;
   background: #f2f2f2;
-  border: 1px solid #ccc; }
+  border: 1px solid #ccc;
+  font-size: 0.8em; }
 
 .center {
   text-align: center; }
@@ -224,63 +417,13 @@ Generic component styles
 
 /*
 ================================================================================
-Navbar component styles
-==============================================================================
-*/
-.navbar {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 60px;
-  background: linear-gradient(90deg, #585b7a 0, #4d506b 10%);
-  border-bottom: 1px solid #42455c; }
-  .navbar-brand {
-    flex: 0 0 auto;
-    margin: auto 10px; }
-  .navbar-collapse {
-    display: flex;
-    flex: 1 1 100%; }
-  .navbar-nav {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex: 1 0 auto;
-    align-items: flex-end; }
-    .navbar-nav .nav-item {
-      display: flex;
-      flex: 0 0 auto;
-      align-items: center; }
-      .navbar-nav .nav-item a {
-        color: #bbbbbb;
-        text-decoration: none; }
-        .navbar-nav .nav-item a:hover {
-          color: #eee; }
-      .navbar-nav .nav-item:not(:first-child) {
-        margin-left: 20px; }
-  .navbar-search {
-    display: flex;
-    padding: 10px; }
-    .navbar-search input {
-      width: 15em;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px 0 0 4px;
-      transition: width .2s ease; }
-      .navbar-search input:focus {
-        width: 30em;
-        transition: width .2s ease; }
-    .navbar-search button {
-      width: 40px;
-      border-radius: 0 4px 4px 0; }
-
-/*
-================================================================================
 Container component styles
 ==============================================================================
 */
 .container {
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
   margin: 10px auto;
   max-width: 1200px;
   min-height: calc(100vh - 80px);
@@ -295,10 +438,5 @@ Container component styles
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #e6e6e6; }
-
-.btn {
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  padding: 4px; }
 
 /*# sourceMappingURL=styles.css.map */

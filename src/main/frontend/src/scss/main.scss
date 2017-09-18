@@ -1,8 +1,11 @@
+
 @import "reset";
 @import "variables";
+@import "nav";
 @import "list";
 @import "table";
 @import "form";
+@import "button";
 @import "modal";
 /*
 ================================================================================
@@ -11,15 +14,15 @@ Tag styles
 */
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html {
-  font-family: Open-sans, sans-serif;
+    font-family: Open-sans, sans-serif;
 }
 
 body {
-  background-color: #eeeeee;
+    background-color: #eeeeee;
 }
 
 /*
@@ -27,13 +30,31 @@ body {
 Grid component styles
 ==============================================================================
 */
+
 @for $g from 1 through $grid-divisor {
-  .g-#{$g} {
-    $size: $g/$grid-divisor * 100%;
-    width: calc(#{$size} - #{$margin*2});
-  }
+    .g-#{$g} {
+        $size: $g/$grid-divisor * 100%;
+        width: calc(#{$size} - #{$margin*2});
+    }
 }
 
+@media only screen and (min-width: $small-device) {
+    @for $g from 1 through $grid-divisor {
+        .g-m-#{$g} {
+            $size: $g/$grid-divisor * 100%;
+            width: calc(#{$size} - #{$margin*2});
+        }
+    }   
+}
+
+@media only screen and (min-width: $medium-device) {
+    @for $g from 1 through $grid-divisor {
+        .g-l-#{$g} {
+            $size: $g/$grid-divisor * 100%;
+            width: calc(#{$size} - #{$margin*2});
+        }
+    }   
+}
 
 /*
 ================================================================================
@@ -42,111 +63,47 @@ Generic component styles
 */
 
 .title {
-  font-size: 2em;
-  margin: 0 0 $margin 0;
-  width: 100%;
+    display: flex;
+    font-size: 1.5em;
+    margin: $margin;
+    width: 100%;
+    font-weight: normal;
+
+    .detail {
+        margin: $margin $margin $margin auto;
+        & > * {
+            margin: auto $margin;
+        }
+    }  
 }
 
 .link {
-  cursor: pointer;
-  color: $link-color;
-  text-decoration: none;
-  &:hover {
-    color: darken($link-color, 20%);
-  }
+    cursor: pointer;
+    color: $link-color;
+    text-decoration: none;
+    &:hover {
+        color: darken($link-color, 20%);
+    }
 }
 
 .circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  width: $circle-size;
-  height: $circle-size;
-  margin: $margin;
-  padding: $padding;
-  background: lighten($list-background-color, 5%);
-  border: 1px solid $list-border-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: $circle-size;
+    height: $circle-size;
+    margin: $margin;
+    padding: $padding;
+    background: lighten($list-background-color, 5%);
+    border: 1px solid $list-border-color;
+    font-size: 0.8em;
 }
 
 @each $alignment in (center, left, right, justify) {
-  .#{$alignment} {
-    text-align: $alignment;
-  }
-}
-
-
-/*
-================================================================================
-Navbar component styles
-==============================================================================
-*/
-.navbar {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: $nav-bar-height;
-  background: linear-gradient(90deg, lighten($nav-background-color, 5%) 0, $nav-background-color 10%);
-  border-bottom: 1px solid $nav-border-color;
-
-  &-brand {
-    flex: 0 0 auto;
-    margin: auto $margin;
-  }
-
-  &-collapse {
-    display: flex;
-    flex: 1 1 100%;
-  }
-
-  &-nav {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex: 1 0 auto;
-    align-items: flex-end;
-
-    .nav-item {
-      display: flex;
-      flex: 0 0 auto;
-      align-items: center;
-
-      a {
-        color: darken($nav-item-color, 20%);
-        text-decoration: none;
-
-        &:hover {
-          color: $nav-item-color;
-        }
-      }
-
-      &:not(:first-child) {
-        margin-left: $margin * 2;
-      }
+    .#{$alignment} {
+        text-align: $alignment;
     }
-  }
-
-  &-search {
-    display: flex;
-    padding: $padding;
-    input {
-      width: 15em;
-      padding: $padding;
-      border: $form-control-border;
-      border-radius: $form-control-border-radius 0 0 $form-control-border-radius;
-      transition: width .2s ease;
-
-      &:focus {
-        width: 30em;
-        transition: width .2s ease;
-      }
-    }
-
-    button {
-      width: 40px;
-      border-radius: 0 $form-control-border-radius $form-control-border-radius 0;
-    }
-  }
 }
 
 /*
@@ -155,28 +112,22 @@ Container component styles
 ==============================================================================
 */
 .container {
-  display: flex;
-  flex-wrap: wrap;
-  margin: $margin auto;
-  max-width: 1200px;
-  min-height: calc(100vh - #{$nav-bar-height + $margin * 2});
-  background: $container-background-color;
-  padding: $padding;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin: $margin auto;
+    max-width: 1200px;
+    min-height: calc(100vh - #{$nav-bar-height + $margin * 2});
+    background: $container-background-color;
+    padding: $padding;
 }
 
 .content {
-  display: flex;
-  flex-wrap: wrap;
-  flex: 1 1 auto;
-  margin: 0 $margin;
-  padding: $padding;
-  border-radius: $form-control-border-radius;
-  border: 1px solid $list-background-color;
-}
-
-
-.btn {
-  border-radius: $form-control-border-radius;
-  border: $form-control-border;
-  padding: $form-control-padding;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    margin: 0 $margin;
+    padding: $padding;
+    border-radius: $form-control-border-radius;
+    border: 1px solid $list-background-color;
 }

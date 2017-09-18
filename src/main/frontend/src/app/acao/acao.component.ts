@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
-import 'rxjs/add/operator/switchMap';
-
+import 'rxjs/add/operator/map';
 import { AcaoService } from './acao.service';
 import { Acao } from "./acao";
 
@@ -11,11 +10,11 @@ import { Acao } from "./acao";
   templateUrl: './acao.component.html'
 })
 export class AcaoComponent implements OnInit {
-    
+
     index: number = null;
     selectedAcao: Acao = null;
     acoes: Acao[] = [];
-    
+
 
     constructor(private acaoService: AcaoService,
       private route: ActivatedRoute,
@@ -23,20 +22,20 @@ export class AcaoComponent implements OnInit {
       }
 
     ngOnInit(): void {
-        this.acaoService.getAcoes().then(acoes => this.acoes = acoes);
+        this.acaoService.getAcoes().subscribe(acoes => this.acoes = acoes.map(acao => Object.assign(new Acao(), acao)));
     }
-    
-    
+
+
     editAcao(acao: Acao, index: number): void {
          this.selectedAcao = Object.assign({}, acao);
          this.index = index;
     }
-    
+
     saveAcao(): void {
         if (this.selectedAcao) {
-            this.acoes[this.index] = Object.assign({}, this.selectedAcao);
+            this.acoes[this.index] = Object.assign(new Acao(), this.selectedAcao);
         }
-        
+
         this.close();
     }
 

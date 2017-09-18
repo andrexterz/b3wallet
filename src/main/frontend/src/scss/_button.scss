@@ -1,0 +1,38 @@
+/*
+================================================================================
+Form component styles
+==============================================================================
+*/
+.btn {
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $btn-color;
+    background-color: $btn-background;
+    border: $form-control-border;
+    border-radius: $form-control-border-radius;
+    padding: $form-control-padding/2 $form-control-padding;
+    height: calc(30px + #{$form-control-padding/2});
+    
+    & + & {
+        margin: 0 $margin/2;
+    }
+    
+    &:active {
+        background-color: lighten($btn-background, 20%);
+        transition: all .1s ease-out;
+    }
+
+    &-primary {
+        color: $btn-color-primary;
+        background-color: $btn-background-primary;
+        transition: all .1s ease-in;
+
+        &:active {
+            background-color: lighten($btn-background-primary, 20%);
+            transition: all .1s ease-out;
+        }
+
+    }
+}

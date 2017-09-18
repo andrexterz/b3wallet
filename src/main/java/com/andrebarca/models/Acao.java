@@ -21,13 +21,13 @@ import javax.persistence.OneToMany;
 public class Acao extends Base {
 
     public Acao() {
-        this.operacaos = new HashSet<>();
+        this.operacoes = new HashSet<>();
     }
     
     public Acao(String codigo, String nome,Set<Operacao> operacoes) {
         this.codigo = codigo;
         this.nome = nome;
-        this.operacaos = operacoes;
+        this.operacoes = operacoes;
     }
     
     private String codigo;
@@ -36,7 +36,7 @@ public class Acao extends Base {
     
     @OneToMany(mappedBy = "acao", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
-    private Set<Operacao> operacaos;
+    private Set<Operacao> operacoes;
 
     public String getCodigo() {
         return codigo;
@@ -56,17 +56,17 @@ public class Acao extends Base {
     
 
     public Set<Operacao> getOperacaos() {
-        return operacaos;
+        return operacoes;
     }
 
     public void setOperacaos(Set<Operacao> operacaos) {
         operacaos.forEach((operacao) -> {
             operacao.setAcao(this);
         });
-        this.operacaos = operacaos;
+        this.operacoes = operacaos;
     }    
     
     public void addOperacao(Operacao operacao) {
-        this.operacaos.add(operacao);
+        this.operacoes.add(operacao);
     }
 }

@@ -4,16 +4,47 @@ Form component styles
 ==============================================================================
 */
 .form {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  margin: $margin -#{$margin};
+    
   &-inline {
-    display: flex;
-    flex: 1 1 auto;
-    padding: $margin;
+    @extend .form;
+    flex-wrap: nowrap;
   }
 
   &-control {
+    display: flex;
+    flex-direction: column;
     border-radius: $form-control-border-radius;
-    border: $form-control-border;
-    padding: $form-control-padding;
     height: $form-control-height;
+    margin: $margin;
+    
+ 
+    input[type="text"] {
+        border-width: 0 0 1px 0;
+        border-color: $form-control-border-color;
+        height: $form-control-height;
+
+        &:required:valid, &:focus {
+            outline: none;
+            border-color: darken($form-control-border-color, 20%);
+            & ~ label {
+                font-size: 0.8em;
+                transform: translateY(-220%);
+                transition: all .1s linear;
+            }
+        }
+        
+        & ~ label {
+         cursor: text;
+         font-size: 1em;
+         height: $form-control-height;
+         color: $form-control-color;
+         transform: translateY(-100%);
+         transition: all .1s linear;
+        }
+     }
   }
 }

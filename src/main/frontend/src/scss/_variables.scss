@@ -8,20 +8,34 @@ $circle-size: 40px;
 $shadow-color: #999;
 
 //=========================================================================
+//Pallete
+//=========================================================================
+$default-color: #4d506b;
+$primary-color: #ff005d;
+$secondary-color: #8a7ca5;
+
+//=========================================================================
 //Breakpoints
 //=========================================================================
-$small-device: 320px;
+$small-device: 425px;
 $medium-device: 768px;
 $large-device: 1200px;
+$screen-map: (
+    l: $large-device,
+    m: $medium-device,
+    s: $small-device
+ );
 //=========================================================================
 //Grid component variables
 //=========================================================================
 $grid-divisor: 12;
+
 //=========================================================================
 //Navbar component variables
 //=========================================================================
-$nav-background-color: #4d506b;
-$nav-border-color: darken($nav-background-color, 5%);
+$nav-background-color-1: $primary-color;
+$nav-background-color-2: $default-color;
+$nav-border-color: darken($nav-background-color-2, 5%);
 $nav-bar-height: 60px;
 $nav-item-color: #eee;
 
@@ -32,14 +46,24 @@ $form-control-border-color: #ccc;
 $form-control-border: 1px solid $form-control-border-color;
 $form-control-border-radius: 4px;
 $form-control-height: 28px;
-$form-control-padding: 4px;
+$form-control-padding: 10px;
+$form-control-color: #888;
+
+//=========================================================================
+//Button component variables
+//=========================================================================
+$btn-color-primary: #fff;
+$btn-background-primary: $primary-color;
+$btn-color: #eee;
+$btn-background: $secondary-color;
 
 //=========================================================================
 //List component variables
 //=========================================================================
 $list-background-color: lighten($form-control-border-color, 10%);
 $list-border-color: $form-control-border-color;
-$list-height: 40px;
+$list-height: 50px;
+
 //=========================================================================
 //Container component variables
 //=========================================================================
