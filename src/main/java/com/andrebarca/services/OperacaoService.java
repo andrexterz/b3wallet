@@ -23,7 +23,7 @@ public class OperacaoService {
     @Autowired
     OperacaoRepository operacaoRepository;
 
-    @RequestMapping(value = "/operacoes", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/operacoes", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Operacao> listOperacoes() {
         Iterable<Operacao> operacoes = this.operacaoRepository.findAll();
         operacoes.forEach(op -> {

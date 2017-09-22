@@ -9,8 +9,12 @@ import com.andrebarca.models.Acao;
 import com.andrebarca.repositories.AcaoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,8 +28,14 @@ public class AcaoService {
     @Autowired
     AcaoRepository acaoRepository;
     
-    @RequestMapping(value = "/acoes", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Acao> listAcoes() {
+    @RequestMapping(value = "/api/acoes/save", method = RequestMethod.POST)
+    public ResponseEntity<?> save(@RequestBody Acao acao) {
+        System.out.println("salvando acao: " + acao.getNome());
+        return new ResponseEntity<>(acao, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/api/acoes", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Acao> list() {
         Iterable<Acao> acoes = this.acaoRepository.findAll();
         acoes.forEach(a -> {
             System.out.println("acao: " + a.getCodigo());

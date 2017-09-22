@@ -71,6 +71,8 @@ Generic component styles
 
     .detail {
         margin: $margin $margin $margin auto;
+        cursor: pointer;
+        
         & > * {
             margin: auto $margin;
         }
@@ -82,7 +84,7 @@ Generic component styles
     color: $link-color;
     text-decoration: none;
     &:hover {
-        color: darken($link-color, 20%);
+        color: lighten($link-color, 10%);
     }
 }
 

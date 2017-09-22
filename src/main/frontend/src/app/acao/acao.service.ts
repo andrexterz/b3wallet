@@ -13,9 +13,13 @@ import { Acao } from './acao';
 export class AcaoService {
 
     constructor(private http: Http) {}
+    
+    saveAcao(acao: Acao): void {
+        this.http.post("/b3wallet/api/acoes/save", acao).subscribe(data => console.log(data));
+    }
 
     getAcoes(): Observable<Acao[]> {
-        return this.http.get("http://localhost:8080/b3wallet/acoes").map((res: Response) => res.json());
+        return this.http.get("/b3wallet/api/acoes").map((res: Response) => res.json());
     }
 
     getAcaoById(id: number): Promise<Acao> {

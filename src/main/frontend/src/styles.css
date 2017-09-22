@@ -379,7 +379,8 @@ Generic component styles
   width: 100%;
   font-weight: normal; }
   .title .detail {
-    margin: 10px 10px 10px auto; }
+    margin: 10px 10px 10px auto;
+    cursor: pointer; }
     .title .detail > * {
       margin: auto 10px; }
 
@@ -388,7 +389,7 @@ Generic component styles
   color: #777;
   text-decoration: none; }
   .link:hover {
-    color: #444444; }
+    color: #919191; }
 
 .circle {
   display: flex;

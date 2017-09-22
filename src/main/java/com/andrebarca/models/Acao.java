@@ -55,11 +55,11 @@ public class Acao extends Base {
     }
     
 
-    public Set<Operacao> getOperacaos() {
+    public Set<Operacao> getOperacoes() {
         return operacoes;
     }
 
-    public void setOperacaos(Set<Operacao> operacaos) {
+    public void setOperacoes(Set<Operacao> operacaos) {
         operacaos.forEach((operacao) -> {
             operacao.setAcao(this);
         });

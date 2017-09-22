@@ -24,7 +24,12 @@ export class AcaoComponent implements OnInit {
     ngOnInit(): void {
         this.acaoService.getAcoes().subscribe(acoes => this.acoes = acoes.map(acao => Object.assign(new Acao(), acao)));
     }
-
+    
+    addAcao(): void {
+        console.log("adicionando ação");
+        this.selectedAcao = new Acao();
+        this.index = null;
+    }
 
     editAcao(acao: Acao, index: number): void {
          this.selectedAcao = Object.assign({}, acao);
@@ -33,9 +38,14 @@ export class AcaoComponent implements OnInit {
 
     saveAcao(): void {
         if (this.selectedAcao) {
-            this.acoes[this.index] = Object.assign(new Acao(), this.selectedAcao);
+            let acao: Acao = Object.assign(new Acao(), this.selectedAcao);
+            this.acaoService.saveAcao(acao);
+            if (this.index) {
+                this.acoes[this.index] = acao;
+            } else {
+                this.acoes.push(acao);
+            }
         }
-
         this.close();
     }
 
