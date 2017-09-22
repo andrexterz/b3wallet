@@ -223,7 +223,8 @@ Modal component styles
     transition: all .25s ease; }
     .modal-close:focus, .modal-close:active, .modal-close:hover {
       outline: none;
-      color: #444444;
+      color: #b7b7b7;
+      transform: scale(1.25);
       transition: all .25s ease; }
   .modal-body {
     display: flex;
@@ -389,7 +390,7 @@ Generic component styles
   color: #777;
   text-decoration: none; }
   .link:hover {
-    color: #919191; }
+    color: #aaaaaa; }
 
 .circle {
   display: flex;

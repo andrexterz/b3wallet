@@ -58,7 +58,8 @@ Modal component styles
 
     &:focus, &:active, &:hover {
       outline: none;
-      color: darken($link-color, 20%);
+      color: lighten($link-color, 25%);
+      transform: scale(1.25);
       transition: all .25s ease;
     }
   }

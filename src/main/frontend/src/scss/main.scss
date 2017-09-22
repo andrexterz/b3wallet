@@ -84,7 +84,7 @@ Generic component styles
     color: $link-color;
     text-decoration: none;
     &:hover {
-        color: lighten($link-color, 10%);
+        color: lighten($link-color, 20%);
     }
 }
 
