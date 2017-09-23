@@ -1,4 +1,5 @@
 <div class="container">
+  <h4 class="title">Operações<a class="detail"><i class="fa fa-plus-circle"></i></a></h4>
   <table class="table">
     <thead>
       <tr>
@@ -31,7 +32,7 @@
     <tbody>
       <tr *ngFor="let operacao of operacoes">
         <td class="left">{{operacao.acao.codigo}}</td>
-        <td class="left">{{operacao.operacao === 0 ? 'Compra': 'Venda'}}</td>
+        <td class="left">{{operacao.tipoOperacao === "COMPRA" ? 'Compra': 'Venda'}}</td>
         <td class="right">{{operacao.quantidade}}</td>
         <td class="center">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</td>
         <td class="right">{{operacao.valor | currency:'BRL':true:'1.2-2'}}</td>

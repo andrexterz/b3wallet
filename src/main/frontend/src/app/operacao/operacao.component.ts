@@ -2,10 +2,9 @@ import { Component,  OnInit, Input } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
-
+import * as moment from 'moment';
 import { OperacaoService } from './operacao.service';
 import { Operacao } from "./operacao";
-import { OperacaoEnum } from "./operacaoEnum";
 import { Acao } from "../acao/acao";
 
 @Component({
@@ -29,10 +28,10 @@ export class OperacaoComponent implements OnInit {
       }
 
     ngOnInit(): void {
-      this.operacaoService.getOperacoes().then(operacoes => {
+      this.operacaoService.getOperacoes().subscribe(operacoes => {
         this.operacoes = operacoes;
         operacoes.forEach(op => {
-          if (op.tipoOperacao === OperacaoEnum.COMPRA) {
+          if (op.tipoOperacao === 'COMPRA') {
             this.precoMedioCompra += op.valor * op.quantidade;
             this.quantidadeCompra += op.quantidade;
 
@@ -46,10 +45,13 @@ export class OperacaoComponent implements OnInit {
 
     getCustosOperacionais(): number {
       let totalCustos:number = 0;
+      let meses:Set<number> = new Set();
 
       let objCustos = this.operacoes.reduce(function(r, a) {
-        r[a.dataOperacao.toLocaleDateString()] = r[a.dataOperacao.toLocaleDateString()] || 0;
-        r[a.dataOperacao.toLocaleDateString()] += a.valor * a.quantidade;
+        let k = moment(a.dataOperacao, "YYYY-MM-DD");
+        meses.add(k.month());
+        r[k.toLocaleString()] = r[k.toLocaleString()] || 0;
+        r[k.toLocaleString()] += a.valor * a.quantidade;
         return r;
       }, Object.create(null));
 
@@ -72,12 +74,8 @@ export class OperacaoComponent implements OnInit {
         }
       });
 
-      // emolumentos e custódia bovespa
-      let quantidadeMeses = new Set(Object.keys(objCustos).map(d => d.split("/")[1])).size;
       let emolumentos = (this.precoMedioVenda + this.precoMedioCompra) * 0.000325;
-      let custodia = (this.precoMedioVenda + this.precoMedioCompra) <= 5000? 8.18 * quantidadeMeses : 8.65 * quantidadeMeses;
-      console.log(emolumentos);
-      console.log(custodia);
+      let custodia = (this.precoMedioVenda + this.precoMedioCompra) <= 5000 ? 8.18 * meses.size : 8.65 * meses.size;
       return totalCustos + emolumentos + custodia;
     }
 

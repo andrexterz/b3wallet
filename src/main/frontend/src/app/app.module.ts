@@ -4,6 +4,7 @@ import {APP_BASE_HREF} from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule }   from '@angular/forms'
+import { MomentModule } from 'angular2-moment';
 import { AppComponent } from './app.component';
 import { AcaoComponent } from './acao/acao.component';
 import {AcaoService } from './acao/acao.service';
@@ -20,6 +21,7 @@ import { OperacaoComponent } from './operacao/operacao.component';
     BrowserModule,
     HttpModule,
     FormsModule,
+    MomentModule,
     RouterModule.forRoot([
       {path: 'dashboard', component: AcaoComponent},
       {path: 'portfolio', component: OperacaoComponent},

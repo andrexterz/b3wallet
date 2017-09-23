@@ -30,16 +30,13 @@ public class AcaoService {
     
     @RequestMapping(value = "/api/acoes/save", method = RequestMethod.POST)
     public ResponseEntity<?> save(@RequestBody Acao acao) {
-        System.out.println("salvando acao: " + acao.getNome());
-        return new ResponseEntity<>(acao, HttpStatus.CREATED);
+        Acao savedObj = this.acaoRepository.save(acao);
+        return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/api/acoes", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Acao> list() {
         Iterable<Acao> acoes = this.acaoRepository.findAll();
-        acoes.forEach(a -> {
-            System.out.println("acao: " + a.getCodigo());
-        }); 
         return (List) acoes ;
     }
 }

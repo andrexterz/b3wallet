@@ -5,7 +5,7 @@
  */
 package com.andrebarca.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -39,7 +39,7 @@ public class Operacao extends Base {
     
     @ManyToOne
     @JoinColumn(name = "ACAO_ID")
-    @JsonBackReference
+    @JsonIgnoreProperties("operacoes")
     private Acao acao;
    
     private Double valor;

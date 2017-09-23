@@ -1,5 +1,4 @@
 import { Operacao } from '../operacao/operacao';
-import { OperacaoEnum } from '../operacao/operacaoEnum';
  export class Acao {
 
     id: number;
@@ -8,8 +7,6 @@ import { OperacaoEnum } from '../operacao/operacaoEnum';
     operacoes: Operacao[] = [];
   
     getCustodia(): number {
-        console.log("função getCustodia() foi chamada");
-        
         let totalCustodia:number = 0;
         
             this.operacoes.forEach((op: Operacao) => {

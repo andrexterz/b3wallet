@@ -9,7 +9,7 @@ package com.andrebarca.models;
  * @author andre
  */
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -35,7 +35,7 @@ public class Acao extends Base {
     private String nome;
     
     @OneToMany(mappedBy = "acao", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @JsonIgnoreProperties("acao")
     private Set<Operacao> operacoes;
 
     public String getCodigo() {
