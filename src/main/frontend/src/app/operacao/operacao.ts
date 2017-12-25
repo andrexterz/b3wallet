@@ -7,4 +7,5 @@ export class Operacao {
   dataOperacao: Date;
   quantidade: number;
   tipoOperacao: string;
+  custoOperacao: number;
 }

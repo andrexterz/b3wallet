@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import * as moment from 'moment';
 import { OperacaoService } from './operacao.service';
+import { AcaoService } from '../acao/acao.service';
 import { Operacao } from "./operacao";
 import { Acao } from "../acao/acao";
 
@@ -13,16 +14,18 @@ import { Acao } from "../acao/acao";
   providers: [OperacaoService]
 })
 export class OperacaoComponent implements OnInit {
-
-    @Input() acao: Acao;
     operacoes: Operacao[] = [];
+    acoes: Acao[];
     precoMedioCompra :number = 0;
     precoMedioVenda: number = 0;
     quantidadeCompra: number = 0;
     quantidadeVenda: number = 0;
+    index: number = null;
+    selectedOperacao: Operacao = null;
 
     constructor(
       private operacaoService: OperacaoService,
+      private acaoService: AcaoService,
       private route: ActivatedRoute,
       private location: Location) {
       }
@@ -41,7 +44,14 @@ export class OperacaoComponent implements OnInit {
           }
         });
       });
+      this.acaoService.getAcoes().subscribe(acoes => this.acoes = acoes.map(acao => Object.assign(new Acao(), acao)));
     }
+    
+    addOperacao(): void {
+        console.log("adicionando operação");
+        this.selectedOperacao = new Operacao();
+        this.index = null;
+    }    
 
     getCustosOperacionais(): number {
       let totalCustos:number = 0;
@@ -82,4 +92,17 @@ export class OperacaoComponent implements OnInit {
     getPerformance(): number {
       return (this.precoMedioVenda / ((this.precoMedioCompra / this.quantidadeCompra) * this.quantidadeVenda)) - 1;
     }
+    
+    saveOperacao(): void {
+        console.log("save operacao");
+        if(this.selectedOperacao) {
+            let operacao: Operacao = Object.assign(new Operacao(), this.selectedOperacao);
+            //let acao = Object.assign(new Acao(), this.acao);
+            console.log(operacao);
+        }
+    }
+    
+    close(): void {
+        this.selectedOperacao = null;
+    }    
 }

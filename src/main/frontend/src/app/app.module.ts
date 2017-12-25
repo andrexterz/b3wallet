@@ -3,7 +3,7 @@ import { HttpModule } from '@angular/http';
 import {APP_BASE_HREF} from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule }   from '@angular/forms'
+import { FormsModule }   from '@angular/forms';
 import { MomentModule } from 'angular2-moment';
 import { AppComponent } from './app.component';
 import { AcaoComponent } from './acao/acao.component';

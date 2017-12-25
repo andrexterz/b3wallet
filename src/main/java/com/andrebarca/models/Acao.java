@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -30,6 +31,7 @@ public class Acao extends Base {
         this.operacoes = operacoes;
     }
     
+    @Column(unique = true)
     private String codigo;
     
     private String nome;

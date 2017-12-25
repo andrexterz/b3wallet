@@ -124,24 +124,52 @@ Form component styles
     border-radius: 4px;
     height: 28px;
     margin: 10px; }
-    .form-control input[type="text"] {
+    .form-control input[type="text"],
+    .form-control input[type="number"],
+    .form-control input[type="password"],
+    .form-control input[type="date"],
+    .form-control select {
       border-width: 0 0 1px 0;
       border-color: #ccc;
-      height: 28px; }
-      .form-control input[type="text"]:required:valid, .form-control input[type="text"]:focus {
+      background-color: transparent;
+      height: 28px;
+      min-height: 28px;
+      z-index: 1; }
+      .form-control input[type="text"]:required:valid, .form-control input[type="text"]:focus,
+      .form-control input[type="number"]:required:valid,
+      .form-control input[type="number"]:focus,
+      .form-control input[type="password"]:required:valid,
+      .form-control input[type="password"]:focus,
+      .form-control input[type="date"]:required:valid,
+      .form-control input[type="date"]:focus,
+      .form-control select:required:valid,
+      .form-control select:focus {
         outline: none;
         border-color: #999999; }
-        .form-control input[type="text"]:required:valid ~ label, .form-control input[type="text"]:focus ~ label {
+        .form-control input[type="text"]:required:valid ~ label, .form-control input[type="text"]:focus ~ label,
+        .form-control input[type="number"]:required:valid ~ label,
+        .form-control input[type="number"]:focus ~ label,
+        .form-control input[type="password"]:required:valid ~ label,
+        .form-control input[type="password"]:focus ~ label,
+        .form-control input[type="date"]:required:valid ~ label,
+        .form-control input[type="date"]:focus ~ label,
+        .form-control select:required:valid ~ label,
+        .form-control select:focus ~ label {
           font-size: 0.8em;
-          transform: translateY(-220%);
+          transform: translateY(-250%);
           transition: all .1s linear; }
-      .form-control input[type="text"] ~ label {
+      .form-control input[type="text"] ~ label,
+      .form-control input[type="number"] ~ label,
+      .form-control input[type="password"] ~ label,
+      .form-control input[type="date"] ~ label,
+      .form-control select ~ label {
         cursor: text;
         font-size: 1em;
         height: 28px;
         color: #888;
         transform: translateY(-100%);
-        transition: all .1s linear; }
+        transition: all .1s linear;
+        z-index: 0; }
 
 /*
 ================================================================================

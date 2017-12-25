@@ -22,17 +22,24 @@ Form component styles
     margin: $margin;
     
  
-    input[type="text"] {
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    input[type="date"],
+    select {
         border-width: 0 0 1px 0;
         border-color: $form-control-border-color;
+        background-color: transparent;
         height: $form-control-height;
-
+        min-height: $form-control-height;
+        z-index: 1;
+        
         &:required:valid, &:focus {
             outline: none;
             border-color: darken($form-control-border-color, 20%);
             & ~ label {
                 font-size: 0.8em;
-                transform: translateY(-220%);
+                transform: translateY(-250%);
                 transition: all .1s linear;
             }
         }
@@ -44,6 +51,7 @@ Form component styles
          color: $form-control-color;
          transform: translateY(-100%);
          transition: all .1s linear;
+         z-index: 0;
         }
      }
   }

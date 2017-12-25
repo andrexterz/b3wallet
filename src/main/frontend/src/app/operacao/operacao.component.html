@@ -1,43 +1,73 @@
 <div class="container">
-  <h4 class="title">Operações<a class="detail"><i class="fa fa-plus-circle"></i></a></h4>
-  <table class="table">
-    <thead>
-      <tr>
-        <th class="left">Código</th>
-        <th class="left">Tipo</th>
-        <th class="right">Quantidade</th>
-        <th class="center">Data operação</th>
-        <th class="right">Preço</th>
-        <th class="right">Total Operação</th>
-      </tr>
-    </thead>
-    <tfoot>
-      <tr>
-        <td class="right" colspan="6"><b>Total custódia: {{(precoMedioCompra/quantidadeCompra) * (quantidadeCompra - quantidadeVenda) | currency:'BRL':true:'1.2-2'}}</b></td>
-      </tr>
-      <tr>
-        <th class="right" colspan="6"><b>performance: {{getPerformance() || 0 | percent: '1.2-2'}}</b></th>
-      </tr>
-      <tr>
-        <th class="right" colspan="6"><b>Total custos operacionais: {{getCustosOperacionais() | currency:'BRL':true:'1.2-2'}}</b></th>
-      </tr>
-      <tr>
-        <th class="right" colspan="6">
-          <b *ngIf="precoMedioVenda">Lucro líquido: {{precoMedioVenda - (precoMedioCompra + getCustosOperacionais()) | currency:'BRL':true:'1.2-2'}}</b>
-          <b *ngIf="!precoMedioVenda">Lucro líquido: {{-getCustosOperacionais() | currency:'BRL':true:'1.2-2'}}</b>
-        </th>
-      </tr>
+    <h4 class="title">Operações<a class="detail" title="adicionar operação" (click)="addOperacao()"><i class="fa fa-plus-circle"></i></a></h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="left">Código</th>
+                <th class="left">Tipo</th>
+                <th class="right">Quantidade</th>
+                <th class="center">Data operação</th>
+                <th class="right">Preço</th>
+                <th class="right">Total Operação</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td class="right" colspan="6"><b>Total custódia: {{(precoMedioCompra/quantidadeCompra) * (quantidadeCompra - quantidadeVenda) | currency:'BRL':true:'1.2-2'}}</b></td>
+            </tr>
+            <tr>
+                <th class="right" colspan="6"><b>performance: {{getPerformance() || 0 | percent: '1.2-2'}}</b></th>
+            </tr>
+            <tr>
+                <th class="right" colspan="6"><b>Total custos operacionais: {{getCustosOperacionais() | currency:'BRL':true:'1.2-2'}}</b></th>
+            </tr>
+            <tr>
+                <th class="right" colspan="6">
+                    <b *ngIf="precoMedioVenda">Lucro líquido: {{precoMedioVenda - (precoMedioCompra + getCustosOperacionais()) | currency:'BRL':true:'1.2-2'}}</b>
+                    <b *ngIf="!precoMedioVenda">Lucro líquido: {{-getCustosOperacionais() | currency:'BRL':true:'1.2-2'}}</b>
+                </th>
+            </tr>
 
-    </tfoot>
-    <tbody>
-      <tr *ngFor="let operacao of operacoes">
-        <td class="left">{{operacao.acao.codigo}}</td>
-        <td class="left">{{operacao.tipoOperacao === "COMPRA" ? 'Compra': 'Venda'}}</td>
-        <td class="right">{{operacao.quantidade}}</td>
-        <td class="center">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</td>
-        <td class="right">{{operacao.valor | currency:'BRL':true:'1.2-2'}}</td>
-        <td class="right"><b>{{operacao.quantidade * operacao.valor | currency:'BRL':true:'1.2-2'}}</b></td>
-      </tr>
-    </tbody>
-  </table>
+        </tfoot>
+        <tbody>
+            <tr *ngFor="let operacao of operacoes">
+                <td class="left">{{operacao.acao.codigo}}</td>
+                <td class="left">{{operacao.tipoOperacao === "COMPRA" ? 'Compra': 'Venda'}}</td>
+                <td class="right">{{operacao.quantidade}}</td>
+                <td class="center">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</td>
+                <td class="right">{{operacao.valor | currency:'BRL':true:'1.2-2'}}</td>
+                <td class="right"><b>{{operacao.quantidade * operacao.valor | currency:'BRL':true:'1.2-2'}}</b></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+<form #operacaoForm="ngForm" class="modal-wrapper" *ngIf="selectedOperacao">
+    <div class="modal">
+        <header class="modal-title">
+            <h4 class="title">Nova operação</h4>
+            <button (click)="close()" class="modal-close"><i class="fa fa-close"></i></button>
+        </header>
+        <section class="modal-body">
+            <div class="form">
+                <div class="form-control g-12 g-m-6 g-l-3">
+                    <select id="acao" name="acao" [(ngModel)]="selectedOperacao.acao" required>
+                        <option>Código</option>
+                        <option *ngFor="let acao of acoes" [ngValue]="acao">{{acao.codigo}}</option>
+                    </select>
+                    <!--<label for="acao">Código</label>-->
+                </div>
+                <div class="form-control g-12 g-m-6 g-l-3">
+                    <input id="valorOperacao" name="valor" [(ngModel)]="selectedOperacao.valor" type="number" min="0.0" step="0.01" required>
+                    <label for="valorOperacao">Valor</label>
+                </div>
+                <div class="form-control g-2 g-m-6 g-l-3">
+                    <input id="dataOperacao" type="date" name="dataOperacao" [(ngModel)]="selectedOperacao.dataOperacao" pattern="dd/mm/yyyy" required>
+                    <label for="dataOperacao">Data</label>
+                </div>
+            </div>
+        </section>
+        <footer class="modal-footer">
+            <button type="submit" (click)="saveOperacao()" class="btn btn-primary">salvar</button>
+        </footer>
+    </div>
+</form>
