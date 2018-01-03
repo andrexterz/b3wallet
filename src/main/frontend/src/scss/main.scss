@@ -25,6 +25,10 @@ body {
     background-color: #eeeeee;
 }
 
+a {
+    cursor: pointer;
+}
+
 /*
 ================================================================================
 Grid component styles
@@ -106,6 +110,17 @@ Generic component styles
     .#{$alignment} {
         text-align: $alignment;
     }
+}
+
+@each $side in (top, right, bottom, left) {
+    @for $m from 1 through 10 {
+        .margin-#{$side}-#{$m} {
+            margin-#{$side}: $m * $margin;
+        }
+}
+
+
+    
 }
 
 /*

@@ -5,8 +5,8 @@
  */
 package com.andrebarca.services;
 
-import com.andrebarca.models.Operacao;
-import com.andrebarca.repositories.OperacaoRepository;
+import com.andrebarca.models.Dividendo;
+import com.andrebarca.repositories.DividendoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,25 +21,26 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author andre
  */
-@RestController
-public class OperacaoService {
 
-    @Autowired
-    OperacaoRepository operacaoRepository;
+@RestController
+public class DividendoService {
     
-    @RequestMapping(value = "/api/operacoes/save", method = RequestMethod.POST)
-    public ResponseEntity<?> save(@RequestBody Operacao operacao) {
-        Operacao savedObj = operacaoRepository.save(operacao);
+    @Autowired
+    DividendoRepository dividendoRepository;
+    
+    @RequestMapping(value = "/api/dividendos/save", method = RequestMethod.POST)
+    public ResponseEntity<?> save(@RequestBody Dividendo dividendo) {
+        Dividendo savedObj = dividendoRepository.save(dividendo);
         return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/api/operacoes", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Operacao> list() {
-        Iterable<Operacao> operacoes = this.operacaoRepository.findAll();
-        operacoes.forEach(op -> {
-            System.out.println("código: " + op.getAcao().getCodigo() + ": " + "operacao:" + op.getTipoOperacao());
+    @RequestMapping(value = "/api/dividendos", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Dividendo> list() {
+        Iterable<Dividendo> dividendos = this.dividendoRepository.findAll();
+        dividendos.forEach(div -> {
+            System.out.println("código: " + div.getAcao().getCodigo() + ": " + "dividendo:" + div.getValor());
         });
-        return (List) operacoes;
-    }
-}
+        return (List) dividendos;
+    }    
     
+}

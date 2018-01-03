@@ -14,8 +14,8 @@ export class AcaoService {
 
     constructor(private http: Http) {}
     
-    saveAcao(acao: Acao): void {
-        this.http.post("/b3wallet/api/acoes/save", acao).subscribe(data => console.log(data));
+    saveAcao(acao: Acao): Observable<Acao>  {
+        return this.http.post("/b3wallet/api/acoes/save", acao).map((res: Response) => res.json());
     }
 
     getAcoes(): Observable<Acao[]> {

@@ -13,7 +13,7 @@
         </thead>
         <tfoot>
             <tr>
-                <td class="right" colspan="6"><b>Total custódia: {{(precoMedioCompra/quantidadeCompra) * (quantidadeCompra - quantidadeVenda) | currency:'BRL':true:'1.2-2'}}</b></td>
+                <td class="right" colspan="6"><b>Total custódia: {{totalCustodia | currency:'BRL':true:'1.2-2'}}</b></td>
             </tr>
             <tr>
                 <th class="right" colspan="6"><b>performance: {{getPerformance() || 0 | percent: '1.2-2'}}</b></th>
@@ -23,20 +23,19 @@
             </tr>
             <tr>
                 <th class="right" colspan="6">
-                    <b *ngIf="precoMedioVenda">Lucro líquido: {{precoMedioVenda - (precoMedioCompra + getCustosOperacionais()) | currency:'BRL':true:'1.2-2'}}</b>
-                    <b *ngIf="!precoMedioVenda">Lucro líquido: {{-getCustosOperacionais() | currency:'BRL':true:'1.2-2'}}</b>
+                    <i>Lucro líquido: {{lucroLiquido | currency:'BRL':true:'1.2-2'}}</i>
                 </th>
             </tr>
 
         </tfoot>
         <tbody>
-            <tr *ngFor="let operacao of operacoes">
+            <tr *ngFor="let operacao of operacoes; let idx = index">
                 <td class="left">{{operacao.acao.codigo}}</td>
                 <td class="left">{{operacao.tipoOperacao === "COMPRA" ? 'Compra': 'Venda'}}</td>
                 <td class="right">{{operacao.quantidade}}</td>
                 <td class="center">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</td>
                 <td class="right">{{operacao.valor | currency:'BRL':true:'1.2-2'}}</td>
-                <td class="right"><b>{{operacao.quantidade * operacao.valor | currency:'BRL':true:'1.2-2'}}</b></td>
+                <td class="right"><b>{{operacao.quantidade * operacao.valor | currency:'BRL':true:'1.2-2'}}</b><a class="margin-left-2" (click)="editOperacao(operacao, idx)"><i class="fa fa-pencil"></i></a></td>
             </tr>
         </tbody>
     </table>
@@ -44,25 +43,32 @@
 <form #operacaoForm="ngForm" class="modal-wrapper" *ngIf="selectedOperacao">
     <div class="modal">
         <header class="modal-title">
-            <h4 class="title">Nova operação</h4>
+            <h4 class="title">{{index === null ? 'Nova Operação': 'Editando Operação'}}</h4>
             <button (click)="close()" class="modal-close"><i class="fa fa-close"></i></button>
         </header>
         <section class="modal-body">
             <div class="form">
-                <div class="form-control g-12 g-m-6 g-l-3">
-                    <select id="acao" name="acao" [(ngModel)]="selectedOperacao.acao" required>
-                        <option>Código</option>
+                <div class="form-control g-2 g-m-6 g-l-4">
+                    <input id="dataOperacao" type="date" name="dataOperacao" [(ngModel)]="selectedOperacao.dataOperacao" pattern="dd/mm/yyyy" required>
+                    <label for="dataOperacao">Data</label>
+                </div>
+                <div class="form-control g-12 g-m-6 g-l-4">
+                    <select id="acao" name="acao" [compareWith]="byAcao" [(ngModel)]="selectedOperacao.acao" required>
                         <option *ngFor="let acao of acoes" [ngValue]="acao">{{acao.codigo}}</option>
                     </select>
-                    <!--<label for="acao">Código</label>-->
+                    <label for="acao">Código</label>
                 </div>
-                <div class="form-control g-12 g-m-6 g-l-3">
+                <div class="form-control g-12 g-m-6 g-l-4">
                     <input id="valorOperacao" name="valor" [(ngModel)]="selectedOperacao.valor" type="number" min="0.0" step="0.01" required>
                     <label for="valorOperacao">Valor</label>
                 </div>
-                <div class="form-control g-2 g-m-6 g-l-3">
-                    <input id="dataOperacao" type="date" name="dataOperacao" [(ngModel)]="selectedOperacao.dataOperacao" pattern="dd/mm/yyyy" required>
-                    <label for="dataOperacao">Data</label>
+                <div class="form-control g-12 g-m-6 g-l-4">
+                    <input id="custoOperacao" name="custoOperacao" [(ngModel)]="selectedOperacao.custoOperacao" type="number" min="0.0" step="0.01" required>
+                    <label for="custorOperacao">Custo Operação</label>
+                </div>
+                <div class="form-control g-12 g-m-6 g-l-4">
+                    <input id="quantidade" name="quantidade" [(ngModel)]="selectedOperacao.quantidade" type="number" min="1" step="1" required>
+                    <label for="quantidade">Quantidade</label>
                 </div>
             </div>
         </section>

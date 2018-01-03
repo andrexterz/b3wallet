@@ -39,12 +39,15 @@ export class AcaoComponent implements OnInit {
     saveAcao(): void {
         if (this.selectedAcao) {
             let acao: Acao = Object.assign(new Acao(), this.selectedAcao);
-            this.acaoService.saveAcao(acao);
-            if (this.index) {
-                this.acoes[this.index] = acao;
-            } else {
-                this.acoes.push(acao);
-            }
+            this.acaoService.saveAcao(acao).subscribe(obj => {
+                let savedObj: Acao = Object.assign(new Acao(), obj);
+                if (this.index) {
+                    this.acoes[this.index] = savedObj;
+                } else {
+                    this.acoes.push(savedObj);
+                }
+            });
+  
         }
         this.close();
     }

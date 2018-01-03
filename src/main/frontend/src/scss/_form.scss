@@ -33,8 +33,10 @@ Form component styles
         height: $form-control-height;
         min-height: $form-control-height;
         z-index: 1;
+        color: transparent;
         
         &:required:valid, &:focus {
+            color: initial;
             outline: none;
             border-color: darken($form-control-border-color, 20%);
             & ~ label {
@@ -49,7 +51,7 @@ Form component styles
          font-size: 1em;
          height: $form-control-height;
          color: $form-control-color;
-         transform: translateY(-100%);
+         transform: translateY(-120%);
          transition: all .1s linear;
          z-index: 0;
         }
