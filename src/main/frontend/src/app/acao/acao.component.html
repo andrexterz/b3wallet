@@ -1,11 +1,32 @@
 <div class="container">
     <h4 class="title">Ações <a class="detail" title="adicionar ação" (click)="addAcao()"><i class="fa fa-plus-circle"></i></a></h4>
+    <!--
     <ul class="list-group g-12">
         <li *ngFor="let acao of acoes; let idx = index" class="list-group-item">
             <span class="circle" title="Ações em custódia">{{acao.getCustodia()}}</span>
-            <b>{{acao.nome}}</b> <a (click)="editAcao(acao, idx)" class="detail link"><i class="fa fa-pencil"></i></a> 
+            <b class="g-1 margin-left-1">{{acao.codigo}}</b><b>{{acao.nome}}</b> <a (click)="editAcao(acao, idx)" class="detail link"><i class="fa fa-pencil"></i></a> 
         </li>
     </ul>
+    -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="left">Código</th>
+                <th class="left">Quantidade</th>
+                <th class="left">Nome</th>
+                <th class="right"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let acao of acoes; let idx = index">
+                <td>{{acao.codigo}}</td>
+                <td>{{acao.getCustodia()}}</td>
+                <td>{{acao.nome}}</td>
+                <td class="right"><a (click)="editAcao(acao, idx)" class="detail link"><i class="fa fa-pencil"></i></a></td>
+            </tr>
+        </tbody>
+        
+    </table>
 </div>
 <form #acaoForm="ngForm" *ngIf="selectedAcao" class="modal-wrapper">
     <div class="modal">

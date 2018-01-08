@@ -70,21 +70,30 @@ export class OperacaoComponent implements OnInit {
     }
 
     addOperacao(): void {
-        console.log("adicionando operação");
         this.selectedOperacao = new Operacao();
         this.index = null;
     }
     
     editOperacao(operacao: Operacao, index: number): void {
-         this.selectedOperacao = Object.assign({}, operacao);
+        console.log(operacao.dataOperacao);
+         this.selectedOperacao = Object.assign(new Operacao(), operacao);
          this.index = index;
     }
             
     saveOperacao(): void {
-        console.log("save operacao");
         if(this.selectedOperacao) {
             let operacao: Operacao = Object.assign(new Operacao(), this.selectedOperacao);
+            this.operacaoService.saveOperacao(operacao).subscribe(obj => {
+                let savedObj: Operacao = Object.assign(new Operacao(), obj);
+                console.log(obj.dataOperacao);
+                if (this.index !== null) {
+                    this.operacoes[this.index] = savedObj;
+                } else {
+                    this.operacoes.push(savedObj);
+                }
+            });
         }
+        this.close();
     }
     
     //compare method for directive compareWith

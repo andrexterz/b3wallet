@@ -5,6 +5,7 @@
  */
 package com.andrebarca.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -53,6 +54,7 @@ public class Operacao extends Base {
     private TipoOperacao tipoOperacao;
     
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dataOperacao;
 
     public Acao getAcao() {

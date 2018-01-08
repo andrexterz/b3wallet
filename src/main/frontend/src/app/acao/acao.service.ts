@@ -15,11 +15,11 @@ export class AcaoService {
     constructor(private http: Http) {}
     
     saveAcao(acao: Acao): Observable<Acao>  {
-        return this.http.post("/b3wallet/api/acoes/save", acao).map((res: Response) => res.json());
+        return this.http.post("/api/acoes/save", acao).map((res: Response) => res.json());
     }
 
     getAcoes(): Observable<Acao[]> {
-        return this.http.get("/b3wallet/api/acoes").map((res: Response) => res.json());
+        return this.http.get("/api/acoes").map((res: Response) => res.json());
     }
 
     getAcaoById(id: number): Promise<Acao> {

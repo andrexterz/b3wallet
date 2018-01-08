@@ -5,6 +5,7 @@
  */
 package com.andrebarca.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -43,6 +44,7 @@ public class Dividendo extends Base {
     private Date dataEx;
 
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dataPagamento;
 
     public Acao getAcao() {

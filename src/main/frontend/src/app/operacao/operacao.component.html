@@ -31,7 +31,7 @@
         <tbody>
             <tr *ngFor="let operacao of operacoes; let idx = index">
                 <td class="left">{{operacao.acao.codigo}}</td>
-                <td class="left">{{operacao.tipoOperacao === "COMPRA" ? 'Compra': 'Venda'}}</td>
+                <td class="left">{{operacao.tipoOperacao}}</td>
                 <td class="right">{{operacao.quantidade}}</td>
                 <td class="center">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</td>
                 <td class="right">{{operacao.valor | currency:'BRL':true:'1.2-2'}}</td>
@@ -58,6 +58,13 @@
                     </select>
                     <label for="acao">Código</label>
                 </div>
+                <div class="form-control g-12 g-m-6 g-l-4">
+                    <select id="tipoOperacao" name="tipoOperacao" [(ngModel)]="selectedOperacao.tipoOperacao" required>
+                        <option value="COMPRA">COMPRA</option>
+                        <option value="VENDA">VENDA</option>
+                    </select>
+                    <label for="tipoOperacao">Operação</label>
+                </div>                
                 <div class="form-control g-12 g-m-6 g-l-4">
                     <input id="valorOperacao" name="valor" [(ngModel)]="selectedOperacao.valor" type="number" min="0.0" step="0.01" required>
                     <label for="valorOperacao">Valor</label>

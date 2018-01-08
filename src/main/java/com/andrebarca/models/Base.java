@@ -5,6 +5,7 @@
  */
 package com.andrebarca.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -28,10 +29,12 @@ public abstract class Base implements Serializable {
     private long id;
     
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(insertable = true, updatable = false)
     private Date dataCriacao;
 
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dataAtualizacao;
 
     public long getId() {
