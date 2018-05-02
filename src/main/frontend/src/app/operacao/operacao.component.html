@@ -13,7 +13,13 @@
         </thead>
         <tfoot>
             <tr>
-                <td class="right" colspan="6"><b>Total custódia: {{totalCustodia | currency:'BRL':true:'1.2-2'}}</b></td>
+                <td class="right" colspan="6"><b>Total compra: {{precoTotalCompra | currency:'BRL':true:'1.2-2'}}</b></td>
+            </tr>
+            <tr>
+                <td class="right" colspan="6"><b>Total venda: {{precoTotalVenda | currency:'BRL':true:'1.2-2'}}</b></td>
+            </tr>
+            <tr>
+                <td class="right" colspan="6"><b>Total custódia: {{getTotalCustodia() | currency:'BRL':true:'1.2-2'}}</b></td>
             </tr>
             <tr>
                 <th class="right" colspan="6"><b>performance: {{getPerformance() || 0 | percent: '1.2-2'}}</b></th>
@@ -49,7 +55,7 @@
         <section class="modal-body">
             <div class="form">
                 <div class="form-control g-2 g-m-6 g-l-4">
-                    <input id="dataOperacao" type="date" name="dataOperacao" [(ngModel)]="selectedOperacao.dataOperacao" pattern="dd/mm/yyyy" required>
+                    <input id="dataOperacao" type="date" name="dataOperacao" [(ngModel)]="selectedOperacao.dataOperacao" pattern="dd/mm/yyyy" autofocus="autofocus" required>
                     <label for="dataOperacao">Data</label>
                 </div>
                 <div class="form-control g-12 g-m-6 g-l-4">

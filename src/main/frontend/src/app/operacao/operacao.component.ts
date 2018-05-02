@@ -1,4 +1,4 @@
-import { Component,  OnInit, Input } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
@@ -15,12 +15,10 @@ import { Acao } from "../acao/acao";
 })
 export class OperacaoComponent implements OnInit {
     operacoes: Operacao[] = [];
+    custodia = {};
     acoes: Acao[] = [];
     precoTotalCompra :number = 0;
     precoTotalVenda: number = 0;
-    quantidadeCompra: number = 0;
-    quantidadeVenda: number = 0;
-    totalCustodia: number = 0;
     lucroLiquido: number = 0;
     index: number = null;
     selectedOperacao: Operacao = null;
@@ -37,20 +35,31 @@ export class OperacaoComponent implements OnInit {
       
       this.operacaoService.getOperacoes().subscribe(operacoes => {
         this.operacoes = operacoes;
-        operacoes.forEach(op => {
+        this.updateOperacoes();
+       });
+    }
 
+    updateOperacoes(): void  {
+       this.operacoes.forEach(op => {
+          
           let total = op.valor * op.quantidade;
           
-          if (op.tipoOperacao === 'COMPRA') {
-            this.precoTotalCompra += total;
-            this.quantidadeCompra += op.quantidade;
-
+          if (op.tipoOperacao == 'COMPRA') {
+              this.precoTotalCompra += total;
+              if (this.custodia.hasOwnProperty(op.acao.codigo)) {
+                  this.custodia[op.acao.codigo].precoMedio = (this.custodia[op.acao.codigo].precoMedio * this.custodia[op.acao.codigo].quantidade + op.valor * op.quantidade) / (this.custodia[op.acao.codigo].quantidade + op.quantidade);
+                  this.custodia[op.acao.codigo].quantidade += op.quantidade;
+              } else {
+                  this.custodia[op.acao.codigo] = {
+                      quantidade: op.quantidade,
+                      precoMedio: op.valor
+                   };                  
+              }
           } else {
-            this.precoTotalVenda += total;
-            this.quantidadeVenda += op.quantidade;
+              this.custodia[op.acao.codigo].quantidade -= op.quantidade;
+              this.precoTotalVenda += total;
           }
-        });
-      });
+        });        
     }
     
     getCustosOperacionais(): number {
@@ -60,9 +69,16 @@ export class OperacaoComponent implements OnInit {
         meses.add(moment(op.dataOperacao, "YYYY-MM-DD").month());
         totalCustos += op.custoOperacao;
       });
-      
-      let custodia = (this.precoTotalVenda + this.precoTotalCompra) <= 5000 ? 8.18 * meses.size : 8.65 * meses.size;
-      return totalCustos + custodia;
+      let taxaCustodia = (this.precoTotalVenda + this.precoTotalCompra) <= 5000 ? 8.18 * meses.size : 8.65 * meses.size;
+      return totalCustos + taxaCustodia;
+    }
+    
+    getTotalCustodia(): number {
+        let total:number = 0;
+        for (let k in this.custodia) {
+            total += this.custodia[k].precoMedio * this.custodia[k].quantidade;
+        };
+        return total;
     }
 
     getPerformance(): number {
@@ -85,7 +101,6 @@ export class OperacaoComponent implements OnInit {
             let operacao: Operacao = Object.assign(new Operacao(), this.selectedOperacao);
             this.operacaoService.saveOperacao(operacao).subscribe(obj => {
                 let savedObj: Operacao = Object.assign(new Operacao(), obj);
-                console.log(obj.dataOperacao);
                 if (this.index !== null) {
                     this.operacoes[this.index] = savedObj;
                 } else {
@@ -93,6 +108,7 @@ export class OperacaoComponent implements OnInit {
                 }
             });
         }
+        this.updateOperacoes();
         this.close();
     }
     

@@ -34,6 +34,8 @@ Navbar component styles
         text-decoration: none; }
         .navbar-nav .nav-item a:hover {
           color: #eee; }
+      .navbar-nav .nav-item.active a {
+        color: #ff5; }
       .navbar-nav .nav-item:not(:first-child) {
         margin-left: 20px; }
   .navbar-search {

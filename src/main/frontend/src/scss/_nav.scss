@@ -32,7 +32,7 @@ Navbar component styles
       display: flex;
       flex: 0 0 auto;
       align-items: center;
-
+      
       a {
         color: darken($nav-item-color, 20%);
         text-decoration: none;
@@ -40,6 +40,10 @@ Navbar component styles
         &:hover {
           color: $nav-item-color;
         }
+      }
+      
+      &.active a {
+          color: $nav-item-color-active;
       }
 
       &:not(:first-child) {

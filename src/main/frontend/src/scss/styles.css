@@ -1,0 +1,742 @@
+body {
+  margin: 0;
+}
+
+/*
+================================================================================
+Navbar component styles
+==============================================================================
+*/
+.navbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(90deg, #ff337d 0, #4d506b 20%);
+  border-bottom: 1px solid #42455c;
+}
+.navbar-brand {
+  flex: 0 0 auto;
+  margin: auto 10px;
+}
+.navbar-collapse {
+  display: flex;
+  flex: 1 1 100%;
+}
+.navbar-nav {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex: 1 0 auto;
+  align-items: flex-end;
+}
+.navbar-nav .nav-item {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+.navbar-nav .nav-item a {
+  color: #bbbbbb;
+  text-decoration: none;
+}
+.navbar-nav .nav-item a:hover {
+  color: #eee;
+}
+.navbar-nav .nav-item.active a {
+  color: #ff5;
+}
+.navbar-nav .nav-item:not(:first-child) {
+  margin-left: 20px;
+}
+.navbar-search {
+  display: flex;
+  padding: 10px;
+}
+.navbar-search input {
+  width: 15em;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  transition: width 0.2s ease;
+}
+.navbar-search input:focus {
+  width: 30em;
+  transition: width 0.2s ease;
+}
+.navbar-search button {
+  width: 40px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+}
+
+/*
+================================================================================
+List component styles
+==============================================================================
+*/
+.list-group {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  list-style-type: none;
+  overflow: hidden;
+  border-radius: 4px;
+  margin: 0 10px auto;
+  padding: 0;
+  border: 1px solid #ccc;
+}
+.list-group-item {
+  display: flex;
+  flex: 1 0 calc(100% - 10px);
+  padding: 10px;
+  height: 50px;
+  align-items: center;
+  background-color: #e6e6e6;
+  transition: all 0.25s ease;
+}
+.list-group-item.selected {
+  background-color: white;
+}
+.list-group-item:hover {
+  transition: all 0.25s ease;
+  background-color: #f2f2f2;
+}
+.list-group-item + .list-group-item {
+  border-top: 1px solid #ccc;
+}
+.list-group-item .detail {
+  margin: 10px 10px 10px auto;
+}
+.list-group-item .detail > * {
+  margin: auto 10px;
+}
+
+/*
+================================================================================
+Table component styles
+==============================================================================
+*/
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table thead {
+  background-color: #e6e6e6;
+}
+.table tfoot {
+  background-color: #f2f2f2;
+}
+.table tr {
+  border-top: 1px solid #ccc;
+}
+.table td, .table th {
+  padding: 10px;
+}
+
+/*
+================================================================================
+Form component styles
+==============================================================================
+*/
+.form, .form-inline {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  margin: 10px -10px;
+}
+.form-inline {
+  flex-wrap: nowrap;
+}
+.form-control {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  height: 28px;
+  margin: 10px;
+}
+.form-control input[type=text],
+.form-control input[type=number],
+.form-control input[type=password],
+.form-control input[type=date],
+.form-control select {
+  border-width: 0 0 1px 0;
+  border-color: #ccc;
+  background-color: transparent;
+  height: 28px;
+  min-height: 28px;
+  z-index: 1;
+  color: transparent;
+}
+.form-control input[type=text]:required:valid, .form-control input[type=text]:focus,
+.form-control input[type=number]:required:valid,
+.form-control input[type=number]:focus,
+.form-control input[type=password]:required:valid,
+.form-control input[type=password]:focus,
+.form-control input[type=date]:required:valid,
+.form-control input[type=date]:focus,
+.form-control select:required:valid,
+.form-control select:focus {
+  color: initial;
+  outline: none;
+  border-color: #999999;
+}
+.form-control input[type=text]:required:valid ~ label, .form-control input[type=text]:focus ~ label,
+.form-control input[type=number]:required:valid ~ label,
+.form-control input[type=number]:focus ~ label,
+.form-control input[type=password]:required:valid ~ label,
+.form-control input[type=password]:focus ~ label,
+.form-control input[type=date]:required:valid ~ label,
+.form-control input[type=date]:focus ~ label,
+.form-control select:required:valid ~ label,
+.form-control select:focus ~ label {
+  font-size: 0.8em;
+  transform: translateY(-250%);
+  transition: all 0.1s linear;
+}
+.form-control input[type=text] ~ label,
+.form-control input[type=number] ~ label,
+.form-control input[type=password] ~ label,
+.form-control input[type=date] ~ label,
+.form-control select ~ label {
+  cursor: text;
+  font-size: 1em;
+  height: 28px;
+  color: #888;
+  transform: translateY(-120%);
+  transition: all 0.1s linear;
+  z-index: 0;
+}
+
+/*
+================================================================================
+Form component styles
+==============================================================================
+*/
+.btn {
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #eee;
+  background-color: #8a7ca5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px 10px;
+  height: calc(30px + 5px);
+}
+.btn + .btn {
+  margin: 0 5px;
+}
+.btn:active {
+  background-color: #c0b8cf;
+  transition: all 0.1s ease-out;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #ff005d;
+  transition: all 0.1s ease-in;
+}
+.btn-primary:active {
+  background-color: #ff669e;
+  transition: all 0.1s ease-out;
+}
+
+/*
+================================================================================
+Modal component styles
+==============================================================================
+*/
+.modal {
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 2px 4px 10px #999, -2px -3px 20px #cccccc;
+  border-radius: 4px;
+  background: #fefefe;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+@media (min-width: 768px) {
+  .modal {
+    width: 75%;
+    height: auto;
+  }
+}
+@media (min-width: 1200px) {
+  .modal {
+    width: 50%;
+    height: auto;
+  }
+}
+.modal-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(155, 155, 175, 0.75);
+}
+.modal-title {
+  display: flex;
+  flex: 1 0 100%;
+  align-items: center;
+  height: 60px;
+  padding: 10px;
+  color: #d6d7e1;
+  background: #42455c;
+  border-bottom: 1px solid #bebebe;
+}
+.modal-close {
+  cursor: pointer;
+  margin-left: auto;
+  border: none;
+  color: #777;
+  background: none;
+  transition: all 0.25s ease;
+}
+.modal-close:focus, .modal-close:active, .modal-close:hover {
+  outline: none;
+  color: #b7b7b7;
+  transform: scale(1.25);
+  transition: all 0.25s ease;
+}
+.modal-body {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex: 1 1 100%;
+  padding: 10px;
+}
+.modal-footer {
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 10px;
+  background: #f1f1f1;
+}
+
+/*
+================================================================================
+Tag styles
+==============================================================================
+*/
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Open-sans, sans-serif;
+}
+
+body {
+  background-color: #eeeeee;
+}
+
+a {
+  cursor: pointer;
+}
+
+/*
+================================================================================
+Grid component styles
+==============================================================================
+*/
+.g-1 {
+  width: calc(8.3333333333% - 20px);
+}
+
+.g-2 {
+  width: calc(16.6666666667% - 20px);
+}
+
+.g-3 {
+  width: calc(25% - 20px);
+}
+
+.g-4 {
+  width: calc(33.3333333333% - 20px);
+}
+
+.g-5 {
+  width: calc(41.6666666667% - 20px);
+}
+
+.g-6 {
+  width: calc(50% - 20px);
+}
+
+.g-7 {
+  width: calc(58.3333333333% - 20px);
+}
+
+.g-8 {
+  width: calc(66.6666666667% - 20px);
+}
+
+.g-9 {
+  width: calc(75% - 20px);
+}
+
+.g-10 {
+  width: calc(83.3333333333% - 20px);
+}
+
+.g-11 {
+  width: calc(91.6666666667% - 20px);
+}
+
+.g-12 {
+  width: calc(100% - 20px);
+}
+
+@media only screen and (min-width: 425px) {
+  .g-m-1 {
+    width: calc(8.3333333333% - 20px);
+  }
+
+  .g-m-2 {
+    width: calc(16.6666666667% - 20px);
+  }
+
+  .g-m-3 {
+    width: calc(25% - 20px);
+  }
+
+  .g-m-4 {
+    width: calc(33.3333333333% - 20px);
+  }
+
+  .g-m-5 {
+    width: calc(41.6666666667% - 20px);
+  }
+
+  .g-m-6 {
+    width: calc(50% - 20px);
+  }
+
+  .g-m-7 {
+    width: calc(58.3333333333% - 20px);
+  }
+
+  .g-m-8 {
+    width: calc(66.6666666667% - 20px);
+  }
+
+  .g-m-9 {
+    width: calc(75% - 20px);
+  }
+
+  .g-m-10 {
+    width: calc(83.3333333333% - 20px);
+  }
+
+  .g-m-11 {
+    width: calc(91.6666666667% - 20px);
+  }
+
+  .g-m-12 {
+    width: calc(100% - 20px);
+  }
+}
+@media only screen and (min-width: 768px) {
+  .g-l-1 {
+    width: calc(8.3333333333% - 20px);
+  }
+
+  .g-l-2 {
+    width: calc(16.6666666667% - 20px);
+  }
+
+  .g-l-3 {
+    width: calc(25% - 20px);
+  }
+
+  .g-l-4 {
+    width: calc(33.3333333333% - 20px);
+  }
+
+  .g-l-5 {
+    width: calc(41.6666666667% - 20px);
+  }
+
+  .g-l-6 {
+    width: calc(50% - 20px);
+  }
+
+  .g-l-7 {
+    width: calc(58.3333333333% - 20px);
+  }
+
+  .g-l-8 {
+    width: calc(66.6666666667% - 20px);
+  }
+
+  .g-l-9 {
+    width: calc(75% - 20px);
+  }
+
+  .g-l-10 {
+    width: calc(83.3333333333% - 20px);
+  }
+
+  .g-l-11 {
+    width: calc(91.6666666667% - 20px);
+  }
+
+  .g-l-12 {
+    width: calc(100% - 20px);
+  }
+}
+/*
+================================================================================
+Generic component styles
+==============================================================================
+*/
+.title {
+  display: flex;
+  font-size: 1.5em;
+  margin: 10px;
+  width: 100%;
+  font-weight: normal;
+}
+.title .detail {
+  margin: 10px 10px 10px auto;
+  cursor: pointer;
+}
+.title .detail > * {
+  margin: auto 10px;
+}
+
+.link {
+  cursor: pointer;
+  color: #777;
+  text-decoration: none;
+}
+.link:hover {
+  color: #aaaaaa;
+}
+
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  padding: 10px;
+  background: #f2f2f2;
+  border: 1px solid #ccc;
+  font-size: 0.8em;
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.justify {
+  text-align: justify;
+}
+
+.margin-top-1 {
+  margin-top: 10px;
+}
+
+.margin-top-2 {
+  margin-top: 20px;
+}
+
+.margin-top-3 {
+  margin-top: 30px;
+}
+
+.margin-top-4 {
+  margin-top: 40px;
+}
+
+.margin-top-5 {
+  margin-top: 50px;
+}
+
+.margin-top-6 {
+  margin-top: 60px;
+}
+
+.margin-top-7 {
+  margin-top: 70px;
+}
+
+.margin-top-8 {
+  margin-top: 80px;
+}
+
+.margin-top-9 {
+  margin-top: 90px;
+}
+
+.margin-top-10 {
+  margin-top: 100px;
+}
+
+.margin-right-1 {
+  margin-right: 10px;
+}
+
+.margin-right-2 {
+  margin-right: 20px;
+}
+
+.margin-right-3 {
+  margin-right: 30px;
+}
+
+.margin-right-4 {
+  margin-right: 40px;
+}
+
+.margin-right-5 {
+  margin-right: 50px;
+}
+
+.margin-right-6 {
+  margin-right: 60px;
+}
+
+.margin-right-7 {
+  margin-right: 70px;
+}
+
+.margin-right-8 {
+  margin-right: 80px;
+}
+
+.margin-right-9 {
+  margin-right: 90px;
+}
+
+.margin-right-10 {
+  margin-right: 100px;
+}
+
+.margin-bottom-1 {
+  margin-bottom: 10px;
+}
+
+.margin-bottom-2 {
+  margin-bottom: 20px;
+}
+
+.margin-bottom-3 {
+  margin-bottom: 30px;
+}
+
+.margin-bottom-4 {
+  margin-bottom: 40px;
+}
+
+.margin-bottom-5 {
+  margin-bottom: 50px;
+}
+
+.margin-bottom-6 {
+  margin-bottom: 60px;
+}
+
+.margin-bottom-7 {
+  margin-bottom: 70px;
+}
+
+.margin-bottom-8 {
+  margin-bottom: 80px;
+}
+
+.margin-bottom-9 {
+  margin-bottom: 90px;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 100px;
+}
+
+.margin-left-1 {
+  margin-left: 10px;
+}
+
+.margin-left-2 {
+  margin-left: 20px;
+}
+
+.margin-left-3 {
+  margin-left: 30px;
+}
+
+.margin-left-4 {
+  margin-left: 40px;
+}
+
+.margin-left-5 {
+  margin-left: 50px;
+}
+
+.margin-left-6 {
+  margin-left: 60px;
+}
+
+.margin-left-7 {
+  margin-left: 70px;
+}
+
+.margin-left-8 {
+  margin-left: 80px;
+}
+
+.margin-left-9 {
+  margin-left: 90px;
+}
+
+.margin-left-10 {
+  margin-left: 100px;
+}
+
+/*
+================================================================================
+Container component styles
+==============================================================================
+*/
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  margin: 10px auto;
+  max-width: 1200px;
+  min-height: calc(100vh - 80px);
+  background: #fefefe;
+  padding: 10px;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  margin: 0 10px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #e6e6e6;
+}
+
+/*# sourceMappingURL=styles.css.map */

@@ -6,6 +6,8 @@
 package com.andrebarca.repositories;
 
 import com.andrebarca.models.Acao;
+import java.util.List;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +18,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AcaoRepository extends CrudRepository<Acao, Long> {
+    List<Acao> findAll(Sort sort);
     
 }

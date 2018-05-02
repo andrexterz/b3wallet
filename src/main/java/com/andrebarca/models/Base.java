@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
 
 @MappedSuperclass
 public abstract class Base implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -44,6 +44,22 @@ public abstract class Base implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+
+    public Date getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public Date getDataAtualizacao() {
+        return dataAtualizacao;
+    }
+
+    public void setDataAtualizacao(Date dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
+    }    
     
     @Override
     public String toString() {
