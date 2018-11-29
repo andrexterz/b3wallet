@@ -6,12 +6,16 @@ import { Operacao } from "./operacao";
 
 @Injectable()
 export class OperacaoService {
-    
+
     constructor(private http: Http) {}
-    
+
     saveOperacao(operacao: Operacao): Observable<Operacao>  {
         return this.http.post("/api/operacoes/save", operacao).map((res: Response) => res.json());
-    }    
+    }
+
+    deleteOperacao(operacao: Operacao): Observable<boolean>  {
+      return this.http.delete("/api/operacoes/delete/" + operacao.id).map((res: Response) => res.json());
+    }
 
     getOperacoes(): Observable<Operacao[]> {
         return this.http.get("/api/operacoes").map((res: Response) => res.json());

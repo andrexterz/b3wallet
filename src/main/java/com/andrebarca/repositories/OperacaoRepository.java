@@ -10,6 +10,8 @@ import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -18,5 +20,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OperacaoRepository extends CrudRepository<Operacao, Long>{
+
+    @Modifying
+    @Query("delete from Operacao o where o.id = ?1")
+    void deleteById(Long id);
+
     List<Operacao> findAll(Sort sort);
 }

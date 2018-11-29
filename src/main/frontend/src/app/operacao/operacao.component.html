@@ -41,7 +41,10 @@
                 <td class="right">{{operacao.quantidade}}</td>
                 <td class="center">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</td>
                 <td class="right">{{operacao.valor | currency:'BRL':true:'1.2-2'}}</td>
-                <td class="right"><b>{{operacao.quantidade * operacao.valor | currency:'BRL':true:'1.2-2'}}</b><a class="margin-left-2" (click)="editOperacao(operacao, idx)"><i class="fa fa-pencil"></i></a></td>
+                <td class="right"><b>{{operacao.quantidade * operacao.valor | currency:'BRL':true:'1.2-2'}}</b>
+                  <a class="margin-left-2" (click)="editOperacao(operacao, idx)"><i class="fa fa-pencil"></i></a>
+                  <a class="margin-left-2" (click)="deleteOperacao(operacao, idx)"><i class="fa fa-trash"></i></a>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -70,7 +73,7 @@
                         <option value="VENDA">VENDA</option>
                     </select>
                     <label for="tipoOperacao">Operação</label>
-                </div>                
+                </div>
                 <div class="form-control g-12 g-m-6 g-l-4">
                     <input id="valorOperacao" name="valor" [(ngModel)]="selectedOperacao.valor" type="number" min="0.0" step="0.01" required>
                     <label for="valorOperacao">Valor</label>

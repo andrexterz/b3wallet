@@ -32,7 +32,7 @@ export class OperacaoComponent implements OnInit {
 
     ngOnInit(): void {
       this.acaoService.getAcoes().subscribe(acoes => this.acoes = acoes.map(acao => Object.assign(new Acao(), acao)));
-      
+
       this.operacaoService.getOperacoes().subscribe(operacoes => {
         this.operacoes = operacoes;
         this.updateOperacoes();
@@ -40,10 +40,12 @@ export class OperacaoComponent implements OnInit {
     }
 
     updateOperacoes(): void  {
+        this.precoTotalCompra = 0;
+        this.precoTotalVenda = 0;
        this.operacoes.forEach(op => {
-          
+
           let total = op.valor * op.quantidade;
-          
+
           if (op.tipoOperacao == 'COMPRA') {
               this.precoTotalCompra += total;
               if (this.custodia.hasOwnProperty(op.acao.codigo)) {
@@ -53,15 +55,15 @@ export class OperacaoComponent implements OnInit {
                   this.custodia[op.acao.codigo] = {
                       quantidade: op.quantidade,
                       precoMedio: op.valor
-                   };                  
+                   };
               }
           } else {
               this.custodia[op.acao.codigo].quantidade -= op.quantidade;
               this.precoTotalVenda += total;
           }
-        });        
+        });
     }
-    
+
     getCustosOperacionais(): number {
       let totalCustos:number = 0;
       let meses:Set<number> = new Set();
@@ -72,7 +74,7 @@ export class OperacaoComponent implements OnInit {
       let taxaCustodia = (this.precoTotalVenda + this.precoTotalCompra) <= 5000 ? 8.18 * meses.size : 8.65 * meses.size;
       return totalCustos + taxaCustodia;
     }
-    
+
     getTotalCustodia(): number {
         let total:number = 0;
         for (let k in this.custodia) {
@@ -89,15 +91,14 @@ export class OperacaoComponent implements OnInit {
         this.selectedOperacao = new Operacao();
         this.index = null;
     }
-    
+
     editOperacao(operacao: Operacao, index: number): void {
-        console.log(operacao.dataOperacao);
          this.selectedOperacao = Object.assign(new Operacao(), operacao);
          this.index = index;
     }
-            
+
     saveOperacao(): void {
-        if(this.selectedOperacao) {
+        if (this.selectedOperacao) {
             let operacao: Operacao = Object.assign(new Operacao(), this.selectedOperacao);
             this.operacaoService.saveOperacao(operacao).subscribe(obj => {
                 let savedObj: Operacao = Object.assign(new Operacao(), obj);
@@ -111,11 +112,23 @@ export class OperacaoComponent implements OnInit {
         this.updateOperacoes();
         this.close();
     }
-    
+
+    deleteOperacao(operacao: Operacao, index: number): void {
+      let confirmDelete = confirm("Remover operacão " + operacao.acao.codigo + ": " + operacao.tipoOperacao + "?");
+      if (confirmDelete) {
+        this.operacaoService.deleteOperacao(operacao).subscribe(res => {
+          if (res) {
+            this.operacoes.splice(index, 1);
+            //todo: add modal info or error
+          }
+        });
+      }
+    }
+
     //compare method for directive compareWith
     byAcao(itemA: any, itemB: any) {
         try {
-            return itemA.id === itemB.id;
+            return itemA.id == itemB.id;
         } catch (e) {
             return false;
         }
@@ -123,5 +136,5 @@ export class OperacaoComponent implements OnInit {
 
     close(): void {
         this.selectedOperacao = null;
-    }    
+    }
 }
