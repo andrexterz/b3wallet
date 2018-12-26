@@ -8,4 +8,5 @@ export class Operacao {
   quantidade: number;
   tipoOperacao: string;
   custoOperacao: number;
+  totalOperacao: number;
 }

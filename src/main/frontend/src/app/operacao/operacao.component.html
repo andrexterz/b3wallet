@@ -41,7 +41,8 @@
                 <td class="right">{{operacao.quantidade}}</td>
                 <td class="center">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</td>
                 <td class="right">{{operacao.valor | currency:'BRL':true:'1.2-2'}}</td>
-                <td class="right"><b>{{operacao.quantidade * operacao.valor | currency:'BRL':true:'1.2-2'}}</b>
+                <td class="right">
+                  <b>{{operacao.quantidade * operacao.valor | currency:'BRL':true:'1.2-2'}}</b>
                   <a class="margin-left-2" (click)="editOperacao(operacao, idx)"><i class="fa fa-pencil"></i></a>
                   <a class="margin-left-2" (click)="deleteOperacao(operacao, idx)"><i class="fa fa-trash"></i></a>
                 </td>

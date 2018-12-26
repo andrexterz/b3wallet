@@ -31,6 +31,7 @@ export class OperacaoComponent implements OnInit {
       }
 
     ngOnInit(): void {
+      window.addEventListener("KeyPress", e => {console.log(e)});
       this.acaoService.getAcoes().subscribe(acoes => this.acoes = acoes.map(acao => Object.assign(new Acao(), acao)));
 
       this.operacaoService.getOperacoes().subscribe(operacoes => {
@@ -42,23 +43,13 @@ export class OperacaoComponent implements OnInit {
     updateOperacoes(): void  {
         this.precoTotalCompra = 0;
         this.precoTotalVenda = 0;
-       this.operacoes.forEach(op => {
+        this.operacoes.forEach(op => {
 
-          let total = op.valor * op.quantidade;
+          let total = op.totalOperacao;
 
           if (op.tipoOperacao == 'COMPRA') {
               this.precoTotalCompra += total;
-              if (this.custodia.hasOwnProperty(op.acao.codigo)) {
-                  this.custodia[op.acao.codigo].precoMedio = (this.custodia[op.acao.codigo].precoMedio * this.custodia[op.acao.codigo].quantidade + op.valor * op.quantidade) / (this.custodia[op.acao.codigo].quantidade + op.quantidade);
-                  this.custodia[op.acao.codigo].quantidade += op.quantidade;
-              } else {
-                  this.custodia[op.acao.codigo] = {
-                      quantidade: op.quantidade,
-                      precoMedio: op.valor
-                   };
-              }
           } else {
-              this.custodia[op.acao.codigo].quantidade -= op.quantidade;
               this.precoTotalVenda += total;
           }
         });

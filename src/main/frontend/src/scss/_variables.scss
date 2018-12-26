@@ -15,12 +15,22 @@ $primary-color: #ff005d;
 $secondary-color: #8a7ca5;
 
 //=========================================================================
+//Message Colors
+//=========================================================================
+$message-info-color: #ccccff;
+$message-success-color: #33cc33;
+$message-warning-color: #cccc00;
+$message-error-color: #ff3333;
+
+//=========================================================================
 //Breakpoints
 //=========================================================================
 $small-device: 425px;
 $medium-device: 768px;
 $large-device: 1200px;
+$xlarge-device: 1280px;
 $screen-map: (
+    xl: $xlarge-device,
     l: $large-device,
     m: $medium-device,
     s: $small-device

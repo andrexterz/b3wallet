@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 
 /**
@@ -36,23 +37,23 @@ public class Operacao extends Base {
         this.tipoOperacao = tipoOperacao;
         this.dataOperacao = dataOperacao;
     }
-    
-    
+
+
     @ManyToOne
     @JoinColumn(name = "ACAO_ID")
     @JsonIgnoreProperties("operacoes")
     private Acao acao;
-   
+
     private Double valor;
-    
+
     @Min(value = 1)
     private Integer quantidade;
 
     private Double custoOperacao;
-    
+
     @Enumerated(EnumType.STRING)
     private TipoOperacao tipoOperacao;
-    
+
     @Temporal(TemporalType.DATE)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dataOperacao;
@@ -64,7 +65,7 @@ public class Operacao extends Base {
     public void setAcao(Acao acao) {
         this.acao = acao;
     }
-    
+
     public Double getValor() {
         return valor;
     }
@@ -89,7 +90,7 @@ public class Operacao extends Base {
         //adicionar regras B3 e CAIXA
         this.custoOperacao = custoOperacao;
     }
-    
+
 
     public TipoOperacao getTipoOperacao() {
         return tipoOperacao;
@@ -106,8 +107,9 @@ public class Operacao extends Base {
     public void setDataOperacao(Date dataOperacao) {
         this.dataOperacao = dataOperacao;
     }
-    
-    public Double getTotal() {
-        return this.quantidade * this.valor;
+
+    @Transient
+    public Double getTotalOperacao() {
+        return this.quantidade * this.valor + this.custoOperacao;
     }
 }
