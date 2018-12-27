@@ -5,8 +5,9 @@
  */
 package com.andrebarca.services;
 
-import com.andrebarca.models.Dividendo;
-import com.andrebarca.repositories.DividendoRepository;
+import com.andrebarca.models.Analise;
+import com.andrebarca.models.Analise;
+import com.andrebarca.repositories.AnaliseRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,22 +25,22 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-public class DividendoService {
+public class AnaliseService {
     
     @Autowired
-    DividendoRepository dividendoRepository;
+    AnaliseRepository analiseRepository;
     
-    @RequestMapping(value = "/api/dividendos/save", method = RequestMethod.POST)
-    public ResponseEntity<?> save(@RequestBody Dividendo dividendo) {
-        Dividendo savedObj = dividendoRepository.save(dividendo);
+    @RequestMapping(value = "/api/analises/save", method = RequestMethod.POST)
+    public ResponseEntity<?> save(@RequestBody Analise analise) {
+        Analise savedObj = analiseRepository.save(analise);
         return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
     }
     
-    @RequestMapping(value = "/api/dividendos/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/api/analises/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable long id) {
         boolean removed = false;
         try {
-            dividendoRepository.deleteById(id);
+            analiseRepository.deleteById(id);
             removed = true;
         } catch (Exception e) {
             System.out.println("could not delete obj id: " + id);
@@ -47,13 +48,9 @@ public class DividendoService {
         return new ResponseEntity<>(removed, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/api/dividendos", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Dividendo> list() {
-        Iterable<Dividendo> dividendos = this.dividendoRepository.findAll();
-        dividendos.forEach(div -> {
-            System.out.println("código: " + div.getAcao().getCodigo() + ": " + "dividendo:" + div.getValor());
-        });
-        return (List) dividendos;
+    @RequestMapping(value = "/api/analises", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Analise> list() {
+        Iterable<Analise> analises = this.analiseRepository.findAll();
+        return (List) analises;
     }    
-    
 }

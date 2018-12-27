@@ -87,7 +87,6 @@ public class Operacao extends Base {
     }
 
     public void setCustoOperacao(Double custoOperacao) {
-        //adicionar regras B3 e CAIXA
         this.custoOperacao = custoOperacao;
     }
 

@@ -10,12 +10,14 @@ import { AcaoComponent } from './acao/acao.component';
 import {AcaoService } from './acao/acao.service';
 import {OperacaoService } from './operacao/operacao.service';
 import { OperacaoComponent } from './operacao/operacao.component';
+import { AnaliseComponent } from './analise/analise.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AcaoComponent,
-    OperacaoComponent
+    OperacaoComponent,
+    AnaliseComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,7 @@ import { OperacaoComponent } from './operacao/operacao.component';
     RouterModule.forRoot([
       {path: 'dashboard', component: AcaoComponent},
       {path: 'portfolio', component: OperacaoComponent},
+      {path: 'analise', component: AnaliseComponent},
       {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
     ])
   ],

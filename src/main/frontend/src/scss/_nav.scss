@@ -4,74 +4,114 @@ Navbar component styles
 ==============================================================================
 */
 .navbar {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: $nav-bar-height;
-  background: linear-gradient(90deg, lighten($nav-background-color-1, 10%) 0, $nav-background-color-2 20%);
-  border-bottom: 1px solid $nav-border-color;
+    //local vars
+    $class-name: &;
 
-  &-brand {
-    flex: 0 0 auto;
-    margin: auto $margin;
-  }
-
-  &-collapse {
+    //properties
     display: flex;
-    flex: 1 1 100%;
-  }
+    width: 100%;
+    height: $nav-bar-height;
+    background: linear-gradient(90deg, lighten($nav-background-color-1, 10%) 0, $nav-background-color-2 20%);
+    border-bottom: 1px solid $nav-border-color;
 
-  &-nav {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex: 1 0 auto;
-    align-items: flex-end;
+    &-brand {
+        flex: 0 0 auto;
+        margin: auto $margin;
+    }
 
-    .nav-item {
-      display: flex;
-      flex: 0 0 auto;
-      align-items: center;
-      
-      a {
-        color: darken($nav-item-color, 20%);
-        text-decoration: none;
+    &-nav {
+        display: none;
+        list-style-type: none;
+        padding: 0;
+        flex: 1 0 auto;
+        align-items: flex-end;
 
-        &:hover {
-          color: $nav-item-color;
+        .nav-item {
+            display: flex;
+            flex: 0 0 auto;
+            align-items: center;
+
+            a {
+                color: darken($nav-item-color, 20%);
+                text-decoration: none;
+
+                & > * {
+                    margin-right: $margin/2;
+                }
+
+                &:hover {
+                    color: $nav-item-color;
+                }
+            }
+
+            &.active a {
+                color: $nav-item-color-active;
+            }
+
+            &:not(:first-child) {
+                margin-left: $margin * 2;
+            }
         }
-      }
-      
-      &.active a {
-          color: $nav-item-color-active;
-      }
-
-      &:not(:first-child) {
-        margin-left: $margin * 2;
-      }
-    }
-  }
-
-  &-search {
-    display: flex;
-    padding: $padding;
-    input {
-      width: 15em;
-      padding: $padding;
-      border: $form-control-border;
-      border-radius: $form-control-border-radius 0 0 $form-control-border-radius;
-      transition: width .2s ease;
-
-      &:focus {
-        width: 30em;
-        transition: width .2s ease;
-      }
     }
 
-    button {
-      width: 40px;
-      border: none;
-      border-radius: 0 $form-control-border-radius $form-control-border-radius 0;
+    &-search {
+        display: flex;
+        height: $nav-search-height;
+        border: $form-control-border;
+        border-radius: $form-control-border-radius;
+        overflow: hidden;
+        margin-left: auto;
+        margin-right: $margin;
+
+        input {
+            width: 12em;
+            padding: $padding;
+            transition: width .2s ease;
+            border: none;
+
+            &:focus {
+                width: 18em;
+                transition: width .2s ease;
+            }
+        }
+
+        button {
+            width: $nav-search-height;
+            height: $nav-search-height;
+            border: none;
+            border-radius: 0;
+        }
     }
-  }
+
+    &-menu {
+        -webkit-appearance: none;
+        color: $dark-foreground;
+        background: none;
+        border: none;
+        margin: 0 1em;
+        font-size: 1.25em;
+        cursor: pointer;
+
+        &:active, &:focus {
+            outline: none;
+        }
+    }
+
+    //container for nav
+    &-wrapper {
+        display: flex;
+        align-items: center;
+        flex: 1 1 100%;
+
+    }
+    
+    @media (min-width: $medium-device) {
+        &-nav {
+            display: flex;        
+        }
+
+        &-menu {
+            display: none;        
+        }
+    }
 }

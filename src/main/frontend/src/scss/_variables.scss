@@ -3,13 +3,23 @@
 //=========================================================================
 $margin: 10px;
 $padding: 10px;
-$link-color: #777;
 $circle-size: 40px;
-$shadow-color: #999;
+$border-radius: 3px;
 
+//=========================================================================
+//Element colors
+//=========================================================================
+$body-background: #f5f5fa;
+$link-color: #777;
+$shadow-color: #55555588;
+$border-color: #9c9c9c;
 //=========================================================================
 //Pallete
 //=========================================================================
+$light-foreground: #333;
+$dark-foreground: #efefef;
+$light-background: #fefefe;
+$dark-background: #333;
 $default-color: #4d506b;
 $primary-color: #ff005d;
 $secondary-color: #8a7ca5;
@@ -18,9 +28,9 @@ $secondary-color: #8a7ca5;
 //Message Colors
 //=========================================================================
 $message-info-color: #ccccff;
-$message-success-color: #33cc33;
-$message-warning-color: #cccc00;
-$message-error-color: #ff3333;
+$message-success-color: #b8ffbb;
+$message-warning-color: #ffd54f;
+$message-error-color: #ff9999;
 
 //=========================================================================
 //Breakpoints
@@ -29,12 +39,6 @@ $small-device: 425px;
 $medium-device: 768px;
 $large-device: 1200px;
 $xlarge-device: 1280px;
-$screen-map: (
-    xl: $xlarge-device,
-    l: $large-device,
-    m: $medium-device,
-    s: $small-device
- );
 //=========================================================================
 //Grid component variables
 //=========================================================================
@@ -47,18 +51,20 @@ $nav-background-color-1: $primary-color;
 $nav-background-color-2: $default-color;
 $nav-border-color: darken($nav-background-color-2, 5%);
 $nav-bar-height: 60px;
+$nav-search-height: 40px;
 $nav-item-color: #eee;
 $nav-item-color-active: #ff5;
 
 //=========================================================================
 //Form component variables
 //=========================================================================
-$form-control-border-color: #ccc;
+$form-control-border-color: $border-color;
 $form-control-border: 1px solid $form-control-border-color;
 $form-control-border-radius: 4px;
 $form-control-height: 28px;
 $form-control-padding: 10px;
 $form-control-color: #888;
+$form-control-background: #f5f5f533;
 
 //=========================================================================
 //Button component variables
@@ -74,6 +80,10 @@ $btn-background: $secondary-color;
 $list-background-color: lighten($form-control-border-color, 10%);
 $list-border-color: $form-control-border-color;
 $list-height: 50px;
+
+//=========================================================================
+//Message component variables
+//=========================================================================
 
 //=========================================================================
 //Container component variables

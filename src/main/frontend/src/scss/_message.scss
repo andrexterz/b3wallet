@@ -4,25 +4,75 @@ Toast messages
 ==============================================================================
 */
 .message {
-  position: fixed;
-  bottom: 2em;
-  margin: 1em;
-  padding: 1em;
-  width: calc(100% - 2em);
+    position: fixed;
+    bottom: 2em;
+    margin: .75em;
+    width: auto;
+    color: $light-foreground;
+    background-color: $light-background;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    box-shadow: 12px 12px 20px 0 $shadow-color, 0 0 8px 0 lighten($shadow-color, 10%);
 
-  &-info {
+    &-header {
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        padding: .5rem;
+        border-bottom: 1px solid $border-color;
+        background: transparentize($dark-background, 0.8);
+    }
 
-  }
+    &-title {
+        flex: 1 0 auto;
+    }
 
-  &-sucsess {
+    &-close {
+        -webkit-appearance: none;
+        flex: 0 0 2em;
+        align-items: center;
+        justify-content: center;
+        width: 2em;
+        height: 2em;
+        display: flex;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: none;
+        cursor: pointer;
+        color: $link-color;
 
-  }
+        &:focus, &:active, &:hover {
+            outline: none;
+            color: darken($link-color, 25%);
+            transform: scale(1.25);
+            transition: all .25s ease;
+        }
+    }
 
-  &-warning {
+    &-header, &-body {
+        padding: .5rem;
+    }
 
-  }
+    &.info {
+        background-color: $message-info-color;
+    }
 
-  &-error {
+    &.success {
+        background-color: $message-success-color;
+    }
 
-  }
+    &.warning {
+        background-color: $message-warning-color;
+    }
+
+    &.error {
+        background-color: $message-error-color;
+    }
+
+    @media (min-width: $medium-device) {
+        max-width: 30rem;
+        margin: 1.5em;
+        right: 1.5em;
+    }
 }

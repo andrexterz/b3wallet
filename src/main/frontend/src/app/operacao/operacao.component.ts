@@ -62,8 +62,7 @@ export class OperacaoComponent implements OnInit {
         meses.add(moment(op.dataOperacao, "YYYY-MM-DD").month());
         totalCustos += op.custoOperacao;
       });
-      let taxaCustodia = (this.precoTotalVenda + this.precoTotalCompra) <= 5000 ? 8.18 * meses.size : 8.65 * meses.size;
-      return totalCustos + taxaCustodia;
+      return totalCustos;
     }
 
     getTotalCustodia(): number {

@@ -9,16 +9,16 @@ Form component styles
   flex: 1 1 auto;
   margin: $margin -#{$margin};
     
-  &-inline {
+  &--inline {
     @extend .form;
     flex-wrap: nowrap;
   }
 
   &-control {
+    position: relative;
     display: flex;
     flex-direction: column;
     border-radius: $form-control-border-radius;
-    height: $form-control-height;
     margin: $margin;
     
  
@@ -26,10 +26,11 @@ Form component styles
     input[type="number"],
     input[type="password"],
     input[type="date"],
+    textarea,
     select {
         border-width: 0 0 1px 0;
         border-color: $form-control-border-color;
-        background-color: transparent;
+        background-color: $form-control-background;
         height: $form-control-height;
         min-height: $form-control-height;
         z-index: 1;
@@ -41,7 +42,7 @@ Form component styles
             border-color: darken($form-control-border-color, 20%);
             & ~ label {
                 font-size: 0.8em;
-                transform: translateY(-250%);
+                transform: translateY(-175%);
                 transition: all .1s linear;
             }
         }
@@ -50,11 +51,22 @@ Form component styles
          cursor: text;
          font-size: 1em;
          height: $form-control-height;
+         margin-left: $margin/2;
          color: $form-control-color;
-         transform: translateY(-120%);
+         transform: translateY(-75%);
          transition: all .1s linear;
          z-index: 0;
         }
+     }
+     
+     textarea {
+         height: initial;
+         resize: vertical;
+         
+         & ~ label {
+            position: absolute;
+            top: $form-control-height;             
+         }
      }
   }
 }

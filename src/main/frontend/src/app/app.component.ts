@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
     title = 'B3 Wallet';
 
@@ -15,8 +15,12 @@ export class AppComponent {
     menuItems = [
         {title: "Início", route: "dashboard", icon: "fa fa-home"},
         {title: "Portfolio", route: "portfolio", icon: "fa fa-folder-open"},
-        // {title: "Sincronizar", route: "#", icon: "fa fa-refresh"},
+         {title: "Análises", route: "analise", icon: "fa fa-sticky-note"},
     ];
+    
+  ngOnInit(): void {
+        this.activeMenu = this.menuItems[0];
+    }    
 
     selectMenu(menu: any) {
         this.activeMenu = menu;

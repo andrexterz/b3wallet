@@ -7,6 +7,7 @@
 @import "form";
 @import "button";
 @import "modal";
+@import "message";
 /*
 ================================================================================
 Tag styles
@@ -22,7 +23,7 @@ html {
 }
 
 body {
-    background-color: #eeeeee;
+    background-color: $body-background;
 }
 
 a {
@@ -65,20 +66,40 @@ Grid component styles
 Generic component styles
 ==============================================================================
 */
+.hidden {
+    display: none;
+}
 
 .title {
     display: flex;
+    align-items: center;
     font-size: 1.5em;
-    margin: $margin;
+    margin: $margin/2;
     width: 100%;
     font-weight: normal;
 
     .detail {
-        margin: $margin $margin $margin auto;
+        margin: $margin/2 $margin/2 $margin/2 auto;
         cursor: pointer;
-        
+        font-size: 1.5em;
+        background: none;        
+
         & > * {
-            margin: auto $margin;
+            background: inherit;
+            transition: all .25s ease-in-out;
+
+            &::before {
+                text-shadow: 3px 3px 10px $shadow-color;        
+            }
+
+            &:hover {
+                transform: scale(1.2);
+                transition: all .25s ease-in-out;
+                &::before {
+                    text-shadow: 12px 6px 20px $shadow-color;        
+                }
+
+            }
         }
     }  
 }
@@ -117,10 +138,7 @@ Generic component styles
         .margin-#{$side}-#{$m} {
             margin-#{$side}: $m * $margin;
         }
-}
-
-
-    
+    }
 }
 
 /*
@@ -132,11 +150,16 @@ Container component styles
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    margin: $margin auto;
+    margin: 0;
     max-width: 1200px;
     min-height: calc(100vh - #{$nav-bar-height + $margin * 2});
+    border: 1px solid lighten($border-color, 25%);
     background: $container-background-color;
     padding: $padding;
+
+    @media(min-width: $medium-device) {
+        margin: $margin auto;
+    }
 }
 
 .content {

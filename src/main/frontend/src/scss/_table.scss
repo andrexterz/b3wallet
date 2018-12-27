@@ -2,26 +2,67 @@
 /*
 ================================================================================
 Table component styles
-==============================================================================
+================================================================================
 */
 
 .table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 
-  thead {
-    background-color: $list-background-color;
-  }
+    thead {
+        display: none;
+        background-color: lighten($list-background-color, 15%);
+    }
 
-  tfoot {
-    background-color: lighten($list-background-color, 5%);
-  }
+    tfoot {
+        background-color: lighten($list-background-color, 20%);
+    }
 
-  tr {
-    border-top: 1px solid $list-border-color;
-  }
+    tr {
+        border-top: 1px solid $list-border-color;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
 
-  td, th {
-    padding: $padding;
-  }
+        td:nth-last-child(1) {
+            background: lighten($list-background-color, 25%);
+        }
+    }
+
+    th, td {
+        padding: $padding;
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: flex-end;
+        border-top: 1px solid lighten($list-border-color, 15%);
+
+        &::before {
+            content: attr(title);
+            display: inline-block;
+            margin-right: auto;
+            font-weight: bold;
+        }
+    }
+
+    @media(min-width: $medium-device) {
+        thead {
+            display: table-header-group;
+        }
+
+        tr {
+            display: table-row;
+            td:nth-last-child(1) {
+                background: inherit;
+            }          
+        }
+
+        th, td {
+            display: table-cell;
+
+            &::before {
+                display: none;
+            }
+        }
+    }
 }
