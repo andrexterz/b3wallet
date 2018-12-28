@@ -2,7 +2,6 @@ import { Component,  OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
-import * as moment from 'moment';
 import { OperacaoService } from './operacao.service';
 import { AcaoService } from '../acao/acao.service';
 import { Operacao } from "./operacao";
@@ -10,8 +9,7 @@ import { Acao } from "../acao/acao";
 
 @Component({
   selector: 'operacao-component',
-  templateUrl: './operacao.component.html',
-  providers: [OperacaoService]
+  templateUrl: './operacao.component.html'
 })
 export class OperacaoComponent implements OnInit {
     operacoes: Operacao[] = [];
@@ -27,8 +25,8 @@ export class OperacaoComponent implements OnInit {
       private operacaoService: OperacaoService,
       private acaoService: AcaoService,
       private route: ActivatedRoute,
-      private location: Location) {
-      }
+      private location: Location
+    ) {}
 
     ngOnInit(): void {
       window.addEventListener("KeyPress", e => {console.log(e)});
@@ -57,9 +55,7 @@ export class OperacaoComponent implements OnInit {
 
     getCustosOperacionais(): number {
       let totalCustos:number = 0;
-      let meses:Set<number> = new Set();
       this.operacoes.forEach(op => {
-        meses.add(moment(op.dataOperacao, "YYYY-MM-DD").month());
         totalCustos += op.custoOperacao;
       });
       return totalCustos;

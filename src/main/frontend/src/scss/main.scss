@@ -49,7 +49,7 @@ Grid component styles
             $size: $g/$grid-divisor * 100%;
             width: calc(#{$size} - #{$margin*2});
         }
-    }   
+    }
 }
 
 @media only screen and (min-width: $medium-device) {
@@ -58,7 +58,7 @@ Grid component styles
             $size: $g/$grid-divisor * 100%;
             width: calc(#{$size} - #{$margin*2});
         }
-    }   
+    }
 }
 
 /*
@@ -78,30 +78,30 @@ Generic component styles
     width: 100%;
     font-weight: normal;
 
-    .detail {
+    &-detail {
         margin: $margin/2 $margin/2 $margin/2 auto;
         cursor: pointer;
         font-size: 1.5em;
-        background: none;        
+        background: none;
 
         & > * {
             background: inherit;
             transition: all .25s ease-in-out;
 
             &::before {
-                text-shadow: 3px 3px 10px $shadow-color;        
+                text-shadow: 3px 3px 10px $shadow-color;
             }
 
             &:hover {
                 transform: scale(1.2);
                 transition: all .25s ease-in-out;
                 &::before {
-                    text-shadow: 12px 6px 20px $shadow-color;        
+                    text-shadow: 12px 6px 20px $shadow-color;
                 }
 
             }
         }
-    }  
+    }
 }
 
 .link {
@@ -120,8 +120,6 @@ Generic component styles
     border-radius: 50%;
     width: $circle-size;
     height: $circle-size;
-    margin: $margin;
-    padding: $padding;
     background: lighten($list-background-color, 5%);
     border: 1px solid $list-border-color;
     font-size: 0.8em;

@@ -11,11 +11,11 @@ Table component styles
 
     thead {
         display: none;
-        background-color: lighten($list-background-color, 15%);
+        background-color:  transparentize($list-background-color, .5);
     }
 
     tfoot {
-        background-color: lighten($list-background-color, 20%);
+        background-color: transparentize($list-background-color, .75);
     }
 
     tr {
@@ -54,7 +54,7 @@ Table component styles
             display: table-row;
             td:nth-last-child(1) {
                 background: inherit;
-            }          
+            }
         }
 
         th, td {

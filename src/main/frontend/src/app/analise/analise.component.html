@@ -1,13 +1,38 @@
 <div class="container">
-    <h4 class="title">Análises <a class="detail" title="adicionar análise" (click)="addAnalise()"><i class="fa fa-plus-circle"></i></a></h4>
-    <p>
-        analise works!
-    </p>
+    <h4 class="title">Análises <a class="title-detail" title="adicionar análise" (click)="addAnalise()"><i class="fa fa-plus-circle"></i></a></h4>
+    <ul class="list">
+      <li *ngFor="let entry of listAnalises() | keyvalue; let idxEntry = index" class="list-item" [ngClass]="{'selected expanded': isExpanded(idxEntry)}" (click)="expandListItem(idxEntry)">
+        <header class="title"><span>{{entry.key}}</span><span class="title-detail circle">{{entry.value.length}}</span></header>
+        <div class="list-item-block">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="left">Anotação</th>
+                <th class="center">Criado em</th>
+                <th class="center">Atualizado em</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let analise of entry.value; let idxAnalise = index">
+                <td title="Anotação">{{analise.anotacao}}</td>
+                <td title="Criado em" class="center">{{analise.dataCriacao | date: 'dd/MM/yyyy'}}</td>
+                <td title="Atualizado em" class="center">{{analise.dataAtualizacao | date: 'dd/MM/yyyy'}}</td>
+                <td class="right">
+                  <a class="margin-left-2 link" (click)="editAnalise(analise, idxAnalise)"><i class="fa fa-pencil"></i></a>
+                  <a class="margin-left-2 link" (click)="deleteAnalise(analise, idxAnalise)"><i class="fa fa-trash"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+    </ul>
 </div>
 <form #analiseForm="ngForm" *ngIf="selectedAnalise" class="modal-wrapper">
     <div class="modal">
         <header class="modal-title">
-            <h4 class="title">{{selectedAnalise.acao || (index === null ? 'Nova Análise': 'Editando Análise')}}</h4>
+            <h4 class="title">{{(index === null ? 'Nova Análise': selectedAnalise.acao.codigo + ' - ' + (selectedAnalise.dataAtualizacao | date: 'dd/MM/yyyy'))}}</h4>
             <button (click)="close()" class="modal-close"><i class="fa fa-close"></i></button>
         </header>
         <section class="modal-body">
@@ -25,7 +50,7 @@
             </div>
         </section>
         <footer class="modal-footer">
-            <button type="submit" class="btn btn-primary" (click)="saveAcao()">salvar</button>
+            <button type="submit" class="btn btn-primary" (click)="saveAnalise()">salvar</button>
         </footer>
     </div>
 </form>

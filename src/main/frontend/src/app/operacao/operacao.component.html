@@ -1,5 +1,5 @@
 <div class="container">
-    <h4 class="title">Operações<a class="detail" title="adicionar operação" (click)="addOperacao()"><i class="fa fa-plus-circle"></i></a></h4>
+    <h4 class="title">Operações<a class="title-detail" title="adicionar operação" (click)="addOperacao()"><i class="fa fa-plus-circle"></i></a></h4>
     <table class="table">
         <thead>
             <tr>
@@ -14,23 +14,23 @@
         </thead>
         <tfoot>
             <tr>
-                <td class="right" colspan="7"><b>Total compra: {{precoTotalCompra | currency:'BRL':true:'1.2-2'}}</b></td>
+                <td class="right" colspan="7"><b>Total compra: {{precoTotalCompra | currency:'BRL':symbol:'1.2-2'}}</b></td>
             </tr>
             <tr>
-                <td class="right" colspan="7"><b>Total venda: {{precoTotalVenda | currency:'BRL':true:'1.2-2'}}</b></td>
+                <td class="right" colspan="7"><b>Total venda: {{precoTotalVenda | currency:'BRL':symbol:'1.2-2'}}</b></td>
             </tr>
             <tr>
-                <td class="right" colspan="7"><b>Total custódia: {{getTotalCustodia() | currency:'BRL':true:'1.2-2'}}</b></td>
+                <td class="right" colspan="7"><b>Total custódia: {{getTotalCustodia() | currency:'BRL':symbol:'1.2-2'}}</b></td>
             </tr>
             <tr>
                 <th class="right" colspan="7"><b>performance: {{getPerformance() || 0 | percent: '1.2-2'}}</b></th>
             </tr>
             <tr>
-                <th class="right" colspan="7"><b>Total custos operacionais: {{getCustosOperacionais() | currency:'BRL':true:'1.2-2'}}</b></th>
+                <th class="right" colspan="7"><b>Total custos operacionais: {{getCustosOperacionais() | currency:'BRL':symbol:'1.2-2'}}</b></th>
             </tr>
             <tr>
                 <th class="right" colspan="7">
-                    <i>Lucro líquido: {{lucroLiquido | currency:'BRL':true:'1.2-2'}}</i>
+                    <i>Lucro líquido: {{lucroLiquido | currency:'BRL':symbol:'1.2-2'}}</i>
                 </th>
             </tr>
 
@@ -41,9 +41,9 @@
                 <td title="Tipo" class="left">{{operacao.tipoOperacao}}</td>
                 <td title="Quantidade" class="right">{{operacao.quantidade}}</td>
                 <td title="Data operação" class="center">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</td>
-                <td title="Preço" class="right">{{operacao.valor | currency:'BRL':true:'1.2-2'}}</td>
+                <td title="Preço" class="right">{{operacao.valor | currency:'BRL':symbol:'1.2-2'}}</td>
                 <td title="Total" class="right">
-                  <b>{{operacao.quantidade * operacao.valor | currency:'BRL':true:'1.2-2'}}</b>
+                  <b>{{operacao.quantidade * operacao.valor | currency:'BRL':symbol:'1.2-2'}}</b>
                 </td>
                 <td class="right">
                   <a class="margin-left-2 link" (click)="editOperacao(operacao, idx)"><i class="fa fa-pencil"></i></a>

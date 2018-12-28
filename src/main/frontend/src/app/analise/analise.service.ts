@@ -17,7 +17,7 @@ export class AnaliseService {
       return this.http.delete("/api/analises/delete/" + analise.id).map((res: Response) => res.json());
     }
 
-    getOperacoes(): Observable<Analise[]> {
+    getAnalises(): Observable<Analise[]> {
         return this.http.get("/api/analises").map((res: Response) => res.json());
     }
 

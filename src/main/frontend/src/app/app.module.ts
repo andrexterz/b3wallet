@@ -4,13 +4,13 @@ import {APP_BASE_HREF} from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
-import { MomentModule } from 'angular2-moment';
 import { AppComponent } from './app.component';
 import { AcaoComponent } from './acao/acao.component';
 import {AcaoService } from './acao/acao.service';
 import {OperacaoService } from './operacao/operacao.service';
 import { OperacaoComponent } from './operacao/operacao.component';
 import { AnaliseComponent } from './analise/analise.component';
+import { AnaliseService } from './analise/analise.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,6 @@ import { AnaliseComponent } from './analise/analise.component';
     BrowserModule,
     HttpModule,
     FormsModule,
-    MomentModule,
     RouterModule.forRoot([
       {path: 'dashboard', component: AcaoComponent},
       {path: 'portfolio', component: OperacaoComponent},
@@ -31,7 +30,7 @@ import { AnaliseComponent } from './analise/analise.component';
       {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
     ])
   ],
-  providers: [AcaoService, OperacaoService],
+  providers: [AcaoService, OperacaoService, AnaliseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

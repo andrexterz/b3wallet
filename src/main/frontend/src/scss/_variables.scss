@@ -64,7 +64,7 @@ $form-control-border-radius: 4px;
 $form-control-height: 28px;
 $form-control-padding: 10px;
 $form-control-color: #888;
-$form-control-background: #f5f5f533;
+$form-control-background: #cccccc24;
 
 //=========================================================================
 //Button component variables
@@ -77,7 +77,7 @@ $btn-background: $secondary-color;
 //=========================================================================
 //List component variables
 //=========================================================================
-$list-background-color: lighten($form-control-border-color, 10%);
+$list-background-color: darken($light-background, 5%);
 $list-border-color: $form-control-border-color;
 $list-height: 50px;
 
