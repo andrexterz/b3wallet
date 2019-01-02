@@ -11,10 +11,8 @@ import { Acao } from "./acao";
 })
 export class AcaoComponent implements OnInit {
 
-    index: number = null;
     selectedAcao: Acao = null;
     acoes: Acao[] = [];
-
 
     constructor(private acaoService: AcaoService,
       private route: ActivatedRoute,
@@ -24,30 +22,27 @@ export class AcaoComponent implements OnInit {
     ngOnInit(): void {
         this.acaoService.getAcoes().subscribe(acoes => this.acoes = acoes.map(acao => Object.assign(new Acao(), acao)));
     }
-    
+
     addAcao(): void {
-        console.log("adicionando ação");
         this.selectedAcao = new Acao();
-        this.index = null;
     }
 
-    editAcao(acao: Acao, index: number): void {
+    editAcao(acao: Acao): void {
          this.selectedAcao = Object.assign({}, acao);
-         this.index = index;
     }
 
     saveAcao(): void {
         if (this.selectedAcao) {
-            let acao: Acao = Object.assign(new Acao(), this.selectedAcao);
-            this.acaoService.saveAcao(acao).subscribe(obj => {
+            this.acaoService.saveAcao(this.selectedAcao).subscribe(obj => {
                 let savedObj: Acao = Object.assign(new Acao(), obj);
-                if (this.index !== null) {
-                    this.acoes[this.index] = savedObj;
+                let index = this.acoes.findIndex(o => o.id == savedObj.id);
+                if (index !== null) {
+                    this.acoes[index] = savedObj;
                 } else {
                     this.acoes.push(savedObj);
                 }
             });
-  
+
         }
         this.close();
     }

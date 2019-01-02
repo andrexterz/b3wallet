@@ -25,10 +25,22 @@ Navbar component styles
   flex: 1 0 auto;
   align-items: flex-end;
 }
+.navbar-nav.active {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background: #4d506b;
+}
 .navbar-nav .nav-item {
   display: flex;
   flex: 0 0 auto;
   align-items: center;
+  padding: 10px;
 }
 .navbar-nav .nav-item a {
   color: #bbbbbb;
@@ -47,13 +59,18 @@ Navbar component styles
   margin-left: 20px;
 }
 .navbar-search {
-  display: flex;
+  display: none;
   height: 40px;
   border: 1px solid #9c9c9c;
   border-radius: 4px;
   overflow: hidden;
   margin-left: auto;
   margin-right: 10px;
+}
+@media (min-width: 425px) {
+  .navbar-search {
+    display: flex;
+  }
 }
 .navbar-search input {
   width: 12em;
@@ -76,7 +93,7 @@ Navbar component styles
   color: #efefef;
   background: none;
   border: none;
-  margin: 0 1em;
+  margin: 1em;
   font-size: 1.25em;
   cursor: pointer;
 }
@@ -117,7 +134,7 @@ List component styles
   display: flex;
   flex-wrap: wrap;
   flex: 1 0 calc(100% - 10px);
-  padding: 10px;
+  padding: 5px;
   min-height: 50px;
   align-items: center;
   background-color: #f1f1f1;
@@ -175,9 +192,9 @@ Table component styles
 .table th, .table td {
   padding: 10px;
   display: flex;
+  flex-wrap: wrap;
   flex: 1;
   align-items: center;
-  justify-content: flex-end;
   border-top: 1px solid #c2c2c2;
 }
 .table th::before, .table td::before {
@@ -269,6 +286,14 @@ Form component styles
   transform: translateY(-175%);
   transition: all 0.1s linear;
 }
+.form-control input[type=text]:invalid,
+.form-control input[type=number]:invalid,
+.form-control input[type=password]:invalid,
+.form-control input[type=date]:invalid,
+.form-control textarea:invalid,
+.form-control select:invalid {
+  border-color: #cc0000;
+}
 .form-control input[type=text] ~ label,
 .form-control input[type=number] ~ label,
 .form-control input[type=password] ~ label,
@@ -314,7 +339,7 @@ Form component styles
   margin: 0 5px;
 }
 .btn:active {
-  background-color: #c0b8cf;
+  background-color: #70618d;
   transition: all 0.1s ease-out;
 }
 .btn-primary {
@@ -323,7 +348,7 @@ Form component styles
   transition: all 0.1s ease-in;
 }
 .btn-primary:active {
-  background-color: #ff669e;
+  background-color: #cc004a;
   transition: all 0.1s ease-out;
 }
 

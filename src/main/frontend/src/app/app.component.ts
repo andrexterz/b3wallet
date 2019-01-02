@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 
     title = 'B3 Wallet';
-
+    showMenuMobile = false;
     activeMenu = null;
 
     menuItems = [
@@ -17,12 +17,17 @@ export class AppComponent implements OnInit {
         {title: "Portfolio", route: "portfolio", icon: "fa fa-folder-open"},
          {title: "Análises", route: "analise", icon: "fa fa-sticky-note"},
     ];
-    
+
   ngOnInit(): void {
         this.activeMenu = this.menuItems[0];
-    }    
+    }
 
-    selectMenu(menu: any) {
+    selectMenu(menu: any): void {
         this.activeMenu = menu;
+        this.showMenuMobile = false;
+    }
+
+    toggleMenuMobile(): void {
+      this.showMenuMobile = !this.showMenuMobile;
     }
 }

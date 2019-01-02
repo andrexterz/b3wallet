@@ -8,7 +8,7 @@ Form component styles
   flex-wrap: wrap;
   flex: 1 1 auto;
   margin: $margin -#{$margin};
-    
+
   &--inline {
     @extend .form;
     flex-wrap: nowrap;
@@ -20,8 +20,8 @@ Form component styles
     flex-direction: column;
     border-radius: $form-control-border-radius;
     margin: $margin;
-    
- 
+
+
     input[type="text"],
     input[type="number"],
     input[type="password"],
@@ -35,7 +35,7 @@ Form component styles
         min-height: $form-control-height;
         z-index: 1;
         color: transparent;
-        
+
         &:required:valid, &:focus {
             color: initial;
             outline: none;
@@ -46,7 +46,11 @@ Form component styles
                 transition: all .1s linear;
             }
         }
-        
+
+        &:invalid {
+          border-color: $form-color-invalid;
+        }
+
         & ~ label {
          cursor: text;
          font-size: 1em;
@@ -58,14 +62,14 @@ Form component styles
          z-index: 0;
         }
      }
-     
+
      textarea {
          height: initial;
          resize: vertical;
-         
+
          & ~ label {
             position: absolute;
-            top: $form-control-height;             
+            top: $form-control-height;
          }
      }
   }

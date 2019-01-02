@@ -1,7 +1,6 @@
 import { Component,  OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
-import 'rxjs/add/operator/switchMap';
 import { OperacaoService } from './operacao.service';
 import { AcaoService } from '../acao/acao.service';
 import { Operacao } from "./operacao";
@@ -18,7 +17,6 @@ export class OperacaoComponent implements OnInit {
     precoTotalCompra :number = 0;
     precoTotalVenda: number = 0;
     lucroLiquido: number = 0;
-    index: number = null;
     selectedOperacao: Operacao = null;
 
     constructor(
@@ -75,21 +73,19 @@ export class OperacaoComponent implements OnInit {
 
     addOperacao(): void {
         this.selectedOperacao = new Operacao();
-        this.index = null;
     }
 
-    editOperacao(operacao: Operacao, index: number): void {
+    editOperacao(operacao: Operacao): void {
          this.selectedOperacao = Object.assign(new Operacao(), operacao);
-         this.index = index;
     }
 
     saveOperacao(): void {
         if (this.selectedOperacao) {
-            let operacao: Operacao = Object.assign(new Operacao(), this.selectedOperacao);
-            this.operacaoService.saveOperacao(operacao).subscribe(obj => {
+            this.operacaoService.saveOperacao(this.selectedOperacao).subscribe(obj => {
                 let savedObj: Operacao = Object.assign(new Operacao(), obj);
-                if (this.index !== null) {
-                    this.operacoes[this.index] = savedObj;
+                let index = this.operacoes.findIndex(o => o.id == savedObj.id);
+                if (index >= 0) {
+                    this.operacoes[index] = savedObj;
                 } else {
                     this.operacoes.push(savedObj);
                 }
@@ -99,10 +95,12 @@ export class OperacaoComponent implements OnInit {
         this.close();
     }
 
-    deleteOperacao(operacao: Operacao, index: number): void {
+    deleteOperacao(operacao: Operacao): void {
       let confirmDelete = confirm("Remover operacão " + operacao.acao.codigo + ": " + operacao.tipoOperacao + "?");
       if (confirmDelete) {
+        let index = this.operacoes.findIndex(o => o.id == operacao.id);
         this.operacaoService.deleteOperacao(operacao).subscribe(res => {
+
           if (res) {
             this.operacoes.splice(index, 1);
             //todo: add modal info or error
@@ -112,7 +110,7 @@ export class OperacaoComponent implements OnInit {
     }
 
     //compare method for directive compareWith
-    byAcao(itemA: any, itemB: any) {
+    comparator(itemA: any, itemB: any) {
         try {
             return itemA.id == itemB.id;
         } catch (e) {

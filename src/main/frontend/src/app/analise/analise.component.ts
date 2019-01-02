@@ -15,7 +15,6 @@ export class AnaliseComponent implements OnInit {
     acoes: Acao[] = [];
     analises: Analise[] = [];
     selectedAnalise: Analise = null;
-    index: number = null;
     selectedListItem: Set<number> = new Set();
 
     constructor(
@@ -44,29 +43,29 @@ export class AnaliseComponent implements OnInit {
 
     addAnalise(): void {
         this.selectedAnalise = new Analise();
-        this.index = null;
     }
 
-    editAnalise(analise: Analise, index: number): void {
-      this.selectedAnalise = analise;
-      this.index = index;
+    editAnalise(analise: Analise): void {
+      this.selectedAnalise = Object.assign(new Analise(), analise);
     }
 
     saveAnalise(): void {
-      let analise: Analise = Object.assign(new Analise(), this.selectedAnalise);
-      this.analiseService.saveAnalise(analise).subscribe(obj => {
-        let savedObj: Analise = Object.assign(new Analise(), obj);
-        if (this.index !== null) {
-          this.analises[this.index] = savedObj;
-        } else {
-          this.analises.push(savedObj);
-        }
-      });
+      if (this.selectedAnalise) {
+        this.analiseService.saveAnalise(this.selectedAnalise).subscribe(obj => {
+          let savedObj: Analise = Object.assign(new Analise(), obj);
+          let index  = this.analises.findIndex(o => o.id == savedObj.id);
+          if (index >= 0) {
+            this.analises[index] = savedObj;
+          } else {
+            this.analises.push(savedObj);
+          }
+        });
+      }
       this.close();
     }
 
-    deleteAnalise(analise: Analise, index: number): void {
-      console.log("implement to delete -> ", analise, " at ", index);
+    deleteAnalise(analise: Analise): void {
+      console.log("implement to delete -> ", analise);
     }
 
     close(): void {
@@ -74,7 +73,7 @@ export class AnaliseComponent implements OnInit {
      }
 
     //compare method for directive compareWith
-    byAcao(itemA: any, itemB: any): boolean {
+    comparator(itemA: any, itemB: any): boolean {
         try {
             return itemA.id == itemB.id;
         } catch (e) {

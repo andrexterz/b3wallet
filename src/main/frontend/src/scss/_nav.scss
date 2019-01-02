@@ -11,7 +11,7 @@ Navbar component styles
     display: flex;
     width: 100%;
     height: $nav-bar-height;
-    background: linear-gradient(90deg, lighten($nav-background-color-1, 10%) 0, $nav-background-color-2 20%);
+    background: $nav-background;
     border-bottom: 1px solid $nav-border-color;
 
     &-brand {
@@ -26,10 +26,23 @@ Navbar component styles
         flex: 1 0 auto;
         align-items: flex-end;
 
+        &.active {
+          position: absolute;
+          top: $nav-bar-height;
+          left: 0;
+          right: 0;
+          margin: 0;
+          padding: $padding;
+          display: flex;
+          flex-direction: column;
+          background: $nav-background-color-2;
+        }
+
         .nav-item {
             display: flex;
             flex: 0 0 auto;
             align-items: center;
+            padding: $padding;
 
             a {
                 color: darken($nav-item-color, 20%);
@@ -55,13 +68,18 @@ Navbar component styles
     }
 
     &-search {
-        display: flex;
+        display: none;
         height: $nav-search-height;
         border: $form-control-border;
         border-radius: $form-control-border-radius;
         overflow: hidden;
         margin-left: auto;
         margin-right: $margin;
+
+        @media(min-width: $small-device) {
+          display: flex;
+        }
+
 
         input {
             width: 12em;
@@ -88,7 +106,7 @@ Navbar component styles
         color: $dark-foreground;
         background: none;
         border: none;
-        margin: 0 1em;
+        margin: 1em;
         font-size: 1.25em;
         cursor: pointer;
 
@@ -102,16 +120,15 @@ Navbar component styles
         display: flex;
         align-items: center;
         flex: 1 1 100%;
-
     }
-    
+
     @media (min-width: $medium-device) {
         &-nav {
-            display: flex;        
+            display: flex;
         }
 
         &-menu {
-            display: none;        
+            display: none;
         }
     }
 }

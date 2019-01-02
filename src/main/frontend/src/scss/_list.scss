@@ -20,7 +20,7 @@ List component styles
     display: flex;
     flex-wrap: wrap;
     flex: 1 0 calc(100% - #{$padding});
-    padding: $padding;
+    padding: $padding/2;
     min-height: $list-height;
     align-items: center;
     background-color: $list-background-color;

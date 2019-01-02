@@ -8,7 +8,7 @@
  -->
 
   <div class="navbar-wrapper">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav" [class.active]="showMenuMobile">
       <li class="nav-item" *ngFor="let item of menuItems" [class.active]="item === activeMenu" (click)="selectMenu(item)">
         <a routerLink="/{{item.route}}"><i class="{{item.icon}}"></i>{{item.title}}</a>
       </li>
@@ -18,7 +18,10 @@
       <button><i class="fa fa-search"></i></button>
     </form>
   </div>
- <button type="button" class="navbar-menu"><i class="fa fa-bars"></i></button>
+ <button type="button" class="navbar-menu" (click)="toggleMenuMobile()">
+   <i *ngIf="!showMenuMobile" class="fa fa-bars"></i>
+   <i *ngIf="showMenuMobile" class="fa fa-close"></i>
+ </button>
 </nav>
 <router-outlet></router-outlet>
 

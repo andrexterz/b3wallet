@@ -14,13 +14,13 @@ Form component styles
     border-radius: $form-control-border-radius;
     padding: $form-control-padding/2 $form-control-padding;
     height: calc(30px + #{$form-control-padding/2});
-    
+
     & + & {
         margin: 0 $margin/2;
     }
-    
+
     &:active {
-        background-color: lighten($btn-background, 20%);
+        background-color: darken($btn-background, 10%);
         transition: all .1s ease-out;
     }
 
@@ -30,7 +30,7 @@ Form component styles
         transition: all .1s ease-in;
 
         &:active {
-            background-color: lighten($btn-background-primary, 20%);
+            background-color: darken($btn-background-primary, 10%);
             transition: all .1s ease-out;
         }
 

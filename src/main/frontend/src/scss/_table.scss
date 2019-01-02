@@ -32,9 +32,9 @@ Table component styles
     th, td {
         padding: $padding;
         display: flex;
+        flex-wrap: wrap;
         flex: 1;
         align-items: center;
-        justify-content: flex-end;
         border-top: 1px solid lighten($list-border-color, 15%);
 
         &::before {

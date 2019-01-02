@@ -1,6 +1,7 @@
 
 @import "reset";
 @import "variables";
+@import "mixins";
 @import "nav";
 @import "list";
 @import "table";
@@ -125,12 +126,14 @@ Generic component styles
     font-size: 0.8em;
 }
 
+//.<alignment> { text-align: <alignment>; }
 @each $alignment in (center, left, right, justify) {
     .#{$alignment} {
         text-align: $alignment;
     }
 }
 
+//.margin-<direction>-[1-10]
 @each $side in (top, right, bottom, left) {
     @for $m from 1 through 10 {
         .margin-#{$side}-#{$m} {

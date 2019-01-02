@@ -1,11 +1,19 @@
 //=========================================================================
+//Breakpoints
+//=========================================================================
+$small-device: 425px;
+$medium-device: 768px;
+$large-device: 1200px;
+$xlarge-device: 1280px;
+
+//=========================================================================
 //Generic component variables
 //=========================================================================
 $margin: 10px;
 $padding: 10px;
 $circle-size: 40px;
 $border-radius: 3px;
-
+$disabled-opacity: 0.25;
 //=========================================================================
 //Element colors
 //=========================================================================
@@ -33,13 +41,6 @@ $message-warning-color: #ffd54f;
 $message-error-color: #ff9999;
 
 //=========================================================================
-//Breakpoints
-//=========================================================================
-$small-device: 425px;
-$medium-device: 768px;
-$large-device: 1200px;
-$xlarge-device: 1280px;
-//=========================================================================
 //Grid component variables
 //=========================================================================
 $grid-divisor: 12;
@@ -49,6 +50,7 @@ $grid-divisor: 12;
 //=========================================================================
 $nav-background-color-1: $primary-color;
 $nav-background-color-2: $default-color;
+$nav-background: linear-gradient(90deg, lighten($nav-background-color-1, 10%) 0, $nav-background-color-2 20%);
 $nav-border-color: darken($nav-background-color-2, 5%);
 $nav-bar-height: 60px;
 $nav-search-height: 40px;
@@ -65,7 +67,7 @@ $form-control-height: 28px;
 $form-control-padding: 10px;
 $form-control-color: #888;
 $form-control-background: #cccccc24;
-
+$form-color-invalid: #cc0000;
 //=========================================================================
 //Button component variables
 //=========================================================================
