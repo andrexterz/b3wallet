@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.andrebarca.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -18,11 +13,11 @@ import javax.validation.constraints.NotBlank;
  */
 @Entity
 public class Analise extends Base {
-    
+
     public Analise() {
-    
+
     }
-    
+
     public Analise(Acao acao, String anotacao) {
         this.acao = acao;
         this.anotacao = anotacao;
@@ -32,7 +27,7 @@ public class Analise extends Base {
     @JoinColumn(name = "ACAO_ID")
     @JsonIgnoreProperties("operacoes")
     private Acao acao;
-    
+
     @NotBlank
     private String anotacao;
 

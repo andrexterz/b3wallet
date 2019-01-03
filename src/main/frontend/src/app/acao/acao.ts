@@ -5,19 +5,9 @@ import { Operacao } from '../operacao/operacao';
     codigo: string;
     nome: string;
     operacoes: Operacao[] = [];
-  
-    getCustodia(): number {
-        let totalCustodia:number = 0;
-        
-            this.operacoes.forEach((op: Operacao) => {
-                
-                if (op.tipoOperacao === <any>'COMPRA') {
-                    totalCustodia += op.quantidade;
-                } else {
-                    totalCustodia -= op.quantidade;
-                }
-        });
-        
-        return totalCustodia;
-  }
+    totalCompra: number = 0;
+    totalVenda: number = 0;
+    totalCustodia: number = 0;
+    precoMedio: number = 0;
+    totalLucro: number = 0;
 }

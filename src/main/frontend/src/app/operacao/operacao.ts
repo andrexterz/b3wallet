@@ -3,10 +3,10 @@ import { Acao } from "../acao/acao";
 export class Operacao {
   id: number;
   acao: Acao;
-  valor: number;
+  valor: number = 0;
   dataOperacao: Date;
-  quantidade: number;
+  quantidade: number = 0;
   tipoOperacao: string;
-  custoOperacao: number;
-  totalOperacao: number;
+  custoOperacao: number = 0;
+  totalOperacao: number = 0;
 }

@@ -203,6 +203,9 @@ Table component styles
   margin-right: auto;
   font-weight: bold;
 }
+.table-action {
+  font-size: 1.5em;
+}
 @media (min-width: 768px) {
   .table thead {
     display: table-header-group;
@@ -218,6 +221,9 @@ Table component styles
   }
   .table th::before, .table td::before {
     display: none;
+  }
+  .table-action {
+    font-size: 1em;
   }
 }
 
@@ -256,6 +262,14 @@ Form component styles
   z-index: 1;
   color: transparent;
 }
+.form-control input[type=text][disabled],
+.form-control input[type=number][disabled],
+.form-control input[type=password][disabled],
+.form-control input[type=date][disabled],
+.form-control textarea[disabled],
+.form-control select[disabled] {
+  opacity: 0.5;
+}
 .form-control input[type=text]:required:valid, .form-control input[type=text]:focus,
 .form-control input[type=number]:required:valid,
 .form-control input[type=number]:focus,
@@ -286,12 +300,12 @@ Form component styles
   transform: translateY(-175%);
   transition: all 0.1s linear;
 }
-.form-control input[type=text]:invalid,
-.form-control input[type=number]:invalid,
-.form-control input[type=password]:invalid,
-.form-control input[type=date]:invalid,
-.form-control textarea:invalid,
-.form-control select:invalid {
+.form-control input[type=text].ng-touched.ng-dirty:invalid,
+.form-control input[type=number].ng-touched.ng-dirty:invalid,
+.form-control input[type=password].ng-touched.ng-dirty:invalid,
+.form-control input[type=date].ng-touched.ng-dirty:invalid,
+.form-control textarea.ng-touched.ng-dirty:invalid,
+.form-control select.ng-touched.ng-dirty:invalid {
   border-color: #cc0000;
 }
 .form-control input[type=text] ~ label,
@@ -337,6 +351,9 @@ Form component styles
 }
 .btn + .btn {
   margin: 0 5px;
+}
+.btn[disabled] {
+  opacity: 0.5;
 }
 .btn:active {
   background-color: #70618d;
@@ -405,13 +422,14 @@ Modal component styles
   cursor: pointer;
   margin-left: auto;
   border: none;
-  color: #777;
+  color: #efefef;
   background: none;
   transition: all 0.25s ease;
+  font-size: 1.5em;
 }
 .modal-close:focus, .modal-close:active, .modal-close:hover {
   outline: none;
-  color: #b7b7b7;
+  color: #ff005d;
   transform: scale(1.25);
   transition: all 0.25s ease;
 }
@@ -692,34 +710,49 @@ Generic component styles
   width: 100%;
   font-weight: normal;
 }
-.title-detail {
+.title-detail, .title-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 5px 5px 5px auto;
+}
+.title-action {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
   cursor: pointer;
   font-size: 1.5em;
-  background: none;
+  background-color: #fefefe;
+  transition: all 0.2s ease-in-out;
 }
-.title-detail > * {
-  background: inherit;
-  transition: all 0.25s ease-in-out;
-}
-.title-detail > *::before {
+.title-action > *::before {
   text-shadow: 3px 3px 10px #55555588;
 }
-.title-detail > *:hover {
+.title-action:hover {
   transform: scale(1.2);
-  transition: all 0.25s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
-.title-detail > *:hover::before {
+.title-action:hover::before {
   text-shadow: 12px 6px 20px #55555588;
+}
+@media (min-width: 768px) {
+  .title-action {
+    position: initial;
+  }
 }
 
 .link {
   cursor: pointer;
   color: #777;
   text-decoration: none;
+  transition: all 0.2s ease-in-out;
 }
 .link:hover {
-  color: #aaaaaa;
+  color: #515151;
+  transition: all 0.2s ease-in-out;
 }
 
 .circle {
@@ -727,8 +760,8 @@ Generic component styles
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 2rem;
+  height: 2rem;
   background: #fefefe;
   border: 1px solid #9c9c9c;
   font-size: 0.8em;
@@ -926,9 +959,18 @@ Container component styles
   background: #fefefe;
   padding: 10px;
 }
+.container::after {
+  content: " ";
+  display: block;
+  width: 100%;
+  height: calc(2rem + 10px);
+}
 @media (min-width: 768px) {
   .container {
     margin: 10px auto;
+  }
+  .container::after {
+    display: none;
   }
 }
 

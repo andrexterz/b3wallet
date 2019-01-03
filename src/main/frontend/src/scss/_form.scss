@@ -36,6 +36,8 @@ Form component styles
         z-index: 1;
         color: transparent;
 
+        @include disabled-status;
+
         &:required:valid, &:focus {
             color: initial;
             outline: none;
@@ -47,7 +49,8 @@ Form component styles
             }
         }
 
-        &:invalid {
+        //angular invalid field
+        &.ng-touched.ng-dirty:invalid {
           border-color: $form-color-invalid;
         }
 

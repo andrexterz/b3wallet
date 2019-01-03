@@ -12,17 +12,17 @@ Modal component styles
   overflow: hidden;
   width: 100%;
   height: 100%;
-  
+
   @media(min-width: $medium-device) {
       width: 75%;
       height: auto;
   }
-  
+
   @media(min-width: $large-device) {
       width: 50%;
       height: auto;
   }
-  
+
 
   &-wrapper {
     display: flex;
@@ -52,18 +52,19 @@ Modal component styles
     cursor: pointer;
     margin-left: auto;
     border: none;
-    color: $link-color;
+    color: $dark-foreground;
     background: none;
     transition: all .25s ease;
+    font-size: 1.5em;
 
     &:focus, &:active, &:hover {
       outline: none;
-      color: lighten($link-color, 25%);
+      color: $primary-color;
       transform: scale(1.25);
       transition: all .25s ease;
     }
   }
-  
+
   &-body {
     display: flex;
     align-items: flex-start;
@@ -71,7 +72,7 @@ Modal component styles
     flex: 1 1 100%;
     padding: $padding;
   }
-  
+
   &-footer {
       display: flex;
       align-items: center;

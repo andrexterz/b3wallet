@@ -79,29 +79,44 @@ Generic component styles
     width: 100%;
     font-weight: normal;
 
-    &-detail {
-        margin: $margin/2 $margin/2 $margin/2 auto;
+    &-detail, &-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: $margin/2 $margin/2 $margin/2 auto;
+    }
+
+    &-action {
+        position: fixed;
+        bottom: $margin;
+        right: $margin;
+        width: $circle-size;
+        height: $circle-size;
+        border-radius: 50%;
         cursor: pointer;
         font-size: 1.5em;
-        background: none;
+        background-color: $light-background;
+        transition: all .2s ease-in-out;
 
         & > * {
-            background: inherit;
-            transition: all .25s ease-in-out;
-
             &::before {
                 text-shadow: 3px 3px 10px $shadow-color;
             }
-
-            &:hover {
-                transform: scale(1.2);
-                transition: all .25s ease-in-out;
-                &::before {
-                    text-shadow: 12px 6px 20px $shadow-color;
-                }
-
-            }
         }
+
+        &:hover {
+          transform: scale(1.2);
+          transition: all .2s ease-in-out;
+          &::before {
+            text-shadow: 12px 6px 20px $shadow-color;
+          }
+        }
+    }
+
+    @media(min-width: $medium-device) {
+      &-action {
+        position: initial;
+      }
     }
 }
 
@@ -109,8 +124,11 @@ Generic component styles
     cursor: pointer;
     color: $link-color;
     text-decoration: none;
+    transition: all .2s ease-in-out;
+
     &:hover {
-        color: lighten($link-color, 20%);
+        color: darken($link-color, 15%);
+        transition: all .2s ease-in-out;
     }
 }
 
@@ -158,8 +176,19 @@ Container component styles
     background: $container-background-color;
     padding: $padding;
 
+    &::after {
+      content: ' ';
+      display: block;
+      width: 100%;
+      height: calc(#{$circle-size} + #{$margin});
+    }
+
     @media(min-width: $medium-device) {
         margin: $margin auto;
+
+        &::after {
+          display: none;
+        }
     }
 }
 

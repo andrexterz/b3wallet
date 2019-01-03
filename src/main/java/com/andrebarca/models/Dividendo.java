@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.andrebarca.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -31,15 +26,15 @@ public class Dividendo extends Base {
         this.dataEx = dataEx;
         this.dataPagamento = dataPagamento;
     }
-    
-    
+
+
     @ManyToOne
     @JoinColumn(name = "ACAO_ID")
     @JsonIgnoreProperties("operacoes")
     private Acao acao;
-   
+
     private Double valor;
-    
+
     @Temporal(TemporalType.DATE)
     private Date dataEx;
 
@@ -54,7 +49,7 @@ public class Dividendo extends Base {
     public void setAcao(Acao acao) {
         this.acao = acao;
     }
-    
+
     public Double getValor() {
         return valor;
     }

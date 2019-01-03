@@ -45,6 +45,10 @@ Table component styles
         }
     }
 
+    &-action {
+      font-size: 1.5em;
+    }
+
     @media(min-width: $medium-device) {
         thead {
             display: table-header-group;
@@ -63,6 +67,10 @@ Table component styles
             &::before {
                 display: none;
             }
+        }
+
+        &-action {
+          font-size: 1em;
         }
     }
 }

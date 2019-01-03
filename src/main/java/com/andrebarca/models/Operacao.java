@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.andrebarca.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -27,6 +22,12 @@ import javax.validation.constraints.Min;
 public class Operacao extends Base {
 
     public Operacao() {
+      this.acao = null;
+      this.valor = 0.0;
+      this.quantidade = 0;
+      this.custoOperacao = 0.0;
+      this.tipoOperacao = null;
+      this.dataOperacao = null;
     }
 
     public Operacao(Acao acao, Double valor, Integer quantidade, Double custoOperacao, TipoOperacao tipoOperacao, Date dataOperacao) {

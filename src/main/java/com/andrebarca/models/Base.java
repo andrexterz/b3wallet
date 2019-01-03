@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.andrebarca.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -29,13 +24,13 @@ public abstract class Base implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @CreationTimestamp
     @Temporal(TemporalType.DATE)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(insertable = true, updatable = false)
     private Date dataCriacao;
-    
+
     @UpdateTimestamp
     @Temporal(TemporalType.DATE)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -63,10 +58,10 @@ public abstract class Base implements Serializable {
 
     public void setDataAtualizacao(Date dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
-    }    
-    
+    }
+
     @Override
     public String toString() {
         return String.format("%s-[%d]", this.getClass().getName(), id);
-    }    
+    }
 }

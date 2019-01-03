@@ -16,7 +16,6 @@ export class OperacaoComponent implements OnInit {
     acoes: Acao[] = [];
     precoTotalCompra :number = 0;
     precoTotalVenda: number = 0;
-    lucroLiquido: number = 0;
     selectedOperacao: Operacao = null;
 
     constructor(
@@ -60,11 +59,7 @@ export class OperacaoComponent implements OnInit {
     }
 
     getTotalCustodia(): number {
-        let total:number = 0;
-        for (let k in this.custodia) {
-            total += this.custodia[k].precoMedio * this.custodia[k].quantidade;
-        };
-        return total;
+        return this.precoTotalCompra - this.precoTotalVenda;
     }
 
     getPerformance(): number {

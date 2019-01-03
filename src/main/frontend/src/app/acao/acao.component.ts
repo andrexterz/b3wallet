@@ -14,7 +14,8 @@ export class AcaoComponent implements OnInit {
     selectedAcao: Acao = null;
     acoes: Acao[] = [];
 
-    constructor(private acaoService: AcaoService,
+    constructor(
+      private acaoService: AcaoService,
       private route: ActivatedRoute,
       private location: Location) {
       }
@@ -36,7 +37,7 @@ export class AcaoComponent implements OnInit {
             this.acaoService.saveAcao(this.selectedAcao).subscribe(obj => {
                 let savedObj: Acao = Object.assign(new Acao(), obj);
                 let index = this.acoes.findIndex(o => o.id == savedObj.id);
-                if (index !== null) {
+                if (index >= 0) {
                     this.acoes[index] = savedObj;
                 } else {
                     this.acoes.push(savedObj);
