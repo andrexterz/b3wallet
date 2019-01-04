@@ -3,15 +3,15 @@
     <ul class="list">
       <li *ngFor="let entry of listAnalises() | keyvalue; let idxEntry = index" class="list-item" [ngClass]="{'selected expanded': isExpanded(idxEntry)}">
         <header class="title link" (click)="expandListItem(idxEntry)">
-          <i *ngIf="!isExpanded(idxEntry)" class="fa fa-plus margin-right-2"></i>
-          <i *ngIf="isExpanded(idxEntry)" class="fa fa-minus margin-right-2"></i>
+          <i *ngIf="!isExpanded(idxEntry)" class="fa fa-folder margin-right-2"></i>
+          <i *ngIf="isExpanded(idxEntry)" class="fa fa-folder-open margin-right-2"></i>
           <span>{{entry.key}}</span><span class="title-detail circle">{{entry.value.length}}</span>
         </header>
         <div class="list-item-block">
           <table class="table">
             <thead>
               <tr>
-                <th class="left">Anotação</th>
+                <th class="left g-6">Anotação</th>
                 <th class="center">Criado em</th>
                 <th class="center">Atualizado em</th>
                 <th></th>

@@ -65,7 +65,17 @@ export class AnaliseComponent implements OnInit {
     }
 
     deleteAnalise(analise: Analise): void {
-      console.log("implement to delete -> ", analise);
+      let confirmDelete = confirm("Remover análise " + analise.acao.codigo + ": " + analise.anotacao.slice(10).trim() + "...?");
+      if (confirmDelete) {
+        let index = this.analises.findIndex(o => o.id == analise.id);
+        this.analiseService.deleteAnalise(analise).subscribe(res => {
+
+          if (res) {
+            this.analises.splice(index, 1);
+            //todo: add modal info or error
+          }
+        });
+      }
     }
 
     close(): void {

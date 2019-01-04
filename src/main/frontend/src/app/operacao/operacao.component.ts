@@ -26,9 +26,7 @@ export class OperacaoComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-      window.addEventListener("KeyPress", e => {console.log(e)});
       this.acaoService.getAcoes().subscribe(acoes => this.acoes = acoes.map(acao => Object.assign(new Acao(), acao)));
-
       this.operacaoService.getOperacoes().subscribe(operacoes => {
         this.operacoes = operacoes;
         this.updateOperacoes();

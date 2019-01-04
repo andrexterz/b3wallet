@@ -53,7 +53,7 @@
         <section class="modal-body">
             <div class="form">
                 <div class="form-control g-12 g-m-6 g-l-4">
-                    <input id="dataOperacao" type="date" name="dataOperacao" [(ngModel)]="selectedOperacao.dataOperacao" pattern="dd/mm/yyyy" autofocus="autofocus" required>
+                    <input id="dataOperacao" name="dataOperacao" type="date" [(ngModel)]="selectedOperacao.dataOperacao" autofocus="autofocus" required>
                     <label for="dataOperacao">Data</label>
                 </div>
                 <div class="form-control g-12 g-m-6 g-l-4">
@@ -70,11 +70,11 @@
                     <label for="tipoOperacao">Operação</label>
                 </div>
                 <div class="form-control g-12 g-m-6 g-l-4">
-                    <input id="valorOperacao" name="valor" [(ngModel)]="selectedOperacao.valor" type="number" min="0.0" step="0.01" required>
+                    <input id="valorOperacao" name="valor" [(ngModel)]="selectedOperacao.valor" type="number" min="0" step="0.01" required>
                     <label for="valorOperacao">Valor</label>
                 </div>
                 <div class="form-control g-12 g-m-6 g-l-4">
-                    <input id="custoOperacao" name="custoOperacao" [(ngModel)]="selectedOperacao.custoOperacao" type="number" min="0.0" step="0.01" required>
+                    <input id="custoOperacao" name="custoOperacao" [(ngModel)]="selectedOperacao.custoOperacao" type="number" min="0" step="0.01" required>
                     <label for="custorOperacao">Custo Operação</label>
                 </div>
                 <div class="form-control g-12 g-m-6 g-l-4">
@@ -84,7 +84,7 @@
             </div>
         </section>
         <footer class="modal-footer">
-            <button type="submit" (click)="saveOperacao()" [disabled]="!operacaoForm.valid" class="btn btn-primary">salvar</button>
+            <button type="submit"  (click)="saveOperacao()" [disabled]="!operacaoForm.valid" class="btn btn-primary">salvar</button>
         </footer>
     </div>
 </form>

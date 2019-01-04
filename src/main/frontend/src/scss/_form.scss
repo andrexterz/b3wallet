@@ -49,10 +49,11 @@ Form component styles
             }
         }
 
-        //angular invalid field
+        // angular invalid field
         &.ng-touched.ng-dirty:invalid {
           border-color: $form-color-invalid;
         }
+
 
         & ~ label {
          cursor: text;

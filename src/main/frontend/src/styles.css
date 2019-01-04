@@ -8,6 +8,8 @@ Navbar component styles
 ==============================================================================
 */
 .navbar {
+  position: sticky;
+  top: 0;
   display: flex;
   width: 100%;
   height: 60px;
@@ -222,7 +224,44 @@ Table component styles
   .table th::before, .table td::before {
     display: none;
   }
+  .table th.g-1, .table td.g-1 {
+    width: 8.3333333333%;
+  }
+  .table th.g-2, .table td.g-2 {
+    width: 16.6666666667%;
+  }
+  .table th.g-3, .table td.g-3 {
+    width: 25%;
+  }
+  .table th.g-4, .table td.g-4 {
+    width: 33.3333333333%;
+  }
+  .table th.g-5, .table td.g-5 {
+    width: 41.6666666667%;
+  }
+  .table th.g-6, .table td.g-6 {
+    width: 50%;
+  }
+  .table th.g-7, .table td.g-7 {
+    width: 58.3333333333%;
+  }
+  .table th.g-8, .table td.g-8 {
+    width: 66.6666666667%;
+  }
+  .table th.g-9, .table td.g-9 {
+    width: 75%;
+  }
+  .table th.g-10, .table td.g-10 {
+    width: 83.3333333333%;
+  }
+  .table th.g-11, .table td.g-11 {
+    width: 91.6666666667%;
+  }
+  .table th.g-12, .table td.g-12 {
+    width: 100%;
+  }
   .table-action {
+    width: 5rem;
     font-size: 1em;
   }
 }

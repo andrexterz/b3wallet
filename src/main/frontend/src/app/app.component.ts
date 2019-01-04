@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     menuItems = [
         {title: "Início", route: "dashboard", icon: "fa fa-home"},
         {title: "Portfolio", route: "portfolio", icon: "fa fa-folder-open"},
-         {title: "Análises", route: "analise", icon: "fa fa-sticky-note"},
+        {title: "Análises", route: "analise", icon: "fa fa-sticky-note"},
     ];
 
   ngOnInit(): void {

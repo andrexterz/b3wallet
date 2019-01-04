@@ -67,9 +67,16 @@ Table component styles
             &::before {
                 display: none;
             }
-        }
+
+            @for $g from 1 through $grid-divisor {
+              &.g-#{$g} {
+                width: $g/$grid-divisor * 100%;
+              }
+            }
+          }
 
         &-action {
+          width: 5rem;
           font-size: 1em;
         }
     }

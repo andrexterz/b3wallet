@@ -8,6 +8,8 @@ Navbar component styles
     $class-name: &;
 
     //properties
+    position: sticky;
+    top: 0;
     display: flex;
     width: 100%;
     height: $nav-bar-height;
