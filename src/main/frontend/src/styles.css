@@ -417,7 +417,6 @@ Modal component styles
   display: flex;
   flex-wrap: wrap;
   box-shadow: 2px 4px 10px #55555588, -2px -3px 20px rgba(136, 136, 136, 0.5333333333);
-  border-radius: 4px;
   background: #fefefe;
   overflow: hidden;
   width: 100%;
@@ -425,6 +424,7 @@ Modal component styles
 }
 @media (min-width: 768px) {
   .modal {
+    border-radius: 4px;
     width: 75%;
     height: auto;
   }
@@ -743,9 +743,11 @@ Generic component styles
 
 .title {
   display: flex;
+  flex: 1 0 auto;
   align-items: center;
   font-size: 1.5em;
-  margin: 5px;
+  margin: -10px -10px -2px -10px;
+  padding: 10px;
   width: 100%;
   font-weight: normal;
 }
@@ -778,6 +780,12 @@ Generic component styles
   text-shadow: 12px 6px 20px #55555588;
 }
 @media (min-width: 768px) {
+  .title {
+    position: initial;
+    background: initial;
+    margin: 0 -10px;
+    border-bottom: 0;
+  }
   .title-action {
     position: initial;
   }

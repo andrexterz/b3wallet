@@ -1,15 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <nav class="navbar">
   <a class="navbar-brand" href="#"><img src="assets/img/b3wallet.svg" alt=""></a>
-<!--
-  <button class="navbar-toggler" type="button">
-    <span class="navbar-toggler-icon"></span>
-  </button>
- -->
 
   <div class="navbar-wrapper">
     <ul class="navbar-nav" [class.active]="showMenuMobile">
-      <li class="nav-item" *ngFor="let item of menuItems" [class.active]="item === activeMenu" (click)="selectMenu(item)">
+      <li class="nav-item" *ngFor="let item of menuItems" (click)="selectMenu(item)" routerLinkActive="active">
         <a routerLink="/{{item.route}}"><i class="{{item.icon}}"></i>{{item.title}}</a>
       </li>
     </ul>

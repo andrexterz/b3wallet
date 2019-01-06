@@ -45,11 +45,11 @@ export class AnaliseComponent implements OnInit {
         this.selectedAnalise = new Analise();
     }
 
-    editAnalise(analise: Analise): void {
+    edit(analise: Analise): void {
       this.selectedAnalise = Object.assign(new Analise(), analise);
     }
 
-    saveAnalise(): void {
+    save(): void {
       if (this.selectedAnalise) {
         this.analiseService.saveAnalise(this.selectedAnalise).subscribe(obj => {
           let savedObj: Analise = Object.assign(new Analise(), obj);
@@ -64,8 +64,8 @@ export class AnaliseComponent implements OnInit {
       this.close();
     }
 
-    deleteAnalise(analise: Analise): void {
-      let confirmDelete = confirm("Remover análise " + analise.acao.codigo + ": " + analise.anotacao.slice(10).trim() + "...?");
+    delete(analise: Analise): void {
+      let confirmDelete = confirm("Remover análise " + analise.acao.codigo + ": " + (analise.anotacao.length <= 10 ? analise.anotacao: analise.anotacao.slice(0, 10).trim()) + "...?");
       if (confirmDelete) {
         let index = this.analises.findIndex(o => o.id == analise.id);
         this.analiseService.deleteAnalise(analise).subscribe(res => {

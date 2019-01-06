@@ -7,20 +7,20 @@ Modal component styles
   display: flex;
   flex-wrap: wrap;
   box-shadow: 2px 4px 10px $shadow-color, -2px -3px 20px lighten($shadow-color, 20%);
-  border-radius: $form-control-border-radius;
   background: $container-background-color;
   overflow: hidden;
   width: 100%;
   height: 100%;
 
   @media(min-width: $medium-device) {
-      width: 75%;
-      height: auto;
+    border-radius: $form-control-border-radius;
+    width: 75%;
+    height: auto;
   }
 
   @media(min-width: $large-device) {
-      width: 50%;
-      height: auto;
+    width: 50%;
+    height: auto;
   }
 
 

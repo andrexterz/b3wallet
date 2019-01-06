@@ -73,9 +73,11 @@ Generic component styles
 
 .title {
     display: flex;
+    flex: 1 0 auto;
     align-items: center;
     font-size: 1.5em;
-    margin: $margin/2;
+    margin: -#{$margin} -#{$margin} -2px -#{$margin};
+    padding: $padding;
     width: 100%;
     font-weight: normal;
 
@@ -114,6 +116,11 @@ Generic component styles
     }
 
     @media(min-width: $medium-device) {
+      position: initial;
+      background: initial;
+      margin: 0 -#{$margin};
+      border-bottom: 0;
+
       &-action {
         position: initial;
       }

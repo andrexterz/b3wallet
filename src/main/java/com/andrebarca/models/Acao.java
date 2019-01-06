@@ -32,7 +32,7 @@ public class Acao extends Base {
 
     private String nome;
 
-    @OneToMany(mappedBy = "acao", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "acao", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("acao")
     private Set<Operacao> operacoes;
 
@@ -80,6 +80,16 @@ public class Acao extends Base {
       return this.operacoes.stream().mapToDouble(operacao -> {
         return operacao.getTipoOperacao().equals(TipoOperacao.VENDA) ? operacao.getValor() * operacao.getQuantidade(): 0;
       }).sum();
+    }
+
+    @Transient
+    public Double getTotalLucro() {
+      int totalQuantidade = this.operacoes.stream()
+        .mapToInt(operacao -> {
+          return operacao.getTipoOperacao().equals(TipoOperacao.VENDA) ? operacao.getQuantidade(): 0;
+      }).sum();
+
+      return this.getTotalVenda() - this.getPrecoMedio() * totalQuantidade;
     }
 
     @Transient

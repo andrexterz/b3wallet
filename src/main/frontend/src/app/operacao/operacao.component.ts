@@ -1,6 +1,7 @@
 import { Component,  OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
 import { OperacaoService } from './operacao.service';
 import { AcaoService } from '../acao/acao.service';
 import { Operacao } from "./operacao";
@@ -14,8 +15,6 @@ export class OperacaoComponent implements OnInit {
     operacoes: Operacao[] = [];
     custodia = {};
     acoes: Acao[] = [];
-    precoTotalCompra :number = 0;
-    precoTotalVenda: number = 0;
     selectedOperacao: Operacao = null;
 
     constructor(
@@ -29,23 +28,19 @@ export class OperacaoComponent implements OnInit {
       this.acaoService.getAcoes().subscribe(acoes => this.acoes = acoes.map(acao => Object.assign(new Acao(), acao)));
       this.operacaoService.getOperacoes().subscribe(operacoes => {
         this.operacoes = operacoes;
-        this.updateOperacoes();
        });
     }
 
-    updateOperacoes(): void  {
-        this.precoTotalCompra = 0;
-        this.precoTotalVenda = 0;
-        this.operacoes.forEach(op => {
+    getTotalCompra(): number {
+      let total = 0;
+      this.operacoes.forEach(op => total += op.tipoOperacao == 'COMPRA'? op.totalOperacao: 0);
+      return total;
+    }
 
-          let total = op.totalOperacao;
-
-          if (op.tipoOperacao == 'COMPRA') {
-              this.precoTotalCompra += total;
-          } else {
-              this.precoTotalVenda += total;
-          }
-        });
+    getTotalVenda(): number {
+      let total = 0;
+      this.operacoes.forEach(op => total += op.tipoOperacao == 'VENDA'? op.totalOperacao: 0);
+      return total;
     }
 
     getCustosOperacionais(): number {
@@ -57,22 +52,24 @@ export class OperacaoComponent implements OnInit {
     }
 
     getTotalCustodia(): number {
-        return this.precoTotalCompra - this.precoTotalVenda;
+      let total = 0;
+      this.operacoes.forEach(op => total += op.tipoOperacao == 'COMPRA'? op.totalOperacao: -op.totalOperacao);
+      return total;
     }
 
     getPerformance(): number {
       return 0;
     }
 
-    addOperacao(): void {
+    add(): void {
         this.selectedOperacao = new Operacao();
     }
 
-    editOperacao(operacao: Operacao): void {
+    edit(operacao: Operacao): void {
          this.selectedOperacao = Object.assign(new Operacao(), operacao);
     }
 
-    saveOperacao(): void {
+    save(): void {
         if (this.selectedOperacao) {
             this.operacaoService.saveOperacao(this.selectedOperacao).subscribe(obj => {
                 let savedObj: Operacao = Object.assign(new Operacao(), obj);
@@ -84,11 +81,10 @@ export class OperacaoComponent implements OnInit {
                 }
             });
         }
-        this.updateOperacoes();
         this.close();
     }
 
-    deleteOperacao(operacao: Operacao): void {
+    delete(operacao: Operacao): void {
       let confirmDelete = confirm("Remover operacão " + operacao.acao.codigo + ": " + operacao.tipoOperacao + "?");
       if (confirmDelete) {
         let index = this.operacoes.findIndex(o => o.id == operacao.id);

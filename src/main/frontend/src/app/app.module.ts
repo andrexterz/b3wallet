@@ -3,7 +3,7 @@ import { HttpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AcaoComponent } from './acao/acao.component';
 import {AcaoService } from './acao/acao.service';
@@ -23,7 +23,6 @@ import { AnaliseService } from './analise/analise.service';
     BrowserModule,
     HttpModule,
     FormsModule,
-    ReactiveFormsModule,
     RouterModule.forRoot([
       {path: 'dashboard', component: AcaoComponent},
       {path: 'portfolio', component: OperacaoComponent},

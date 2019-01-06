@@ -24,15 +24,15 @@ export class AcaoComponent implements OnInit {
         this.acaoService.getAcoes().subscribe(acoes => this.acoes = acoes.map(acao => Object.assign(new Acao(), acao)));
     }
 
-    addAcao(): void {
+    add(): void {
         this.selectedAcao = new Acao();
     }
 
-    editAcao(acao: Acao): void {
+    edit(acao: Acao): void {
          this.selectedAcao = Object.assign({}, acao);
     }
 
-    saveAcao(): void {
+    save(): void {
         if (this.selectedAcao) {
             this.acaoService.saveAcao(this.selectedAcao).subscribe(obj => {
                 let savedObj: Acao = Object.assign(new Acao(), obj);
