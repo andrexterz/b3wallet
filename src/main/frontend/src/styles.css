@@ -177,10 +177,10 @@ Table component styles
 }
 .table thead {
   display: none;
-  background-color: rgba(241, 241, 241, 0.5);
+  background-color: rgba(241, 241, 241, 0.75);
 }
 .table tfoot {
-  background-color: rgba(241, 241, 241, 0.25);
+  background-color: rgba(241, 241, 241, 0.5);
 }
 .table tr {
   border-top: 1px solid #9c9c9c;

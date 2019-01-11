@@ -16,8 +16,8 @@
                 <td title="Código">{{acao.codigo}}</td>
                 <td title="Nome">{{acao.nome}}</td>
                 <td class="right" title="Custódia">{{acao.totalCustodia}}</td>
-                <td class="right" title="Preço médio">{{acao.precoMedio | currency:'BRL':symbol:'1.2-2'}}</td>
-                <td class="right" title="Lucro">{{acao.totalLucro | currency:'BRL':symbol:'1.2-2'}}</td>
+                <td class="right" title="Preço médio">{{acao.precoMedio | currency:'BRL':'symbol':'1.2-2'}}</td>
+                <td class="right" title="Lucro">{{acao.totalLucro | currency:'BRL':'symbol':'1.2-2'}}</td>
                 <td class="table-action right"><a title="editar ação" class="link" (click)="edit(acao)"><i class="fa fa-pencil"></i></a></td>
             </tr>
         </tbody>

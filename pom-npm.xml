@@ -27,7 +27,7 @@
                 <arguments>
                     <argument>build</argument>
                     <argument>--prod</argument>
-                    <argument>--base-href /${project.name}/</argument>
+                    <!-- <argument>--base-href /${project.name}/</argument> -->
                     <argument>--output-path=${project.basedir}/src/main/resources/static</argument>
                 </arguments>
             </configuration>

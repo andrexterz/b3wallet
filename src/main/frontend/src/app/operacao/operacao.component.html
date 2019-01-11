@@ -14,16 +14,16 @@
         </thead>
         <tfoot>
             <tr>
-                <td class="right" colspan="7"><b>Total compra: {{getTotalCompra() | currency:'BRL':symbol:'1.2-2'}}</b></td>
+                <td class="right" colspan="7"><b>Total compra: {{getTotalCompra() | currency:'BRL':'symbol':'1.2-2'}}</b></td>
             </tr>
             <tr>
-                <td class="right" colspan="7"><b>Total venda: {{getTotalVenda() | currency:'BRL':symbol:'1.2-2'}}</b></td>
+                <td class="right" colspan="7"><b>Total venda: {{getTotalVenda() | currency:'BRL':'symbol':'1.2-2'}}</b></td>
             </tr>
             <tr>
-              <th class="right" colspan="7"><b>Total custos operacionais: {{getCustosOperacionais() | currency:'BRL':symbol:'1.2-2'}}</b></th>
+              <th class="right" colspan="7"><b>Total custos operacionais: {{getCustosOperacionais() | currency:'BRL':'symbol':'1.2-2'}}</b></th>
             </tr>
             <tr>
-                <td class="right" colspan="7"><b>Total custódia: {{getTotalCustodia() | currency:'BRL':symbol:'1.2-2'}}</b></td>
+                <td class="right" colspan="7"><b>Total custódia: {{getTotalCustodia() | currency:'BRL':'symbol':'1.2-2'}}</b></td>
             </tr>
         </tfoot>
         <tbody>
@@ -32,9 +32,9 @@
                 <td title="Tipo" class="left">{{operacao.tipoOperacao}}</td>
                 <td title="Quantidade" class="right">{{operacao.quantidade}}</td>
                 <td title="Data operação" class="center">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</td>
-                <td title="Preço" class="right">{{operacao.valor | currency:'BRL':symbol:'1.2-2'}}</td>
+                <td title="Preço" class="right">{{operacao.valor | currency:'BRL':'symbol':'1.2-2'}}</td>
                 <td title="Total" class="right">
-                  <b>{{operacao.quantidade * operacao.valor | currency:'BRL':symbol:'1.2-2'}}</b>
+                  <b>{{operacao.quantidade * operacao.valor | currency:'BRL':'symbol':'1.2-2'}}</b>
                 </td>
                 <td class="table-action right">
                   <a title="editar operação" class="link" (click)="edit(operacao)"><i class="fa fa-pencil"></i></a>
@@ -52,32 +52,32 @@
         </header>
         <section class="modal-body">
             <div class="form">
-                <div class="form-control g-12 g-m-6 g-l-4">
+                <div class="form-control g-6 g-l-4">
                     <input id="dataOperacao" name="dataOperacao" type="date" [(ngModel)]="selectedOperacao.dataOperacao" autofocus="autofocus" required>
                     <label for="dataOperacao">Data</label>
                 </div>
-                <div class="form-control g-12 g-m-6 g-l-4">
+                <div class="form-control g-6 g-l-4">
                     <select id="acao" name="acao" [compareWith]="comparator" [(ngModel)]="selectedOperacao.acao" required>
                         <option *ngFor="let acao of acoes" [ngValue]="acao">{{acao.codigo}}</option>
                     </select>
                     <label for="acao">Código</label>
                 </div>
-                <div class="form-control g-12 g-m-6 g-l-4">
+                <div class="form-control g-6 g-l-4">
                     <select id="tipoOperacao" name="tipoOperacao" [(ngModel)]="selectedOperacao.tipoOperacao" required>
                         <option value="COMPRA">COMPRA</option>
                         <option value="VENDA">VENDA</option>
                     </select>
                     <label for="tipoOperacao">Operação</label>
                 </div>
-                <div class="form-control g-12 g-m-6 g-l-4">
+                <div class="form-control g-6 g-l-4">
                     <input id="valorOperacao" name="valor" [(ngModel)]="selectedOperacao.valor" type="number" min="0" step="0.01" required>
                     <label for="valorOperacao">Valor</label>
                 </div>
-                <div class="form-control g-12 g-m-6 g-l-4">
+                <div class="form-control g-6 g-l-4">
                     <input id="custoOperacao" name="custoOperacao" [(ngModel)]="selectedOperacao.custoOperacao" type="number" min="0" step="0.01" required>
                     <label for="custorOperacao">Custo Operação</label>
                 </div>
-                <div class="form-control g-12 g-m-6 g-l-4">
+                <div class="form-control g-6 g-l-4">
                     <input id="quantidade" name="quantidade" [(ngModel)]="selectedOperacao.quantidade" type="number" min="1" step="1" required>
                     <label for="quantidade">Quantidade</label>
                 </div>

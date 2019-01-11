@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { APP_BASE_HREF } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { APP_BASE_HREF, registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -11,6 +12,8 @@ import {OperacaoService } from './operacao/operacao.service';
 import { OperacaoComponent } from './operacao/operacao.component';
 import { AnaliseComponent } from './analise/analise.component';
 import { AnaliseService } from './analise/analise.service';
+
+registerLocaleData(localePt, 'pt');
 
 @NgModule({
   declarations: [
@@ -30,7 +33,7 @@ import { AnaliseService } from './analise/analise.service';
       {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
     ])
   ],
-  providers: [AcaoService, OperacaoService, AnaliseService],
+  providers: [{provide: LOCALE_ID, useValue: 'pt'}, AcaoService, OperacaoService, AnaliseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

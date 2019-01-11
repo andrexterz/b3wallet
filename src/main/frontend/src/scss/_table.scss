@@ -11,11 +11,11 @@ Table component styles
 
     thead {
         display: none;
-        background-color:  transparentize($list-background-color, .5);
+        background-color:  transparentize($list-background-color, .25);
     }
 
     tfoot {
-        background-color: transparentize($list-background-color, .75);
+        background-color: transparentize($list-background-color, .5);
     }
 
     tr {
