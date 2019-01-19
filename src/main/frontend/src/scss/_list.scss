@@ -7,7 +7,7 @@ List component styles
 .list {
   $class-name: &;
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 0 100%;
   flex-wrap: wrap;
   align-content: flex-start;
   list-style-type: none;

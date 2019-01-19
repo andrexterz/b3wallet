@@ -90,6 +90,30 @@ Navbar component styles
   border: none;
   border-radius: 0;
 }
+.navbar-login {
+  color: #efefef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 5px;
+}
+.navbar-login:hover {
+  color: #ff5;
+}
+.navbar-login-user {
+  display: none;
+}
+@media (min-width: 425px) {
+  .navbar-login {
+    margin: 0 20px;
+  }
+  .navbar-login-user {
+    display: inline;
+    white-space: nowrap;
+    margin-left: 5px;
+  }
+}
 .navbar-menu {
   -webkit-appearance: none;
   color: #efefef;
@@ -123,7 +147,7 @@ List component styles
 */
 .list {
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 0 100%;
   flex-wrap: wrap;
   align-content: flex-start;
   list-style-type: none;
@@ -308,6 +332,7 @@ Form component styles
 .form-control textarea[disabled],
 .form-control select[disabled] {
   opacity: 0.5;
+  cursor: not-allowed;
 }
 .form-control input[type=text]:required:valid, .form-control input[type=text]:focus,
 .form-control input[type=number]:required:valid,
@@ -356,7 +381,7 @@ Form component styles
   cursor: text;
   font-size: 1em;
   height: 28px;
-  margin-left: 5px;
+  margin-left: 0;
   color: #888;
   transform: translateY(-75%);
   transition: all 0.1s linear;
@@ -369,6 +394,18 @@ Form component styles
 .form-control textarea ~ label {
   position: absolute;
   top: 28px;
+}
+.form-title {
+  flex: 1 0 auto;
+  margin-top: 0;
+  padding: 20px 10px;
+  background: #edeef5;
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1 0 auto;
+  padding: 10px;
 }
 
 /*
@@ -391,12 +428,16 @@ Form component styles
 .btn + .btn {
   margin: 0 5px;
 }
-.btn[disabled] {
-  opacity: 0.5;
+.btn:hover {
+  cursor: pointer;
 }
 .btn:active {
   background-color: #70618d;
   transition: all 0.1s ease-out;
+}
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 .btn-primary {
   color: #fff;
@@ -537,8 +578,14 @@ Toast messages
   transform: scale(1.25);
   transition: all 0.25s ease;
 }
-.message-header, .message-body {
+.message-header, .message-body, .message-footer {
+  width: 100%;
   padding: 0.5rem;
+}
+.message-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #9c9c9c;
 }
 .message.info {
   background-color: #ccccff;
@@ -999,6 +1046,7 @@ Container component styles
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+  align-items: flex-start;
   margin: 0;
   max-width: 1200px;
   min-height: calc(100vh - 80px);
@@ -1011,6 +1059,22 @@ Container component styles
   display: block;
   width: 100%;
   height: calc(2rem + 10px);
+}
+.container-login {
+  align-items: center;
+  align-content: center;
+}
+.container-login .form, .container-login .form--inline {
+  margin: auto;
+  max-width: 20em;
+  border-radius: 3px;
+  border: thin solid #9c9c9c;
+}
+.container-login .form-title {
+  text-align: center;
+}
+.container-login .form-actions {
+  justify-content: center;
 }
 @media (min-width: 768px) {
   .container {

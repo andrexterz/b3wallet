@@ -176,6 +176,7 @@ Container component styles
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
+    align-items: flex-start;
     margin: 0;
     max-width: 1200px;
     min-height: calc(100vh - #{$nav-bar-height + $margin * 2});
@@ -188,6 +189,26 @@ Container component styles
       display: block;
       width: 100%;
       height: calc(#{$circle-size} + #{$margin});
+    }
+
+    &-login {
+      align-items: center;
+      align-content: center;
+
+      .form {
+        margin: auto;
+        max-width: 20em;
+        border-radius: $border-radius;
+        border: thin solid $border-color;
+
+        &-title {
+          text-align: center;
+        }
+
+        &-actions {
+          justify-content: center;
+        }
+      }
     }
 
     @media(min-width: $medium-device) {

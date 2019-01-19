@@ -103,6 +103,33 @@ Navbar component styles
         }
     }
 
+    &-login {
+      color: $dark-foreground;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      padding: $padding/2;
+
+      &:hover {
+        color: $nav-item-color-active;
+      }
+
+      &-user {
+        display: none;
+
+      }
+      @media(min-width: $small-device) {
+        margin: 0 #{$margin*2};
+
+        &-user {
+          display: inline;
+          white-space: nowrap;
+          margin-left: $margin/2;
+        }
+      }
+    }
+
     &-menu {
         -webkit-appearance: none;
         color: $dark-foreground;

@@ -13,6 +13,10 @@
       <button><i class="fa fa-search"></i></button>
     </form>
   </div>
+  <a class="navbar-login" routerLink="/login">
+    <i class="fa fa-user-circle"></i>
+    <span class="navbar-login-user">login</span>
+  </a>
  <button type="button" class="navbar-menu" (click)="toggleMenuMobile()">
    <i *ngIf="!showMenuMobile" class="fa fa-bars"></i>
    <i *ngIf="showMenuMobile" class="fa fa-close"></i>
@@ -20,12 +24,15 @@
 </nav>
 <router-outlet></router-outlet>
 
-<div class="message success hidden">
+<div class="message" [ngClass]="message.status">
     <header class="message-header">
-        <h4 class="message-title">título da mensagem</h4>
+        <h4 class="message-title">{{message.title}}</h4>
         <button type="button" class="message-close"><i class="fa fa-close"></i></button>
     </header>
     <section class="message-body">
-        <p classs="message-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p classs="message-text">{{message.text}}</p>
     </section>
+    <footer class="message-footer">
+      <button class="btn" (click)="showMessage()">OK</button>
+    </footer>
 </div>

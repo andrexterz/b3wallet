@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { Analise } from './analise';
@@ -8,8 +8,7 @@ import { AnaliseService } from './analise.service';
 
 @Component({
   selector: 'analise-component',
-  templateUrl: './analise.component.html',
-  styleUrls: ['./analise.component.css']
+  templateUrl: './analise.component.html'
 })
 export class AnaliseComponent implements OnInit {
     acoes: Acao[] = [];

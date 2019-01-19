@@ -2,27 +2,20 @@
  * acao service
  */
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
+import { HttpClient } from '@angular/common/http';
 import { Acao } from './acao';
 
 @Injectable()
 export class AcaoService {
 
-    constructor(private http: Http) {}
-    
+    constructor(private http: HttpClient) {}
+
     saveAcao(acao: Acao): Observable<Acao>  {
-        return this.http.post("/api/acoes/save", acao).map((res: Response) => res.json());
+        return this.http.post<Acao>("/api/acoes/save", acao);
     }
 
     getAcoes(): Observable<Acao[]> {
-        return this.http.get("/api/acoes").map((res: Response) => res.json());
-    }
-
-    getAcaoById(id: number): Promise<Acao> {
-      return null;
+        return this.http.get<Acao[]>("/api/acoes");
     }
 }

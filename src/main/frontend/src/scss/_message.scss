@@ -50,8 +50,15 @@ Toast messages
         }
     }
 
-    &-header, &-body {
-        padding: .5rem;
+    &-header, &-body, &-footer {
+      width: 100%;
+      padding: .5rem;
+    }
+
+    &-footer {
+      display: flex;
+      justify-content: flex-end;
+      border-top: 1px solid $border-color;
     }
 
     &.info {

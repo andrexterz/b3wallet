@@ -1,0 +1,17 @@
+<div class="container container-login">
+  <form #loginForm="ngForm" class="form" (ngSubmit)="login()">
+    <h4 class="form-title">Entre com usuário e senha</h4>
+    <div class="form-control g-12">
+        <input id="username" name="username" [(ngModel)]="credentials.username" type="text" autocomplete="off" required>
+        <label for="username">Usuário</label>
+    </div>
+
+    <div class="form-control g-12">
+        <input id="password" name="password" [(ngModel)]="credentials.password" type="password" required>
+        <label for="password">Senha</label>
+    </div>
+    <footer class="form-actions">
+      <button class="btn btn-primary g-12" type="submit">login</button>
+    </footer>
+  </form>
+</div>

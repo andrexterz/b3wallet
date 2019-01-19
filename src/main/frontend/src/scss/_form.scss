@@ -59,7 +59,7 @@ Form component styles
          cursor: text;
          font-size: 1em;
          height: $form-control-height;
-         margin-left: $margin/2;
+         margin-left: 0;
          color: $form-control-color;
          transform: translateY(-75%);
          transition: all .1s linear;
@@ -76,5 +76,20 @@ Form component styles
             top: $form-control-height;
          }
      }
+  }
+
+  &-title {
+    flex: 1 0 auto;
+    margin-top: 0;
+    padding: #{$padding*2}  #{$padding};
+    background: $form-title-background;
+  }
+
+
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 0 auto;
+    padding: $padding;
   }
 }

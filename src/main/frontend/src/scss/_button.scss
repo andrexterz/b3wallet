@@ -19,14 +19,17 @@ Form component styles
         margin: 0 $margin/2;
     }
 
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: darken($btn-background, 10%);
+      transition: all .1s ease-out;
+    }
 
     @include disabled-status;
 
-
-    &:active {
-        background-color: darken($btn-background, 10%);
-        transition: all .1s ease-out;
-    }
 
     &-primary {
         color: $btn-color-primary;
