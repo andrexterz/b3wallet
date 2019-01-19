@@ -587,6 +587,9 @@ Toast messages
   justify-content: flex-end;
   border-top: 1px solid #9c9c9c;
 }
+.message.dismissed {
+  visibility: hidden;
+}
 .message.info {
   background-color: #ccccff;
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MessageService } from './message.service';
-import { Message } from './message';
+import { MensagemService } from './mensagem/mensagem.service';
+import { Mensagem } from './mensagem/mensagem';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,6 @@ export class AppComponent {
 
     title = 'B3 Wallet';
     showMenuMobile: boolean = false;
-    message: Message = {title: '', text: '', status: ''};
 
     menuItems = [
         {title: "Início", route: "dashboard", icon: "fa fa-home"},
@@ -19,7 +18,7 @@ export class AppComponent {
         {title: "Análises", route: "analise", icon: "fa fa-sticky-note"},
     ];
 
-    constructor (private messageService: MessageService) {}
+    constructor (private mensagemService: MensagemService) {}
 
     selectMenu(menu: any): void {
         this.showMenuMobile = false;
@@ -29,8 +28,7 @@ export class AppComponent {
       this.showMenuMobile = !this.showMenuMobile;
     }
 
-    showMessage(): void {
-      this.messageService.showAlert();
-      this.message = this.messageService.getMessage();
+    teste(): void {
+      this.mensagemService.showMessage("test app", "body message app", "warning");
     }
 }

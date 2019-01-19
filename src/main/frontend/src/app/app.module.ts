@@ -16,6 +16,7 @@ import { AnaliseComponent } from './analise/analise.component';
 import { AnaliseService } from './analise/analise.service';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
+import { MensagemComponent } from './mensagem/mensagem.component';
 
 registerLocaleData(localePt, 'pt');
 
@@ -25,7 +26,8 @@ registerLocaleData(localePt, 'pt');
     AcaoComponent,
     OperacaoComponent,
     AnaliseComponent,
-    LoginComponent
+    LoginComponent,
+    MensagemComponent
   ],
   imports: [
     BrowserModule,
