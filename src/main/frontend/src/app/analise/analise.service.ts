@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Acao } from '../acao/acao';
 import { Analise } from "./analise";
 
@@ -9,15 +9,15 @@ export class AnaliseService {
 
     constructor(private http: HttpClient) {}
 
-    saveAnalise(analise: Analise): Observable<Analise>  {
-        return this.http.post<Analise>("/api/analises/save", analise);
+    saveAnalise(analise: Analise): Observable<HttpResponse<Analise>>  {
+        return this.http.post<Analise>("/api/analises/save", analise, {observe: 'response'});
     }
 
-    deleteAnalise(analise: Analise): Observable<boolean>  {
-      return this.http.delete<boolean>("/api/analises/delete/" + analise.id);
+    deleteAnalise(analise: Analise): Observable<HttpResponse<boolean>> {
+      return this.http.delete<boolean>("/api/analises/delete/" + analise.id, {observe: 'response'});
     }
 
-    getAnalises(): Observable<Analise[]> {
-        return this.http.get<Analise[]>("/api/analises");
+    getAnalises(): Observable<HttpResponse<Analise[]>> {
+        return this.http.get<Analise[]>("/api/analises", {observe: 'response'});
     }
 }

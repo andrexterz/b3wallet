@@ -3,14 +3,14 @@ import { Mensagem } from './mensagem';
 import { MensagemService } from './mensagem.service';
 
 @Component({
-  selector: 'mensagem',
+  selector: 'mensagem-component',
   templateUrl: './mensagem.component.html'
 })
 export class MensagemComponent implements OnInit {
-  mensagem: Mensagem = {titulo: '', texto: '', status: 'dismissed'};
+  mensagem: Mensagem;
 
   constructor(private mensagemService: MensagemService) {
-    this.mensagemService.setMensagem(this.mensagem);
+    this.mensagem = this.mensagemService.getMensagem();
   }
 
   ngOnInit() {

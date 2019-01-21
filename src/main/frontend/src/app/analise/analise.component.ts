@@ -5,6 +5,7 @@ import { Analise } from './analise';
 import { Acao } from '../acao/acao';
 import { AcaoService } from '../acao/acao.service';
 import { AnaliseService } from './analise.service';
+import { MensagemService } from '../mensagem/mensagem.service';
 
 @Component({
   selector: 'analise-component',
@@ -21,15 +22,16 @@ export class AnaliseComponent implements OnInit {
       private location: Location,
       private analiseService: AnaliseService,
       private acaoService: AcaoService,
+      private mensagemService: MensagemService
     ) {}
 
     ngOnInit(): void {
       this.acaoService.getAcoes().subscribe(acoes => this.acoes = acoes.map(acao => Object.assign(new Acao(), acao)));
-      this.analiseService.getAnalises().subscribe(analises => this.analises = analises.map(analise => Object.assign(new Analise(), analise)));
+      this.analiseService.getAnalises().subscribe(response => this.analises = response.body.map(analise => Object.assign(new Analise(), analise)));
     }
 
     listAnalises(): Object {
-      let obj:Object = new Object();
+      let obj: Object = new Object();
       this.analises.forEach(analise => {
         if (obj.hasOwnProperty(analise.acao.codigo)) {
           obj[analise.acao.codigo].push(analise);
@@ -50,14 +52,18 @@ export class AnaliseComponent implements OnInit {
 
     save(): void {
       if (this.selectedAnalise) {
-        this.analiseService.saveAnalise(this.selectedAnalise).subscribe(obj => {
-          let savedObj: Analise = Object.assign(new Analise(), obj);
+        this.analiseService.saveAnalise(this.selectedAnalise).subscribe(response => {
+          let savedObj: Analise = Object.assign(new Analise(), response.body);
           let index  = this.analises.findIndex(o => o.id == savedObj.id);
           if (index >= 0) {
             this.analises[index] = savedObj;
           } else {
             this.analises.push(savedObj);
           }
+          this.mensagemService.showMessage(savedObj.acao.codigo, "anotação salva com sucesso", "success");
+        }, error => {
+          this.mensagemService.showMessage("Erro ao salvar anotação", error.message, "error");
+          console.log(error);
         });
       }
       this.close();
