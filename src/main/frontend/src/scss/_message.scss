@@ -3,10 +3,6 @@
 Toast messages
 ==============================================================================
 */
-@animation dismiss {
-
-}
-
 .message {
     position: fixed;
     bottom: 2em;
@@ -17,6 +13,9 @@ Toast messages
     border: 1px solid $border-color;
     border-radius: $border-radius;
     box-shadow: 12px 12px 20px 0 $shadow-color, 0 0 8px 0 lighten($shadow-color, 10%);
+    transition: all .25s ease-in;
+    opacity: 1.0;
+    transform: scale(1) rotateY(0);
 
     &-header {
         height: 3rem;
@@ -66,7 +65,9 @@ Toast messages
     }
 
     &.dismissed {
-      visibility: hidden;
+      transition: all .3s ease-out;
+      opacity: 0.0;
+      transform: scale(0) rotateY(180deg);
     }
 
     &.info {

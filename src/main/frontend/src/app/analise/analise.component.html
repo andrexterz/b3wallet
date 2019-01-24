@@ -1,5 +1,5 @@
 <div class="container">
-    <h4 class="title">Análises <a class="title-action" title="adicionar análise" (click)="addAnalise()"><i class="fa fa-plus-circle"></i></a></h4>
+    <h4 class="title">Anotações <a class="title-action" title="adicionar análise" (click)="addAnalise()"><i class="fa fa-plus-circle"></i></a></h4>
     <ul class="list">
       <li *ngFor="let entry of listAnalises() | keyvalue; let idxEntry = index" class="list-item" [ngClass]="{'selected expanded': isExpanded(idxEntry)}">
         <header class="title link" (click)="expandListItem(idxEntry)">
@@ -24,7 +24,7 @@
                 <td title="Atualizado em" class="center">{{analise.dataAtualizacao | date: 'dd/MM/yyyy'}}</td>
                 <td class="table-action right">
                   <a title="editar análise" class="link" (click)="edit(analise)"><i class="fa fa-pencil"></i></a>
-                  <a title="removere análise" class="margin-left-3 link" (click)="delete(analise)"><i class="fa fa-trash"></i></a>
+                  <a title="remover análise" class="margin-left-3 link" (click)="delete(analise)"><i class="fa fa-trash"></i></a>
                 </td>
               </tr>
             </tbody>

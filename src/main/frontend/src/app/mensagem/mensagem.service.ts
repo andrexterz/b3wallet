@@ -6,7 +6,7 @@ import { Mensagem } from './mensagem';
 })
 export class MensagemService {
   mensagem: Mensagem = {titulo: '', texto: '', status: 'dismissed'};
-  defaultTimeout: number = 3000;
+  defaultTimeout: number = 2500;
 
   constructor() {
   }

@@ -60,7 +60,7 @@ export class AnaliseComponent implements OnInit {
           } else {
             this.analises.push(savedObj);
           }
-          this.mensagemService.showMessage(savedObj.acao.codigo, "anotação salva com sucesso", "success");
+          this.mensagemService.showMessage(savedObj.acao.codigo, "anotação salva com sucesso.", "success");
         }, error => {
           this.mensagemService.showMessage("Erro ao salvar anotação", error.message, "error");
           console.log(error);
@@ -70,14 +70,14 @@ export class AnaliseComponent implements OnInit {
     }
 
     delete(analise: Analise): void {
-      let confirmDelete = confirm("Remover análise " + analise.acao.codigo + ": " + (analise.anotacao.length <= 10 ? analise.anotacao: analise.anotacao.slice(0, 10).trim()) + "...?");
+      let confirmDelete = confirm("Remover anotação " + analise.acao.codigo + ": " + (analise.anotacao.length <= 10 ? analise.anotacao: analise.anotacao.slice(0, 10).trim()) + "...?");
       if (confirmDelete) {
         let index = this.analises.findIndex(o => o.id == analise.id);
-        this.analiseService.deleteAnalise(analise).subscribe(res => {
+        this.analiseService.deleteAnalise(analise).subscribe(response => {
 
-          if (res) {
+          if (response) {
+            this.mensagemService.showMessage("Anotação de " + analise.acao.codigo, (analise.anotacao.length <= 10 ? analise.anotacao: analise.anotacao.slice(0, 10).trim()) + " removida com sucesso.", "success");
             this.analises.splice(index, 1);
-            //todo: add modal info or error
           }
         });
       }
