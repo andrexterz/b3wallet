@@ -49,6 +49,11 @@
             <version>7.0</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>3.5.3</version>
+        </dependency>        
     </dependencies>
     <build>
       <finalName>b3wallet</finalName>

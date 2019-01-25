@@ -38,7 +38,7 @@ Form component styles
 
         @include disabled-status;
 
-        &:required:valid, &:focus {
+        &:valid, &:focus {
             color: initial;
             outline: none;
             border-color: darken($form-control-border-color, 20%);
