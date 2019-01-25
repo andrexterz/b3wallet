@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { MensagemService } from './mensagem/mensagem.service';
-import { Mensagem } from './mensagem/mensagem';
+import { MensagemService } from './services/mensagem.service';
 
 @Component({
   selector: 'app-root',

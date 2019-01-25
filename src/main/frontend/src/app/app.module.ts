@@ -9,13 +9,13 @@ import { FormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TokenInterceptor } from './tokenInterceptor';
 import { AcaoComponent } from './acao/acao.component';
-import { AcaoService } from './acao/acao.service';
-import { OperacaoService } from './operacao/operacao.service';
+import { AcaoService } from './services/acao.service';
+import { OperacaoService } from './services/operacao.service';
+import { AnaliseService } from './services/analise.service';
+import { LoginService } from './services/login.service';
 import { OperacaoComponent } from './operacao/operacao.component';
 import { AnaliseComponent } from './analise/analise.component';
-import { AnaliseService } from './analise/analise.service';
 import { LoginComponent } from './login/login.component';
-import { LoginService } from './login/login.service';
 import { MensagemComponent } from './mensagem/mensagem.component';
 
 registerLocaleData(localePt, 'pt');

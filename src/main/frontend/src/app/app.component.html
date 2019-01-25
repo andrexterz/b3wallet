@@ -7,9 +7,9 @@
       <li class="nav-item" *ngFor="let item of menuItems" (click)="selectMenu(item)" routerLinkActive="active">
         <a routerLink="/{{item.route}}"><i class="{{item.icon}}"></i>{{item.title}}</a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a (click)="teste()">teste</a>
-      </li>
+      </li> -->
     </ul>
     <form class="navbar-search">
       <input type="text" placeholder="Código ou nome" aria-label="busca">

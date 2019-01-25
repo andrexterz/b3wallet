@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/map';
-import { AcaoService } from './acao.service';
-import { Acao } from "./acao";
+import { AcaoService } from '../services/acao.service';
+import { MensagemService } from '../services/mensagem.service';
+import { Acao } from "../models/acao";
 
 @Component({
   selector: 'acao-component',

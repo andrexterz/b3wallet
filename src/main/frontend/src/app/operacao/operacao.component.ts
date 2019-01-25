@@ -2,10 +2,10 @@ import { Component,  OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import { OperacaoService } from './operacao.service';
-import { AcaoService } from '../acao/acao.service';
-import { Operacao } from "./operacao";
-import { Acao } from "../acao/acao";
+import { OperacaoService } from '../services/operacao.service';
+import { AcaoService } from '../services/acao.service';
+import { Operacao } from "../models/operacao";
+import { Acao } from "../models/acao";
 
 @Component({
   selector: 'operacao-component',

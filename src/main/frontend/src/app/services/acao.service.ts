@@ -4,7 +4,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import { Acao } from './acao';
+import { Acao } from '../models/acao';
 
 @Injectable()
 export class AcaoService {
