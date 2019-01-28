@@ -5,10 +5,6 @@
  */
 package com.andrebarca.services;
 
-import com.andrebarca.models.Analise;
-import com.andrebarca.models.Analise;
-import com.andrebarca.repositories.AnaliseRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.andrebarca.models.Analise;
+import com.andrebarca.repositories.AnaliseRepository;
 
 /**
  *
@@ -49,8 +48,8 @@ public class AnaliseService {
     }
 
     @RequestMapping(value = "/api/analises", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Analise> list() {
+    public ResponseEntity<?> list() {
         Iterable<Analise> analises = this.analiseRepository.findAll();
-        return (List) analises;
+        return new ResponseEntity<>(analises, HttpStatus.OK);
     }    
 }

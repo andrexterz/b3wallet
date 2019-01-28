@@ -14,6 +14,7 @@ export class AppComponent {
     menuItems = [
         {title: "Início", route: "dashboard", icon: "fa fa-home"},
         {title: "Portfolio", route: "portfolio", icon: "fa fa-folder-open"},
+        {title: "Dividendos", route: "dividendo", icon: "fa fa-usd"},
         {title: "Análises", route: "analise", icon: "fa fa-sticky-note"},
     ];
 
@@ -25,9 +26,5 @@ export class AppComponent {
 
     toggleMenuMobile(): void {
       this.showMenuMobile = !this.showMenuMobile;
-    }
-
-    teste(): void {
-      this.mensagemService.showMessage("test app", "body message app", "warning");
     }
 }

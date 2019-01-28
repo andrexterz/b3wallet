@@ -1,4 +1,4 @@
-import { Acao } from "../models/acao";
+import { Acao } from "./acao";
 
 export class Analise {
   id: number;

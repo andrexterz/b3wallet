@@ -6,6 +6,8 @@ import { OperacaoService } from '../services/operacao.service';
 import { AcaoService } from '../services/acao.service';
 import { Operacao } from "../models/operacao";
 import { Acao } from "../models/acao";
+import { MensagemService } from '../services/mensagem.service';
+
 
 @Component({
   selector: 'operacao-component',
@@ -21,13 +23,14 @@ export class OperacaoComponent implements OnInit {
       private operacaoService: OperacaoService,
       private acaoService: AcaoService,
       private route: ActivatedRoute,
-      private location: Location
+      private location: Location,
+      private mensagemService: MensagemService
     ) {}
 
     ngOnInit(): void {
-      this.acaoService.getAcoes().subscribe(acoes => this.acoes = acoes.map(acao => Object.assign(new Acao(), acao)));
-      this.operacaoService.getOperacoes().subscribe(operacoes => {
-        this.operacoes = operacoes;
+      this.acaoService.getAcoes().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
+      this.operacaoService.getOperacoes().subscribe(response => {
+        this.operacoes = response.body;
        });
     }
 
@@ -71,15 +74,19 @@ export class OperacaoComponent implements OnInit {
 
     save(): void {
         if (this.selectedOperacao) {
-            this.operacaoService.saveOperacao(this.selectedOperacao).subscribe(obj => {
-                let savedObj: Operacao = Object.assign(new Operacao(), obj);
+            this.operacaoService.saveOperacao(this.selectedOperacao).subscribe(response => {
+                let savedObj: Operacao = Object.assign(new Operacao(), response.body);
                 let index = this.operacoes.findIndex(o => o.id == savedObj.id);
                 if (index >= 0) {
                     this.operacoes[index] = savedObj;
                 } else {
                     this.operacoes.push(savedObj);
                 }
-            });
+                this.mensagemService.showMessage(savedObj.acao.codigo, "Operação salva com sucesso.", "success");
+            }, error => {
+                this.mensagemService.showMessage("Erro ao salvar operação", error.message, "error");
+                console.log(error);
+              });
         }
         this.close();
     }
@@ -88,12 +95,12 @@ export class OperacaoComponent implements OnInit {
       let confirmDelete = confirm("Remover operacão " + operacao.acao.codigo + ": " + operacao.tipoOperacao + "?");
       if (confirmDelete) {
         let index = this.operacoes.findIndex(o => o.id == operacao.id);
-        this.operacaoService.deleteOperacao(operacao).subscribe(res => {
-
-          if (res) {
+        this.operacaoService.deleteOperacao(operacao).subscribe(response => {
             this.operacoes.splice(index, 1);
-            //todo: add modal info or error
-          }
+            this.mensagemService.showMessage("Operação de " + operacao.tipoOperacao + ": " + operacao.acao.codigo + " removida com sucesso.", "success");
+        }, error => {
+            this.mensagemService.showMessage("Erro ao salvar anotação", error.message, "error");
+            console.log(error);
         });
       }
     }

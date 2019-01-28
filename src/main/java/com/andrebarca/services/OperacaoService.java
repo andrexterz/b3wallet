@@ -1,20 +1,19 @@
 package com.andrebarca.services;
 
-import com.andrebarca.models.Operacao;
-import com.andrebarca.repositories.OperacaoRepository;
-import java.text.SimpleDateFormat;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
+
+import com.andrebarca.models.Operacao;
+import com.andrebarca.repositories.OperacaoRepository;
 
 /**
  *
@@ -29,12 +28,6 @@ public class OperacaoService {
     @RequestMapping(value = "/api/operacoes/save", method = RequestMethod.POST)
     public ResponseEntity<?> save(@RequestBody Operacao operacao) {
         Operacao savedObj = operacaoRepository.save(operacao);
-        System.out.println(
-                "------------------------------------------------------------\n" +
-                "código....: " + operacao.getAcao().getCodigo()
-                + "\noperacao:" + operacao.getTipoOperacao()
-                + "\ndata...:" + new SimpleDateFormat("dd/MM/yyy").format(operacao.getDataOperacao())
-        );
         return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
     }
 
@@ -52,12 +45,12 @@ public class OperacaoService {
     }
 
     @RequestMapping(value = "/api/operacoes", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Operacao> list() {
+    public ResponseEntity<?>list() {
         Iterable<Operacao> operacoes = this.operacaoRepository.findAll(
                 new Sort(Direction.ASC, "acao.codigo")
                 .and(new Sort(Direction.ASC,"dataOperacao"))
                 .and(new Sort(Direction.ASC,"tipoOperacao"))
         );
-        return (List) operacoes;
+        return new ResponseEntity<>(operacoes, HttpStatus.OK);
     }
 }
