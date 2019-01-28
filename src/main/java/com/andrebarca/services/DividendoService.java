@@ -47,13 +47,13 @@ public class DividendoService {
         return new ResponseEntity<>(removed, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/api/dividendos", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Dividendo> list() {
+    @RequestMapping(value = "/api/dividendos", method RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> list() {
         Iterable<Dividendo> dividendos = this.dividendoRepository.findAll();
         dividendos.forEach(div -> {
             System.out.println("código: " + div.getAcao().getCodigo() + ": " + "dividendo:" + div.getValor());
         });
-        return (List) dividendos;
+        return new ResponseEntity<>(dividendos, HttpStatus.OK);
     }    
     
 }
