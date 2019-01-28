@@ -1,4 +1,4 @@
-package com.andrebarca;
+package com.andrebarca.controllers;
 
 import java.util.Enumeration;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 

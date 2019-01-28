@@ -3,7 +3,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Acao } from '../models/acao';
 
 @Injectable()
@@ -11,11 +11,11 @@ export class AcaoService {
 
     constructor(private http: HttpClient) {}
 
-    saveAcao(acao: Acao): Observable<Acao>  {
-        return this.http.post<Acao>("/api/acoes/save", acao);
+    saveAcao(acao: Acao): Observable<HttpResponse<Acao>>  {
+        return this.http.post<Acao>("/api/acoes/save", acao, {observe: 'response'});
     }
 
-    getAcoes(): Observable<Acao[]> {
-        return this.http.get<Acao[]>("/api/acoes");
+    getAcoes(): Observable<HttpResponse<Acao[]>> {
+        return this.http.get<Acao[]>("/api/acoes", {observe: 'response'});
     }
 }

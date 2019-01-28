@@ -18,11 +18,13 @@ export class AcaoComponent implements OnInit {
     constructor(
       private acaoService: AcaoService,
       private route: ActivatedRoute,
-      private location: Location) {
+      private location: Location,
+      private mensagemService: MensagemService
+      ) {
       }
 
     ngOnInit(): void {
-        this.acaoService.getAcoes().subscribe(acoes => this.acoes = acoes.map(acao => Object.assign(new Acao(), acao)));
+        this.acaoService.getAcoes().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
     }
 
     add(): void {
@@ -35,14 +37,18 @@ export class AcaoComponent implements OnInit {
 
     save(): void {
         if (this.selectedAcao) {
-            this.acaoService.saveAcao(this.selectedAcao).subscribe(obj => {
-                let savedObj: Acao = Object.assign(new Acao(), obj);
+            this.acaoService.saveAcao(this.selectedAcao).subscribe(response => {
+                let savedObj: Acao = Object.assign(new Acao(), response.body);
                 let index = this.acoes.findIndex(o => o.id == savedObj.id);
                 if (index >= 0) {
                     this.acoes[index] = savedObj;
                 } else {
                     this.acoes.push(savedObj);
                 }
+                this.mensagemService.showMessage(savedObj.codigo, "Ação salva com sucesso.", "success");
+            }, error => {
+                this.mensagemService.showMessage("Erro ao salvar ação", error.message, "error");
+                console.log(error);
             });
 
         }

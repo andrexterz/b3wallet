@@ -26,7 +26,7 @@ export class AnaliseComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-      this.acaoService.getAcoes().subscribe(acoes => this.acoes = acoes.map(acao => Object.assign(new Acao(), acao)));
+      this.acaoService.getAcoes().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
       this.analiseService.getAnalises().subscribe(response => this.analises = response.body.map(analise => Object.assign(new Analise(), analise)));
     }
 
@@ -60,7 +60,7 @@ export class AnaliseComponent implements OnInit {
           } else {
             this.analises.push(savedObj);
           }
-          this.mensagemService.showMessage(savedObj.acao.codigo, "anotação salva com sucesso.", "success");
+          this.mensagemService.showMessage(savedObj.acao.codigo, "Anotação salva com sucesso.", "success");
         }, error => {
           this.mensagemService.showMessage("Erro ao salvar anotação", error.message, "error");
           console.log(error);
@@ -74,11 +74,11 @@ export class AnaliseComponent implements OnInit {
       if (confirmDelete) {
         let index = this.analises.findIndex(o => o.id == analise.id);
         this.analiseService.deleteAnalise(analise).subscribe(response => {
-
-          if (response) {
-            this.mensagemService.showMessage("Anotação de " + analise.acao.codigo, (analise.anotacao.length <= 10 ? analise.anotacao: analise.anotacao.slice(0, 10).trim()) + " removida com sucesso.", "success");
             this.analises.splice(index, 1);
-          }
+            this.mensagemService.showMessage("Anotação de " + analise.acao.codigo, (analise.anotacao.length <= 10 ? analise.anotacao: analise.anotacao.slice(0, 10).trim()) + " removida com sucesso.", "success");
+        }, error => {
+            this.mensagemService.showMessage("Erro ao salvar anotação", error.message, "error");
+            console.log(error);
         });
       }
     }

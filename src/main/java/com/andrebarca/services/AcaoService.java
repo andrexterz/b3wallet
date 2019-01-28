@@ -5,9 +5,6 @@
  */
 package com.andrebarca.services;
 
-import com.andrebarca.models.Acao;
-import com.andrebarca.repositories.AcaoRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -18,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.andrebarca.models.Acao;
+import com.andrebarca.repositories.AcaoRepository;
 
 /**
  *
@@ -37,8 +37,8 @@ public class AcaoService {
     }
 
     @RequestMapping(value = "/api/acoes", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Acao> list() {
+    public ResponseEntity<?> list() {
         Iterable<Acao> acoes = this.acaoRepository.findAll(new Sort(Direction.ASC, "codigo"));
-        return (List) acoes ;
+        return new ResponseEntity<>(acoes, HttpStatus.OK);
     }
 }
