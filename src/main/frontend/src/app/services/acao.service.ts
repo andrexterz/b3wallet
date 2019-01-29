@@ -11,11 +11,11 @@ export class AcaoService {
 
     constructor(private http: HttpClient) {}
 
-    saveAcao(acao: Acao): Observable<HttpResponse<Acao>>  {
+    save(acao: Acao): Observable<HttpResponse<Acao>>  {
         return this.http.post<Acao>("/api/acoes/save", acao, {observe: 'response'});
     }
 
-    getAcoes(): Observable<HttpResponse<Acao[]>> {
+    list(): Observable<HttpResponse<Acao[]>> {
         return this.http.get<Acao[]>("/api/acoes", {observe: 'response'});
     }
 }

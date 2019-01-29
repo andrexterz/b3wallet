@@ -26,11 +26,11 @@ export class AnaliseComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-      this.acaoService.getAcoes().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
-      this.analiseService.getAnalises().subscribe(response => this.analises = response.body.map(analise => Object.assign(new Analise(), analise)));
+      this.acaoService.list().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
+      this.analiseService.list().subscribe(response => this.analises = response.body.map(analise => Object.assign(new Analise(), analise)));
     }
 
-    listAnalises(): Object {
+    list(): Object {
       let obj: Object = new Object();
       this.analises.forEach(analise => {
         if (obj.hasOwnProperty(analise.acao.codigo)) {
@@ -42,7 +42,7 @@ export class AnaliseComponent implements OnInit {
       return obj;
     }
 
-    addAnalise(): void {
+    add(): void {
         this.selectedAnalise = new Analise();
     }
 
@@ -52,7 +52,7 @@ export class AnaliseComponent implements OnInit {
 
     save(): void {
       if (this.selectedAnalise) {
-        this.analiseService.saveAnalise(this.selectedAnalise).subscribe(response => {
+        this.analiseService.save(this.selectedAnalise).subscribe(response => {
           let savedObj: Analise = Object.assign(new Analise(), response.body);
           let index  = this.analises.findIndex(o => o.id == savedObj.id);
           if (index >= 0) {
@@ -73,7 +73,7 @@ export class AnaliseComponent implements OnInit {
       let confirmDelete = confirm("Remover anotação " + analise.acao.codigo + ": " + (analise.anotacao.length <= 10 ? analise.anotacao: analise.anotacao.slice(0, 10).trim()) + "...?");
       if (confirmDelete) {
         let index = this.analises.findIndex(o => o.id == analise.id);
-        this.analiseService.deleteAnalise(analise).subscribe(response => {
+        this.analiseService.delete(analise).subscribe(response => {
             this.analises.splice(index, 1);
             this.mensagemService.showMessage("Anotação de " + analise.acao.codigo, (analise.anotacao.length <= 10 ? analise.anotacao: analise.anotacao.slice(0, 10).trim()) + " removida com sucesso.", "success");
         }, error => {

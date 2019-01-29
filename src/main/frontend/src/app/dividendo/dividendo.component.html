@@ -1,3 +1,68 @@
-<div class="container container-login">
-	<p>implementar dividendos</p>
+<div class="container">
+	<h4 class="title">Dividendos<a class="title-action" title="adicionar dividendo" (click)="add()"><i class="fa fa-plus-circle"></i></a></h4>
+	<table class="table">
+		<thead>
+			<tr>
+				<th class="left">Código</th>
+				<th class="center">Data ex</th>
+				<th class="center">Data do pagamento</th>
+				<th class="right">Valor</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th colspan="5" class="right">Total: R$00,00</th>
+			</tr>
+		</tfoot>
+		<tbody *ngFor="let entry of list() | keyvalue; let idxEntry = index">
+			<tr>
+				<th colspan="4" class="left">Mês: {{entry.key}}</th>
+				<th class="right">{{entry.value.length}}</th>
+			</tr>
+			<tr *ngFor="let dividendo of entry.value; let idxDividendo = index">
+				<td title="Código" class="left">{{dividendo.acao.codigo}}</td>
+				<td title="Data ex" class="center">{{dividendo.dataEx | date: 'dd/MM/yyyy'}}</td>
+				<td title="Data do pagamento" class="center">{{dividendo.dataPagamento | date: 'dd/MM/yyyy'}}</td>
+				<td title="Valor" class="right">{{dividendo.valor | currency:'BRL':'symbol':'1.2-2'}}</td>
+				<td class="table-action right">
+					<a title="editar dividendo" class="link" (click)="edit(dividendo)"><i class="fa fa-pencil"></i></a>
+					<a title="remover dividendo" class="margin-left-3 link" (click)="delete(dividendo)"><i class="fa fa-trash"></i></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
+<form #dividendoForm="ngForm" *ngIf="selectedDividendo" (ngSubmit)="save()" class="modal-wrapper">
+    <div class="modal">
+        <header class="modal-title">
+            <h4>{{(selectedDividendo.id == null ? 'Nova Análise': selectedDividendo.acao.codigo + ' - ' + (selectedDividendo.dataAtualizacao | date: 'dd/MM/yyyy'))}}</h4>
+            <button (click)="close()" class="modal-close"><i class="fa fa-close"></i></button>
+        </header>
+        <section class="modal-body">
+            <div class="form">
+                <div class="form-control g-6 g-l-3">
+                    <select id="acao" name="acao" [compareWith]="comparator" [(ngModel)]="selectedDividendo.acao" autofocus="autofocus" required>
+                        <option *ngFor="let acao of acoes" [ngValue]="acao">{{acao.codigo}}</option>
+                    </select>
+                    <label for="acao">Ação</label>
+                </div>
+				<div class="form-control g-6 g-l-3">
+                    <input id="valor" name="valor" [(ngModel)]="selectedDividendo.valor" type="number" min="0.01" step="0.01" required>
+                    <label for="valor">Valor</label>
+                </div>
+				<div class="form-control g-6 g-l-3">
+                    <input id="dataEx" name="dataEx" [(ngModel)]="selectedDividendo.dataEx" type="date" required>
+                    <label for="dataEx">Data ex</label>
+                </div>
+				<div class="form-control g-6 g-l-3">
+                    <input id="dataPagamento" name="dataEx" [(ngModel)]="selectedDividendo.dataPagamento" type="date" required>
+                    <label for="dataPagamento">Data do pagamento</label>
+                </div>
+            </div>
+        </section>
+        <footer class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!dividendoForm.valid">salvar</button>
+        </footer>
+    </div>
+</form>

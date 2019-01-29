@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { MensagemService } from './services/mensagem.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
 
@@ -18,7 +16,7 @@ export class AppComponent {
         {title: "Análises", route: "analise", icon: "fa fa-sticky-note"},
     ];
 
-    constructor (private mensagemService: MensagemService) {}
+    constructor () {}
 
     selectMenu(menu: any): void {
         this.showMenuMobile = false;

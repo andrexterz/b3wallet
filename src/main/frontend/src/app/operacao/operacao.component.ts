@@ -20,16 +20,16 @@ export class OperacaoComponent implements OnInit {
     selectedOperacao: Operacao = null;
 
     constructor(
-      private operacaoService: OperacaoService,
-      private acaoService: AcaoService,
       private route: ActivatedRoute,
       private location: Location,
+      private operacaoService: OperacaoService,
+      private acaoService: AcaoService,
       private mensagemService: MensagemService
     ) {}
 
     ngOnInit(): void {
-      this.acaoService.getAcoes().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
-      this.operacaoService.getOperacoes().subscribe(response => {
+      this.acaoService.list().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
+      this.operacaoService.list().subscribe(response => {
         this.operacoes = response.body;
        });
     }
@@ -74,7 +74,7 @@ export class OperacaoComponent implements OnInit {
 
     save(): void {
         if (this.selectedOperacao) {
-            this.operacaoService.saveOperacao(this.selectedOperacao).subscribe(response => {
+            this.operacaoService.save(this.selectedOperacao).subscribe(response => {
                 let savedObj: Operacao = Object.assign(new Operacao(), response.body);
                 let index = this.operacoes.findIndex(o => o.id == savedObj.id);
                 if (index >= 0) {
@@ -95,7 +95,7 @@ export class OperacaoComponent implements OnInit {
       let confirmDelete = confirm("Remover operacão " + operacao.acao.codigo + ": " + operacao.tipoOperacao + "?");
       if (confirmDelete) {
         let index = this.operacoes.findIndex(o => o.id == operacao.id);
-        this.operacaoService.deleteOperacao(operacao).subscribe(response => {
+        this.operacaoService.delete(operacao).subscribe(response => {
             this.operacoes.splice(index, 1);
             this.mensagemService.showMessage("Operação de " + operacao.tipoOperacao + ": " + operacao.acao.codigo + " removida com sucesso.", "success");
         }, error => {

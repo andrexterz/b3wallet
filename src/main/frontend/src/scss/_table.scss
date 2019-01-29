@@ -18,6 +18,12 @@ Table component styles
         background-color: transparentize($list-background-color, .5);
     }
 
+    tbody {
+      th {
+        background-color: darken($list-background-color, 5%);
+      }
+    }
+
     tr {
         border-top: 1px solid $list-border-color;
         display: flex;

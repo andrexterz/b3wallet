@@ -9,15 +9,15 @@ export class OperacaoService {
 
     constructor(private http: HttpClient) {}
 
-    saveOperacao(operacao: Operacao): Observable<HttpResponse<Operacao>>  {
+    save(operacao: Operacao): Observable<HttpResponse<Operacao>>  {
       return this.http.post<Operacao>("/api/operacoes/save", operacao, {observe: 'response'});
     }
 
-    deleteOperacao(operacao: Operacao): Observable<HttpResponse<boolean>>  {
+    delete(operacao: Operacao): Observable<HttpResponse<boolean>>  {
       return this.http.delete<boolean>("/api/operacoes/delete/" + operacao.id, {observe: 'response'});
     }
 
-    getOperacoes(): Observable<HttpResponse<Operacao[]>> {
+    list(): Observable<HttpResponse<Operacao[]>> {
         return this.http.get<Operacao[]>("/api/operacoes", {observe: 'response'});
     }
 }
