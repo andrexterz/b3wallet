@@ -31,12 +31,13 @@ public class RelatorioService {
 
     @RequestMapping(value = "/api/json/report", method=RequestMethod.POST)
     public ResponseEntity<?> report(InputStream data) throws IOException, JRException {
+        String reportName = "dividendos";
     	String filename = "download";
         JsonDataSource datasource = new JsonDataSource(data);
         System.out.println(datasource.toString());
         Map<String,Object> reportParameters = new HashMap<>();
         reportParameters.put("PAGE_TITLE", "Exemplo Jasper PDF");
-        File file = new ClassPathResource("reports/dividendos.jrxml").getFile();
+        File file = new ClassPathResource(String.format("reports/%s.jrxml", reportName)).getFile();
         JasperDesign jasperDesign = JRXmlLoader.load(file.getAbsolutePath());
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, reportParameters, datasource);
