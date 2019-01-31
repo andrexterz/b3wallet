@@ -17,6 +17,7 @@ export class DividendoComponent implements OnInit {
   selectedDividendo: Dividendo;
   dividendos: Dividendo[] = [];
   acoes: Acao[] = [];
+  selectedListItem: Set<number> = new Set();
 
   constructor(
     private route: ActivatedRoute,
@@ -36,9 +37,10 @@ export class DividendoComponent implements OnInit {
     this.dividendos.forEach(dividendo => {
       let key = moment(dividendo.dataPagamento).format("MM/YYYY");
       if (obj.hasOwnProperty(key)) {
-        obj[key].push(dividendo);
+        obj[key].items.push(dividendo);
+        obj[key].total += dividendo.valor;
       } else {
-        obj[key] = [dividendo];
+        obj[key] = {"items": [dividendo], "total": dividendo.valor};
       }
     });
     return obj;
@@ -90,4 +92,15 @@ export class DividendoComponent implements OnInit {
     }
   }
 
+  expandListItem(index: number): void {
+    if (this.selectedListItem.has(index)) {
+      this.selectedListItem.delete(index);
+    } else {
+      this.selectedListItem.add(index);
+    }
+  }
+
+  isExpanded(index: number):boolean {
+    return this.selectedListItem.has(index);
+  }
 }
