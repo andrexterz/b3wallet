@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Location } from '@angular/common';
+import { Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { Acao } from '../models/acao';
 import { AcaoService } from '../services/acao.service';
 import { Dividendo } from '../models/dividendo';
@@ -24,7 +24,8 @@ export class DividendoComponent implements OnInit {
     private location: Location,
     private dividendoService: DividendoService,
     private acaoService: AcaoService,
-    private mensagemService: MensagemService
+    private mensagemService: MensagemService,
+    @Inject(LOCALE_ID) private locale: string
   ) { }
 
   ngOnInit() {
@@ -56,7 +57,6 @@ export class DividendoComponent implements OnInit {
   }
 
   save(): void {
-    console.log("to implement save: ", this.selectedDividendo);
     if (this.selectedDividendo) {
         this.dividendoService.save(this.selectedDividendo).subscribe(response => {
             let savedObj: Dividendo = Object.assign(new Dividendo(), response.body);
@@ -76,7 +76,17 @@ export class DividendoComponent implements OnInit {
   }
 
   delete(dividendo: Dividendo): void {
-    console.log("to implement delete: ", dividendo);
+    let valor = formatCurrency(dividendo.valor, this.locale, getCurrencySymbol('BRL', 'narrow', this.locale));
+    let confirmDelete = confirm("Remover dividendo " + dividendo.acao.codigo + ": " + valor + "?");
+    if (confirmDelete) {
+      let index = this.dividendos.findIndex(o => o.id == dividendo.id);
+      this.dividendoService.delete(dividendo).subscribe(response => {
+        this.dividendos.splice(index, 1);
+        this.mensagemService.showMessage("Item removido", "Dividendo de " + dividendo.acao.codigo + ": " + valor +  " removido com sucesso.", "success");
+      }, error => {
+        this.mensagemService.showMessage("Erro ao remover dividendo", error.message, "error");
+      });
+    }
   }
 
   close(): void {

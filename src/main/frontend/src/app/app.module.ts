@@ -11,6 +11,7 @@ import { TokenInterceptor } from './tokenInterceptor';
 import { AcaoComponent } from './acao/acao.component';
 import { AcaoService } from './services/acao.service';
 import { OperacaoService } from './services/operacao.service';
+import { DividendoService } from './services/dividendo.service';
 import { AnaliseService } from './services/analise.service';
 import { LoginService } from './services/login.service';
 import { OperacaoComponent } from './operacao/operacao.component';
@@ -19,7 +20,7 @@ import { AnaliseComponent } from './analise/analise.component';
 import { LoginComponent } from './login/login.component';
 import { MensagemComponent } from './mensagem/mensagem.component';
 
-registerLocaleData(localePt, 'pt');
+registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   declarations: [
@@ -45,9 +46,9 @@ registerLocaleData(localePt, 'pt');
       {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
     ])
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'pt'},
+  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'},
               {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
-              LoginService, AcaoService, OperacaoService, AnaliseService],
+              LoginService, AcaoService, OperacaoService, DividendoService, AnaliseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

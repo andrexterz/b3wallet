@@ -97,9 +97,9 @@ export class OperacaoComponent implements OnInit {
         let index = this.operacoes.findIndex(o => o.id == operacao.id);
         this.operacaoService.delete(operacao).subscribe(response => {
             this.operacoes.splice(index, 1);
-            this.mensagemService.showMessage("Operação de " + operacao.tipoOperacao + ": " + operacao.acao.codigo + " removida com sucesso.", "success");
+            this.mensagemService.showMessage("Item removido", "Operação de " + operacao.tipoOperacao + ": " + operacao.acao.codigo + " removida com sucesso.", "success");
         }, error => {
-            this.mensagemService.showMessage("Erro ao salvar anotação", error.message, "error");
+            this.mensagemService.showMessage("Erro ao remover operação", error.message, "error");
             console.log(error);
         });
       }

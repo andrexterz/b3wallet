@@ -77,8 +77,7 @@ export class AnaliseComponent implements OnInit {
             this.analises.splice(index, 1);
             this.mensagemService.showMessage("Anotação de " + analise.acao.codigo, (analise.anotacao.length <= 10 ? analise.anotacao: analise.anotacao.slice(0, 10).trim()) + " removida com sucesso.", "success");
         }, error => {
-            this.mensagemService.showMessage("Erro ao salvar anotação", error.message, "error");
-            console.log(error);
+            this.mensagemService.showMessage("Erro ao remover anotação", error.message, "error");
         });
       }
     }
