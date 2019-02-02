@@ -1,8 +1,10 @@
 <div class="container">
     <h4 class="title">
       <span>Operações</span>
-      <a class="title-action" title="adicionar operação" (click)="add()"><i class="fa fa-plus-circle"></i></a></h4>
-    <table class="table">
+      <a class="title-action" title="adicionar operação" (click)="add()"><i class="fa fa-plus-circle"></i></a>
+    </h4>
+    <p class="note" *ngIf="operacoes.length == 0"><i class="fa fa-info-circle"></i><span class="margin-left-1">Você ainda não cadastrou nenhum item.</span></p>
+    <table class="table" *ngIf="operacoes.length > 0">
         <thead>
             <tr>
                 <th class="left">Código</th>

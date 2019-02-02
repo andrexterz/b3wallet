@@ -1,8 +1,10 @@
 <div class="container">
 	<h4 class="title">
 		<span>Dividendos</span>
-		<a class="title-action" title="adicionar dividendo" (click)="add()"><i class="fa fa-plus-circle"></i></a></h4>
-	<ul class="list">
+		<a class="title-action" title="adicionar dividendo" (click)="add()"><i class="fa fa-plus-circle"></i></a>
+	</h4>
+	<p class="note" *ngIf="dividendos.length == 0"><i class="fa fa-info-circle"></i><span class="margin-left-1">Você ainda não cadastrou nenhum item.</span></p>
+	<ul class="list" *ngIf="dividendos.length > 0">
 		<li *ngFor="let entry of list() | keyvalue; let idxEntry = index" class="list-item" [ngClass]="{'selected expanded': isExpanded(idxEntry)}">
 			<header class="title link" (click)="expandListItem(idxEntry)">
 				<i *ngIf="!isExpanded(idxEntry)" class="fa fa-folder margin-right-2"></i>

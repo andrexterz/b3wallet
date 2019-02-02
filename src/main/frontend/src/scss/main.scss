@@ -149,8 +149,21 @@ Generic component styles
     }
 }
 
+.note {
+  display: flex;
+  flex: 1 0 auto;
+  padding: $padding;
+  margin: $margin;
+  align-items: center;
+  justify-content: center;
+  border: thin solid $border-color;
+  border-radius: $border-radius;
+  color: $dark-foreground;
+  background: $dark-background;
+}
+
 .circle {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
@@ -193,6 +206,7 @@ Container component styles
     border: 1px solid lighten($border-color, 25%);
     background: $container-background-color;
     padding: $padding;
+    z-index: 1;
 
     &::after {
       content: ' ';

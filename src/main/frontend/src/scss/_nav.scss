@@ -15,7 +15,7 @@ Navbar component styles
     height: $nav-bar-height;
     background: $nav-background;
     border-bottom: 1px solid $nav-border-color;
-    z-index: 1;
+    z-index: 2;
 
     &-brand {
         flex: 0 0 auto;
@@ -79,11 +79,6 @@ Navbar component styles
         margin-left: auto;
         margin-right: $margin;
 
-        @media(min-width: $small-device) {
-          display: flex;
-        }
-
-
         input {
             width: 12em;
             padding: $padding;
@@ -120,15 +115,6 @@ Navbar component styles
         display: none;
 
       }
-      @media(min-width: $small-device) {
-        margin: 0 #{$margin*2};
-
-        &-user {
-          display: inline;
-          white-space: nowrap;
-          margin-left: $margin/2;
-        }
-      }
     }
 
     &-menu {
@@ -152,6 +138,18 @@ Navbar component styles
         flex: 1 1 100%;
     }
 
+    @media(min-width: $small-device) {
+      &-login {
+        margin: 0 #{$margin*2};
+
+        &-user {
+          display: inline;
+          white-space: nowrap;
+          margin-left: $margin/2;
+        }
+      }
+    }
+
     @media (min-width: $medium-device) {
         &-nav {
             display: flex;
@@ -159,6 +157,14 @@ Navbar component styles
 
         &-menu {
             display: none;
+        }
+
+        &-search {
+          display: inline-flex;
+        }
+
+        &-login {
+
         }
     }
 }

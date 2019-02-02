@@ -15,7 +15,7 @@ Navbar component styles
   height: 60px;
   background: linear-gradient(90deg, #ff337d 0, #4d506b 20%);
   border-bottom: 1px solid #42455c;
-  z-index: 1;
+  z-index: 2;
 }
 .navbar-brand {
   flex: 0 0 auto;
@@ -70,11 +70,6 @@ Navbar component styles
   margin-left: auto;
   margin-right: 10px;
 }
-@media (min-width: 425px) {
-  .navbar-search {
-    display: flex;
-  }
-}
 .navbar-search input {
   width: 12em;
   padding: 10px;
@@ -105,16 +100,6 @@ Navbar component styles
 .navbar-login-user {
   display: none;
 }
-@media (min-width: 425px) {
-  .navbar-login {
-    margin: 0 20px;
-  }
-  .navbar-login-user {
-    display: inline;
-    white-space: nowrap;
-    margin-left: 5px;
-  }
-}
 .navbar-menu {
   -webkit-appearance: none;
   color: #efefef;
@@ -132,12 +117,25 @@ Navbar component styles
   align-items: center;
   flex: 1 1 100%;
 }
+@media (min-width: 425px) {
+  .navbar-login {
+    margin: 0 20px;
+  }
+  .navbar-login-user {
+    display: inline;
+    white-space: nowrap;
+    margin-left: 5px;
+  }
+}
 @media (min-width: 768px) {
   .navbar-nav {
     display: flex;
   }
   .navbar-menu {
     display: none;
+  }
+  .navbar-search {
+    display: inline-flex;
   }
 }
 
@@ -455,6 +453,35 @@ Form component styles
   border-radius: 4px;
   padding: 5px 10px;
   height: calc(30px + 5px);
+  position: relative;
+  transition: all 0.4s ease-in;
+}
+@keyframes click-effect {
+  50% {
+    transform: scale(1.5, 1.5);
+    opacity: 0;
+  }
+  99% {
+    transform: scale(0.001, 0.001);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.001, 0.001);
+    opacity: 1;
+  }
+}
+.btn:before {
+  content: " ";
+  display: block;
+  background-color: #ff005d;
+  box-shadow: 0 0 8px 8px #ff005d;
+  position: absolute;
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transform: scale(0.001, 0.001);
 }
 .btn + .btn {
   margin: 0 5px;
@@ -465,6 +492,10 @@ Form component styles
 .btn:active {
   background-color: #70618d;
   transition: all 0.1s ease-out;
+  outline: 0;
+}
+.btn:active:before {
+  animation: click-effect 0.8s ease-out;
 }
 .btn[disabled] {
   opacity: 0.5;
@@ -487,7 +518,7 @@ Modal component styles
 */
 .modal {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   box-shadow: 2px 4px 10px #55555588, -2px -3px 20px rgba(136, 136, 136, 0.5333333333);
   background: #fefefe;
   overflow: hidden;
@@ -518,10 +549,10 @@ Modal component styles
   right: 0;
   bottom: 0;
   background: rgba(155, 155, 175, 0.75);
+  z-index: 3;
 }
 .modal-title {
   display: flex;
-  flex: 1 0 100%;
   align-items: center;
   height: 60px;
   padding: 10px;
@@ -547,6 +578,7 @@ Modal component styles
 .modal-body {
   display: flex;
   align-items: flex-start;
+  align-self: stretch;
   flex-wrap: wrap;
   flex: 1 1 100%;
   padding: 10px;
@@ -896,8 +928,21 @@ Generic component styles
   transition: all 0.2s ease-in-out;
 }
 
-.circle {
+.note {
   display: flex;
+  flex: 1 0 auto;
+  padding: 10px;
+  margin: 10px;
+  align-items: center;
+  justify-content: center;
+  border: thin solid #9c9c9c;
+  border-radius: 3px;
+  color: #efefef;
+  background: #333;
+}
+
+.circle {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
@@ -1100,6 +1145,7 @@ Container component styles
   border: 1px solid gainsboro;
   background: #fefefe;
   padding: 10px;
+  z-index: 1;
 }
 .container::after {
   content: " ";

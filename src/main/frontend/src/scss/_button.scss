@@ -3,7 +3,24 @@
 Form component styles
 ==============================================================================
 */
+
 .btn {
+
+    @keyframes click-effect {
+      50% {
+        transform: scale(1.5, 1.5);
+        opacity: 0;
+      }
+      99% {
+        transform: scale(0.001, 0.001);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(0.001, 0.001);
+        opacity: 1;
+      }
+    }
+    
     font-size: 1.1em;
     display: flex;
     align-items: center;
@@ -14,6 +31,26 @@ Form component styles
     border-radius: $form-control-border-radius;
     padding: $form-control-padding/2 $form-control-padding;
     height: calc(30px + #{$form-control-padding/2});
+
+    position: relative;
+    transition: all 0.4s ease-in;
+
+    &:before {
+      content: ' ';
+      display: block;
+      background-color: $primary-color;
+      box-shadow: 0 0 8px 8px $primary-color;
+      position: absolute;
+      height: 100%;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      transform: scale(0.001, 0.001);
+    }
+
+    &:active {
+    }
 
     & + & {
         margin: 0 $margin/2;
@@ -26,7 +63,13 @@ Form component styles
     &:active {
       background-color: darken($btn-background, 10%);
       transition: all .1s ease-out;
+      outline: 0;
+      &:before {
+        animation: click-effect 0.8s ease-out;
+      }
     }
+
+
 
     @include disabled-status;
 
