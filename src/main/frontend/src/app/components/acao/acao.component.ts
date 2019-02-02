@@ -66,6 +66,6 @@ export class AcaoComponent implements OnInit {
 
     setCustodia(): void {
       this.hasCustodia = !this.hasCustodia;
-      localStorage.setItem("hasCustodia", this.hasCustodia);
+      localStorage.setItem("hasCustodia", this.hasCustodia.toString());
     }
 }

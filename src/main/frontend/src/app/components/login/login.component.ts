@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.localStorage.removeItem('token');
+    localStorage.removeItem('token');
   }
 
 
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     console.log("login form submited");
     this.loginService.authenticate(this.credentials).subscribe(data => {
       console.log(data);
-      window.localStorage.setItem('token', data.token);
+      localStorage.setItem('token', data.token);
     });
   }
 }
