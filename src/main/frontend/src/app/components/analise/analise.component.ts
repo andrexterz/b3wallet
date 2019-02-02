@@ -1,11 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
-import { Analise } from '../models/analise';
-import { Acao } from '../models/acao';
-import { AcaoService } from '../services/acao.service';
-import { AnaliseService } from '../services/analise.service';
-import { MensagemService } from '../services/mensagem.service';
+import { Analise, Acao } from '../../models';
+import { AcaoService, AnaliseService, MensagemService } from '../../services';
 
 @Component({
   selector: 'analise-component',

@@ -1,5 +1,14 @@
 <div class="container">
-    <h4 class="title">Ações <a class="title-action" title="adicionar ação" (click)="add()"><i class="fa fa-plus-circle"></i></a></h4>
+    <h4 class="title">
+      <span>Ações</span>
+      <section class="title-detail">
+        <div class="form-control">
+          <input type="checkbox" name="filterCustodia" id="filterCustodia" [(ngModel)]="hasCustodia" (click)="setCustodia()">
+          <label for="filterCustodia">Custódia</label>
+        </div>
+      </section>
+      <a class="title-action" title="adicionar ação" (click)="add()"><i class="fa fa-plus-circle"></i></a>
+    </h4>
     <table class="table">
         <thead>
             <tr>
@@ -12,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let acao of acoes; let idx = index">
+            <tr *ngFor="let acao of list(); let idx = index">
                 <td title="Código">{{acao.codigo}}</td>
                 <td title="Nome">{{acao.nome}}</td>
                 <td class="right" title="Custódia">{{acao.totalCustodia}}</td>

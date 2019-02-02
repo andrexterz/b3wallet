@@ -6,19 +6,25 @@ import localePt from '@angular/common/locales/pt';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
-import { AppComponent } from './app.component';
 import { TokenInterceptor } from './tokenInterceptor';
-import { AcaoComponent } from './acao/acao.component';
-import { AcaoService } from './services/acao.service';
-import { OperacaoService } from './services/operacao.service';
-import { DividendoService } from './services/dividendo.service';
-import { AnaliseService } from './services/analise.service';
-import { LoginService } from './services/login.service';
-import { OperacaoComponent } from './operacao/operacao.component';
-import { DividendoComponent } from './dividendo/dividendo.component';
-import { AnaliseComponent } from './analise/analise.component';
-import { LoginComponent } from './login/login.component';
-import { MensagemComponent } from './mensagem/mensagem.component';
+import { AppComponent } from './app.component';
+
+import {
+  AcaoComponent,
+  OperacaoComponent,
+  DividendoComponent,
+  AnaliseComponent,
+  LoginComponent,
+  MensagemComponent
+} from './components';
+
+import {
+  AcaoService,
+  OperacaoService,
+  DividendoService,
+  AnaliseService,
+  LoginService
+} from './services';
 
 registerLocaleData(localePt, 'pt-BR');
 

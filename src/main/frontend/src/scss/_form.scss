@@ -14,6 +14,7 @@ Form component styles
     flex-wrap: nowrap;
   }
 
+  @at-root
   &-control {
     position: relative;
     display: flex;
@@ -21,13 +22,13 @@ Form component styles
     border-radius: $form-control-border-radius;
     margin: $margin;
 
-
     input[type="text"],
     input[type="number"],
     input[type="password"],
     input[type="date"],
     textarea,
     select {
+        flex: 1 0 auto;
         border-width: 0 0 1px 0;
         border-color: $form-control-border-color;
         background-color: $form-control-background;
@@ -43,7 +44,8 @@ Form component styles
             outline: none;
             border-color: darken($form-control-border-color, 20%);
             & ~ label {
-                font-size: 0.8em;
+                cursor: default;
+                font-size: 0.8rem;
                 transform: translateY(-175%);
                 transition: all .1s linear;
             }
@@ -55,17 +57,52 @@ Form component styles
         }
 
 
-        & ~ label {
-         cursor: text;
-         font-size: 1em;
-         height: $form-control-height;
-         margin-left: 0;
-         color: $form-control-color;
-         transform: translateY(-75%);
-         transition: all .1s linear;
-         z-index: 0;
-        }
      }
+
+     label {
+       user-select: none;
+       cursor: text;
+       font-size: 1rem;
+       height: $form-control-height;
+       margin-left: 0;
+       color: $form-control-color;
+       transform: translateY(-75%);
+       transition: all .1s linear;
+       z-index: 0;
+     }
+
+    input[type="checkbox"], input[type="radio"] {
+      display: none;
+
+      & ~ label {
+        display: flex;
+        align-items: center;
+        cursor: default;
+        height: initial;
+        transform: translateY(0);
+
+        &::before {
+          content: ' ';
+          display: inline-block;
+          margin-right: $margin/2;
+          border: 2px solid $form-control-color;
+          border-radius: $form-control-border-radius;
+          box-sizing: border-box;
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+
+      &:checked ~ label {
+        color: darken($form-control-border-color, 20%);
+        &::before {
+          background: $btn-background-primary;
+          outline: 1px solid $form-title-background;
+          outline-offset: -3px;
+
+        }
+      }
+    }
 
      textarea {
          height: initial;

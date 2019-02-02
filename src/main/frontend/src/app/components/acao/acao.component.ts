@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/map';
-import { AcaoService } from '../services/acao.service';
-import { MensagemService } from '../services/mensagem.service';
-import { Acao } from "../models/acao";
+import { AcaoService, MensagemService } from '../../services';
+import { Acao } from "../../models";
 
 @Component({
   selector: 'acao-component',
@@ -14,6 +13,7 @@ export class AcaoComponent implements OnInit {
 
     selectedAcao: Acao = null;
     acoes: Acao[] = [];
+    hasCustodia: boolean = false;
 
     constructor(
       private acaoService: AcaoService,
@@ -25,6 +25,11 @@ export class AcaoComponent implements OnInit {
 
     ngOnInit(): void {
         this.acaoService.list().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
+        eval(localStorage.getItem("hasCustodia")) ? this.hasCustodia = eval(localStorage.getItem("hasCustodia")): false;
+    }
+
+    list(): Object {
+      return this.hasCustodia? this.acoes.filter(acao => acao.totalCustodia > 0): this.acoes;
     }
 
     add(): void {
@@ -57,5 +62,10 @@ export class AcaoComponent implements OnInit {
 
     close(): void {
       this.selectedAcao = null;
+    }
+
+    setCustodia(): void {
+      this.hasCustodia = !this.hasCustodia;
+      localStorage.setItem("hasCustodia", this.hasCustodia);
     }
 }

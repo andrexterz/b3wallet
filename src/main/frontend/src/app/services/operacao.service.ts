@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Acao } from '../models/acao';
-import { Operacao } from "../models/operacao";
+import { Operacao, Acao } from "../models";
 
 @Injectable()
 export class OperacaoService {

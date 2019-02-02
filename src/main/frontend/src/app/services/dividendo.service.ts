@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Acao } from '../models/acao';
-import { Dividendo } from '../models/dividendo';
+import { Acao, Dividendo } from '../models';
 
 @Injectable({
   providedIn: 'root'

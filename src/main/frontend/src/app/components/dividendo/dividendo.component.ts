@@ -1,11 +1,8 @@
 import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location, formatCurrency, getCurrencySymbol } from '@angular/common';
-import { Acao } from '../models/acao';
-import { AcaoService } from '../services/acao.service';
-import { Dividendo } from '../models/dividendo';
-import { DividendoService } from '../services/dividendo.service';
-import { MensagemService } from '../services/mensagem.service';
+import { Acao, Dividendo } from '../../models';
+import { AcaoService, DividendoService, MensagemService } from '../../services';
 import * as moment from 'moment';
 
 @Component({

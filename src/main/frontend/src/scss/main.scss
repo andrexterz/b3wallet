@@ -25,6 +25,7 @@ html {
 
 body {
     background-color: $body-background;
+    overflow-y: scroll;
 }
 
 a {
@@ -75,6 +76,7 @@ Generic component styles
     display: flex;
     flex: 1 0 auto;
     align-items: center;
+    justify-content: flex-start;
     font-size: 1.5em;
     margin: -#{$margin} -#{$margin} -2px -#{$margin};
     padding: $padding;
@@ -85,7 +87,15 @@ Generic component styles
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: $margin/2 $margin/2 $margin/2 auto;
+      margin: $margin/2;
+    }
+
+    &-detail {
+      margin-left: auto;
+    }
+
+    :not(&-detail) + &-action {
+      margin-left: auto;
     }
 
     &-action {

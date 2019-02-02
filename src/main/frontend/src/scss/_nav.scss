@@ -15,6 +15,7 @@ Navbar component styles
     height: $nav-bar-height;
     background: $nav-background;
     border-bottom: 1px solid $nav-border-color;
+    z-index: 1;
 
     &-brand {
         flex: 0 0 auto;
