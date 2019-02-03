@@ -12,8 +12,8 @@ export class AppComponent {
     menuItems = [
         {title: "Início", route: "dashboard", icon: "fa fa-home"},
         {title: "Portfolio", route: "portfolio", icon: "fa fa-folder-open"},
-        {title: "Dividendos", route: "dividendo", icon: "fa fa-usd"},
-        {title: "Análises", route: "analise", icon: "fa fa-sticky-note"},
+        {title: "Proventos", route: "provento", icon: "fa fa-usd"},
+        {title: "Notas", route: "nota", icon: "fa fa-sticky-note"},
     ];
 
     constructor () {}

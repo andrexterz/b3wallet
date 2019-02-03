@@ -1,18 +1,20 @@
 package com.andrebarca.models;
 
- /*
- * @author andre
- */
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.HashSet;
+ import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+
+/*
+ * @author andre
+ */
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Acao extends Base {

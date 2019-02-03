@@ -24,6 +24,6 @@ public enum TipoOperacao implements Serializable {
     }
 
     public String getDescricao() {
-        return this.tipo;
+        return this.descricao;
     }
 }

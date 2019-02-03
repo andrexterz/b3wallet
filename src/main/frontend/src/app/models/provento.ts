@@ -1,6 +1,6 @@
 import { Acao } from "./acao";
 
-export class Dividendo {
+export class Provento {
   id: number;
   acao: Acao;
   valor: number = 0;

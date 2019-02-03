@@ -1,10 +1,11 @@
 package com.andrebarca.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
@@ -12,13 +13,13 @@ import javax.validation.constraints.NotBlank;
  * @author andre
  */
 @Entity
-public class Analise extends Base {
+public class Nota extends Base {
 
-    public Analise() {
+    public Nota() {
 
     }
 
-    public Analise(Acao acao, String anotacao) {
+    public Nota(Acao acao, String anotacao) {
         this.acao = acao;
         this.anotacao = anotacao;
     }

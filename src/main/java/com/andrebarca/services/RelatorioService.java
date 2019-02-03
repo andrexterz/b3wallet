@@ -31,7 +31,7 @@ public class RelatorioService {
 
     @RequestMapping(value = "/api/json/report", method=RequestMethod.POST)
     public ResponseEntity<?> report(InputStream data) throws IOException, JRException {
-        String reportName = "dividendos";
+        String reportName = "proventos";
     	String filename = "download";
         JsonDataSource datasource = new JsonDataSource(data);
         System.out.println(datasource.toString());

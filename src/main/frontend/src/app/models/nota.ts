@@ -1,6 +1,6 @@
 import { Acao } from "./acao";
 
-export class Analise {
+export class Nota {
   id: number;
   acao: Acao;
   anotacao: string;

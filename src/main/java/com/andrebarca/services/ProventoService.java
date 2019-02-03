@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.andrebarca.models.Analise;
-import com.andrebarca.repositories.AnaliseRepository;
+import com.andrebarca.models.Provento;
+import com.andrebarca.repositories.ProventoRepository;
 
 /**
  *
@@ -24,22 +24,22 @@ import com.andrebarca.repositories.AnaliseRepository;
  */
 
 @RestController
-public class AnaliseService {
-    
+public class ProventoService {
+
     @Autowired
-    AnaliseRepository analiseRepository;
-    
-    @RequestMapping(value = "/api/analises/save", method = RequestMethod.POST)
-    public ResponseEntity<?> save(@RequestBody Analise analise) {
-        Analise savedObj = analiseRepository.save(analise);
+    ProventoRepository proventoRepository;
+
+    @RequestMapping(value = "/api/proventos/save", method = RequestMethod.POST)
+    public ResponseEntity<?> save(@RequestBody Provento provento) {
+        Provento savedObj = proventoRepository.save(provento);
         return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
     }
-    
-    @RequestMapping(value = "/api/analises/delete/{id}", method = RequestMethod.DELETE)
+
+    @RequestMapping(value = "/api/proventos/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> delete(@PathVariable long id) {
         boolean removed = false;
         try {
-            analiseRepository.deleteById(id);
+            proventoRepository.deleteById(id);
             removed = true;
         } catch (Exception e) {
             System.out.println("could not delete obj id: " + id);
@@ -47,9 +47,13 @@ public class AnaliseService {
         return new ResponseEntity<>(removed, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/api/analises", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/proventos", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> list() {
-        Iterable<Analise> analises = this.analiseRepository.findAll();
-        return new ResponseEntity<>(analises, HttpStatus.OK);
-    }    
+        Iterable<Provento> proventos = this.proventoRepository.findAll();
+        proventos.forEach(div -> {
+            System.out.println("código: " + div.getAcao().getCodigo() + ": " + "provento:" + div.getValor());
+        });
+        return new ResponseEntity<>(proventos, HttpStatus.OK);
+    }
+
 }

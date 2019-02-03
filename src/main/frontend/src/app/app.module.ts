@@ -12,8 +12,8 @@ import { AppComponent } from './app.component';
 import {
   AcaoComponent,
   OperacaoComponent,
-  DividendoComponent,
-  AnaliseComponent,
+  ProventoComponent,
+  NotaComponent,
   LoginComponent,
   MensagemComponent
 } from './components';
@@ -21,8 +21,8 @@ import {
 import {
   AcaoService,
   OperacaoService,
-  DividendoService,
-  AnaliseService,
+  ProventoService,
+  NotaService,
   LoginService
 } from './services';
 
@@ -33,8 +33,8 @@ registerLocaleData(localePt, 'pt-BR');
     AppComponent,
     AcaoComponent,
     OperacaoComponent,
-    DividendoComponent,
-    AnaliseComponent,
+    ProventoComponent,
+    NotaComponent,
     LoginComponent,
     MensagemComponent
   ],
@@ -46,15 +46,15 @@ registerLocaleData(localePt, 'pt-BR');
     RouterModule.forRoot([
       {path: 'dashboard', component: AcaoComponent},
       {path: 'portfolio', component: OperacaoComponent},
-      {path: 'dividendo', component: DividendoComponent},
-      {path: 'analise', component: AnaliseComponent},
+      {path: 'provento', component: ProventoComponent},
+      {path: 'nota', component: NotaComponent},
       {path: 'login', component: LoginComponent},
       {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
     ])
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pt-BR'},
               {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
-              LoginService, AcaoService, OperacaoService, DividendoService, AnaliseService],
+              LoginService, AcaoService, OperacaoService, ProventoService, NotaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

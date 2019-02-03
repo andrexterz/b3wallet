@@ -5,13 +5,15 @@
  */
 package com.andrebarca.repositories;
 
-import com.andrebarca.models.Analise;
 import java.util.List;
+
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.andrebarca.models.Nota;
 
 /**
  *
@@ -19,11 +21,11 @@ import org.springframework.data.jpa.repository.Query;
  */
 
 @Repository
-public interface AnaliseRepository extends CrudRepository<Analise, Long>{
+public interface NotaRepository extends CrudRepository<Nota, Long>{
 
     @Modifying
-    @Query("delete from Analise o where o.id = ?1")
+    @Query("delete from Nota o where o.id = ?1")
     void deleteById(Long id);
 
-    List<Analise> findAll(Sort sort);
+    List<Nota> findAll(Sort sort);
 }

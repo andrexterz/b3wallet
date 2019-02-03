@@ -1,13 +1,15 @@
 package com.andrebarca.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  *
@@ -15,12 +17,12 @@ import javax.persistence.TemporalType;
  */
 
 @Entity
-public class Dividendo extends Base {
+public class Provento extends Base {
 
-    public Dividendo() {
+    public Provento() {
     }
 
-    public Dividendo(Acao acao, Double valor, Date dataEx, Date dataPagamento) {
+    public Provento(Acao acao, Double valor, Date dataEx, Date dataPagamento) {
         this.acao = acao;
         this.valor = valor;
         this.dataEx = dataEx;
