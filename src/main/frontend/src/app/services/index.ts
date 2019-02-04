@@ -4,3 +4,4 @@ export * from "./provento.service";
 export * from "./login.service";
 export * from "./mensagem.service";
 export * from "./operacao.service";
+export * from "./tokenInterceptor";

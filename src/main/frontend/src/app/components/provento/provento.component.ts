@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location, formatCurrency, getCurrencySymbol } from '@angular/common';
-import { Acao, Provento } from '../../models';
+import { Acao, Provento, TipoProventoEnum } from '../../models';
 import { AcaoService, ProventoService, MensagemService } from '../../services';
 import * as moment from 'moment';
 
@@ -28,6 +28,7 @@ export class ProventoComponent implements OnInit {
   ngOnInit() {
     this.acaoService.list().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
     this.proventoService.list().subscribe(response => this.proventos = response.body.map(provento => Object.assign(new Provento(), provento)));
+    this.listOptionsTipoProvento();
   }
 
   list(): Object {
@@ -47,6 +48,7 @@ export class ProventoComponent implements OnInit {
   add(): void {
     this.selectedProvento = new Provento();
     this.selectedProvento.valor = 0.01;
+    this.selectedProvento.tipoProvento = Object.keys(TipoProventoEnum)[0];
   }
 
   edit(provento: Provento): void {
@@ -88,6 +90,10 @@ export class ProventoComponent implements OnInit {
 
   close(): void {
     this.selectedProvento = null;
+  }
+
+  listOptionsTipoProvento(): Object {
+      return TipoProventoEnum;
   }
 
   //compare method for directive compareWith

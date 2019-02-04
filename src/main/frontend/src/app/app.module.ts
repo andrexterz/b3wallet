@@ -6,7 +6,6 @@ import localePt from '@angular/common/locales/pt';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
-import { TokenInterceptor } from './tokenInterceptor';
 import { AppComponent } from './app.component';
 
 import {
@@ -23,7 +22,8 @@ import {
   OperacaoService,
   ProventoService,
   NotaService,
-  LoginService
+  LoginService,
+  TokenInterceptor
 } from './services';
 
 registerLocaleData(localePt, 'pt-BR');

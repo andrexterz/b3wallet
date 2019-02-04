@@ -1,4 +1,5 @@
 import { Acao } from "./acao";
+import { TipoProventoEnum } from "./tipoProventoEnum";
 
 export class Provento {
   id: number;
@@ -6,4 +7,5 @@ export class Provento {
   valor: number = 0;
   dataEx: Date;
   dataPagamento: Date;
+  tipoProvento: string;
 }

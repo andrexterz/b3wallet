@@ -50,9 +50,6 @@ public class ProventoService {
     @RequestMapping(value = "/api/proventos", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> list() {
         Iterable<Provento> proventos = this.proventoRepository.findAll();
-        proventos.forEach(div -> {
-            System.out.println("código: " + div.getAcao().getCodigo() + ": " + "provento:" + div.getValor());
-        });
         return new ResponseEntity<>(proventos, HttpStatus.OK);
     }
 

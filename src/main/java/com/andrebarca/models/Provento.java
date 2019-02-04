@@ -3,6 +3,8 @@ package com.andrebarca.models;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -22,13 +24,16 @@ public class Provento extends Base {
     public Provento() {
     }
 
-    public Provento(Acao acao, Double valor, Date dataEx, Date dataPagamento) {
+    public Provento(TipoProvento tipoProvento, Acao acao, Double valor, Date dataEx, Date dataPagamento) {
+        this.tipoProvento = tipoProvento;
         this.acao = acao;
         this.valor = valor;
         this.dataEx = dataEx;
         this.dataPagamento = dataPagamento;
     }
 
+    @Enumerated(EnumType.STRING)
+    private TipoProvento tipoProvento;
 
     @ManyToOne
     @JoinColumn(name = "ACAO_ID")
@@ -43,6 +48,14 @@ public class Provento extends Base {
     @Temporal(TemporalType.DATE)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dataPagamento;
+
+    public TipoProvento getTipoProvento() {
+		    return tipoProvento;
+	  }
+
+    public void setTipoProvento(TipoProvento tipoProvento) {
+		    this.tipoProvento = tipoProvento;
+	  }
 
     public Acao getAcao() {
         return acao;
@@ -75,5 +88,4 @@ public class Provento extends Base {
     public void setDataPagamento(Date dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
-
 }
