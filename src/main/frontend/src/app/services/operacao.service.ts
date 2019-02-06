@@ -19,4 +19,8 @@ export class OperacaoService {
     list(): Observable<HttpResponse<Operacao[]>> {
         return this.http.get<Operacao[]>("/api/operacoes", {observe: 'response'});
     }
+
+    listOptions(): Observable<HttpResponse<Object[]>> {
+        return this.http.get<Object[]>("/api/operacoes/tipos", {observe: 'response'});
+    }
 }

@@ -23,4 +23,8 @@ export class ProventoService {
     list(): Observable<HttpResponse<Provento[]>> {
         return this.http.get<Provento[]>("/api/proventos", {observe: 'response'});
     }
+
+    listOptions(): Observable<HttpResponse<Object[]>> {
+        return this.http.get<Object[]>("/api/proventos/tipos", {observe: 'response'});
+    }
 }

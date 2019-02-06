@@ -8,8 +8,8 @@ import java.io.Serializable;
  */
 public enum TipoOperacao implements Serializable {
 
-    COMPRA ("c", "Compra"),
-    VENDA ("v", "Venda");
+    COMPRA ("COMPRA", "Compra"),
+    VENDA ("VENDA", "Venda");
 
     private final String tipo;
     private final String descricao;
@@ -22,7 +22,7 @@ public enum TipoOperacao implements Serializable {
     public String getTipo() {
         return this.tipo;
     }
-
+    
     public String getDescricao() {
         return this.descricao;
     }

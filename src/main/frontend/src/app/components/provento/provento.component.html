@@ -55,7 +55,7 @@
             <div class="form">
 								<div class="form-control g-12 g-l-8">
 										<select id="tipo" name="tipo" [(ngModel)]="selectedProvento.tipoProvento" required>
-												<option *ngFor="let entry of listOptionsTipoProvento() | keyvalue" [value]="entry.key">{{entry.value}}</option>
+												<option *ngFor="let option of options" [value]="option.tipo">{{option.descricao}}</option>
 										</select>
 										<label for="tipo">Tipo</label>
 								</div>

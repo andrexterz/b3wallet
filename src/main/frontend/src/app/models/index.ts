@@ -4,4 +4,4 @@ export * from './provento';
 export * from './login';
 export * from './mensagem';
 export * from './operacao';
-export * from './tipoProventoEnum';
+export * from './option';

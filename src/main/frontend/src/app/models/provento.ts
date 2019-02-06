@@ -1,5 +1,4 @@
 import { Acao } from "./acao";
-import { TipoProventoEnum } from "./tipoProventoEnum";
 
 export class Provento {
   id: number;
