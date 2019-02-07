@@ -1,11 +1,5 @@
 package com.andrebarca.services;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -59,12 +53,7 @@ public class OperacaoService {
 	}
 
 	@RequestMapping(value = "/api/operacoes/tipos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> listTypeOptions() {
-		List<Map<String, String>> tipos = new ArrayList<>();
-		Arrays.stream(TipoOperacao.values()).forEach(tipo -> tipos.add(new HashMap<String, String>() {{
-				put("tipo", tipo.getTipo());
-				put("descricao", tipo.getDescricao());
-			}}));
-		return new ResponseEntity<>(tipos, HttpStatus.OK);
+	public ResponseEntity<?> listOptions() {
+		return new ResponseEntity<>(TipoOperacao.getPropertyList(), HttpStatus.OK);
 	}
 }

@@ -5,12 +5,6 @@
  */
 package com.andrebarca.services;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -61,13 +55,8 @@ public class ProventoService {
     }
     
     @RequestMapping(value = "/api/proventos/tipos", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> listTypeOptions() {
-    	List<Map<String, String>> tipos = new ArrayList<>();
-    	Arrays.stream(TipoProvento.values()).forEach(tipo -> tipos.add(new HashMap<String, String>() {{
-    		put("tipo", tipo.getTipo());
-			put("descricao", tipo.getDescricao());
-    		}}));
-    	return new ResponseEntity<>(tipos, HttpStatus.OK);
+    public ResponseEntity<?> listOptions() {
+    	return new ResponseEntity<>(TipoProvento.getPropertyList(), HttpStatus.OK);
     }
 
 }

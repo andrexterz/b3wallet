@@ -14,6 +14,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @Entity
 public class Nota extends Base {
+	
+	private static final long serialVersionUID = 1L;	
 
     public Nota() {
 

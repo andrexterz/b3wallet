@@ -1,6 +1,11 @@
 package com.andrebarca.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public enum TipoProvento implements Serializable {
 	DIVIDENDO("DIVIDENDO", "Dividendo"),
@@ -21,5 +26,16 @@ public enum TipoProvento implements Serializable {
 
     public String getDescricao() {
         return this.descricao;
+    }
+
+    public static List<Map<String, String>> getPropertyList() {
+    	List<Map<String, String>> tipos = new ArrayList<>();
+    	Arrays.stream(TipoProvento.values()).forEach(tipo -> {
+    		Map<String, String> tipoMap = new HashMap<String, String>();
+    		tipoMap.put("tipo", tipo.getTipo());
+    		tipoMap.put("descricao", tipo.getDescricao());
+				tipos.add(tipoMap);
+    	});
+    	return tipos;
     }
 }

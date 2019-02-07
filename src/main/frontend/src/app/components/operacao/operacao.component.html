@@ -68,8 +68,7 @@
                 </div>
                 <div class="form-control g-6 g-l-4">
                     <select id="tipo" name="tipo" [(ngModel)]="selectedOperacao.tipoOperacao" required>
-                        <option value="COMPRA">COMPRA</option>
-                        <option value="VENDA">VENDA</option>
+                        <option *ngFor="let option of options" [value]="option.tipo">{{option.descricao}}</option>
                     </select>
                     <label for="tipo">Operação</label>
                 </div>

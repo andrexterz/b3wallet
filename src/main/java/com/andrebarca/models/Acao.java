@@ -19,7 +19,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 public class Acao extends Base {
 
-    public Acao() {
+	private static final long serialVersionUID = 1L;
+
+	public Acao() {
         this.operacoes = new HashSet<>();
     }
 

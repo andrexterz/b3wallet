@@ -23,7 +23,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 public class Operacao extends Base {
 
-    public Operacao() {
+	private static final long serialVersionUID = 1L;
+
+	public Operacao() {
       this.acao = null;
       this.valor = 0.0;
       this.quantidade = 0;

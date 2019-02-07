@@ -29,7 +29,7 @@ export class OperacaoComponent implements OnInit {
       this.operacaoService.list().subscribe(response => {
         this.operacoes = response.body;
        });
-      this.operacaoService.listOptions().subscribe(response => this.options = response.body);
+      this.operacaoService.listOptions().subscribe(response => this.options = response.body.map(option => Object.assign(new Option(), option)));
     }
 
     getTotalCompra(): number {
