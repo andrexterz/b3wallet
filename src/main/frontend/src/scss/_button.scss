@@ -20,11 +20,11 @@ Form component styles
         opacity: 1;
       }
     }
-    
-    font-size: 1.1em;
+
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1rem;
     color: $btn-color;
     background-color: $btn-background;
     border: $form-control-border;
@@ -52,7 +52,7 @@ Form component styles
     &:active {
     }
 
-    & + & {
+    & + &, & > * + * {
         margin: 0 $margin/2;
     }
 
@@ -83,5 +83,21 @@ Form component styles
             background-color: darken($btn-background-primary, 10%);
             transition: all .1s ease-out;
         }
+    }
+
+    &-flat {
+      padding: initial;
+      height: initial;
+      color: $form-control-color;
+      background: none;
+      border: none;
+
+      &:active {
+          background-color: $btn-color-primary;
+      }
+
+      &:focus {
+        outline: none;
+      }
     }
 }

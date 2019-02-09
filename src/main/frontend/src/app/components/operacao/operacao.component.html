@@ -1,6 +1,22 @@
 <div class="container">
     <h4 class="title">
       <span>Operações</span>
+      <form class="title-detail">
+        <div class="form-control">
+          <button class="btn btn-flat" type="reset">
+            <i class="fa fa-times-circle"></i>
+            <span>Limpar filtros</span>
+          </button>
+        </div>
+        <div class="form-control g-3">
+          <input id="filterData" name="filterData" type="text" required>
+          <label for="filterData">Mês</label>
+        </div>
+        <div class="form-control" *ngFor="let option of options">
+          <input name="tipoOperacao" [id]="option.tipo" [value]="option.tipo" [(ngModel)]="tipoOperacaoFilter" type="radio" (change)="filter(option.tipo)">
+          <label [for]="option.tipo">{{option.descricao}}</label>
+        </div>
+      </form>
       <a class="title-action" title="adicionar operação" (click)="add()"><i class="fa fa-plus-circle"></i></a>
     </h4>
     <p class="note" *ngIf="operacoes.length == 0"><i class="fa fa-info-circle"></i><span class="margin-left-1">Você ainda não cadastrou nenhum item.</span></p>
@@ -31,7 +47,7 @@
             </tr>
         </tfoot>
         <tbody>
-            <tr *ngFor="let operacao of operacoes; let idx = index">
+            <tr *ngFor="let operacao of list()">
                 <td title="Código" class="left">{{operacao.acao.codigo}}</td>
                 <td title="Tipo" class="left">{{operacao.tipoOperacao}}</td>
                 <td title="Quantidade" class="right">{{operacao.quantidade}}</td>

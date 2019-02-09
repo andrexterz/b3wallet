@@ -55,8 +55,6 @@ Form component styles
         &.ng-touched.ng-dirty:invalid {
           border-color: $form-color-invalid;
         }
-
-
      }
 
      label {
@@ -70,6 +68,18 @@ Form component styles
        transition: all .1s linear;
        z-index: 0;
      }
+
+    input[type="checkbox"] {
+      & ~ label::before {
+        border-radius: $form-control-border-radius;
+      }
+    }
+
+    input[type="radio"] {
+      & ~ label::before {
+        border-radius: 50%;
+      }
+    }
 
     input[type="checkbox"], input[type="radio"] {
       display: none;
@@ -86,7 +96,6 @@ Form component styles
           display: inline-block;
           margin-right: $margin/2;
           border: 2px solid $form-control-color;
-          border-radius: $form-control-border-radius;
           box-sizing: border-box;
           width: 1rem;
           height: 1rem;
@@ -94,12 +103,9 @@ Form component styles
       }
 
       &:checked ~ label {
-        color: darken($form-control-border-color, 20%);
+        color: darken($form-control-color, 20%);
         &::before {
-          background: $btn-background-primary;
-          outline: 1px solid $form-title-background;
-          outline-offset: -3px;
-
+          background: darken($form-control-color, 20%);
         }
       }
     }

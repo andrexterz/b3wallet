@@ -15,6 +15,7 @@ export class OperacaoComponent implements OnInit {
     acoes: Acao[] = [];
     selectedOperacao: Operacao = null;
     options: Object[];
+    tipoOperacaoFilter: string;
 
     constructor(
       private route: ActivatedRoute,
@@ -30,6 +31,11 @@ export class OperacaoComponent implements OnInit {
         this.operacoes = response.body;
        });
       this.operacaoService.listOptions().subscribe(response => this.options = response.body.map(option => Object.assign(new Option(), option)));
+      this.tipoOperacaoFilter = localStorage.getItem("tipoOperacaoFilter");
+    }
+
+    list(): Object {
+      return this.tipoOperacaoFilter? this.operacoes.filter(operacao => operacao.tipoOperacao == this.tipoOperacaoFilter): this.operacoes;
     }
 
     getTotalCompra(): number {
@@ -101,6 +107,11 @@ export class OperacaoComponent implements OnInit {
             console.log(error);
         });
       }
+    }
+
+    filter(filterValue: string): void {
+      this.tipoOperacaoFilter = filterValue;
+      localStorage.setItem("tipoOperacaoFilter", this.tipoOperacaoFilter);
     }
 
     //compare method for directive compareWith

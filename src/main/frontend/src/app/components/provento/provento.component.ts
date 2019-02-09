@@ -14,7 +14,7 @@ export class ProventoComponent implements OnInit {
   selectedProvento: Provento;
   proventos: Provento[] = [];
   acoes: Acao[] = [];
-  selectedListItem: Set<number> = new Set();
+  selectedListItem: Set<string> = new Set();
   options: Option[];
 
   constructor(
@@ -104,15 +104,15 @@ export class ProventoComponent implements OnInit {
     }
   }
 
-  expandListItem(index: number): void {
-    if (this.selectedListItem.has(index)) {
-      this.selectedListItem.delete(index);
+  expandListItem(item: string): void {
+    if (this.selectedListItem.has(item)) {
+      this.selectedListItem.delete(item);
     } else {
-      this.selectedListItem.add(index);
+      this.selectedListItem.add(item);
     }
   }
 
-  isExpanded(index: number):boolean {
-    return this.selectedListItem.has(index);
+  isExpanded(item: string):boolean {
+    return this.selectedListItem.has(item);
   }
 }

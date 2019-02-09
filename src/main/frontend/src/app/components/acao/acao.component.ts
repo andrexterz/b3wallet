@@ -13,7 +13,7 @@ export class AcaoComponent implements OnInit {
 
     selectedAcao: Acao = null;
     acoes: Acao[] = [];
-    hasCustodia: boolean = false;
+    custodiaFilter: boolean = false;
 
     constructor(
       private acaoService: AcaoService,
@@ -25,11 +25,11 @@ export class AcaoComponent implements OnInit {
 
     ngOnInit(): void {
         this.acaoService.list().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
-        eval(localStorage.getItem("hasCustodia")) ? this.hasCustodia = eval(localStorage.getItem("hasCustodia")): false;
+        eval(localStorage.getItem("custodiaFilter")) ? this.custodiaFilter = eval(localStorage.getItem("custodiaFilter")): false;
     }
 
     list(): Object {
-      return this.hasCustodia? this.acoes.filter(acao => acao.totalCustodia > 0): this.acoes;
+      return this.custodiaFilter? this.acoes.filter(acao => acao.totalCustodia > 0): this.acoes;
     }
 
     add(): void {
@@ -64,8 +64,8 @@ export class AcaoComponent implements OnInit {
       this.selectedAcao = null;
     }
 
-    setCustodia(): void {
-      this.hasCustodia = !this.hasCustodia;
-      localStorage.setItem("hasCustodia", this.hasCustodia.toString());
+    filter(): void {
+      this.custodiaFilter = !this.custodiaFilter;
+      localStorage.setItem("custodiaFilter", this.custodiaFilter.toString());
     }
 }

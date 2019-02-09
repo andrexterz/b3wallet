@@ -5,10 +5,10 @@
     </h4>
     <p class="note" *ngIf="notas.length == 0"><i class="fa fa-info-circle"></i><span class="margin-left-1">Você ainda não cadastrou nenhum item.</span></p>
     <ul class="list" *ngIf="notas.length > 0">
-      <li *ngFor="let entry of list() | keyvalue; let idxEntry = index" class="list-item" [ngClass]="{'selected expanded': isExpanded(idxEntry)}">
-        <header class="title link" (click)="expandListItem(idxEntry)">
-          <i *ngIf="!isExpanded(idxEntry)" class="fa fa-folder margin-right-2"></i>
-          <i *ngIf="isExpanded(idxEntry)" class="fa fa-folder-open margin-right-2"></i>
+      <li *ngFor="let entry of list() | keyvalue" class="list-item" [ngClass]="{'selected expanded': isExpanded(entry.key)}">
+        <header class="title link" (click)="expandListItem(entry.key)">
+          <i *ngIf="!isExpanded(entry.key)" class="fa fa-folder margin-right-2"></i>
+          <i *ngIf="isExpanded(entry.key)" class="fa fa-folder-open margin-right-2"></i>
           <span>{{entry.key}}</span><span class="title-detail circle">{{entry.value.length}}</span>
         </header>
         <div class="list-item-block">
@@ -22,7 +22,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let nota of entry.value; let idxNota = index">
+              <tr *ngFor="let nota of entry.value">
                 <td title="Anotação">{{nota.anotacao}}</td>
                 <td title="Criado em" class="center">{{nota.dataCriacao | date: 'dd/MM/yyyy'}}</td>
                 <td title="Atualizado em" class="center">{{nota.dataAtualizacao | date: 'dd/MM/yyyy'}}</td>
