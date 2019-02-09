@@ -2,19 +2,21 @@
     <h4 class="title">
       <span>Operações</span>
       <form class="title-detail">
-        <div class="form-control">
-          <button class="btn btn-flat" type="reset">
+        <div class="form-control inline">
+          <button class="btn btn-flat" type="reset" (click)="resetFilter()">
             <i class="fa fa-times-circle"></i>
-            <span>Limpar filtros</span>
+            <span class="hidden-m">Limpar filtros</span>
           </button>
         </div>
-        <div class="form-control g-3">
-          <input id="filterData" name="filterData" type="text" required>
-          <label for="filterData">Mês</label>
+        <div class="form-control inline">
+          <select id="filterData" name="filterData" [(ngModel)]="dataOperacaoFilter" (change)="filterDataOperacao()">
+            <option [value]="null">Mês/Ano</option>
+            <option *ngFor="let option of listOptionsDataOperacao()" [value]="option.value">{{option.description}}</option>
+          </select>
         </div>
-        <div class="form-control" *ngFor="let option of options">
-          <input name="tipoOperacao" [id]="option.tipo" [value]="option.tipo" [(ngModel)]="tipoOperacaoFilter" type="radio" (change)="filter(option.tipo)">
-          <label [for]="option.tipo">{{option.descricao}}</label>
+        <div class="form-control inline" *ngFor="let option of optionsTipoOperacao">
+          <input name="tipoOperacao" [id]="option.value" [value]="option.value" [(ngModel)]="tipoOperacaoFilter" type="radio" (change)="filterTipoOperacao(option.value)">
+          <label [for]="option.value">{{option.description}}</label>
         </div>
       </form>
       <a class="title-action" title="adicionar operação" (click)="add()"><i class="fa fa-plus-circle"></i></a>
@@ -84,7 +86,7 @@
                 </div>
                 <div class="form-control g-6 g-l-4">
                     <select id="tipo" name="tipo" [(ngModel)]="selectedOperacao.tipoOperacao" required>
-                        <option *ngFor="let option of options" [value]="option.tipo">{{option.descricao}}</option>
+                        <option *ngFor="let option of optionsTipoOperacao" [value]="option.value">{{option.description}}</option>
                     </select>
                     <label for="tipo">Operação</label>
                 </div>

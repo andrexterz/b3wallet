@@ -20,7 +20,7 @@ export class OperacaoService {
         return this.http.get<Operacao[]>("/api/operacoes", {observe: 'response'});
     }
 
-    listOptions(): Observable<HttpResponse<Object[]>> {
+    listOptionsTipoOperacao(): Observable<HttpResponse<Object[]>> {
         return this.http.get<Object[]>("/api/operacoes/tipos", {observe: 'response'});
     }
 }

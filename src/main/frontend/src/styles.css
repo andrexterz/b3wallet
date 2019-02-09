@@ -297,14 +297,11 @@ Table component styles
 Form component styles
 ==============================================================================
 */
-.form, .form--inline {
+.form {
   display: flex;
   flex-wrap: wrap;
   flex: 1 1 auto;
   margin: 10px -10px;
-}
-.form--inline {
-  flex-wrap: nowrap;
 }
 .form-control {
   position: relative;
@@ -317,6 +314,7 @@ Form component styles
 .form-control input[type=number],
 .form-control input[type=password],
 .form-control input[type=date],
+.form-control input[type=month],
 .form-control textarea,
 .form-control select {
   flex: 1 0 auto;
@@ -332,6 +330,7 @@ Form component styles
 .form-control input[type=number][disabled],
 .form-control input[type=password][disabled],
 .form-control input[type=date][disabled],
+.form-control input[type=month][disabled],
 .form-control textarea[disabled],
 .form-control select[disabled] {
   opacity: 0.5;
@@ -344,6 +343,8 @@ Form component styles
 .form-control input[type=password]:focus,
 .form-control input[type=date]:valid,
 .form-control input[type=date]:focus,
+.form-control input[type=month]:valid,
+.form-control input[type=month]:focus,
 .form-control textarea:valid,
 .form-control textarea:focus,
 .form-control select:valid,
@@ -359,6 +360,8 @@ Form component styles
 .form-control input[type=password]:focus ~ label,
 .form-control input[type=date]:valid ~ label,
 .form-control input[type=date]:focus ~ label,
+.form-control input[type=month]:valid ~ label,
+.form-control input[type=month]:focus ~ label,
 .form-control textarea:valid ~ label,
 .form-control textarea:focus ~ label,
 .form-control select:valid ~ label,
@@ -372,6 +375,7 @@ Form component styles
 .form-control input[type=number].ng-touched.ng-dirty:invalid,
 .form-control input[type=password].ng-touched.ng-dirty:invalid,
 .form-control input[type=date].ng-touched.ng-dirty:invalid,
+.form-control input[type=month].ng-touched.ng-dirty:invalid,
 .form-control textarea.ng-touched.ng-dirty:invalid,
 .form-control select.ng-touched.ng-dirty:invalid {
   border-color: #cc0000;
@@ -413,10 +417,10 @@ Form component styles
   height: 1rem;
 }
 .form-control input[type=checkbox]:checked ~ label, .form-control input[type=radio]:checked ~ label {
-  color: #555555;
+  color: black;
 }
 .form-control input[type=checkbox]:checked ~ label::before, .form-control input[type=radio]:checked ~ label::before {
-  background: #555555;
+  background: black;
 }
 .form-control textarea {
   height: initial;
@@ -425,6 +429,25 @@ Form component styles
 .form-control textarea ~ label {
   position: absolute;
   top: 28px;
+}
+.form-control.inline {
+  flex-direction: row;
+  align-items: center;
+  margin: 0 10px;
+}
+.form-control.inline input, .form-control.inline textarea, .form-control.inline select {
+  font-size: initial;
+  border-width: 0;
+  background-color: transparent;
+}
+.form-control.inline input:valid ~ label, .form-control.inline input:focus ~ label, .form-control.inline textarea:valid ~ label, .form-control.inline textarea:focus ~ label, .form-control.inline select:valid ~ label, .form-control.inline select:focus ~ label {
+  font-size: initial;
+  transform: initial;
+}
+.form-control.inline label {
+  height: initial;
+  transform: initial;
+  order: -1;
 }
 
 .form-title {
@@ -875,6 +898,26 @@ Generic component styles
 .hidden {
   display: none;
 }
+@media only screen and (max-width: 425px) {
+  .hidden-s {
+    display: none;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .hidden-m {
+    display: none;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .hidden-l {
+    display: none;
+  }
+}
+@media only screen and (max-width: 1280px) {
+  .hidden-xl {
+    display: none;
+  }
+}
 
 .title {
   display: flex;
@@ -891,7 +934,7 @@ Generic component styles
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5px;
+  margin: 0 5px;
 }
 .title-detail {
   margin-left: auto;
@@ -1173,7 +1216,7 @@ Container component styles
   align-items: center;
   align-content: center;
 }
-.container-login .form, .container-login .form--inline {
+.container-login .form {
   margin: auto;
   max-width: 20em;
   border-radius: 3px;

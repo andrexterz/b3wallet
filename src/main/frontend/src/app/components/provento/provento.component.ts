@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location, formatCurrency, getCurrencySymbol } from '@angular/common';
+import * as moment from 'moment';
 import { Acao, Provento, Option } from '../../models';
 import { AcaoService, ProventoService, MensagemService } from '../../services';
-import * as moment from 'moment';
 
 @Component({
   selector: 'provento',
@@ -50,7 +50,7 @@ export class ProventoComponent implements OnInit {
     this.selectedProvento = new Provento();
     this.selectedProvento.valor = 0.01;
     let option: Option = this.options[0];
-    this.selectedProvento.tipoProvento = option.tipo;
+    this.selectedProvento.tipoProvento = option.value;
   }
 
   edit(provento: Provento): void {

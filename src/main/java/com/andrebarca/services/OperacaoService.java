@@ -53,7 +53,7 @@ public class OperacaoService {
 	}
 
 	@RequestMapping(value = "/api/operacoes/tipos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> listOptions() {
+	public ResponseEntity<?> listOptionsTipoOperacao() {
 		return new ResponseEntity<>(TipoOperacao.getPropertyList(), HttpStatus.OK);
 	}
 }

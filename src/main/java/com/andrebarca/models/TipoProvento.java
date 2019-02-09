@@ -32,8 +32,8 @@ public enum TipoProvento implements Serializable {
     	List<Map<String, String>> tipos = new ArrayList<>();
     	Arrays.stream(TipoProvento.values()).forEach(tipo -> {
     		Map<String, String> tipoMap = new HashMap<String, String>();
-    		tipoMap.put("tipo", tipo.getTipo());
-    		tipoMap.put("descricao", tipo.getDescricao());
+    		tipoMap.put("value", tipo.getTipo());
+    		tipoMap.put("description", tipo.getDescricao());
 				tipos.add(tipoMap);
     	});
     	return tipos;

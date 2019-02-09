@@ -4,15 +4,11 @@ Form component styles
 ==============================================================================
 */
 .form {
+  $className: &;
   display: flex;
   flex-wrap: wrap;
   flex: 1 1 auto;
   margin: $margin -#{$margin};
-
-  &--inline {
-    @extend .form;
-    flex-wrap: nowrap;
-  }
 
   @at-root
   &-control {
@@ -26,6 +22,7 @@ Form component styles
     input[type="number"],
     input[type="password"],
     input[type="date"],
+    input[type="month"],
     textarea,
     select {
         flex: 1 0 auto;
@@ -103,9 +100,9 @@ Form component styles
       }
 
       &:checked ~ label {
-        color: darken($form-control-color, 20%);
+        color: darken($form-control-color, 100%);
         &::before {
-          background: darken($form-control-color, 20%);
+          background: darken($form-control-color, 100%);
         }
       }
     }
@@ -118,6 +115,31 @@ Form component styles
             position: absolute;
             top: $form-control-height;
          }
+     }
+
+     //label + field inline
+     &.inline {
+       flex-direction: row;
+       align-items: center;
+       margin: 0 #{$margin};
+
+       input, textarea, select {
+         font-size: initial;
+         border-width: 0;
+         background-color: transparent;
+         &:valid, &:focus {
+           & ~ label {
+             font-size: initial;
+             transform: initial;
+           }
+         }
+       }
+
+       label {
+         height: initial;
+         transform: initial;
+         order: -1;
+       }
      }
   }
 
@@ -135,4 +157,5 @@ Form component styles
     flex: 1 0 auto;
     padding: $padding;
   }
+
 }

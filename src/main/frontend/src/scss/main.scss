@@ -70,6 +70,13 @@ Generic component styles
 */
 .hidden {
     display: none;
+    @each $size, $device in (s: $small-device, m: $medium-device, l: $large-device, xl: $xlarge-device) {
+      &-#{$size} {
+        @media only screen and (max-width: $device) {
+          display: none;
+        }
+      }
+    }
 }
 
 .title {
@@ -87,7 +94,7 @@ Generic component styles
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: $margin/2;
+      margin: 0 $margin/2;
     }
 
     &-detail {
