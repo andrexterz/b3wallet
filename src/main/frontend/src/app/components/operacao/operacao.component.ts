@@ -150,7 +150,6 @@ export class OperacaoComponent implements OnInit {
       if (!this.tipoOperacaoFilter) {
         localStorage.removeItem("tipoOperacaoFilter");
         this.tipoOperacaoFilter = null;
-
       } else {
         localStorage.setItem("tipoOperacaoFilter", this.tipoOperacaoFilter);
       }
