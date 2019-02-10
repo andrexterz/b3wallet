@@ -11,11 +11,10 @@ Table component styles
 
     thead {
         display: none;
-        background-color:  transparentize($list-background-color, .25);
     }
 
-    tfoot {
-        background-color: transparentize($list-background-color, .5);
+    thead, tfoot {
+        background-color: darken($list-background-color, 5%);
     }
 
     tbody {
@@ -58,6 +57,17 @@ Table component styles
     @media(min-width: $medium-device) {
         thead {
             display: table-header-group;
+        }
+
+        tbody {
+          tr {
+            background-color: darken($light-background, 5%);
+            transition: background-color .2s ease-out;
+            &:hover {
+              transition: background-color .2s ease-in;
+              background-color: lighten($light-background, 100%);
+            }
+          }
         }
 
         tr {

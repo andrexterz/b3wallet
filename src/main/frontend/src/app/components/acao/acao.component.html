@@ -1,7 +1,7 @@
 <div class="container">
     <h4 class="title">
       <span>Ações</span>
-      <form class="title-detail">
+      <form #filterForm="ngForm" class="title-detail">
         <div class="form-control">
           <input type="checkbox" name="filterCustodia" id="filterCustodia" [(ngModel)]="custodiaFilter" (click)="filter()">
           <label for="filterCustodia">Custódia</label>

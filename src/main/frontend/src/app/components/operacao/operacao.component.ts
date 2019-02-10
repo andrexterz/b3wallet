@@ -13,8 +13,8 @@ export class OperacaoComponent implements OnInit {
     operacoes: Operacao[] = [];
     custodia = {};
     acoes: Acao[] = [];
-    selectedOperacao: Operacao = null;
     optionsTipoOperacao: Object[];
+    selectedOperacao: Operacao = null;
     dataOperacaoFilter: string = null;
     tipoOperacaoFilter: string = null;
 
@@ -33,10 +33,13 @@ export class OperacaoComponent implements OnInit {
        });
       this.operacaoService.listOptionsTipoOperacao().subscribe(response => this.optionsTipoOperacao = response.body.map(option => Object.assign(new Option(), option)));
       this.tipoOperacaoFilter = localStorage.getItem("tipoOperacaoFilter");
+      this.dataOperacaoFilter = localStorage.getItem("dataOperacaoFilter");
     }
 
     list(): Object {
-      return this.tipoOperacaoFilter? this.operacoes.filter(operacao => operacao.tipoOperacao == this.tipoOperacaoFilter): this.operacoes;
+      return this.operacoes
+        .filter(operacao => this.tipoOperacaoFilter? operacao.tipoOperacao == this.tipoOperacaoFilter: true)
+        .filter(operacao => this.dataOperacaoFilter? moment(operacao.dataOperacao).format("YYYY-MM") == this.dataOperacaoFilter: true);
     }
 
     getTotalCompra(): number {
@@ -129,15 +132,28 @@ export class OperacaoComponent implements OnInit {
     resetFilter(): void {
       localStorage.removeItem("dataOperacaoFilter");
       localStorage.removeItem("tipoOperacaoFilter");
+      this.dataOperacaoFilter = null;
+      this.tipoOperacaoFilter = null;
     }
 
     filterDataOperacao(): void {
-      localStorage.setItem("dataOperacaoFilter", this.dataOperacaoFilter);
+      if (!this.dataOperacaoFilter) {
+        localStorage.removeItem("dataOperacaoFilter");
+        this.dataOperacaoFilter = null;
+      } else {
+        localStorage.setItem("dataOperacaoFilter", this.dataOperacaoFilter);
+      }
     }
 
-    filterTipoOperacao(filterValue: string): void {
-      this.tipoOperacaoFilter = filterValue;
-      localStorage.setItem("tipoOperacaoFilter", this.tipoOperacaoFilter);
+    filterTipoOperacao(): void {
+      console.log(this.tipoOperacaoFilter);
+      if (!this.tipoOperacaoFilter) {
+        localStorage.removeItem("tipoOperacaoFilter");
+        this.tipoOperacaoFilter = null;
+
+      } else {
+        localStorage.setItem("tipoOperacaoFilter", this.tipoOperacaoFilter);
+      }
     }
 
     //compare method for directive compareWith

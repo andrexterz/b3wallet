@@ -1,22 +1,26 @@
 <div class="container">
     <h4 class="title">
       <span>Operações</span>
-      <form class="title-detail">
+      <form #filterForm="ngForm" class="title-detail">
         <div class="form-control inline">
-          <button class="btn btn-flat" type="reset" (click)="resetFilter()">
+          <button class="btn btn-flat" type="button" (click)="resetFilter()">
             <i class="fa fa-times-circle"></i>
             <span class="hidden-m">Limpar filtros</span>
           </button>
         </div>
         <div class="form-control inline">
           <select id="filterData" name="filterData" [(ngModel)]="dataOperacaoFilter" (change)="filterDataOperacao()">
-            <option [value]="null">Mês/Ano</option>
-            <option *ngFor="let option of listOptionsDataOperacao()" [value]="option.value">{{option.description}}</option>
+            <option [ngValue]="null">Mês/Ano</option>
+            <option *ngFor="let option of listOptionsDataOperacao()" [ngValue]="option.value">{{option.description}}</option>
           </select>
         </div>
         <div class="form-control inline" *ngFor="let option of optionsTipoOperacao">
-          <input name="tipoOperacao" [id]="option.value" [value]="option.value" [(ngModel)]="tipoOperacaoFilter" type="radio" (change)="filterTipoOperacao(option.value)">
+          <input name="tipoOperacao" [id]="option.value" [value]="option.value" [(ngModel)]="tipoOperacaoFilter" type="radio" (change)="filterTipoOperacao()">
           <label [for]="option.value">{{option.description}}</label>
+        </div>
+        <div class="form-control inline">
+          <input name="tipoOperacao" id="todosFiltrosTipoOperacao" [value]="null" [(ngModel)]="tipoOperacaoFilter" type="radio" (change)="filterTipoOperacao()">
+          <label for="todosFiltrosTipoOperacao">Todas</label>
         </div>
       </form>
       <a class="title-action" title="adicionar operação" (click)="add()"><i class="fa fa-plus-circle"></i></a>
@@ -80,7 +84,7 @@
                 </div>
                 <div class="form-control g-6 g-l-4">
                     <select id="acao" name="acao" [compareWith]="comparator" [(ngModel)]="selectedOperacao.acao" required>
-                        <option *ngFor="let acao of acoes" [ngValue]="acao">{{acao.codigo}}</option>
+                      <option *ngFor="let acao of acoes" [ngValue]="acao">{{acao.codigo}}</option>
                     </select>
                     <label for="acao">Código</label>
                 </div>

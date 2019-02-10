@@ -14,6 +14,6 @@ export class MensagemComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("mensagem component started.");
+    console.log("mensagem component started!");
   }
 }

@@ -200,10 +200,9 @@ Table component styles
 }
 .table thead {
   display: none;
-  background-color: rgba(241, 241, 241, 0.75);
 }
-.table tfoot {
-  background-color: rgba(241, 241, 241, 0.5);
+.table thead, .table tfoot {
+  background-color: #e5e5e5;
 }
 .table tbody th {
   background-color: #e5e5e5;
@@ -237,6 +236,14 @@ Table component styles
 @media (min-width: 768px) {
   .table thead {
     display: table-header-group;
+  }
+  .table tbody tr {
+    background-color: #f1f1f1;
+    transition: background-color 0.2s ease-out;
+  }
+  .table tbody tr:hover {
+    transition: background-color 0.2s ease-in;
+    background-color: white;
   }
   .table tr {
     display: table-row;
