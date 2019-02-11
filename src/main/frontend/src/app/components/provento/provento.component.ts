@@ -40,7 +40,7 @@ export class ProventoComponent implements OnInit {
         obj[key].items.push(provento);
         obj[key].total += provento.valor;
       } else {
-        obj[key] = {"items": [provento], "total": provento.valor};
+        obj[key] = {items: [provento], total: provento.valor};
       }
     });
     return obj;

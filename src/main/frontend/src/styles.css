@@ -198,6 +198,9 @@ Table component styles
   width: 100%;
   border-collapse: collapse;
 }
+.table + .table {
+  margin-top: 10px;
+}
 .table thead {
   display: none;
 }

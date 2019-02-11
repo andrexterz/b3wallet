@@ -9,6 +9,10 @@ Table component styles
     width: 100%;
     border-collapse: collapse;
 
+    & + & {
+      margin-top: $margin;
+    }
+
     thead {
         display: none;
     }

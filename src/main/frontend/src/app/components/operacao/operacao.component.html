@@ -26,49 +26,55 @@
       <a class="title-action" title="adicionar operação" (click)="add()"><i class="fa fa-plus-circle"></i></a>
     </h4>
     <p class="note" *ngIf="operacoes.length == 0"><i class="fa fa-info-circle"></i><span class="margin-left-1">Você ainda não cadastrou nenhum item.</span></p>
-    <table class="table" *ngIf="operacoes.length > 0">
+    <ng-container *ngIf="operacoes.length > 0">
+      <table class="table" *ngFor="let entry of list() | keyvalue" >
         <thead>
-            <tr>
-                <th class="left">Código</th>
-                <th class="left">Tipo</th>
-                <th class="right">Quantidade</th>
-                <th class="center">Data da operação</th>
-                <th class="right">Preço</th>
-                <th class="right">Total</th>
-                <th></th>
-            </tr>
+          <tr>
+            <th class="left" colspan="7">{{entry.value.title}}</th>
+          </tr>
+          <tr>
+            <th class="left">Código</th>
+            <th class="left">Tipo</th>
+            <th class="right">Quantidade</th>
+            <th class="center">Data da operação</th>
+            <th class="right">Preço</th>
+            <th class="right">Total</th>
+            <th></th>
+          </tr>
         </thead>
         <tfoot>
-            <tr>
-                <td class="right" colspan="7"><b>Total compra: {{getTotalCompra() | currency:'BRL':'symbol':'1.2-2'}}</b></td>
-            </tr>
-            <tr>
-                <td class="right" colspan="7"><b>Total venda: {{getTotalVenda() | currency:'BRL':'symbol':'1.2-2'}}</b></td>
-            </tr>
-            <tr>
-              <th class="right" colspan="7"><b>Total custos operacionais: {{getCustosOperacionais() | currency:'BRL':'symbol':'1.2-2'}}</b></th>
-            </tr>
-            <tr>
-                <td class="right" colspan="7"><b>Total custódia: {{getTotalCustodia() | currency:'BRL':'symbol':'1.2-2'}}</b></td>
-            </tr>
+          <tr>
+            <td class="right" colspan="7"><b>Total compra: {{entry.value.totalCompra | currency:'BRL':'symbol':'1.2-2'}}</b></td>
+          </tr>
+          <tr>
+            <td class="right" colspan="7"><b>Total venda: {{entry.value.totalVenda | currency:'BRL':'symbol':'1.2-2'}}</b></td>
+          </tr>
+          <tr>
+            <th class="right" colspan="7"><b>Total custos operacionais: {{getCustosOperacionais() | currency:'BRL':'symbol':'1.2-2'}}</b></th>
+          </tr>
+          <tr>
+            <td class="right" colspan="7"><b>Total custódia: {{getTotalCustodia() | currency:'BRL':'symbol':'1.2-2'}}</b></td>
+          </tr>
+
         </tfoot>
         <tbody>
-            <tr *ngFor="let operacao of list()">
-                <td title="Código" class="left">{{operacao.acao.codigo}}</td>
-                <td title="Tipo" class="left">{{operacao.tipoOperacao}}</td>
-                <td title="Quantidade" class="right">{{operacao.quantidade}}</td>
-                <td title="Data operação" class="center">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</td>
-                <td title="Preço" class="right">{{operacao.valor | currency:'BRL':'symbol':'1.2-2'}}</td>
-                <td title="Total" class="right">
-                  <b>{{operacao.quantidade * operacao.valor | currency:'BRL':'symbol':'1.2-2'}}</b>
-                </td>
-                <td class="table-action right">
-                  <a title="editar operação" class="link" (click)="edit(operacao)"><i class="fa fa-pencil"></i></a>
-                  <a title="remover operação" class="margin-left-3 link" (click)="delete(operacao)"><i class="fa fa-trash"></i></a>
-                </td>
-            </tr>
+          <tr *ngFor="let operacao of entry.value.items">
+            <td title="Código" class="left">{{operacao.acao.codigo}}</td>
+            <td title="Tipo" class="left">{{operacao.tipoOperacao}}</td>
+            <td title="Quantidade" class="right">{{operacao.quantidade}}</td>
+            <td title="Data operação" class="center">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</td>
+            <td title="Preço" class="right">{{operacao.valor | currency:'BRL':'symbol':'1.2-2'}}</td>
+            <td title="Total" class="right">
+              <b>{{operacao.quantidade * operacao.valor | currency:'BRL':'symbol':'1.2-2'}}</b>
+            </td>
+            <td class="table-action right">
+              <a title="editar operação" class="link" (click)="edit(operacao)"><i class="fa fa-pencil"></i></a>
+              <a title="remover operação" class="margin-left-3 link" (click)="delete(operacao)"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
         </tbody>
-    </table>
+      </table>
+    </ng-container>
 </div>
 <form #operacaoForm="ngForm" (ngSubmit)="save()" class="modal-wrapper" *ngIf="selectedOperacao">
     <div class="modal">

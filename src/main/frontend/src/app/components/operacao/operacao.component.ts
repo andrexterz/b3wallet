@@ -17,6 +17,7 @@ export class OperacaoComponent implements OnInit {
     selectedOperacao: Operacao = null;
     dataOperacaoFilter: string = null;
     tipoOperacaoFilter: string = null;
+    selectedListItem: Set<string> = new Set();
 
     constructor(
       private route: ActivatedRoute,
@@ -37,9 +38,26 @@ export class OperacaoComponent implements OnInit {
     }
 
     list(): Object {
-      return this.operacoes
+      let obj: Object = new Object();
+      this.operacoes
         .filter(operacao => this.tipoOperacaoFilter? operacao.tipoOperacao == this.tipoOperacaoFilter: true)
-        .filter(operacao => this.dataOperacaoFilter? moment(operacao.dataOperacao).format("YYYY-MM") == this.dataOperacaoFilter: true);
+        .filter(operacao => this.dataOperacaoFilter? moment(operacao.dataOperacao).format("YYYY-MM") == this.dataOperacaoFilter: true)
+        .forEach(operacao => {
+          let key = moment(operacao.dataOperacao).format("YYYY-MM");
+          let title = moment(operacao.dataOperacao).format("MM/YYYY");
+          if (obj.hasOwnProperty(key)) {
+            obj[key].items.push(operacao);
+            operacao.tipoOperacao == 'COMPRA'? obj[key].totalCompra += operacao.totalOperacao: obj[key].totalVenda += operacao.totalOperacao;
+          } else {
+            obj[key] = {
+              title: title,
+              items: [operacao],
+              totalCompra: operacao.tipoOperacao == 'COMPRA'? operacao.totalOperacao: 0,
+              totalVenda: operacao.tipoOperacao == 'VENDA'? operacao.totalOperacao: 0
+            };
+          }
+        });
+      return obj;
     }
 
     getTotalCompra(): number {
@@ -114,19 +132,20 @@ export class OperacaoComponent implements OnInit {
     }
 
     listOptionsDataOperacao(): Object {
-      let keys = [];
-      let optionsDataOperacao: Option[] = [];
+      let keys: Set<string> = new Set();
+      let options: Option[] = [];
       this.operacoes.forEach(operacao => {
         let key = moment(operacao.dataOperacao).format("YYYY-MM");
-        if (!keys.includes(key)) {
-          keys.push(key);
+        if (!keys.has(key)) {
           let option = new Option();
-          option.value = key;
+          option.value = moment(operacao.dataOperacao).format("YYYY-MM");
           option.description = moment(operacao.dataOperacao).format("MM/YYYY");
-          optionsDataOperacao.push(option);
+          option.id = moment(operacao.dataOperacao).valueOf();
+          options.push(option);
+          keys.add(key);
         }
       });
-      return optionsDataOperacao;
+      return options.sort((optionA, optionB) => optionB.id - optionA.id);
     }
 
     resetFilter(): void {
@@ -146,13 +165,16 @@ export class OperacaoComponent implements OnInit {
     }
 
     filterTipoOperacao(): void {
-      console.log(this.tipoOperacaoFilter);
       if (!this.tipoOperacaoFilter) {
         localStorage.removeItem("tipoOperacaoFilter");
         this.tipoOperacaoFilter = null;
       } else {
         localStorage.setItem("tipoOperacaoFilter", this.tipoOperacaoFilter);
       }
+    }
+
+    close(): void {
+      this.selectedOperacao = null;
     }
 
     //compare method for directive compareWith
@@ -164,7 +186,15 @@ export class OperacaoComponent implements OnInit {
         }
     }
 
-    close(): void {
-        this.selectedOperacao = null;
+    expandListItem(item: string): void {
+      if (this.selectedListItem.has(item)) {
+        this.selectedListItem.delete(item);
+      } else {
+        this.selectedListItem.add(item);
+      }
+    }
+
+    isExpanded(item: string):boolean {
+      return this.selectedListItem.has(item);
     }
 }
