@@ -1,25 +1,34 @@
 <div class="container">
     <h4 class="title">
       <span>Operações</span>
-      <form #filterForm="ngForm" class="title-detail">
+      <form #formFilter="ngForm" class="title-detail" (change)="filter()">
         <div class="form-control inline">
-          <button class="btn btn-flat" type="button" (click)="resetFilter()">
+          <button class="btn btn-flat" type="reset" (click)="resetFilter()">
             <i class="fa fa-times-circle"></i>
             <span class="hidden-m">Limpar filtros</span>
           </button>
         </div>
         <div class="form-control inline">
-          <select id="filterData" name="filterData" [(ngModel)]="dataOperacaoFilter" (change)="filterDataOperacao()">
-            <option [ngValue]="null">Mês/Ano</option>
-            <option *ngFor="let option of listOptionsDataOperacao()" [ngValue]="option.value">{{option.description}}</option>
-          </select>
+          <div class="option-button">
+            <label class="option-button-control" [class.active]="optionButtonActive" type="button">
+              <i class="fa fa-calendar-o"></i>
+              <span class="hidden-m">mês/ano</span>
+              <input type="checkbox" name="optionButtonStatus" [(ngModel)]="optionButtonActive">
+            </label>
+            <ul class="option-button-list">
+              <li class="option-button-item" *ngFor="let option of optionsDataOperacao">
+                <input name="dataOperacao" type="radio" [id]="option.value" [value]="option.value" [(ngModel)]="dataOperacaoFilter">
+                <label [for]="option.value">{{option.description}}</label>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="form-control inline" *ngFor="let option of optionsTipoOperacao">
-          <input name="tipoOperacao" [id]="option.value" [value]="option.value" [(ngModel)]="tipoOperacaoFilter" type="radio" (change)="filterTipoOperacao()">
+          <input name="tipoOperacao" type="radio" [id]="option.value" [value]="option.value" [(ngModel)]="tipoOperacaoFilter">
           <label [for]="option.value">{{option.description}}</label>
         </div>
         <div class="form-control inline">
-          <input name="tipoOperacao" id="todosFiltrosTipoOperacao" [value]="null" [(ngModel)]="tipoOperacaoFilter" type="radio" (change)="filterTipoOperacao()">
+          <input name="tipoOperacao" type="radio" id="todosFiltrosTipoOperacao" [value]="null" [(ngModel)]="tipoOperacaoFilter">
           <label for="todosFiltrosTipoOperacao">Todas</label>
         </div>
       </form>

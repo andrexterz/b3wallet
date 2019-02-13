@@ -11,13 +11,12 @@ import { Operacao, Acao, Option } from "../../models";
 })
 export class OperacaoComponent implements OnInit {
     operacoes: Operacao[] = [];
-    custodia = {};
     acoes: Acao[] = [];
-    optionsTipoOperacao: Object[];
+    optionsDataOperacao: Option[] = [];
+    optionsTipoOperacao: Option[] = [];
     selectedOperacao: Operacao = null;
     dataOperacaoFilter: string = null;
     tipoOperacaoFilter: string = null;
-    selectedListItem: Set<string> = new Set();
 
     constructor(
       private route: ActivatedRoute,
@@ -28,13 +27,16 @@ export class OperacaoComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-      this.acaoService.list().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
-      this.operacaoService.list().subscribe(response => {
-        this.operacoes = response.body;
-       });
-      this.operacaoService.listOptionsTipoOperacao().subscribe(response => this.optionsTipoOperacao = response.body.map(option => Object.assign(new Option(), option)));
+      this.acaoService.list().subscribe(response => this.acoes = response.body);
+      this.operacaoService.listOptionsTipoOperacao().subscribe(response => this.optionsTipoOperacao = response.body);
       this.tipoOperacaoFilter = localStorage.getItem("tipoOperacaoFilter");
       this.dataOperacaoFilter = localStorage.getItem("dataOperacaoFilter");
+      this.updateServices();
+    }
+
+    updateServices(): void {
+      this.operacaoService.list().subscribe(response => this.operacoes = response.body);
+      this.operacaoService.listOptionsDataOperacao().subscribe(response => this.optionsDataOperacao = response.body);
     }
 
     list(): Object {
@@ -47,13 +49,13 @@ export class OperacaoComponent implements OnInit {
           let title = moment(operacao.dataOperacao).format("MM/YYYY");
           if (obj.hasOwnProperty(key)) {
             obj[key].items.push(operacao);
-            operacao.tipoOperacao == 'COMPRA'? obj[key].totalCompra += operacao.totalOperacao: obj[key].totalVenda += operacao.totalOperacao;
+            operacao.tipoOperacao == "COMPRA"? obj[key].totalCompra += operacao.totalOperacao: obj[key].totalVenda += operacao.totalOperacao;
           } else {
             obj[key] = {
               title: title,
               items: [operacao],
-              totalCompra: operacao.tipoOperacao == 'COMPRA'? operacao.totalOperacao: 0,
-              totalVenda: operacao.tipoOperacao == 'VENDA'? operacao.totalOperacao: 0
+              totalCompra: operacao.tipoOperacao == "COMPRA"? operacao.totalOperacao: 0,
+              totalVenda: operacao.tipoOperacao == "VENDA"? operacao.totalOperacao: 0
             };
           }
         });
@@ -62,13 +64,13 @@ export class OperacaoComponent implements OnInit {
 
     getTotalCompra(): number {
       let total = 0;
-      this.operacoes.forEach(op => total += op.tipoOperacao == 'COMPRA'? op.totalOperacao: 0);
+      this.operacoes.forEach(op => total += op.tipoOperacao == "COMPRA"? op.totalOperacao: 0);
       return total;
     }
 
     getTotalVenda(): number {
       let total = 0;
-      this.operacoes.forEach(op => total += op.tipoOperacao == 'VENDA'? op.totalOperacao: 0);
+      this.operacoes.forEach(op => total += op.tipoOperacao == "VENDA"? op.totalOperacao: 0);
       return total;
     }
 
@@ -82,7 +84,7 @@ export class OperacaoComponent implements OnInit {
 
     getTotalCustodia(): number {
       let total = 0;
-      this.operacoes.forEach(op => total += op.tipoOperacao == 'COMPRA'? op.totalOperacao: -op.totalOperacao);
+      this.operacoes.forEach(op => total += op.tipoOperacao == "COMPRA"? op.totalOperacao: -op.totalOperacao);
       return total;
     }
 
@@ -91,23 +93,18 @@ export class OperacaoComponent implements OnInit {
     }
 
     add(): void {
-        this.selectedOperacao = new Operacao();
+      this.selectedOperacao = new Operacao();
     }
 
     edit(operacao: Operacao): void {
-         this.selectedOperacao = Object.assign(new Operacao(), operacao);
+      this.selectedOperacao = Object.assign(new Operacao(), operacao);
     }
 
     save(): void {
         if (this.selectedOperacao) {
             this.operacaoService.save(this.selectedOperacao).subscribe(response => {
                 let savedObj: Operacao = Object.assign(new Operacao(), response.body);
-                let index = this.operacoes.findIndex(o => o.id == savedObj.id);
-                if (index >= 0) {
-                    this.operacoes[index] = savedObj;
-                } else {
-                    this.operacoes.push(savedObj);
-                }
+                  this.updateServices();
                 this.mensagemService.showMessage(savedObj.acao.codigo, "Operação salva com sucesso.", "success");
             }, error => {
                 this.mensagemService.showMessage("Erro ao salvar operação", error.message, "error");
@@ -122,7 +119,8 @@ export class OperacaoComponent implements OnInit {
       if (confirmDelete) {
         let index = this.operacoes.findIndex(o => o.id == operacao.id);
         this.operacaoService.delete(operacao).subscribe(response => {
-            this.operacoes.splice(index, 1);
+            // this.operacoes.splice(index, 1);
+            this.updateServices();
             this.mensagemService.showMessage("Item removido", "Operação de " + operacao.tipoOperacao + ": " + operacao.acao.codigo + " removida com sucesso.", "success");
         }, error => {
             this.mensagemService.showMessage("Erro ao remover operação", error.message, "error");
@@ -131,21 +129,21 @@ export class OperacaoComponent implements OnInit {
       }
     }
 
-    listOptionsDataOperacao(): Object {
-      let keys: Set<string> = new Set();
-      let options: Option[] = [];
-      this.operacoes.forEach(operacao => {
-        let key = moment(operacao.dataOperacao).format("YYYY-MM");
-        if (!keys.has(key)) {
-          let option = new Option();
-          option.value = moment(operacao.dataOperacao).format("YYYY-MM");
-          option.description = moment(operacao.dataOperacao).format("MM/YYYY");
-          option.id = moment(operacao.dataOperacao).valueOf();
-          options.push(option);
-          keys.add(key);
-        }
-      });
-      return options.sort((optionA, optionB) => optionB.id - optionA.id);
+    filter(): void {
+      //filter data operacao
+      if (!this.dataOperacaoFilter) {
+        localStorage.removeItem("dataOperacaoFilter");
+        this.dataOperacaoFilter = null;
+      } else {
+        localStorage.setItem("dataOperacaoFilter", this.dataOperacaoFilter);
+      }
+      //filter tipo operacao
+      if (!this.tipoOperacaoFilter) {
+        localStorage.removeItem("tipoOperacaoFilter");
+        this.tipoOperacaoFilter = null;
+      } else {
+        localStorage.setItem("tipoOperacaoFilter", this.tipoOperacaoFilter);
+      }
     }
 
     resetFilter(): void {
@@ -153,24 +151,6 @@ export class OperacaoComponent implements OnInit {
       localStorage.removeItem("tipoOperacaoFilter");
       this.dataOperacaoFilter = null;
       this.tipoOperacaoFilter = null;
-    }
-
-    filterDataOperacao(): void {
-      if (!this.dataOperacaoFilter) {
-        localStorage.removeItem("dataOperacaoFilter");
-        this.dataOperacaoFilter = null;
-      } else {
-        localStorage.setItem("dataOperacaoFilter", this.dataOperacaoFilter);
-      }
-    }
-
-    filterTipoOperacao(): void {
-      if (!this.tipoOperacaoFilter) {
-        localStorage.removeItem("tipoOperacaoFilter");
-        this.tipoOperacaoFilter = null;
-      } else {
-        localStorage.setItem("tipoOperacaoFilter", this.tipoOperacaoFilter);
-      }
     }
 
     close(): void {
@@ -186,15 +166,9 @@ export class OperacaoComponent implements OnInit {
         }
     }
 
-    expandListItem(item: string): void {
-      if (this.selectedListItem.has(item)) {
-        this.selectedListItem.delete(item);
-      } else {
-        this.selectedListItem.add(item);
-      }
-    }
-
-    isExpanded(item: string):boolean {
-      return this.selectedListItem.has(item);
+    //mover para component option-button
+    optionButtonActive: boolean = false;
+    toggle(): void {
+      this.optionButtonActive = !this.optionButtonActive;
     }
 }

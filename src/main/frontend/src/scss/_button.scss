@@ -1,7 +1,8 @@
 /*
 ================================================================================
 Form component styles
-==============================================================================
+.btn .btn-primary .btn-flat
+================================================================================
 */
 
 .btn {
@@ -24,15 +25,16 @@ Form component styles
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     font-size: 1rem;
+    height: calc(30px + #{$form-control-padding/2});
+    padding: $form-control-padding/2 $form-control-padding;
+    position: relative;
     color: $btn-color;
     background-color: $btn-background;
     border: $form-control-border;
     border-radius: $form-control-border-radius;
-    padding: $form-control-padding/2 $form-control-padding;
-    height: calc(30px + #{$form-control-padding/2});
 
-    position: relative;
     transition: all 0.4s ease-in;
 
     &:before {
@@ -73,7 +75,7 @@ Form component styles
 
     @include disabled-status;
 
-
+    /* btn btn-primary =======================================================*/
     &-primary {
         color: $btn-color-primary;
         background-color: $btn-background-primary;
@@ -85,6 +87,7 @@ Form component styles
         }
     }
 
+    /* btn btn-flat ==========================================================*/
     &-flat {
       padding: initial;
       height: initial;
@@ -100,4 +103,77 @@ Form component styles
         outline: none;
       }
     }
+}
+
+/*
+================================================================================
+.option-button
+================================================================================
+*/
+
+.option-button {
+  position: relative;
+
+  &-control {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: $form-control-color;
+    background: none;
+    padding: initial;
+    height: initial;
+    border: none;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    & > * + * {
+       margin: 0 $margin/2;
+    }
+
+    &:active, &.active {
+      color: darken($form-control-color, 100%);
+      background-color: $btn-color-primary;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &-list {
+    $arrowSize: 8px;
+    position: absolute;
+    list-style-type: none;
+    background-color: $list-background-color;
+    padding: #{$margin / 2};
+    margin: #{$margin} 0 0 0;
+    top: 100%;
+    box-shadow: 0 0 10px $shadow-color;
+    border: $form-control-border;
+
+    &::before, &::after {
+      position: absolute;
+      content: ' ';
+      display: block;
+      border: #{$arrowSize} solid transparent;
+    }
+
+    &::before {
+      top: #{$arrowSize * -2};
+      border-bottom: #{$arrowSize} solid $form-control-border-color;
+    }
+    &::after {
+      top: #{($arrowSize - 1) * -2};
+      border-bottom: #{$arrowSize} solid $list-background-color;
+
+    }
+  }
+
+  &-item {
+    padding: inherit;
+  }
 }

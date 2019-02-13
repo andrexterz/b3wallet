@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Operacao, Acao } from "../models";
+import { Operacao, Acao, Option } from "../models";
 
 @Injectable()
 export class OperacaoService {
@@ -20,7 +20,11 @@ export class OperacaoService {
         return this.http.get<Operacao[]>("/api/operacoes", {observe: 'response'});
     }
 
-    listOptionsTipoOperacao(): Observable<HttpResponse<Object[]>> {
-        return this.http.get<Object[]>("/api/operacoes/tipos", {observe: 'response'});
+    listOptionsTipoOperacao(): Observable<HttpResponse<Option[]>> {
+        return this.http.get<Option[]>("/api/operacoes/tipos", {observe: 'response'});
+    }
+
+    listOptionsDataOperacao(): Observable<HttpResponse<Option[]>> {
+        return this.http.get<Option[]>("/api/operacoes/meses", {observe: 'response'});
     }
 }

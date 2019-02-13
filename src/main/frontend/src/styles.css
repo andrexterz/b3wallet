@@ -392,7 +392,6 @@ Form component styles
 }
 .form-control label {
   user-select: none;
-  cursor: text;
   font-size: 1rem;
   height: 28px;
   margin-left: 0;
@@ -407,13 +406,16 @@ Form component styles
 .form-control input[type=radio] ~ label::before {
   border-radius: 50%;
 }
+.form-control input[type=radio]:checked ~ label {
+  cursor: default;
+}
 .form-control input[type=checkbox], .form-control input[type=radio] {
   display: none;
 }
 .form-control input[type=checkbox] ~ label, .form-control input[type=radio] ~ label {
   display: flex;
   align-items: center;
-  cursor: default;
+  cursor: pointer;
   height: initial;
   transform: translateY(0);
 }
@@ -476,21 +478,25 @@ Form component styles
 /*
 ================================================================================
 Form component styles
-==============================================================================
+.btn .btn-primary .btn-flat
+================================================================================
 */
 .btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   font-size: 1rem;
+  height: calc(30px + 5px);
+  padding: 5px 10px;
+  position: relative;
   color: #eee;
   background-color: #8a7ca5;
   border: 1px solid #9c9c9c;
   border-radius: 4px;
-  padding: 5px 10px;
-  height: calc(30px + 5px);
-  position: relative;
   transition: all 0.4s ease-in;
+  /* btn btn-primary =======================================================*/
+  /* btn btn-flat ==========================================================*/
 }
 @keyframes click-effect {
   50% {
@@ -558,6 +564,68 @@ Form component styles
 }
 .btn-flat:focus {
   outline: none;
+}
+
+/*
+================================================================================
+.option-button
+================================================================================
+*/
+.option-button {
+  position: relative;
+}
+.option-button-control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #888;
+  background: none;
+  padding: initial;
+  height: initial;
+  border: none;
+  cursor: pointer;
+}
+.option-button-control input[type=checkbox] {
+  display: none;
+}
+.option-button-control > * + * {
+  margin: 0 5px;
+}
+.option-button-control:active, .option-button-control.active {
+  color: black;
+  background-color: #fff;
+}
+.option-button-control:focus {
+  outline: none;
+}
+.option-button-list {
+  position: absolute;
+  list-style-type: none;
+  background-color: #f1f1f1;
+  padding: 5px;
+  margin: 10px 0 0 0;
+  top: 100%;
+  box-shadow: 0 0 10px #55555588;
+  border: 1px solid #9c9c9c;
+}
+.option-button-list::before, .option-button-list::after {
+  position: absolute;
+  content: " ";
+  display: block;
+  border: 8px solid transparent;
+}
+.option-button-list::before {
+  top: -16px;
+  border-bottom: 8px solid #9c9c9c;
+}
+.option-button-list::after {
+  top: -14px;
+  border-bottom: 8px solid #f1f1f1;
+}
+.option-button-item {
+  padding: inherit;
 }
 
 /*

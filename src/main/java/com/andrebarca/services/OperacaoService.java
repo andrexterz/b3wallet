@@ -1,5 +1,12 @@
 package com.andrebarca.services;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -15,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.andrebarca.models.Operacao;
 import com.andrebarca.models.TipoOperacao;
 import com.andrebarca.repositories.OperacaoRepository;
+import com.ibm.icu.text.SimpleDateFormat;
 
 /**
  *
@@ -55,5 +63,19 @@ public class OperacaoService {
 	@RequestMapping(value = "/api/operacoes/tipos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> listOptionsTipoOperacao() {
 		return new ResponseEntity<>(TipoOperacao.getPropertyList(), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/api/operacoes/meses", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> listOptionsDataOperacao() {
+		SimpleDateFormat valueFormat = new SimpleDateFormat("yyyy-MM");
+		SimpleDateFormat descriptionFormat = new SimpleDateFormat("MM/yyyy");
+		Set<Map<String, String>> dateList = new HashSet<>();
+		this.operacaoRepository.listAllDataOperacao().forEach(date -> {
+			Map<String, String> dateMap = new HashMap<String, String>();
+			dateMap.put("value", valueFormat.format(date));
+			dateMap.put("description", descriptionFormat.format(date));
+			dateList.add(dateMap);
+		});
+		return new ResponseEntity<>(dateList, HttpStatus.OK);
 	}
 }

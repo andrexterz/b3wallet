@@ -5,6 +5,7 @@
  */
 package com.andrebarca.repositories;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Sort;
@@ -28,4 +29,7 @@ public interface OperacaoRepository extends CrudRepository<Operacao, Long>{
     void deleteById(Long id);
 
     List<Operacao> findAll(Sort sort);
+    
+    @Query("select dataOperacao from Operacao")
+    List<Date> listAllDataOperacao();
 }
