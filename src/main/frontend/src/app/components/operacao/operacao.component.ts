@@ -15,8 +15,8 @@ export class OperacaoComponent implements OnInit {
     optionsDataOperacao: Option[] = [];
     optionsTipoOperacao: Option[] = [];
     selectedOperacao: Operacao = null;
-    dataOperacaoFilter: string = null;
-    tipoOperacaoFilter: string = null;
+    dataOperacaoFilter: Option = null;
+    tipoOperacaoFilter: Option = null;
 
     constructor(
       private route: ActivatedRoute,
@@ -28,22 +28,30 @@ export class OperacaoComponent implements OnInit {
 
     ngOnInit(): void {
       this.acaoService.list().subscribe(response => this.acoes = response.body);
-      this.operacaoService.listOptionsTipoOperacao().subscribe(response => this.optionsTipoOperacao = response.body);
-      this.tipoOperacaoFilter = localStorage.getItem("tipoOperacaoFilter");
-      this.dataOperacaoFilter = localStorage.getItem("dataOperacaoFilter");
-      this.updateServices();
+      this.operacaoService.list().subscribe(response => this.operacoes = response.body);
+
+      this.operacaoService.listOptionsTipoOperacao().subscribe(response => {
+        this.optionsTipoOperacao = response.body;
+        this.tipoOperacaoFilter = this.optionsTipoOperacao.find(option => option.value == localStorage.getItem("tipoOperacaoFilter"));
+      });
+
+      this.operacaoService.listOptionsDataOperacao().subscribe(response => {
+        this.optionsDataOperacao = response.body.sort((current, next) => current.value > next.value? 1: -1);
+        this.dataOperacaoFilter = this.optionsDataOperacao.find(option => option.value == localStorage.getItem("dataOperacaoFilter"));
+      });
     }
 
     updateServices(): void {
       this.operacaoService.list().subscribe(response => this.operacoes = response.body);
       this.operacaoService.listOptionsDataOperacao().subscribe(response => this.optionsDataOperacao = response.body);
+      console.log(this.tipoOperacaoFilter, this.dataOperacaoFilter);
     }
 
     list(): Object {
       let obj: Object = new Object();
       this.operacoes
-        .filter(operacao => this.tipoOperacaoFilter? operacao.tipoOperacao == this.tipoOperacaoFilter: true)
-        .filter(operacao => this.dataOperacaoFilter? moment(operacao.dataOperacao).format("YYYY-MM") == this.dataOperacaoFilter: true)
+        .filter(operacao => this.tipoOperacaoFilter? operacao.tipoOperacao == this.tipoOperacaoFilter.value: true)
+        .filter(operacao => this.dataOperacaoFilter? moment(operacao.dataOperacao).format("YYYY-MM") == this.dataOperacaoFilter.value: true)
         .forEach(operacao => {
           let key = moment(operacao.dataOperacao).format("YYYY-MM");
           let title = moment(operacao.dataOperacao).format("MM/YYYY");
@@ -135,14 +143,14 @@ export class OperacaoComponent implements OnInit {
         localStorage.removeItem("dataOperacaoFilter");
         this.dataOperacaoFilter = null;
       } else {
-        localStorage.setItem("dataOperacaoFilter", this.dataOperacaoFilter);
+        localStorage.setItem("dataOperacaoFilter", this.dataOperacaoFilter.value);
       }
       //filter tipo operacao
       if (!this.tipoOperacaoFilter) {
         localStorage.removeItem("tipoOperacaoFilter");
         this.tipoOperacaoFilter = null;
       } else {
-        localStorage.setItem("tipoOperacaoFilter", this.tipoOperacaoFilter);
+        localStorage.setItem("tipoOperacaoFilter", this.tipoOperacaoFilter.value);
       }
     }
 

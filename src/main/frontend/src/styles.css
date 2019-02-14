@@ -577,7 +577,6 @@ Form component styles
 .option-button-control {
   position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
   font-size: 1rem;
   color: #888;
@@ -600,8 +599,12 @@ Form component styles
 .option-button-control:focus {
   outline: none;
 }
+.option-button-control.active + .option-button-list {
+  display: initial;
+}
 .option-button-list {
   position: absolute;
+  display: none;
   list-style-type: none;
   background-color: #f1f1f1;
   padding: 5px;

@@ -117,7 +117,6 @@ Form component styles
   &-control {
     position: relative;
     display: flex;
-    align-items: center;
     justify-content: center;
     font-size: 1rem;
     color: $form-control-color;
@@ -139,14 +138,20 @@ Form component styles
       color: darken($form-control-color, 100%);
       background-color: $btn-color-primary;
     }
+
     &:focus {
       outline: none;
     }
   }
 
+  &-control.active + &-list {
+    display: initial;
+  }
+
   &-list {
     $arrowSize: 8px;
     position: absolute;
+    display: none;
     list-style-type: none;
     background-color: $list-background-color;
     padding: #{$margin / 2};

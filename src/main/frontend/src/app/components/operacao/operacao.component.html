@@ -12,19 +12,19 @@
           <div class="option-button">
             <label class="option-button-control" [class.active]="optionButtonActive" type="button">
               <i class="fa fa-calendar-o"></i>
-              <span class="hidden-m">mês/ano</span>
+              <span class="hidden-m">{{dataOperacaoFilter? dataOperacaoFilter.description : "mês/ano"}}</span>
               <input type="checkbox" name="optionButtonStatus" [(ngModel)]="optionButtonActive">
             </label>
             <ul class="option-button-list">
               <li class="option-button-item" *ngFor="let option of optionsDataOperacao">
-                <input name="dataOperacao" type="radio" [id]="option.value" [value]="option.value" [(ngModel)]="dataOperacaoFilter">
-                <label [for]="option.value">{{option.description}}</label>
+                <input name="dataOperacao" type="radio" [id]="option.value" [value]="option" [(ngModel)]="dataOperacaoFilter">
+                <label [for]="option.value" (click)="toggle()">{{option.description}}</label>
               </li>
             </ul>
           </div>
         </div>
         <div class="form-control inline" *ngFor="let option of optionsTipoOperacao">
-          <input name="tipoOperacao" type="radio" [id]="option.value" [value]="option.value" [(ngModel)]="tipoOperacaoFilter">
+          <input name="tipoOperacao" type="radio" [id]="option.value" [value]="option" [(ngModel)]="tipoOperacaoFilter">
           <label [for]="option.value">{{option.description}}</label>
         </div>
         <div class="form-control inline">
