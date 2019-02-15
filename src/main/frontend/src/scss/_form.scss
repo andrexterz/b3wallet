@@ -116,7 +116,7 @@ Form component styles
      textarea {
          height: initial;
          resize: vertical;
-
+    
          & ~ label {
             position: absolute;
             top: $form-control-height;

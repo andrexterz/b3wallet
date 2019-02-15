@@ -1,5 +1,6 @@
 package com.andrebarca.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,6 +33,7 @@ public class Nota extends Base {
     private Acao acao;
 
     @NotBlank
+    @Column(length=1000)
     private String anotacao;
 
     public Acao getAcao() {

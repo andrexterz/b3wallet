@@ -52,8 +52,8 @@
                     <label for="acao">Ação</label>
                 </div>
                 <div class="form-control g-12">
-                    <textarea id="nota" name="nota" [(ngModel)]="selectedNota.anotacao" rows="10" required></textarea>
-                    <label for="nota">Nota</label>
+                    <textarea id="nota" name="nota" [(ngModel)]="selectedNota.anotacao" maxlength="1000" rows="10" required></textarea>
+                    <label for="nota">Nota <small *ngIf="selectedNota.anotacao">{{"resta(m) " + (1000 - selectedNota.anotacao.length) + " caracteres"}}</small></label>
                 </div>
             </div>
         </section>
