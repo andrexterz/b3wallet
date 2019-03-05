@@ -83,6 +83,7 @@ Table component styles
 
         th, td {
             display: table-cell;
+            vertical-align: baseline;
 
             &::before {
                 display: none;

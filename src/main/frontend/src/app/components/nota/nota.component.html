@@ -23,7 +23,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let nota of entry.value">
-                <td title="Anotação">{{nota.anotacao}}</td>
+                <td title="Anotação"><p class="justify">{{nota.anotacao}}</p></td>
                 <td title="Criado em" class="center">{{nota.dataCriacao | date: 'dd/MM/yyyy'}}</td>
                 <td title="Atualizado em" class="center">{{nota.dataAtualizacao | date: 'dd/MM/yyyy'}}</td>
                 <td class="table-action right">

@@ -256,6 +256,7 @@ Table component styles
   }
   .table th, .table td {
     display: table-cell;
+    vertical-align: baseline;
   }
   .table th::before, .table td::before {
     display: none;
