@@ -5,7 +5,8 @@ import { APP_BASE_HREF, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import {NgxMaskModule} from 'ngx-mask';
 import { AppComponent } from './app.component';
 
 import {
@@ -14,7 +15,8 @@ import {
   ProventoComponent,
   NotaComponent,
   LoginComponent,
-  MensagemComponent
+  MensagemComponent,
+  OptionButtonComponent
 } from './components';
 
 import {
@@ -36,13 +38,15 @@ registerLocaleData(localePt, 'pt-BR');
     ProventoComponent,
     NotaComponent,
     LoginComponent,
-    MensagemComponent
+    MensagemComponent,
+    OptionButtonComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     HttpClientModule,
     FormsModule,
+     NgxMaskModule.forRoot({}),
     RouterModule.forRoot([
       {path: 'dashboard', component: AcaoComponent},
       {path: 'portfolio', component: OperacaoComponent},

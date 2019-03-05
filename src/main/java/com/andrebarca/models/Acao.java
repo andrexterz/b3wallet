@@ -36,6 +36,8 @@ public class Acao extends Base {
 
     private String nome;
 
+    private String cnpj;
+
     @OneToMany(mappedBy = "acao", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("acao")
     private Set<Operacao> operacoes;
@@ -54,6 +56,14 @@ public class Acao extends Base {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getCnpj() {
+      return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+      this.cnpj = cnpj;
     }
 
 

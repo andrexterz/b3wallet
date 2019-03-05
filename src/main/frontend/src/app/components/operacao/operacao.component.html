@@ -9,19 +9,7 @@
           </button>
         </div>
         <div class="form-control inline">
-          <div class="option-button">
-            <label class="option-button-control" [class.active]="optionButtonActive" type="button">
-              <i class="fa fa-calendar-o"></i>
-              <span class="hidden-m">{{dataOperacaoFilter? dataOperacaoFilter.description : "mês/ano"}}</span>
-              <input type="checkbox" name="optionButtonStatus" [(ngModel)]="optionButtonActive">
-            </label>
-            <ul class="option-button-list">
-              <li class="option-button-item" *ngFor="let option of optionsDataOperacao">
-                <input name="dataOperacao" type="radio" [id]="option.value" [value]="option" [(ngModel)]="dataOperacaoFilter">
-                <label [for]="option.value" (click)="toggle()">{{option.description}}</label>
-              </li>
-            </ul>
-          </div>
+          <option-button name="dataOperacao" [options]="optionsDataOperacao" [(value)]="dataOperacaoFilter"></option-button>
         </div>
         <div class="form-control inline" *ngFor="let option of optionsTipoOperacao">
           <input name="tipoOperacao" type="radio" [id]="option.value" [value]="option" [(ngModel)]="tipoOperacaoFilter">
@@ -36,10 +24,37 @@
     </h4>
     <p class="note" *ngIf="operacoes.length == 0"><i class="fa fa-info-circle"></i><span class="margin-left-1">Você ainda não cadastrou nenhum item.</span></p>
     <ng-container *ngIf="operacoes.length > 0">
+      
+      <!-- tabela totais -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="4" class="right">Resumo das Operações</th>
+          </tr>
+          <tr>
+            <th class="right">Custos operacionais</th>
+            <th class="right">Total compra</th>
+            <th class="right">Total venda</th>
+            <th class="right">Total custódia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td title="Custos operacionais" class="right"><b>{{getCustosOperacionais() | currency:'BRL':'symbol':'1.2-2'}}</b></td>
+            <td title="Total compra" class="right"><b>{{getTotalCompra() | currency:'BRL':'symbol':'1.2-2'}}</b></td>
+            <td title="Total venda" class="right"><b>{{getTotalVenda() | currency:'BRL':'symbol':'1.2-2'}}</b></td>
+            <td title="Total custódia" class="right"><b>{{getTotalCustodia() | currency:'BRL':'symbol':'1.2-2'}}</b></td>
+          </tr>
+
+        </tbody>
+      </table>
+      <hr>
+
+      <!-- tabela mensal -->
       <table class="table" *ngFor="let entry of list() | keyvalue" >
         <thead>
           <tr>
-            <th class="left" colspan="7">{{entry.value.title}}</th>
+            <th class="left" colspan="7">Mês: {{entry.value.title}}</th>
           </tr>
           <tr>
             <th class="left">Código</th>
@@ -58,13 +73,6 @@
           <tr>
             <td class="right" colspan="7"><b>Total venda: {{entry.value.totalVenda | currency:'BRL':'symbol':'1.2-2'}}</b></td>
           </tr>
-          <tr>
-            <th class="right" colspan="7"><b>Total custos operacionais: {{getCustosOperacionais() | currency:'BRL':'symbol':'1.2-2'}}</b></th>
-          </tr>
-          <tr>
-            <td class="right" colspan="7"><b>Total custódia: {{getTotalCustodia() | currency:'BRL':'symbol':'1.2-2'}}</b></td>
-          </tr>
-
         </tfoot>
         <tbody>
           <tr *ngFor="let operacao of entry.value.items">

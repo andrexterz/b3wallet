@@ -1,0 +1,15 @@
+<div class="option-button">
+  <label class="option-button-control" tabindex="1" [class.active]="optionButtonActive" (blur)="optionButtonOnBlur()" type="button">
+    <i class="fa fa-calendar-o"></i>
+    <span>{{value? value.description : "mês/ano"}}</span>
+    <input type="checkbox" name="optionButtonStatus" [(ngModel)]="optionButtonActive">
+  </label>
+  <div class="option-button-wrapper">
+    <ul class="option-button-list">
+      <li class="option-button-item" *ngFor="let option of options">
+        <input name="optionValue" type="radio" [id]="option.value" [value]="option" [ngModel]="value">
+        <label [for]="option.value" (click)="select(option)">{{option.description}}</label>
+      </li>
+    </ul>
+  </div>
+</div>

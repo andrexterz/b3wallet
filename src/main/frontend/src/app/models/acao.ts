@@ -4,6 +4,7 @@ import { Operacao } from '../models/operacao';
     id: number;
     codigo: string;
     nome: string;
+    cnpj: string;
     operacoes: Operacao[] = [];
     totalCompra: number = 0;
     totalVenda: number = 0;

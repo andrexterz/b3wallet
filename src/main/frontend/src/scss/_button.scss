@@ -112,6 +112,7 @@ Form component styles
 */
 
 .option-button {
+  $arrowSize: 8px;
   position: relative;
 
   &-control {
@@ -144,24 +145,20 @@ Form component styles
     }
   }
 
-  &-control.active + &-list {
+  &-control.active + &-wrapper {
     display: initial;
   }
 
-  &-list {
-    $arrowSize: 8px;
+  &-wrapper {
     position: absolute;
-    display: none;
-    list-style-type: none;
-    background-color: $list-background-color;
-    padding: #{$margin / 2};
-    margin: #{$margin} 0 0 0;
     top: 100%;
-    box-shadow: 0 0 10px $shadow-color;
-    border: $form-control-border;
+    left: -#{$arrowSize};
+    margin: #{$margin} 0 0 0;
+    display: none;
 
     &::before, &::after {
       position: absolute;
+      left: #{$arrowSize};
       content: ' ';
       display: block;
       border: #{$arrowSize} solid transparent;
@@ -174,8 +171,31 @@ Form component styles
     &::after {
       top: #{($arrowSize - 1) * -2};
       border-bottom: #{$arrowSize} solid $list-background-color;
+    }    
+  }
 
+  &-list {
+    list-style-type: none;
+    background-color: $list-background-color;
+    padding: #{$margin / 2};
+    margin: 0;
+    overflow-y: auto;
+    box-shadow: 0 0 10px $shadow-color;
+    border: $form-control-border;
+
+    max-height: 64vh;
+    
+    @media screen and (min-width: #{$small-device}) {
+      max-height: 48vh;
     }
+
+    @media screen and (min-width: #{$medium-device}) {
+      max-height: 32vh;
+    }    
+
+    @media screen and (min-width: #{$large-device}) {
+      max-height: 16vh;
+    }    
   }
 
   &-item {

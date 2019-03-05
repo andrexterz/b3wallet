@@ -15,6 +15,7 @@
             <tr>
                 <th class="left">Código</th>
                 <th class="left">Nome</th>
+                <th class="left">CNPJ</th>
                 <th class="right">Custódia</th>
                 <th class="right">Preço médio</th>
                 <th class="right">Lucro</th>
@@ -25,6 +26,7 @@
             <tr *ngFor="let acao of list(); let idx = index">
                 <td title="Código">{{acao.codigo}}</td>
                 <td title="Nome">{{acao.nome}}</td>
+                <td title="CNPJ">{{acao.cnpj | mask:'00.000.000/0000-00'}}</td>
                 <td class="right" title="Custódia">{{acao.totalCustodia}}</td>
                 <td class="right" title="Preço médio">{{acao.precoMedio | currency:'BRL':'symbol':'1.2-2'}}</td>
                 <td class="right" title="Lucro">{{acao.totalLucro | currency:'BRL':'symbol':'1.2-2'}}</td>
@@ -41,13 +43,17 @@
         </header>
         <section class="modal-body">
             <div class="form">
-                <div class="form-control g-12 g-m-6 g-l-3">
+                <div class="form-control g-12 g-l-2">
                     <input type="text" id="codigoAcao" name="codigo" [(ngModel)]="selectedAcao.codigo" autofocus="autofocus" required>
                     <label for="codigoAcao">Código</label>
                 </div>
-                <div class="form-control g-12 g-m-6 g-l-9">
+                <div class="form-control g-12 g-l-6">
                     <input type="text" id="nomeAcao" name="nome" [(ngModel)]="selectedAcao.nome" required>
                     <label for="nomeAcao">Nome</label>
+                </div>
+                <div class="form-control g-12 g-l-4">
+                    <input type="text" id="cnpj" name="cnpj" mask="00.000.000/0000-00" [(ngModel)]="selectedAcao.cnpj" required>
+                    <label for="cnpj">CNPJ</label>
                 </div>
             </div>
         </section>

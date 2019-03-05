@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment';
 import { OperacaoService, AcaoService, MensagemService } from '../../services';
 import { Operacao, Acao, Option } from "../../models";
+
 @Component({
   selector: 'operacao-component',
   templateUrl: './operacao.component.html'
@@ -172,11 +173,5 @@ export class OperacaoComponent implements OnInit {
         } catch (e) {
             return false;
         }
-    }
-
-    //mover para component option-button
-    optionButtonActive: boolean = false;
-    toggle(): void {
-      this.optionButtonActive = !this.optionButtonActive;
     }
 }
