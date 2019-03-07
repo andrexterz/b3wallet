@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 
 import {
   AcaoComponent,
+  EmpresaComponent,
   OperacaoComponent,
   ProventoComponent,
   NotaComponent,
@@ -21,6 +22,7 @@ import {
 
 import {
   AcaoService,
+  EmpresaService,
   OperacaoService,
   ProventoService,
   NotaService,
@@ -39,7 +41,8 @@ registerLocaleData(localePt, 'pt-BR');
     NotaComponent,
     LoginComponent,
     MensagemComponent,
-    OptionButtonComponent
+    OptionButtonComponent,
+    EmpresaComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ registerLocaleData(localePt, 'pt-BR');
      NgxMaskModule.forRoot({}),
     RouterModule.forRoot([
       {path: 'dashboard', component: AcaoComponent},
+      {path: 'empresa', component: EmpresaComponent},
       {path: 'portfolio', component: OperacaoComponent},
       {path: 'provento', component: ProventoComponent},
       {path: 'nota', component: NotaComponent},
@@ -58,7 +62,7 @@ registerLocaleData(localePt, 'pt-BR');
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pt-BR'},
               {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
-              LoginService, AcaoService, OperacaoService, ProventoService, NotaService],
+              LoginService, EmpresaService, AcaoService, OperacaoService, ProventoService, NotaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

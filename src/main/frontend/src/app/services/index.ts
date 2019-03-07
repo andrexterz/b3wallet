@@ -1,3 +1,4 @@
+export * from "./empresa.service";
 export * from "./acao.service";
 export * from "./nota.service";
 export * from "./provento.service";

@@ -1,7 +1,6 @@
 import { Component,  OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment';
 import { OperacaoService, AcaoService, MensagemService } from '../../services';
 import { Operacao, Acao, Option } from "../../models";

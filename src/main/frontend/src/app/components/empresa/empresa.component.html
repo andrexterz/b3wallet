@@ -1,0 +1,46 @@
+<div class="container">
+    <h4 class="title">
+      <span>Empresas</span>
+      <a class="title-action" title="adicionar empresa" (click)="add()"><i class="fa fa-plus-circle"></i></a>
+    </h4>
+    <p class="note" *ngIf="empresas.length == 0"><i class="fa fa-info-circle"></i><span class="margin-left-1">Você ainda não cadastrou nenhum item.</span></p>
+    <table class="table" *ngIf="empresas.length > 0">
+      <thead>
+        <tr>
+          <th class="left">Nome</th>
+          <th class="left">CNPJ</th>
+          <th class="right"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let empresa of list(); let idx = index">
+          <td title="Nome">{{empresa.nome}}</td>
+          <td title="CNPJ">{{empresa.cnpj | mask:'00.000.000/0000-00'}}</td>
+          <td class="table-action right"><a title="editar empresa" class="link" (click)="edit(empresa)"><i class="fa fa-pencil"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<form #empresaForm="ngForm" *ngIf="selectedEmpresa" (ngSubmit)="save()" class="modal-wrapper">
+    <div class="modal">
+        <header class="modal-title">
+            <h4>{{selectedEmpresa.id == null ? 'Nova Empresa': selectedEmpresa.nome}}</h4>
+            <button (click)="close()" class="modal-close"><i class="fa fa-close"></i></button>
+        </header>
+        <section class="modal-body">
+            <div class="form">
+                <div class="form-control g-12 g-l-8">
+                    <input type="text" id="empresa" name="empresa" [(ngModel)]="selectedEmpresa.nome" required>
+                    <label for="empresa">Empresa</label>
+                </div>
+                <div class="form-control g-12 g-l-4">
+                    <input type="text" id="cnpj" name="cnpj" mask="00.000.000/0000-00" [(ngModel)]="selectedEmpresa.cnpj" required>
+                    <label for="cnpj">CNPJ</label>
+                </div>
+            </div>
+        </section>
+        <footer class="modal-footer">
+            <button type="submit" [disabled]="!empresaForm.valid" class="btn btn-primary">salvar</button>
+        </footer>
+    </div>
+</form>

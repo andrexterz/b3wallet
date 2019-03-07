@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/map';
-import { AcaoService, MensagemService } from '../../services';
-import { Acao } from "../../models";
+import { AcaoService, EmpresaService, MensagemService } from '../../services';
+import { Acao, Empresa } from "../../models";
 
 @Component({
   selector: 'acao-component',
@@ -13,18 +13,21 @@ export class AcaoComponent implements OnInit {
 
     selectedAcao: Acao = null;
     acoes: Acao[] = [];
+    empresas: Empresa[] = [];
     custodiaFilter: boolean = false;
 
     constructor(
-      private acaoService: AcaoService,
       private route: ActivatedRoute,
       private location: Location,
+      private acaoService: AcaoService,
+      private empresaoService: AcaoService,
       private mensagemService: MensagemService
       ) {
       }
 
     ngOnInit(): void {
         this.acaoService.list().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
+        this.empresaoService.list().subscribe(response => this.empresas = response.body.map(empresa => Object.assign(new Empresa(), empresa)));
         eval(localStorage.getItem("custodiaFilter")) ? this.custodiaFilter = eval(localStorage.getItem("custodiaFilter")): false;
     }
 

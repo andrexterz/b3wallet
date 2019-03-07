@@ -1,3 +1,4 @@
+export * from './empresa/empresa.component';
 export * from './acao/acao.component';
 export * from './operacao/operacao.component';
 export * from './provento/provento.component';

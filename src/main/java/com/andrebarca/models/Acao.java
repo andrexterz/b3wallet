@@ -1,20 +1,23 @@
 package com.andrebarca.models;
 
- import java.util.HashSet;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /*
  * @author andre
  */
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Acao extends Base {
@@ -25,18 +28,18 @@ public class Acao extends Base {
         this.operacoes = new HashSet<>();
     }
 
-    public Acao(String codigo, String nome,Set<Operacao> operacoes) {
+    public Acao(String codigo, Empresa empresa, Set<Operacao> operacoes) {
         this.codigo = codigo;
-        this.nome = nome;
+        this.empresa = empresa;
         this.operacoes = operacoes;
     }
 
     @Column(unique = true)
     private String codigo;
 
-    private String nome;
-
-    private String cnpj;
+    @ManyToOne
+    @JoinColumn(name = "EMPRESA_ID")
+    private Empresa empresa;
 
     @OneToMany(mappedBy = "acao", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("acao")
@@ -50,32 +53,23 @@ public class Acao extends Base {
         this.codigo = codigo;
     }
 
-    public String getNome() {
-        return nome;
+    public Empresa getEmpresa() {
+      return empresa;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setEmpresa(Empresa empresa) {
+      this.empresa = empresa;
     }
-
-    public String getCnpj() {
-      return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-      this.cnpj = cnpj;
-    }
-
 
     public Set<Operacao> getOperacoes() {
         return operacoes;
     }
 
-    public void setOperacoes(Set<Operacao> operacaos) {
-        operacaos.forEach((operacao) -> {
+    public void setOperacoes(Set<Operacao> operacoes) {
+        operacoes.forEach((operacao) -> {
             operacao.setAcao(this);
         });
-        this.operacoes = operacaos;
+        this.operacoes = operacoes;
     }
 
     public void addOperacao(Operacao operacao) {

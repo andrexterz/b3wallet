@@ -1,10 +1,11 @@
+import { Empresa } from '../models/empresa';
 import { Operacao } from '../models/operacao';
+
  export class Acao {
 
     id: number;
     codigo: string;
-    nome: string;
-    cnpj: string;
+    empresa: Empresa;
     operacoes: Operacao[] = [];
     totalCompra: number = 0;
     totalVenda: number = 0;
