@@ -39,7 +39,7 @@ public class Provento extends Base {
 
 	@ManyToOne
 	@JoinColumn(name = "ACAO_ID")
-	@JsonIgnoreProperties("operacoes")
+	@JsonIgnoreProperties({"operacoes"})
 	private Acao acao;
 
 	private Double valor;

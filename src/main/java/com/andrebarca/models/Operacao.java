@@ -22,18 +22,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Operacao extends Base {
-
+    
 	private static final long serialVersionUID = 1L;
 
 	public Operacao() {
-      this.acao = null;
+        this.acao = null;
       this.valor = 0.0;
       this.quantidade = 0;
       this.custoOperacao = 0.0;
       this.tipoOperacao = null;
       this.dataOperacao = null;
     }
-
+    
     public Operacao(Acao acao, Double valor, Integer quantidade, Double custoOperacao, TipoOperacao tipoOperacao, Date dataOperacao) {
         this.acao = acao;
         this.valor = valor;
@@ -42,11 +42,11 @@ public class Operacao extends Base {
         this.tipoOperacao = tipoOperacao;
         this.dataOperacao = dataOperacao;
     }
-
-
+    
+    
     @ManyToOne
     @JoinColumn(name = "ACAO_ID")
-    @JsonIgnoreProperties("operacoes")
+    @JsonIgnoreProperties({"operacoes", "empresa"})
     private Acao acao;
 
     private Double valor;

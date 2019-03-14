@@ -8,15 +8,14 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 /**
  *
  * @author andre
  */
 @Entity
 public class Nota extends Base {
-	
-	private static final long serialVersionUID = 1L;	
+
+    private static final long serialVersionUID = 1L;
 
     public Nota() {
 
@@ -29,11 +28,11 @@ public class Nota extends Base {
 
     @ManyToOne
     @JoinColumn(name = "ACAO_ID")
-    @JsonIgnoreProperties("operacoes")
+    @JsonIgnoreProperties({ "operacoes", "empresa" })
     private Acao acao;
 
     @NotBlank
-    @Column(length=1000)
+    @Column(length = 1000)
     private String anotacao;
 
     public Acao getAcao() {

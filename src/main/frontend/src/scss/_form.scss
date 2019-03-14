@@ -9,6 +9,21 @@ Form component styles
   flex-wrap: wrap;
   flex: 1 1 auto;
   margin: $margin -#{$margin};
+  
+  fieldset {
+    display: inherit;
+    flex-wrap: inherit;
+    flex: inherit;
+    border: thin solid $form-control-border-color;
+    border-radius: $form-control-border-radius;
+    margin: $margin;
+
+    legend {
+      color: $form-control-color;
+      margin: #{$margin};
+      padding: #{$padding/2};
+    }
+  }  
 
   @at-root
   &-control {
@@ -165,3 +180,4 @@ Form component styles
   }
 
 }
+

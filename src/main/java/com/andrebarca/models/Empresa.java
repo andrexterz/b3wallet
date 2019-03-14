@@ -26,7 +26,7 @@ public class Empresa extends Base {
     private String cnpj;
 
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("empresa")
+    @JsonIgnoreProperties({"empresa"})
     private Set<Acao> acoes;    
 
     public String getNome() {

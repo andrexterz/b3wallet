@@ -10,11 +10,12 @@ export class AppComponent {
     showMenuMobile: boolean = false;
 
     menuItems = [
-        {title: "Início", route: "dashboard", icon: "fa fa-home"},
-        {title: "Empresas", route: "empresa", icon: "fa fa-building"},
-        {title: "Portfolio", route: "portfolio", icon: "fa fa-folder-open"},
-        {title: "Proventos", route: "provento", icon: "fa fa-usd"},
-        {title: "Notas", route: "nota", icon: "fa fa-sticky-note"},
+        {title: 'Início', route: 'dashboard', icon: 'fa fa-home'},
+      { title: 'Papeis', route: 'acoes', icon: 'fa fa-puzzle-piece'},
+        {title: 'Empresas', route: 'empresas', icon: 'fa fa-building'},
+      { title: 'Operações', route: 'operacoes', icon: 'fa fa-exchange'},
+        {title: 'Proventos', route: 'proventos', icon: 'fa fa-usd'},
+        {title: 'Notas', route: 'notas', icon: 'fa fa-sticky-note'},
     ];
 
     constructor () {}

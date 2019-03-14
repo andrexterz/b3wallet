@@ -22,6 +22,7 @@ import com.andrebarca.models.Empresa;
 
 @Repository
 public interface EmpresaRepository extends CrudRepository<Empresa, Long> {
+
     List<Empresa> findAll(Sort sort);
 
     @Modifying

@@ -314,6 +314,19 @@ Form component styles
   flex: 1 1 auto;
   margin: 10px -10px;
 }
+.form fieldset {
+  display: inherit;
+  flex-wrap: inherit;
+  flex: inherit;
+  border: thin solid #9c9c9c;
+  border-radius: 4px;
+  margin: 10px;
+}
+.form fieldset legend {
+  color: #888;
+  margin: 10px;
+  padding: 5px;
+}
 .form-control {
   position: relative;
   display: flex;

@@ -38,7 +38,7 @@ public class EmpresaService {
 
     @RequestMapping(value = "/api/empresas", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> list() {
-        Iterable<Empresa> acoes = this. empresaRepository.findAll(new Sort(Direction.ASC, "acoes.codigo"));
-        return new ResponseEntity<>(acoes, HttpStatus.OK);
+        Iterable<Empresa> empresas = this.empresaRepository.findAll(new Sort(Direction.ASC, "nome"));
+        return new ResponseEntity<>(empresas, HttpStatus.OK);
     }
 }

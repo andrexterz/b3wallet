@@ -52,10 +52,11 @@ registerLocaleData(localePt, 'pt-BR');
      NgxMaskModule.forRoot({}),
     RouterModule.forRoot([
       {path: 'dashboard', component: AcaoComponent},
-      {path: 'empresa', component: EmpresaComponent},
-      {path: 'portfolio', component: OperacaoComponent},
-      {path: 'provento', component: ProventoComponent},
-      {path: 'nota', component: NotaComponent},
+      {path: 'acoes', component: AcaoComponent},
+      {path: 'empresas', component: EmpresaComponent},
+      {path: 'operacoes', component: OperacaoComponent},
+      {path: 'proventos', component: ProventoComponent},
+      {path: 'notas', component: NotaComponent},
       {path: 'login', component: LoginComponent},
       {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
     ])

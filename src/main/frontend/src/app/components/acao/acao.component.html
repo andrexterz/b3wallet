@@ -1,6 +1,6 @@
 <div class="container">
     <h4 class="title">
-      <span>Ações</span>
+      <span>Papéis</span>
       <form #filterForm="ngForm" class="title-detail">
         <div class="form-control">
           <input type="checkbox" name="filterCustodia" id="filterCustodia" [(ngModel)]="custodiaFilter" (click)="filter()">
@@ -41,11 +41,37 @@
         </header>
         <section class="modal-body">
             <div class="form">
-                <!-- inserir select para empresa aqui -->
-                <div class="form-control g-12 g-l-2">
+                <div class="form-control g-8 g-l-9">
+                    <select id="empresa" name="empresa" [compareWith]="comparator" [(ngModel)]="selectedAcao.empresa" required>
+                        <option *ngFor="let empresa of empresas; let idx = index" [ngValue]="empresa">{{idx}} - {{empresa.nome}}</option>
+                    </select>
+                    <label for="empresa">Empresa</label>
+                </div>
+                <div class="form-control g-4 g-l-3">
                     <input type="text" id="codigoAcao" name="codigo" [(ngModel)]="selectedAcao.codigo" autofocus="autofocus" required>
                     <label for="codigoAcao">Código</label>
                 </div>
+                <fieldset>
+                    <legend>Tipo de papel</legend>
+                    <div class="form">
+                        <div class="form-control">
+                            <input type="radio" name="tipoPapel" id="tipoPapelAcao">
+                            <label for="tipoPapelAcao">Ação</label>
+                        </div>
+                        <div class="form-control">
+                            <input type="radio" name="tipoPapel" id="tipoPapelFII">
+                            <label for="tipoPapelFII">Fundo de investimento Imobiliário</label>
+                        </div>
+                        <div class="form-control">
+                            <input type="radio" name="tipoPapel" id="tipoPapelETF">
+                            <label for="tipoPapelETF">Exchange Traded Fund - ETF</label>
+                        </div>
+                        <div class="form-control">
+                            <input type="radio" name="tipoPapel" id="tipoPapelTesouro">
+                            <label for="tipoPapelTesouro">Tesouro Direto</label>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
         </section>
         <footer class="modal-footer">
