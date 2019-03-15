@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/map';
 import { AcaoService, EmpresaService, MensagemService } from '../../services';
-import { Acao, Empresa } from "../../models";
+import { Acao, Empresa, Option } from '../../models';
 
 @Component({
   selector: 'acao-component',
@@ -14,6 +14,7 @@ export class AcaoComponent implements OnInit {
     selectedAcao: Acao = null;
     acoes: Acao[] = [];
     empresas: Empresa[] = [];
+    optionsTipoPapel: Option[] = [];
     custodiaFilter: boolean = false;
 
     constructor(
@@ -26,13 +27,16 @@ export class AcaoComponent implements OnInit {
       }
 
     ngOnInit(): void {
-        this.acaoService.list().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
-        this.empresaoService.list().subscribe(response => this.empresas = response.body.map(empresa => Object.assign(new Empresa(), empresa)));
-        eval(localStorage.getItem("custodiaFilter")) ? this.custodiaFilter = eval(localStorage.getItem("custodiaFilter")): false;
+      this.acaoService.list().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
+      this.empresaoService.list().subscribe(response => this.empresas = response.body.map(empresa => Object.assign(new Empresa(), empresa)));
+      this.acaoService.listOptionsTipoPapel().subscribe(response => {
+        this.optionsTipoPapel = response.body;
+      });
+      eval(localStorage.getItem('custodiaFilter')) ? this.custodiaFilter = eval(localStorage.getItem('custodiaFilter')): false;
     }
 
     list(): Object {
-      return this.custodiaFilter? this.acoes.filter(acao => acao.totalCustodia > 0): this.acoes;
+      return this.custodiaFilter ? this.acoes.filter(acao => acao.totalCustodia > 0): this.acoes;
     }
 
     add(): void {
@@ -53,14 +57,12 @@ export class AcaoComponent implements OnInit {
               } else {
                   this.acoes.push(savedObj);
               }
-              this.mensagemService.showMessage(savedObj.codigo, "Ação salva com sucesso.", "success");
+              this.mensagemService.showMessage(savedObj.codigo, 'Ação salva com sucesso.', 'success');
           }, error => {
-              this.mensagemService.showMessage("Erro ao salvar ação", error.message, "error");
+              this.mensagemService.showMessage('Erro ao salvar ação', error.message, 'error');
               console.log(error);
           });
-
       }
-      
       this.close();
     }
 
@@ -70,15 +72,15 @@ export class AcaoComponent implements OnInit {
 
     filter(): void {
       this.custodiaFilter = !this.custodiaFilter;
-      localStorage.setItem("custodiaFilter", this.custodiaFilter.toString());
+      localStorage.setItem('custodiaFilter', this.custodiaFilter.toString());
     }
 
-  //compare method for directive compareWith
+  //compare method for directive compareWith (mover para Utils.ts)
   comparator(itemA: any, itemB: any) {
     try {
       return itemA.id == itemB.id;
     } catch (e) {
       return false;
     }
-  }    
+  }
 }

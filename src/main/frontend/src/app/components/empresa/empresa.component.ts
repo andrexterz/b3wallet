@@ -5,7 +5,7 @@ import { Empresa } from "../../models";
 import { EmpresaService, MensagemService } from '../../services';
 
 @Component({
-  selector: 'empresa',
+  selector: 'empresa-component',
   templateUrl: './empresa.component.html'
 })
 export class EmpresaComponent implements OnInit {
@@ -31,7 +31,7 @@ export class EmpresaComponent implements OnInit {
   }
 
   add(): void {
-    console.log("implmementar");
+    this.selectedEmpresa = new Empresa();
   }
 
   edit(empresa: Empresa): void {
@@ -39,7 +39,22 @@ export class EmpresaComponent implements OnInit {
   }
 
   save(): void {
-    console.log("implmementar");
+    if (this.selectedEmpresa) {
+      this.empresaService.save(this.selectedEmpresa).subscribe(response => {
+        let savedObj: Empresa = Object.assign(new Empresa(), response.body);
+        let index = this.empresas.findIndex(o => o.id == savedObj.id);
+        if (index >= 0) {
+          this.empresas[index] = savedObj;
+        } else {
+          this.empresas.push(savedObj);
+        }
+        this.mensagemService.showMessage(savedObj.nome, "Empresa salva com sucesso.", "success");
+      }, error => {
+        this.mensagemService.showMessage("Erro ao salvar empresa", error.message, "error");
+        console.log(error);
+      });
+    }
+    this.close();
   }
 
   close(): void {

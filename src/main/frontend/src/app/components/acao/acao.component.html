@@ -54,21 +54,9 @@
                 <fieldset>
                     <legend>Tipo de papel</legend>
                     <div class="form">
-                        <div class="form-control">
-                            <input type="radio" name="tipoPapel" id="tipoPapelAcao">
-                            <label for="tipoPapelAcao">Ação</label>
-                        </div>
-                        <div class="form-control">
-                            <input type="radio" name="tipoPapel" id="tipoPapelFII">
-                            <label for="tipoPapelFII">Fundo de investimento Imobiliário</label>
-                        </div>
-                        <div class="form-control">
-                            <input type="radio" name="tipoPapel" id="tipoPapelETF">
-                            <label for="tipoPapelETF">Exchange Traded Fund - ETF</label>
-                        </div>
-                        <div class="form-control">
-                            <input type="radio" name="tipoPapel" id="tipoPapelTesouro">
-                            <label for="tipoPapelTesouro">Tesouro Direto</label>
+                        <div class="form-control" *ngFor="let option of optionsTipoPapel">
+                            <input type="radio" name="tipoPapel" [id]="option.value" [value]="option">
+                            <label [for]="option.value">{{option.description}}</label>
                         </div>
                     </div>
                 </fieldset>

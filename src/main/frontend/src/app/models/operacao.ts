@@ -1,4 +1,4 @@
-import { Acao } from "./acao";
+import { Acao } from '.';
 
 export class Operacao {
   id: number;

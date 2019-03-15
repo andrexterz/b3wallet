@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../services';
 
 @Component({
-  selector: 'login',
+  selector: 'login-component',
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
