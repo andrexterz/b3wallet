@@ -1,14 +1,8 @@
 package com.andrebarca.models;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /*
  * @author andre
@@ -18,16 +12,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Empresa extends Base {
 
     public Empresa() {
-        this.acoes = new HashSet<>();
+    }
+
+    public Empresa(String nome, String cnpj, TipoPapel tipoPapel) {
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.tipoPapel = tipoPapel;
     }
 
     private String nome;
 
     private String cnpj;
 
-    @OneToMany(mappedBy = "empresa", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JsonIgnoreProperties({"empresa"})
-    private Set<Acao> acoes;    
+    @Enumerated(EnumType.STRING)
+    private TipoPapel tipoPapel;
 
     public String getNome() {
         return nome;
@@ -45,15 +43,11 @@ public class Empresa extends Base {
         this.cnpj = cnpj;
     }
 
-    public Set<Acao> getAcoes() {
-        return acoes;
+    public TipoPapel getTipoPapel() {
+        return tipoPapel;
     }
 
-    public void setAcoes(Set<Acao> acoes) {
-        acoes.forEach((acao) -> {
-            acao.setEmpresa(this);
-        });
-
-        this.acoes = acoes;
-    }
+    public void setTipoPapel(TipoPapel tipoPapel) {
+        this.tipoPapel = tipoPapel;
+    }    
 }

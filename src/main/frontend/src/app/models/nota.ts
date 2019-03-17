@@ -1,8 +1,8 @@
-import { Acao } from "./acao";
+import { Empresa } from './empresa';
 
 export class Nota {
   id: number;
-  acao: Acao;
+  empresa: Empresa;
   anotacao: string;
   dataCriacao: Date;
   dataAtualizacao: Date;

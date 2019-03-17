@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.andrebarca.models.Empresa;
+import com.andrebarca.models.TipoPapel;
 import com.andrebarca.repositories.EmpresaRepository;
 
 /**
@@ -41,4 +42,10 @@ public class EmpresaService {
         Iterable<Empresa> empresas = this.empresaRepository.findAll(new Sort(Direction.ASC, "nome"));
         return new ResponseEntity<>(empresas, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/api/empresas/tipos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> listOptionsTipoPapel() {
+        return new ResponseEntity<>(TipoPapel.getPropertyList(), HttpStatus.OK);
+    }
+
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
-import { Empresa } from "../../models";
+import { Empresa, Option } from '../../models';
 import { EmpresaService, MensagemService } from '../../services';
 
 @Component({
@@ -12,6 +12,7 @@ export class EmpresaComponent implements OnInit {
 
   selectedEmpresa: Empresa = null;
   empresas: Empresa[] = [];
+  optionsTipoPapel: Option[] = [];
 
   constructor(
     private empresaService: EmpresaService,
@@ -23,10 +24,17 @@ export class EmpresaComponent implements OnInit {
 
   ngOnInit() {
     this.empresaService.list().subscribe(response => this.empresas = response.body.map(empresa => Object.assign(new Empresa(), empresa)));
+    this.empresaService.listOptionsTipoPapel().subscribe(response => {
+      this.optionsTipoPapel = response.body;
+    });
+  }
+
+  getTipoPapelDescritipion(value: string): string {
+    const option = this.optionsTipoPapel.find(opt => opt.value === value);
+    return option ? option.description : null;
   }
 
   list(): Object {
-    console.log("implmementar");
     return this.empresas;
   }
 
@@ -48,9 +56,9 @@ export class EmpresaComponent implements OnInit {
         } else {
           this.empresas.push(savedObj);
         }
-        this.mensagemService.showMessage(savedObj.nome, "Empresa salva com sucesso.", "success");
+        this.mensagemService.showMessage(savedObj.nome, 'Empresa salva com sucesso.', 'success');
       }, error => {
-        this.mensagemService.showMessage("Erro ao salvar empresa", error.message, "error");
+        this.mensagemService.showMessage('Erro ao salvar empresa', error.message, 'error');
         console.log(error);
       });
     }

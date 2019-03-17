@@ -40,16 +40,16 @@
 <form #notaForm="ngForm" *ngIf="selectedNota" (ngSubmit)="save()" class="modal-wrapper">
     <div class="modal">
         <header class="modal-title">
-            <h4>{{(selectedNota.id == null ? 'Nova Nota': selectedNota.acao.codigo + ' - ' + (selectedNota.dataAtualizacao | date: 'dd/MM/yyyy'))}}</h4>
+            <h4>{{(selectedNota.id == null ? 'Nova Nota': selectedNota.empresa.nome + ' - ' + (selectedNota.dataAtualizacao | date: 'dd/MM/yyyy'))}}</h4>
             <button (click)="close()" class="modal-close"><i class="fa fa-close"></i></button>
         </header>
         <section class="modal-body">
             <div class="form">
                 <div class="form-control g-12">
-                    <select id="acao" name="acao" [compareWith]="comparator" [(ngModel)]="selectedNota.acao" required>
-                        <option *ngFor="let acao of acoes" [ngValue]="acao">{{acao.codigo}}</option>
+                    <select id="empresa" name="empresa" [compareWith]="comparator" [(ngModel)]="selectedNota.empresa" required>
+                        <option *ngFor="let empresa of empresas" [ngValue]="empresa">{{empresa.nome}}</option>
                     </select>
-                    <label for="acao">Ação</label>
+                    <label for="empresa">Empresa</label>
                 </div>
                 <div class="form-control g-12">
                     <textarea id="nota" name="nota" [(ngModel)]="selectedNota.anotacao" maxlength="1000" rows="10" required></textarea>

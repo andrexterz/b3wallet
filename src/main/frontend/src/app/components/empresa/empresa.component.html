@@ -8,6 +8,7 @@
       <thead>
         <tr>
           <th class="left">Nome</th>
+          <th class="left">Papel</th>
           <th class="left">CNPJ</th>
           <th class="right"></th>
         </tr>
@@ -15,6 +16,7 @@
       <tbody>
         <tr *ngFor="let empresa of list(); let idx = index">
           <td title="Nome">{{empresa.nome}}</td>
+          <td title="Papel">{{getTipoPapelDescritipion(empresa.tipoPapel)}}</td>
           <td title="CNPJ">{{empresa.cnpj | mask:'00.000.000/0000-00'}}</td>
           <td class="table-action right"><a title="editar empresa" class="link" (click)="edit(empresa)"><i class="fa fa-pencil"></i></a></td>
         </tr>
@@ -30,13 +32,22 @@
         <section class="modal-body">
             <div class="form">
                 <div class="form-control g-12 g-l-8">
-                    <input type="text" id="empresa" name="empresa" [(ngModel)]="selectedEmpresa.nome" required>
+                    <input type="text" id="empresa" name="empresa" [(ngModel)]="selectedEmpresa.nome" autocomplete="off" required>
                     <label for="empresa">Empresa</label>
                 </div>
                 <div class="form-control g-12 g-l-4">
-                    <input type="text" id="cnpj" name="cnpj" mask="00.000.000/0000-00" [(ngModel)]="selectedEmpresa.cnpj" required>
+                    <input type="text" id="cnpj" name="cnpj" mask="00.000.000/0000-00" [(ngModel)]="selectedEmpresa.cnpj" autocomplete="off" required>
                     <label for="cnpj">CNPJ</label>
                 </div>
+                <fieldset>
+                    <legend>Tipo de papel</legend>
+                    <div class="form">
+                        <div class="form-control" *ngFor="let option of optionsTipoPapel">
+                            <input type="radio" name="tipoPapel" [id]="option.value" [value]="option.value" [(ngModel)]="selectedEmpresa.tipoPapel" required>
+                            <label [for]="option.value">{{option.description}}</label>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
         </section>
         <footer class="modal-footer">

@@ -4,7 +4,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Empresa } from '../models';
+import { Empresa, Option } from '../models';
 
 @Injectable()
 export class EmpresaService {
@@ -17,5 +17,8 @@ export class EmpresaService {
 
     list(): Observable<HttpResponse<Empresa[]>> {
         return this.http.get<Empresa[]>("/api/empresas", { observe: 'response' });
+    }
+    listOptionsTipoPapel(): Observable<HttpResponse<Option[]>> {
+        return this.http.get<Option[]>('/api/empresas/tipos', { observe: 'response' });
     }
 }

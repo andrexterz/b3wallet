@@ -1,15 +1,15 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
-import { Nota, Acao } from '../../models';
-import { AcaoService, NotaService, MensagemService } from '../../services';
+import { Nota, Empresa } from '../../models';
+import { EmpresaService, NotaService, MensagemService } from '../../services';
 
 @Component({
   selector: 'nota-component',
   templateUrl: './nota.component.html'
 })
 export class NotaComponent implements OnInit {
-    acoes: Acao[] = [];
+    empresas: Empresa[] = [];
     notas: Nota[] = [];
     selectedNota: Nota = null;
     selectedListItem: Set<string> = new Set();
@@ -18,22 +18,22 @@ export class NotaComponent implements OnInit {
       private route: ActivatedRoute,
       private location: Location,
       private notaService: NotaService,
-      private acaoService: AcaoService,
+      private empresaService: EmpresaService,
       private mensagemService: MensagemService
     ) {}
 
     ngOnInit(): void {
-      this.acaoService.list().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
+      this.empresaService.list().subscribe(response => this.empresas = response.body.map(empresa => Object.assign(new Empresa(), empresa)));
       this.notaService.list().subscribe(response => this.notas = response.body.map(nota => Object.assign(new Nota(), nota)));
     }
 
     list(): Object {
       let obj: Object = new Object();
       this.notas.forEach(nota => {
-        if (obj.hasOwnProperty(nota.acao.codigo)) {
-          obj[nota.acao.codigo].push(nota);
+        if (obj.hasOwnProperty(nota.empresa.nome)) {
+          obj[nota.empresa.nome].push(nota);
         } else {
-            obj[nota.acao.codigo] = [nota];
+            obj[nota.empresa.nome] = [nota];
         }
       });
       return obj;
@@ -57,9 +57,9 @@ export class NotaComponent implements OnInit {
           } else {
             this.notas.push(savedObj);
           }
-          this.mensagemService.showMessage(savedObj.acao.codigo, "Anotação salva com sucesso.", "success");
+          this.mensagemService.showMessage(savedObj.empresa.nome, 'Anotação salva com sucesso.', 'success');
         }, error => {
-          this.mensagemService.showMessage("Erro ao salvar nota", error.message, "error");
+          this.mensagemService.showMessage('Erro ao salvar nota', error.message, 'error');
           console.log(error);
         });
       }
@@ -67,14 +67,14 @@ export class NotaComponent implements OnInit {
     }
 
     delete(nota: Nota): void {
-      let confirmDelete = confirm("Remover nota " + nota.acao.codigo + ": " + (nota.anotacao.length <= 10 ? nota.anotacao: nota.anotacao.slice(0, 10).trim()) + "...?");
+      let confirmDelete = confirm('Remover nota ' + nota.empresa.nome + ': ' + (nota.anotacao.length <= 10 ? nota.anotacao: nota.anotacao.slice(0, 10).trim()) + '...?');
       if (confirmDelete) {
         let index = this.notas.findIndex(o => o.id == nota.id);
         this.notaService.delete(nota).subscribe(response => {
             this.notas.splice(index, 1);
-            this.mensagemService.showMessage("Anotação de " + nota.acao.codigo, (nota.anotacao.length <= 10 ? nota.anotacao: nota.anotacao.slice(0, 10).trim()) + " removida com sucesso.", "success");
+            this.mensagemService.showMessage('Anotação de ' + nota.empresa.nome, (nota.anotacao.length <= 10 ? nota.anotacao: nota.anotacao.slice(0, 10).trim()) + ' removida com sucesso.', 'success');
         }, error => {
-            this.mensagemService.showMessage("Erro ao remover nota", error.message, "error");
+            this.mensagemService.showMessage('Erro ao remover nota', error.message, 'error');
         });
       }
     }

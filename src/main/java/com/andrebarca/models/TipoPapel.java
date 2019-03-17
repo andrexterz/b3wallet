@@ -1,12 +1,13 @@
 package com.andrebarca.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public enum TipoPapel {
+public enum TipoPapel implements Serializable {
     ACAO("ACAO", "Ação"),
     FUNDO_INVESTIMENTO_IMOBILIARIO("FUNDO_INVESTIMENTO_IMOBILIARIO", "Fundo de Investimento Imobiliário");
 

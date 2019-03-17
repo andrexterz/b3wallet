@@ -6,8 +6,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 /**
  *
  * @author andre
@@ -21,26 +19,25 @@ public class Nota extends Base {
 
     }
 
-    public Nota(Acao acao, String anotacao) {
-        this.acao = acao;
+    public Nota(Empresa empresa, String anotacao) {
+        this.empresa = empresa;
         this.anotacao = anotacao;
     }
 
     @ManyToOne
-    @JoinColumn(name = "ACAO_ID")
-    @JsonIgnoreProperties({ "operacoes", "empresa" })
-    private Acao acao;
+    @JoinColumn(name = "EMPRESA_ID")
+    private Empresa empresa;
 
     @NotBlank
     @Column(length = 1000)
     private String anotacao;
 
-    public Acao getAcao() {
-        return acao;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setAcao(Acao acao) {
-        this.acao = acao;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public String getAnotacao() {

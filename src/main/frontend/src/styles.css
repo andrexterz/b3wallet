@@ -324,7 +324,6 @@ Form component styles
 }
 .form fieldset legend {
   color: #888;
-  margin: 10px;
   padding: 5px;
 }
 .form-control {

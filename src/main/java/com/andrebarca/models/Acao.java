@@ -6,8 +6,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,10 +27,9 @@ public class Acao extends Base {
     this.operacoes = new HashSet<>();
   }
 
-  public Acao(String codigo, Empresa empresa, TipoPapel tipoPapel, Set<Operacao> operacoes) {
+  public Acao(String codigo, Empresa empresa, Set<Operacao> operacoes) {
     this.codigo = codigo;
     this.empresa = empresa;
-    this.tipoPapel = tipoPapel;
     this.operacoes = operacoes;
   }
 
@@ -44,10 +41,8 @@ public class Acao extends Base {
   @JsonIgnoreProperties({"acao"})
   private Empresa empresa;
   
-  @Enumerated(EnumType.STRING)
-  private TipoPapel tipoPapel;
-
   @OneToMany(mappedBy = "acao", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+  @JsonIgnoreProperties({ "acao" })
   private Set<Operacao> operacoes;
 
   public String getCodigo() {
@@ -64,14 +59,6 @@ public class Acao extends Base {
 
   public void setEmpresa(Empresa empresa) {
     this.empresa = empresa;
-  }
-
-  public TipoPapel getTipoPapel() {
-    return tipoPapel;
-  }
-
-  public void setTipoPapel(TipoPapel tipoPapel) {
-    this.tipoPapel = tipoPapel;
   }
 
   public Set<Operacao> getOperacoes() {

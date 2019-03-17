@@ -51,15 +51,6 @@
                     <input type="text" id="codigoAcao" name="codigo" [(ngModel)]="selectedAcao.codigo" autofocus="autofocus" required>
                     <label for="codigoAcao">Código</label>
                 </div>
-                <fieldset>
-                    <legend>Tipo de papel</legend>
-                    <div class="form">
-                        <div class="form-control" *ngFor="let option of optionsTipoPapel">
-                            <input type="radio" name="tipoPapel" [id]="option.value" [value]="option">
-                            <label [for]="option.value">{{option.description}}</label>
-                        </div>
-                    </div>
-                </fieldset>
             </div>
         </section>
         <footer class="modal-footer">

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.andrebarca.models.Acao;
-import com.andrebarca.models.TipoPapel;
 import com.andrebarca.repositories.AcaoRepository;
 
 /**
@@ -37,10 +36,4 @@ public class AcaoService {
         Iterable<Acao> acoes = this.acaoRepository.findAll(new Sort(Direction.ASC, "codigo"));
         return new ResponseEntity<>(acoes, HttpStatus.OK);
     }
-
-    @RequestMapping(value = "/api/acoes/tipos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> listOptionsTipoPapel() {
-        return new ResponseEntity<>(TipoPapel.getPropertyList(), HttpStatus.OK);
-    }
-
 }
