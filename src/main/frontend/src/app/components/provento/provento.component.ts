@@ -2,8 +2,8 @@ import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import * as moment from 'moment';
-import { Acao, Provento, Option } from '../../models';
-import { AcaoService, ProventoService, MensagemService } from '../../services';
+import { Papel, Provento, Option } from '../../models';
+import { PapelService, ProventoService, MensagemService } from '../../services';
 
 @Component({
   selector: 'provento',
@@ -13,7 +13,7 @@ export class ProventoComponent implements OnInit {
 
   selectedProvento: Provento;
   proventos: Provento[] = [];
-  acoes: Acao[] = [];
+  papeis: Papel[] = [];
   selectedListItem: Set<string> = new Set();
   options: Option[];
 
@@ -21,13 +21,13 @@ export class ProventoComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private proventoService: ProventoService,
-    private acaoService: AcaoService,
+    private papelService: PapelService,
     private mensagemService: MensagemService,
     @Inject(LOCALE_ID) private locale: string
   ) { }
 
   ngOnInit() {
-    this.acaoService.list().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
+    this.papelService.list().subscribe(response => this.papeis = response.body.map(papel => Object.assign(new Papel(), papel)));
     this.proventoService.list().subscribe(response => this.proventos = response.body.map(provento => Object.assign(new Provento(), provento)));
     this.proventoService.listOptions().subscribe(response => this.options = response.body.map(option => Object.assign(new Option(), option)));
   }
@@ -68,7 +68,7 @@ export class ProventoComponent implements OnInit {
             } else {
                 this.proventos.push(savedObj);
             }
-            this.mensagemService.showMessage(savedObj.acao.codigo, "Provento salvo com sucesso.", "success");
+            this.mensagemService.showMessage(savedObj.papel.codigo, "Provento salvo com sucesso.", "success");
         }, error => {
             this.mensagemService.showMessage("Erro ao salvar provento", error.message, "error");
             console.log(error);
@@ -79,12 +79,12 @@ export class ProventoComponent implements OnInit {
 
   delete(provento: Provento): void {
     let valor = formatCurrency(provento.valor, this.locale, getCurrencySymbol('BRL', 'narrow', this.locale));
-    let confirmDelete = confirm("Remover provento " + provento.acao.codigo + ": " + valor + "?");
+    let confirmDelete = confirm("Remover provento " + provento.papel.codigo + ": " + valor + "?");
     if (confirmDelete) {
       let index = this.proventos.findIndex(o => o.id == provento.id);
       this.proventoService.delete(provento).subscribe(response => {
         this.proventos.splice(index, 1);
-        this.mensagemService.showMessage("Item removido", "Provento de " + provento.acao.codigo + ": " + valor +  " removido com sucesso.", "success");
+        this.mensagemService.showMessage("Item removido", "Provento de " + provento.papel.codigo + ": " + valor +  " removido com sucesso.", "success");
       }, error => {
         this.mensagemService.showMessage("Erro ao remover provento", error.message, "error");
       });

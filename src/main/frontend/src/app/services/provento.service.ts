@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Acao, Provento } from '../models';
+import { Papel, Provento } from '../models';
 
 @Injectable({
   providedIn: 'root'

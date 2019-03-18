@@ -26,28 +26,32 @@ public class Operacao extends Base {
 	private static final long serialVersionUID = 1L;
 
 	public Operacao() {
-        this.acao = null;
-      this.valor = 0.0;
-      this.quantidade = 0;
-      this.custoOperacao = 0.0;
-      this.tipoOperacao = null;
-      this.dataOperacao = null;
+        this.papel = null;
+        this.valor = 0.0;
+        this.quantidade = 0;
+        this.custoOperacao = 0.0;
+        this.tipoOperacao = null;
+        this.dataOperacao = null;
     }
     
-    public Operacao(Acao acao, Double valor, Integer quantidade, Double custoOperacao, TipoOperacao tipoOperacao, Date dataOperacao) {
-        this.acao = acao;
+    public Operacao(Papel papel, Double valor, NotaCorretagem notaCorretagem, Integer quantidade, Double custoOperacao, TipoOperacao tipoOperacao, Date dataOperacao) {
+        this.papel = papel;
+        this.notaCorretagem = notaCorretagem;
         this.valor = valor;
         this.quantidade = quantidade;
         this.custoOperacao = custoOperacao;
         this.tipoOperacao = tipoOperacao;
         this.dataOperacao = dataOperacao;
     }
-    
+
+    @ManyToOne
+    @JoinColumn(name = "NOTA_CORRETAGEM_ID")
+    private NotaCorretagem notaCorretagem;
     
     @ManyToOne
-    @JoinColumn(name = "ACAO_ID")
+    @JoinColumn(name = "PAPEL_ID")
     @JsonIgnoreProperties({"operacoes", "empresa"})
-    private Acao acao;
+    private Papel papel;
 
     private Double valor;
 
@@ -63,12 +67,20 @@ public class Operacao extends Base {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dataOperacao;
 
-    public Acao getAcao() {
-        return acao;
+    public Papel getPapel() {
+        return papel;
     }
 
-    public void setAcao(Acao acao) {
-        this.acao = acao;
+    public void setPapel(Papel papel) {
+        this.papel =papel;
+    }
+
+    public NotaCorretagem getNotaCorretagem() {
+        return notaCorretagem;
+    }
+
+    public void setNotaCorretagem(NotaCorretagem notaCorretagem) {
+        this.notaCorretagem = notaCorretagem;
     }
 
     public Double getValor() {

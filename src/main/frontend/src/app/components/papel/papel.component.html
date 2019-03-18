@@ -1,0 +1,60 @@
+<div class="container">
+    <h4 class="title">
+      <span>Papéis</span>
+      <form #filterForm="ngForm" class="title-detail">
+        <div class="form-control">
+          <input type="checkbox" name="filterCustodia" id="filterCustodia" [(ngModel)]="custodiaFilter" (click)="filter()">
+          <label for="filterCustodia">Custódia</label>
+        </div>
+      </form>
+      <a class="title-action" title="adicionar papel" (click)="add()"><i class="fa fa-plus-circle"></i></a>
+    </h4>
+    <p class="note" *ngIf="papeis.length == 0"><i class="fa fa-info-circle"></i><span class="margin-left-1">Você ainda não cadastrou nenhum item.</span></p>
+    <table class="table" *ngIf="papeis.length > 0">
+        <thead>
+            <tr>
+                <th class="left">Código</th>
+                <th class="left">Empresa</th>
+                <th class="right">Custódia</th>
+                <th class="right">Preço médio</th>
+                <th class="right">Lucro</th>
+                <th class="right"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let papel of list(); let idx = index">
+                <td title="Código">{{papel.codigo}}</td>
+                <td title="Empresa">{{papel.empresa.nome}}</td>
+                <td class="right" title="Custódia">{{papel.totalCustodia}}</td>
+                <td class="right" title="Preço médio">{{papel.precoMedio | currency:'BRL':'symbol':'1.2-2'}}</td>
+                <td class="right" title="Lucro">{{papel.totalLucro | currency:'BRL':'symbol':'1.2-2'}}</td>
+                <td class="table-action right"><a title="editar papel" class="link" (click)="edit(papel)"><i class="fa fa-pencil"></i></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<form #papelForm="ngForm" *ngIf="selectedPapel" (ngSubmit)="save()" class="modal-wrapper">
+    <div class="modal">
+        <header class="modal-title">
+            <h4>{{selectedPapel.id == null ? 'Nova Papel': selectedPapel.codigo}}</h4>
+            <button (click)="close()" class="modal-close"><i class="fa fa-close"></i></button>
+        </header>
+        <section class="modal-body">
+            <div class="form">
+                <div class="form-control g-8 g-l-9">
+                    <select id="empresa" name="empresa" [compareWith]="comparator" [(ngModel)]="selectedPapel.empresa" required>
+                        <option *ngFor="let empresa of empresas" [ngValue]="empresa">{{empresa.nome}}</option>
+                    </select>
+                    <label for="empresa">Empresa</label>
+                </div>
+                <div class="form-control g-4 g-l-3">
+                    <input type="text" id="codigoPapel" name="codigo" [(ngModel)]="selectedPapel.codigo" autofocus="autofocus" required>
+                    <label for="codigoPapel">Código</label>
+                </div>
+            </div>
+        </section>
+        <footer class="modal-footer">
+            <button type="submit" [disabled]="!papelForm.valid" class="btn btn-primary">salvar</button>
+        </footer>
+    </div>
+</form>

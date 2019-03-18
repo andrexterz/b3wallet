@@ -9,7 +9,7 @@
           </button>
         </div>
         <div class="form-control inline">
-          <option-button name="dataOperacao" [options]="optionsDataOperacao" [(value)]="dataOperacaoFilter"></option-button>
+          <option-button name="dataOperacao" label="mês/ano" [options]="optionsDataOperacao" [(value)]="dataOperacaoFilter"></option-button>
         </div>
         <div class="form-control inline" *ngFor="let option of optionsTipoOperacao">
           <input name="tipoOperacao" type="radio" [id]="option.value" [value]="option" [(ngModel)]="tipoOperacaoFilter">
@@ -76,7 +76,7 @@
         </tfoot>
         <tbody>
           <tr *ngFor="let operacao of entry.value.items">
-            <td title="Código" class="left">{{operacao.acao.codigo}}</td>
+            <td title="Código" class="left">{{operacao.papel.codigo}}</td>
             <td title="Tipo" class="left">{{operacao.tipoOperacao}}</td>
             <td title="Quantidade" class="right">{{operacao.quantidade}}</td>
             <td title="Data operação" class="center">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</td>
@@ -93,10 +93,12 @@
       </table>
     </ng-container>
 </div>
-<form #operacaoForm="ngForm" (ngSubmit)="save()" class="modal-wrapper" *ngIf="selectedOperacao">
+<nota-corretagem *ngIf="selectedNotaCorretagem" [(notaCorretagem)]="selectedNotaCorretagem"></nota-corretagem> 
+<!-- <form #operacaoForm="ngForm" (ngSubmit)="save()" class="modal-wrapper" *ngIf="selectedOperacao"> -->
+<form #operacaoForm="ngForm" (ngSubmit)="save()" class="modal-wrapper" *ngIf="false">
     <div class="modal">
         <header class="modal-title">
-            <h4>{{selectedOperacao.id == null ? 'Nova Operação': selectedOperacao.acao.codigo + ': ' + selectedOperacao.tipoOperacao}}</h4>
+            <h4>{{selectedOperacao.id == null ? 'Nova Operação': selectedOperacao.papel.codigo + ': ' + selectedOperacao.tipoOperacao}}</h4>
             <button (click)="close()" class="modal-close"><i class="fa fa-close"></i></button>
         </header>
         <section class="modal-body">
@@ -106,10 +108,10 @@
                     <label for="dataOperacao">Data</label>
                 </div>
                 <div class="form-control g-6 g-l-4">
-                    <select id="acao" name="acao" [compareWith]="comparator" [(ngModel)]="selectedOperacao.acao" required>
-                      <option *ngFor="let acao of acoes" [ngValue]="acao">{{acao.codigo}}</option>
+                    <select id="papel" name="papel" [compareWith]="comparator" [(ngModel)]="selectedOperacao.papel" required>
+                      <option *ngFor="let papel of papeis" [ngValue]="papel">{{papel.codigo}}</option>
                     </select>
-                    <label for="acao">Código</label>
+                    <label for="papel">Código</label>
                 </div>
                 <div class="form-control g-6 g-l-4">
                     <select id="tipo" name="tipo" [(ngModel)]="selectedOperacao.tipoOperacao" required>

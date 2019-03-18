@@ -13,17 +13,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.andrebarca.models.Acao;
+import com.andrebarca.models.Papel;
 /**
  *
  * @author andre
  */
 
 @Repository
-public interface AcaoRepository extends CrudRepository<Acao, Long> {
-    List<Acao> findAll(Sort sort);
+public interface PapelRepository extends CrudRepository<Papel, Long> {
+    List<Papel> findAll(Sort sort);
 
     @Modifying
-    @Query("delete from Acao a where a.id = ?1")
+    @Query("delete from Papel a where a.id = ?1")
     void deleteById(Long id);
 }

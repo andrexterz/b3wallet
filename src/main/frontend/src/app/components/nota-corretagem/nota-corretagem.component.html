@@ -1,0 +1,22 @@
+<form #notaCorretagemForm="ngForm" (ngSubmit)="save()" class="modal-wrapper">
+  <div class="modal">
+    <header class="modal-title">
+      <h4>
+        Nota de corretagem
+      </h4>
+      <button (click)="close()" class="modal-close"><i class="fa fa-close"></i></button>
+    </header>
+    <section class="modal-body">
+      <div class="form">
+        <div class="form-control g-6 g-l-4">
+          <input id="dataOperacao" name="dataOperacao" type="date" autofocus="autofocus" required>
+          <label for="dataOperacao">Data</label>
+        </div>
+      </div>
+    </section>
+    <footer class="modal-footer">
+      <button type="submit" [disabled]="!notaCorretagemForm.valid" class="btn btn-primary">salvar</button>
+    </footer>
+  </div>
+</form>
+

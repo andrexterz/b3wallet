@@ -9,6 +9,7 @@ import java.util.Set;
 import com.andrebarca.models.Operacao;
 import com.andrebarca.models.TipoOperacao;
 import com.andrebarca.repositories.OperacaoRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -33,7 +34,7 @@ public class OperacaoService {
 	OperacaoRepository operacaoRepository;
 
 	@RequestMapping(value = "/api/operacoes/save", method = RequestMethod.POST)
-	public ResponseEntity<?> save(@RequestBody Operacao operacao) {
+	public ResponseEntity<?> save(@RequestBody Operacao operacao) throws JsonProcessingException {
 		Operacao savedObj = operacaoRepository.save(operacao);
 		return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
 	}
@@ -43,17 +44,16 @@ public class OperacaoService {
 		boolean removed = false;
 		try {
 			operacaoRepository.deleteById(id);
-			System.out.println("deleted obj id: " + id);
 			removed = true;
 		} catch (Exception e) {
-			System.out.println("could not delete obj id: " + id);
+			return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>(removed, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/api/operacoes", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> list() {
-		Iterable<Operacao> operacoes = this.operacaoRepository.findAll(new Sort(Direction.ASC, "acao.codigo")
+		Iterable<Operacao> operacoes = this.operacaoRepository.findAll(new Sort(Direction.ASC, "papel.codigo")
 				.and(new Sort(Direction.ASC, "dataOperacao")).and(new Sort(Direction.ASC, "tipoOperacao")));
 		return new ResponseEntity<>(operacoes, HttpStatus.OK);
 	}

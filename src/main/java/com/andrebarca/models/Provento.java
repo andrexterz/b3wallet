@@ -26,9 +26,9 @@ public class Provento extends Base {
 	public Provento() {
 	}
 
-	public Provento(TipoProvento tipoProvento, Acao acao, Double valor, Date dataEx, Date dataPagamento) {
+	public Provento(TipoProvento tipoProvento, Papel papel, Double valor, Date dataEx, Date dataPagamento) {
 		this.tipoProvento = tipoProvento;
-		this.acao = acao;
+		this.papel = papel;
 		this.valor = valor;
 		this.dataEx = dataEx;
 		this.dataPagamento = dataPagamento;
@@ -40,7 +40,7 @@ public class Provento extends Base {
 	@ManyToOne
 	@JoinColumn(name = "ACAO_ID")
 	@JsonIgnoreProperties({"operacoes"})
-	private Acao acao;
+	private Papel papel;
 
 	private Double valor;
 
@@ -59,12 +59,12 @@ public class Provento extends Base {
 		this.tipoProvento = tipoProvento;
 	}
 
-	public Acao getAcao() {
-		return acao;
+	public Papel getPapel() {
+		return papel;
 	}
 
-	public void setAcao(Acao acao) {
-		this.acao = acao;
+	public void setPapel(Papel papel) {
+		this.papel = papel;
 	}
 
 	public Double getValor() {

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef, Renderer } from '@angular/core';
 import { Option } from '../../models/option';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'option-button',
@@ -9,6 +8,7 @@ import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 })
 export class OptionButtonComponent implements OnInit {
 
+  @Input() label: string;
   @Input() options: Option[];
   @Input() value: Option;
   @Output() valueChange = new EventEmitter<Option>();
@@ -20,6 +20,7 @@ export class OptionButtonComponent implements OnInit {
     private renderer: Renderer) { }
 
   ngOnInit() {
+    console.log("default label: ", this.label);
   }
 
   private notifyChange(): void {
@@ -31,7 +32,6 @@ export class OptionButtonComponent implements OnInit {
     this.value = option;
     this.valueChange.emit(this.value);
     this.notifyChange();
-    this.optionButtonActive = !this.optionButtonActive;
   }
 
   optionButtonOnBlur(): void {

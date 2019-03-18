@@ -10,9 +10,10 @@ import {NgxMaskModule} from 'ngx-mask';
 import { AppComponent } from './app.component';
 
 import {
-  AcaoComponent,
+  PapelComponent,
   EmpresaComponent,
   OperacaoComponent,
+  NotaCorretagemComponent,
   ProventoComponent,
   NotaComponent,
   LoginComponent,
@@ -21,7 +22,7 @@ import {
 } from './components';
 
 import {
-  AcaoService,
+  PapelService,
   EmpresaService,
   OperacaoService,
   ProventoService,
@@ -35,8 +36,9 @@ registerLocaleData(localePt, 'pt-BR');
 @NgModule({
   declarations: [
     AppComponent,
-    AcaoComponent,
+    PapelComponent,
     OperacaoComponent,
+    NotaCorretagemComponent,
     ProventoComponent,
     NotaComponent,
     LoginComponent,
@@ -51,8 +53,8 @@ registerLocaleData(localePt, 'pt-BR');
     FormsModule,
      NgxMaskModule.forRoot({}),
     RouterModule.forRoot([
-      {path: 'dashboard', component: AcaoComponent},
-      {path: 'acoes', component: AcaoComponent},
+      {path: 'dashboard', component: PapelComponent},
+      {path:  'papeis', component: PapelComponent},
       {path: 'empresas', component: EmpresaComponent},
       {path: 'operacoes', component: OperacaoComponent},
       {path: 'proventos', component: ProventoComponent},
@@ -63,7 +65,7 @@ registerLocaleData(localePt, 'pt-BR');
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pt-BR'},
               {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
-              LoginService, EmpresaService, AcaoService, OperacaoService, ProventoService, NotaService],
+              LoginService, EmpresaService, PapelService, OperacaoService, ProventoService, NotaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

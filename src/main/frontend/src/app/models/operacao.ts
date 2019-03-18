@@ -1,8 +1,8 @@
-import { Acao } from '.';
+import { Papel } from '.';
 
 export class Operacao {
   id: number;
-  acao: Acao;
+  papel: Papel;
   valor: number = 0;
   quantidade: number = 0;
   tipoOperacao: string;

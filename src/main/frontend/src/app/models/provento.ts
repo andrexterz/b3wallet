@@ -1,8 +1,8 @@
-import { Acao } from "./acao";
+import { Papel } from "./papel";
 
 export class Provento {
   id: number;
-  acao: Acao;
+  papel: Papel;
   valor: number = 0;
   dataEx: Date;
   dataPagamento: Date;

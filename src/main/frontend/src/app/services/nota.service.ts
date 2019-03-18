@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Acao, Nota } from "../models";
+import { Papel, Nota } from "../models";
 
 @Injectable()
 export class NotaService {

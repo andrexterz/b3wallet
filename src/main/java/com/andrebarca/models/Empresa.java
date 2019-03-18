@@ -1,5 +1,6 @@
 package com.andrebarca.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -21,7 +22,8 @@ public class Empresa extends Base {
     }
 
     private String nome;
-
+    
+    @Column(unique = true)
     private String cnpj;
 
     @Enumerated(EnumType.STRING)

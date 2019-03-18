@@ -3,7 +3,6 @@ package com.andrebarca.models;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,15 +18,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 
 @Entity
-public class Acao extends Base {
+public class Papel extends Base {
 
   private static final long serialVersionUID = 1L;
 
-  public Acao() {
-    this.operacoes = new HashSet<>();
+  public Papel() {
+    this.operacoes = new HashSet<Operacao>();
   }
 
-  public Acao(String codigo, Empresa empresa, Set<Operacao> operacoes) {
+  public Papel(String codigo, Empresa empresa, Set<Operacao> operacoes) {
     this.codigo = codigo;
     this.empresa = empresa;
     this.operacoes = operacoes;
@@ -38,13 +37,13 @@ public class Acao extends Base {
 
   @ManyToOne
   @JoinColumn(name = "EMPRESA_ID")
-  @JsonIgnoreProperties({"acao"})
+  @JsonIgnoreProperties({"papel"})
   private Empresa empresa;
   
-  @OneToMany(mappedBy = "acao", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-  @JsonIgnoreProperties({ "acao" })
+  @OneToMany(mappedBy = "papel", fetch = FetchType.EAGER)
+  @JsonIgnoreProperties({"papel"})
   private Set<Operacao> operacoes;
-
+  
   public String getCodigo() {
     return codigo;
   }
@@ -66,14 +65,10 @@ public class Acao extends Base {
   }
 
   public void setOperacoes(Set<Operacao> operacoes) {
-    operacoes.forEach((operacao) -> {
-      operacao.setAcao(this);
+    operacoes.forEach(op -> {
+      op.setPapel(this);
     });
     this.operacoes = operacoes;
-  }
-
-  public void addOperacao(Operacao operacao) {
-    this.operacoes.add(operacao);
   }
 
   @Transient

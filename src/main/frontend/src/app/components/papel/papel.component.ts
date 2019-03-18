@@ -2,59 +2,59 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/map';
-import { AcaoService, EmpresaService, MensagemService } from '../../services';
-import { Acao, Empresa } from '../../models';
+import { PapelService, EmpresaService, MensagemService } from '../../services';
+import { Papel, Empresa } from '../../models';
 
 @Component({
-  selector: 'acao-component',
-  templateUrl: './acao.component.html'
+  selector: 'papel-component',
+  templateUrl: './papel.component.html'
 })
-export class AcaoComponent implements OnInit {
+export class PapelComponent implements OnInit {
 
-    selectedAcao: Acao = null;
-    acoes: Acao[] = [];
+    selectedPapel: Papel = null;
+    papeis: Papel[] = [];
     empresas: Empresa[] = [];
     custodiaFilter: boolean = false;
 
     constructor(
       private route: ActivatedRoute,
       private location: Location,
-      private acaoService: AcaoService,
+      private papelService: PapelService,
       private empresaoService: EmpresaService,
       private mensagemService: MensagemService
       ) {
       }
 
     ngOnInit(): void {
-      this.acaoService.list().subscribe(response => this.acoes = response.body.map(acao => Object.assign(new Acao(), acao)));
+      this.papelService.list().subscribe(response => this.papeis = response.body.map(papel => Object.assign(new Papel(), papel)));
       this.empresaoService.list().subscribe(response => this.empresas = response.body.map(empresa => Object.assign(new Empresa(), empresa)));
       eval(localStorage.getItem('custodiaFilter')) ? this.custodiaFilter = eval(localStorage.getItem('custodiaFilter')): false;
     }
 
     list(): Object {
-      return this.custodiaFilter ? this.acoes.filter(acao => acao.totalCustodia > 0): this.acoes;
+      return this.custodiaFilter ? this.papeis.filter(papel => papel.totalCustodia > 0): this.papeis;
     }
 
     add(): void {
-      this.selectedAcao = new Acao();
+      this.selectedPapel = new Papel();
     }
 
-    edit(acao: Acao): void {
-      this.selectedAcao = Object.assign({}, acao);
+    edit(papel: Papel): void {
+      this.selectedPapel = Object.assign({}, papel);
     }
 
     save(): void {
-      if (this.selectedAcao) {
+      if (this.selectedPapel) {
         // delete
-        console.log(this.selectedAcao);
+        console.log(this.selectedPapel);
         // fim delete
-        this.acaoService.save(this.selectedAcao).subscribe(response => {
-            let savedObj: Acao = Object.assign(new Acao(), response.body);
-            let index = this.acoes.findIndex(o => o.id == savedObj.id);
+        this.papelService.save(this.selectedPapel).subscribe(response => {
+            let savedObj: Papel = Object.assign(new Papel(), response.body);
+            let index = this.papeis.findIndex(o => o.id == savedObj.id);
             if (index >= 0) {
-                this.acoes[index] = savedObj;
+                this.papeis[index] = savedObj;
             } else {
-                this.acoes.push(savedObj);
+                this.papeis.push(savedObj);
             }
             this.mensagemService.showMessage(savedObj.codigo, 'Ação salva com sucesso.', 'success');
         }, error => {
@@ -66,7 +66,7 @@ export class AcaoComponent implements OnInit {
     }
 
     close(): void {
-      this.selectedAcao = null;
+      this.selectedPapel = null;
     }
 
     filter(): void {
@@ -74,7 +74,7 @@ export class AcaoComponent implements OnInit {
       localStorage.setItem('custodiaFilter', this.custodiaFilter.toString());
     }
 
-  //compare method for directive compareWith (mover para Util.ts)
+  // compare method for directive compareWith (mover para Util.ts)
   comparator(itemA: any, itemB: any) {
     try {
       return itemA.id == itemB.id;

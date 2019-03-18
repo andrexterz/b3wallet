@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.andrebarca.models.Acao;
-import com.andrebarca.repositories.AcaoRepository;
+import com.andrebarca.models.Papel;
+import com.andrebarca.repositories.PapelRepository;
 
 /**
  *
@@ -20,20 +20,20 @@ import com.andrebarca.repositories.AcaoRepository;
  */
 
 @RestController
-public class AcaoService {
+public class PapelService {
     
     @Autowired
-    AcaoRepository acaoRepository;
+    PapelRepository papelRepository;
     
-    @RequestMapping(value = "/api/acoes/save", method = RequestMethod.POST)
-    public ResponseEntity<?> save(@RequestBody Acao acao) {
-        Acao savedObj = this.acaoRepository.save(acao);
+    @RequestMapping(value = "/api/papeis/save", method = RequestMethod.POST)
+    public ResponseEntity<?> save(@RequestBody Papel papel) {
+        Papel savedObj = this.papelRepository.save(papel);
         return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/api/acoes", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/papeis", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> list() {
-        Iterable<Acao> acoes = this.acaoRepository.findAll(new Sort(Direction.ASC, "codigo"));
-        return new ResponseEntity<>(acoes, HttpStatus.OK);
+        Iterable<Papel> papeis = this.papelRepository.findAll(new Sort(Direction.ASC, "codigo"));
+        return new ResponseEntity<>(papeis, HttpStatus.OK);
     }
 }

@@ -1,6 +1,6 @@
 import { Operacao, Empresa } from '.';
 
- export class Acao {
+ export class Papel {
 
     id: number;
     codigo: string;
