@@ -21,6 +21,11 @@ Form component styles
     legend {
       color: $form-control-color;
       padding: #{$padding/2};
+      user-select: none;
+
+      * + * {
+        margin-left: #{$margin};
+      }
     }
   }  
 
@@ -31,6 +36,13 @@ Form component styles
     flex-direction: column;
     border-radius: $form-control-border-radius;
     margin: $margin;
+    font-size: 1rem;
+    color: $form-control-color;
+
+
+    input[type="number"] {
+      text-align: right;
+    }
 
     input[type="text"],
     input[type="number"],
@@ -73,7 +85,6 @@ Form component styles
        font-size: 1rem;
        height: $form-control-height;
        margin-left: 0;
-       color: $form-control-color;
        transform: translateY(-75%);
        transition: all .1s linear;
        z-index: 0;
@@ -140,8 +151,12 @@ Form component styles
      //label + field inline
      &.inline {
        flex-direction: row;
-       align-items: center;
+      //  align-items: center;
        margin: 0 #{$margin};
+
+       * + * {
+         margin-left: #{$margin / 2};
+       }
 
        input, textarea, select {
          font-size: initial;

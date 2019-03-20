@@ -1,6 +1,5 @@
 <div class="option-button">
   <label class="option-button-control" tabindex="1" [class.active]="optionButtonActive" (blur)="optionButtonOnBlur()" type="button">
-    <i class="fa fa-calendar-o"></i>
     <span>{{value? value.description : label}}</span>
     <input type="checkbox" name="optionButtonStatus" [(ngModel)]="optionButtonActive">
   </label>

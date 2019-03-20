@@ -22,7 +22,7 @@ Form component styles
       }
     }
 
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -51,7 +51,8 @@ Form component styles
       transform: scale(0.001, 0.001);
     }
 
-    &:active {
+    &:focus {
+      color: darken($btn-background, 50%);
     }
 
     & + &, & > * + * {
@@ -63,7 +64,7 @@ Form component styles
     }
 
     &:active {
-      background-color: darken($btn-background, 10%);
+      background-color: darken($btn-background, 20%);
       transition: all .1s ease-out;
       outline: 0;
       &:before {

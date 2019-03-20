@@ -8,10 +8,147 @@
     </header>
     <section class="modal-body">
       <div class="form">
-        <div class="form-control g-6 g-l-4">
-          <input id="dataOperacao" name="dataOperacao" type="date" autofocus="autofocus" required>
-          <label for="dataOperacao">Data</label>
+        <div class="form-control g-6 g-l-3">
+          <input id="numeroNotaCorretagem" name="numeroNotaCorretagem" type="text" mask="0*" autofocus="autofocus" required>
+          <label for="dataOperacao">Número</label>
         </div>
+        <div class="form-control g-6 g-l-3">
+          <input id="dataPregao" name="dataPregao" type="date" required>
+          <label for="dataOperacao">Data do pregão</label>
+        </div>
+        <div class="form-control g-4 g-l-2">
+          <input id="taxaLiquidacao" name="taxaLiquidacao" type="number" min="0" step="0.01" required>
+          <label for="taxaLiquidacao">Taxa de liquidação</label>
+        </div>
+        <div class="form-control g-4 g-l-2">
+          <input id="taxaRegistro" name="taxaRegistro" type="number" min="0" step="0.01" required>
+          <label for="taxaRegistro">Taxa de registro</label>
+        </div>
+        <div class="form-control g-4 g-l-2">
+          <input id="taxaTermo" name="taxaTermo" type="number" min="0" step="0.01" required>
+          <label for="taxaTermo">Taxa termo</label>
+        </div>
+        <div class="form-control g-4 g-l-2">
+          <input id="taxaANA" name="taxaANA" type="number" min="0" step="0.01" required>
+          <label for="taxaANA">Taxa A.N.A.</label>
+        </div>
+        <div class="form-control g-4 g-l-2">
+          <input id="emolumentos" name="emolumentos" type="number" min="0" step="0.01" required>
+          <label for="emolumentos">Emolumentos</label>
+        </div>
+        <div class="form-control g-4 g-l-2">
+          <input id="corretagem" name="corretagem" type="number" min="0" step="0.01" required>
+          <label for="corretagem">Corretagem</label>
+        </div>
+        <div class="form-control g-4 g-l-2">
+          <input id="iss" name="iss" type="number" min="0" step="0.01" required>
+          <label for="iss">I.S.S.</label>
+        </div>
+        <div class="form-control g-4 g-l-2">
+          <input id="irrf" name="irrf" type="number" min="0" step="0.01" required>
+          <label for="irrf">I.R.R.F.</label>
+        </div>
+        <div class="form-control g-4 g-l-2">
+          <input id="outrasDespesas" name="outrasDespesas" type="number" min="0" step="0.01" required>
+          <label for="outrasDespesas">Outras despesas</label>
+        </div>
+        
+        <fieldset>
+          
+          <legend><span>Operações</span><button class="btn btn-flat"><i class="fa fa-plus-circle"></i></button></legend>
+
+          <table class="table editable">
+            <thead>
+              <tr>
+                <th class="left">Código</th>
+                <th class="left">Operação</th>
+                <th class="left">Valor</th>
+                <th class="left">Quantidade</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th class="right" colspan="5">Total de custos: R$ 0.00</th>
+              </tr>
+              <tr>
+                <th class="right" colspan="5">Total da nota: R$ 0.00</th>
+              </tr>
+              <tr>
+                <th class="right" colspan="5">Total líquido: R$ 0.00</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <!-- on init add 1 item -->
+              <tr>
+                <td>
+                  <div class="form-control">
+                    <select id="papel" name="papel" [compareWith]="comparator" [(ngModel)]="selectedOperacao.papel" required>
+                      <option *ngFor="let papel of papeis" [ngValue]="papel">{{papel.codigo}}</option>
+                      <option value="1">teste 1</option>
+                      <option value="2">teste 2</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-control">
+                    <select id="tipo" name="tipo" [(ngModel)]="selectedOperacao.tipoOperacao" required>
+                        <option *ngFor="let option of optionsTipoOperacao" [value]="option.value">{{option.description}}</option>
+                        <option value="1">teste 1</option>
+                        <option value="2">teste 2</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-control">
+                    <input id="valor" name="valor" [(ngModel)]="selectedOperacao.valor" type="number" min="0.01" step="0.01" required>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-control">
+                    <input id="quantidade" name="quantidade" [(ngModel)]="selectedOperacao.quantidade" type="number" min="1" step="1" required>
+                  </div>
+                </td>
+                <td class="center">
+                  <button type="button" class="btn btn-flat"><i class="fa fa-trash"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="form-control">
+                    <select id="papel" name="papel" [compareWith]="comparator" [(ngModel)]="selectedOperacao.papel" required>
+                      <option *ngFor="let papel of papeis" [ngValue]="papel">{{papel.codigo}}</option>
+                      <option value="1">teste 1</option>
+                      <option value="2">teste 2</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-control">
+                    <select id="tipo" name="tipo" [(ngModel)]="selectedOperacao.tipoOperacao" required>
+                        <option *ngFor="let option of optionsTipoOperacao" [value]="option.value">{{option.description}}</option>
+                        <option value="1">teste 1</option>
+                        <option value="2">teste 2</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-control">
+                    <input id="valor" name="valor" [(ngModel)]="selectedOperacao.valor" type="number" min="0.01" step="0.01" required>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-control">
+                    <input id="quantidade" name="quantidade" [(ngModel)]="selectedOperacao.quantidade" type="number" min="1" step="1" required>
+                  </div>
+                </td>
+                <td class="center">
+                  <button type="button" class="btn btn-flat"><i class="fa fa-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </fieldset>
       </div>
     </section>
     <footer class="modal-footer">

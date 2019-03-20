@@ -101,4 +101,56 @@ Table component styles
           font-size: 1em;
         }
     }
+
+    // .table .form
+    &.editable {
+      border: 1px solid $list-border-color;
+      margin: auto;
+      
+      // tr all groups
+      tr {
+        border-top: 1px solid $list-border-color;
+        border-bottom: 1px solid $list-border-color;
+      }
+
+      td, th {
+
+        &:not(:first-child) {
+          border-left: 1px solid $list-border-color;
+        }
+  
+        &:not(:last-child) {
+          border-right: 1px solid $list-border-color;
+        }
+      }
+
+      // .table.editable tbody
+      tbody {
+
+        
+        td {
+          padding: 0;
+
+
+          .form-control {
+            margin: 0;
+
+            input[type="text"],
+            input[type="number"],
+            input[type="password"],
+            input[type="date"],
+            input[type="month"],
+            textarea,
+            select {
+              border-width: 0;
+              background-color: #{$col-control-background};
+
+              &:focus {
+                background-color: #{lighten($col-control-background, 100%)};
+              }
+            }
+          }
+        }
+      }
+    }
 }
