@@ -53,7 +53,18 @@ Grid component styles
     }
 }
 
-@media only screen and (min-width: $small-device) {
+// small device
+@media only screen and (max-width: $small-device) {
+    @for $g from 1 through $grid-divisor {
+        .g-p-#{$g} {
+            $size: $g/$grid-divisor * 100%;
+            width: calc(#{$size} - #{$margin*2});
+        }
+    }
+}
+
+// medium device
+@media only screen and (min-width: $small-device) and (max-width: $medium-device) {
     @for $g from 1 through $grid-divisor {
         .g-m-#{$g} {
             $size: $g/$grid-divisor * 100%;
@@ -62,6 +73,7 @@ Grid component styles
     }
 }
 
+// large device
 @media only screen and (min-width: $medium-device) {
     @for $g from 1 through $grid-divisor {
         .g-l-#{$g} {
