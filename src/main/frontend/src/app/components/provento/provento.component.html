@@ -33,7 +33,7 @@
 							<td title="Data ex" class="center">{{provento.dataEx | date: 'dd/MM/yyyy'}}</td>
 							<td title="Pagamento em" class="center">{{provento.dataPagamento | date: 'dd/MM/yyyy'}}</td>
 							<td title="Valor" class="right">{{provento.valor | currency:'BRL':'symbol':'1.2-2'}}</td>
-							<td class="table-action right">
+							<td class="table-action center">
 								<a title="editar provento" class="link" (click)="edit(provento)"><i class="fa fa-pencil"></i></a>
 								<a title="remover provento" class="margin-left-3 link" (click)="delete(provento)"><i class="fa fa-trash"></i></a>
 							</td>

@@ -12,7 +12,9 @@ import javax.persistence.Enumerated;
 @Entity
 public class Empresa extends Base {
 
-    public Empresa() {
+  	private static final long serialVersionUID = 1L;
+
+	public Empresa() {
     }
 
     public Empresa(String nome, String cnpj, TipoPapel tipoPapel) {

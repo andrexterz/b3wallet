@@ -131,6 +131,9 @@ Table component styles
         td {
           padding: 0;
 
+          .static-text {
+            margin: 0 #{$margin/2};
+          }
 
           .form-control {
             margin: 0;

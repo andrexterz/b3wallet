@@ -9,62 +9,62 @@
     <section class="modal-body">
       <div class="form">
         <div class="form-control g-12 g-m-6 g-l-3">
-          <input id="numeroNotaCorretagem" name="numeroNotaCorretagem" type="text" mask="0*" autofocus="autofocus" required>
+          <input id="numeroNotaCorretagem" name="numeroNotaCorretagem" type="text" mask="0*" autofocus="autofocus" [(ngModel)]="notaCorretagem.numero" required>
           <label for="dataOperacao">Número</label>
         </div>
         <div class="form-control g-12 g-m-6 g-l-3">
-          <input id="dataPregao" name="dataPregao" type="date" required>
+          <input id="dataPregao" name="dataPregao" type="date" [(ngModel)]="notaCorretagem.dataPregao" required>
           <label for="dataOperacao">Data do pregão</label>
         </div>
         <div class="form-control g-12 g-m-6 g-l-2">
-          <input id="taxaLiquidacao" name="taxaLiquidacao" type="number" min="0" step="0.01" required>
+          <input id="taxaLiquidacao" name="taxaLiquidacao" type="number" min="0" step="0.01" [(ngModel)]="notaCorretagem.taxaLiquidacao" required>
           <label for="taxaLiquidacao">Taxa de liquidação</label>
         </div>
         <div class="form-control g-12 g-m-6 g-l-2">
-          <input id="taxaRegistro" name="taxaRegistro" type="number" min="0" step="0.01" required>
+          <input id="taxaRegistro" name="taxaRegistro" type="number" min="0" step="0.01" [(ngModel)]="notaCorretagem.taxaRegistro" required>
           <label for="taxaRegistro">Taxa de registro</label>
         </div>
         <div class="form-control g-12 g-m-6 g-l-2">
-          <input id="taxaTermo" name="taxaTermo" type="number" min="0" step="0.01" required>
+          <input id="taxaTermo" name="taxaTermo" type="number" min="0" step="0.01" [(ngModel)]="notaCorretagem.taxaTermo" required>
           <label for="taxaTermo">Taxa termo</label>
         </div>
         <div class="form-control g-12 g-m-6 g-l-2">
-          <input id="taxaANA" name="taxaANA" type="number" min="0" step="0.01" required>
+          <input id="taxaANA" name="taxaANA" type="number" min="0" step="0.01" [(ngModel)]="notaCorretagem.taxaANA" required>
           <label for="taxaANA">Taxa A.N.A.</label>
         </div>
         <div class="form-control g-12 g-m-6 g-l-2">
-          <input id="emolumentos" name="emolumentos" type="number" min="0" step="0.01" required>
+          <input id="emolumentos" name="emolumentos" type="number" min="0" step="0.01" [(ngModel)]="notaCorretagem.emolumentos" required>
           <label for="emolumentos">Emolumentos</label>
         </div>
         <div class="form-control g-12 g-m-6 g-l-2">
-          <input id="corretagem" name="corretagem" type="number" min="0" step="0.01" required>
+          <input id="corretagem" name="corretagem" type="number" min="0" step="0.01" [(ngModel)]="notaCorretagem.corretagem" required>
           <label for="corretagem">Corretagem</label>
         </div>
         <div class="form-control g-12 g-m-6 g-l-2">
-          <input id="iss" name="iss" type="number" min="0" step="0.01" required>
+          <input id="iss" name="iss" type="number" min="0" step="0.01" [(ngModel)]="notaCorretagem.iss" required>
           <label for="iss">I.S.S.</label>
         </div>
         <div class="form-control g-12 g-m-6 g-l-2">
-          <input id="irrf" name="irrf" type="number" min="0" step="0.01" required>
+          <input id="irrf" name="irrf" type="number" min="0" step="0.01" [(ngModel)]="notaCorretagem.irrf" required>
           <label for="irrf">I.R.R.F.</label>
         </div>
         <div class="form-control g-12 g-m-6 g-l-2">
-          <input id="outrasDespesas" name="outrasDespesas" type="number" min="0" step="0.01" required>
+          <input id="outrasDespesas" name="outrasDespesas" type="number" min="0" step="0.01" [(ngModel)]="notaCorretagem.outrasDespesas" required>
           <label for="outrasDespesas">Outras despesas</label>
         </div>
         
         <fieldset>
           
-          <legend><span>Operações</span><button class="btn btn-flat"><i class="fa fa-plus-circle"></i></button></legend>
+          <legend>Operações</legend>
 
           <table class="table editable">
             <thead>
               <tr>
                 <th class="left">Código</th>
                 <th class="left">Operação</th>
-                <th class="left">Valor</th>
-                <th class="left">Quantidade</th>
-                <th></th>
+                <th class="right">Valor</th>
+                <th class="right">Quantidade</th>
+                <th><button class="btn btn-flat" title="Nova Operação" type="button" (click)="newOperacao()"><i class="fa fa-plus-circle"></i></button></th>
               </tr>
             </thead>
             <tfoot>
@@ -78,36 +78,47 @@
                 <th class="right" colspan="5">Total líquido: R$ 0.00</th>
               </tr>
             </tfoot>
-            <tbody>
-              <!-- on init add 1 item -->
+            <tbody *ngIf="operacoes">
               <tr *ngFor="let operacao of operacoes">
+                <td><span class="static-text">{{operacao.papel ? operacao.papel.codigo : ''}}</span></td>
+                <td><span class="static-text">{{operacao.tipoOperacao}}</span></td>
+                <td class="right"><span class="static-text">{{operacao.valor}}</span></td>
+                <td class="right"><span class="static-text">{{operacao.quantidade}}</span></td>
+                <td class="table-action center">
+                  <button type="button" class="btn btn-flat"><i class="fa fa-pencil"></i></button>
+                  <button type="button" class="btn btn-flat margin-left-3"><i class="fa fa-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr *ngIf="selectedOperacao">
                 <td>
                   <div class="form-control">
-                    <select id="papel">
-                      <option value="1">teste 1</option>
-                      <option value="2">teste 2</option>
+                    <select id="papel" name="papel" [(ngModel)]="selectedOperacao.papel" required>
+                      <option *ngFor="let papel of papeis" [ngValue]="papel">{{papel.codigo}}</option>
                     </select>
                   </div>
                 </td>
                 <td>
                   <div class="form-control">
-                    <select id="tipo" name="tipo" required>
+                    <select id="tipoOperacao" name="tipoOperacao" [(ngModel)]="selectedOperacao.tipoOperacao" required>
                         <option *ngFor="let option of optionsTipoOperacao" [value]="option.value">{{option.description}}</option>
                     </select>
                   </div>
                 </td>
                 <td>
                   <div class="form-control">
-                    <input id="valor" name="valor" [(ngModel)]="operacao.valor" type="number" min="0.01" step="0.01" required>
+                    <input id="valor" name="valor" [(ngModel)]="selectedOperacao.valor" type="number" min="0.01" step="0.01" required>
                   </div>
                 </td>
                 <td>
                   <div class="form-control">
-                    <input id="quantidade" name="quantidade" [(ngModel)]="operacao.quantidade" type="number" min="1" step="1" required>
+                    <input id="quantidade" name="quantidade" [(ngModel)]="selectedOperacao.quantidade" type="number" min="1" step="1" required>
                   </div>
                 </td>
                 <td class="center">
-                  <button type="button" class="btn btn-flat"><i class="fa fa-trash"></i></button>
+                  <button type="button" class="btn btn-flat" (click)="addEditOperacao()"><i class="fa fa-check"></i></button>
+                  <button type="button" class="btn btn-flat margin-left-3" title="cancelar edição" (click)="removeCancelOperacao()"><i class="fa fa-close"></i></button>
                 </td>
               </tr>
             </tbody>

@@ -18,7 +18,7 @@
           <td title="Nome">{{empresa.nome}}</td>
           <td title="Papel">{{getTipoPapelDescritipion(empresa.tipoPapel)}}</td>
           <td title="CNPJ">{{empresa.cnpj | mask:'00.000.000/0000-00'}}</td>
-          <td class="table-action right"><a title="editar empresa" class="link" (click)="edit(empresa)"><i class="fa fa-pencil"></i></a></td>
+          <td class="table-action center"><a title="editar empresa" class="link" (click)="edit(empresa)"><i class="fa fa-pencil"></i></a></td>
         </tr>
       </tbody>
     </table>

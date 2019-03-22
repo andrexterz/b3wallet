@@ -180,6 +180,15 @@ Form component styles
        }
      }
   }
+  
+  @at-root  
+  .static-text {
+    display: inline-flex;
+    flex: 1 0 auto;
+    align-items: center;
+    height: $form-control-height;
+    min-height: $form-control-height;
+  }
 
   &-title {
     flex: 1 0 auto;

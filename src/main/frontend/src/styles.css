@@ -319,6 +319,9 @@ Table component styles
 .table.editable tbody td {
   padding: 0;
 }
+.table.editable tbody td .static-text {
+  margin: 0 5px;
+}
 .table.editable tbody td .form-control {
   margin: 0;
 }
@@ -527,6 +530,14 @@ Form component styles
   order: -1;
 }
 
+.static-text {
+  display: inline-flex;
+  flex: 1 0 auto;
+  align-items: center;
+  height: 28px;
+  min-height: 28px;
+}
+
 .form-title {
   flex: 1 0 auto;
   margin-top: 0;
@@ -592,9 +603,6 @@ Form component styles
 }
 .btn:focus {
   color: #100e14;
-}
-.btn + .btn, .btn > * + * {
-  margin: 0 5px;
 }
 .btn:hover {
   cursor: pointer;

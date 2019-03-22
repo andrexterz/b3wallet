@@ -55,10 +55,6 @@ Form component styles
       color: darken($btn-background, 50%);
     }
 
-    & + &, & > * + * {
-        margin: 0 $margin/2;
-    }
-
     &:hover {
       cursor: pointer;
     }
