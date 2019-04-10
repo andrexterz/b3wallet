@@ -83,7 +83,7 @@ Table component styles
 
         th, td {
             display: table-cell;
-            vertical-align: baseline;
+            vertical-align: middle;
 
             &::before {
                 display: none;
@@ -111,6 +111,11 @@ Table component styles
       tr {
         border-top: 1px solid $list-border-color;
         border-bottom: 1px solid $list-border-color;
+        
+        &.active {
+          border-bottom-width: 2px;
+          background-color: $row-control-background;
+        }
       }
 
       td, th {
@@ -146,11 +151,7 @@ Table component styles
             textarea,
             select {
               border-width: 0;
-              background-color: #{$col-control-background};
-
-              &:focus {
-                background-color: #{lighten($col-control-background, 100%)};
-              }
+              color: initial;
             }
           }
         }

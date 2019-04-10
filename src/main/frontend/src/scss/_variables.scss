@@ -18,17 +18,17 @@ $disabled-opacity: 0.5;
 //Element colors
 //=========================================================================
 $body-background: #f5f5fa;
-$link-color: #777;
+$link-color: #777777;
 $shadow-color: #55555588;
 $border-color: #9c9c9c;
 $border-dark-color: #3b3b3b;
 //=========================================================================
 //Pallete
 //=========================================================================
-$light-foreground: #333;
+$light-foreground: #333333;
 $dark-foreground: #efefef;
 $light-background: #fefefe;
-$dark-background: #333;
+$dark-background: #333333;
 $default-color: #4d506b;
 $primary-color: #ff005d;
 $secondary-color: #8a7ca5;
@@ -54,8 +54,8 @@ $nav-background: linear-gradient(90deg, lighten($nav-background-color-1, 10%) 0,
 $nav-border-color: darken($nav-background-color-2, 5%);
 $nav-bar-height: 60px;
 $nav-search-height: 40px;
-$nav-item-color: #eee;
-$nav-item-color-active: #ff5;
+$nav-item-color: #eeeeee;
+$nav-item-color-active: #ffff55;
 
 //=========================================================================
 //Form component variables
@@ -68,7 +68,7 @@ $form-control-padding: 10px;
 $form-control-color: #888;
 $form-control-background: #cccccc24;
 $form-title-background: #edeef5;
-$form-color-invalid: #cc0000;
+$form-color-invalid: #ee3333;
 //=========================================================================
 //Button component variables
 //=========================================================================
@@ -88,6 +88,7 @@ $list-height: 50px;
 //Table component variables
 //=========================================================================
 $col-control-background: #f5f5f5;
+$row-control-background: #fff8b6;
 
 //=========================================================================
 //Message component variables
@@ -97,3 +98,10 @@ $col-control-background: #f5f5f5;
 //Container component variables
 //=========================================================================
 $container-background-color: #fefefe;
+
+//=========================================================================
+//directions, margins, alignments variables
+//=========================================================================
+$text-alignment: (center, left, right, justify);
+$directions: (top, right, bottom, left);
+$horizontal-flex-alignment: ("left": start, "center": center, "right": end);

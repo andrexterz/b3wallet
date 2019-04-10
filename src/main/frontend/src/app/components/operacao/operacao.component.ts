@@ -1,5 +1,5 @@
 import { Component,  OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
 import { OperacaoService, PapelService, MensagemService } from '../../services';
@@ -19,9 +19,7 @@ export class OperacaoComponent implements OnInit {
     dataOperacaoFilter: Option = null;
     tipoOperacaoFilter: Option = null;
 
-    constructor(
-      private route: ActivatedRoute,
-      private location: Location,
+    constructor (
       private operacaoService: OperacaoService,
       private papelService: PapelService,
       private mensagemService: MensagemService
@@ -40,12 +38,15 @@ export class OperacaoComponent implements OnInit {
         this.optionsDataOperacao = response.body.sort((current, next) => current.value > next.value ? 1 : -1);
         this.dataOperacaoFilter = this.optionsDataOperacao.find(option => option.value == localStorage.getItem('dataOperacaoFilter'));
       });
+
+      // delete this after implementation
+      this.selectedNotaCorretagem = new NotaCorretagem();
+      // end delete this
     }
 
     updateServices(): void {
       this.operacaoService.list().subscribe(response => this.operacoes = response.body);
       this.operacaoService.listOptionsDataOperacao().subscribe(response => this.optionsDataOperacao = response.body);
-      console.log(this.tipoOperacaoFilter, this.dataOperacaoFilter);
     }
 
     list(): Object {
@@ -127,11 +128,13 @@ export class OperacaoComponent implements OnInit {
     delete(operacao: Operacao): void {
       let confirmDelete = confirm('Remover operacão ' + operacao.papel.codigo + ': ' + operacao.tipoOperacao + '?');
       if (confirmDelete) {
-        let index = this.operacoes.findIndex(o => o.id == operacao.id);
-        this.operacaoService.delete(operacao).subscribe(response => {
+        this.operacaoService.delete(operacao).subscribe(() => {
             // this.operacoes.splice(index, 1);
             this.updateServices();
-            this.mensagemService.showMessage('Item removido', 'Operação de ' + operacao.tipoOperacao + ': ' + operacao.papel.codigo + ' removida com sucesso.', 'success');
+            this.mensagemService.showMessage(
+              'Item removido', 'Operação de ' +
+              operacao.tipoOperacao + ': '    +
+              operacao.papel.codigo + ' removida com sucesso.', 'success');
         }, error => {
             this.mensagemService.showMessage('Erro ao remover operação', error.message, 'error');
             console.log(error);

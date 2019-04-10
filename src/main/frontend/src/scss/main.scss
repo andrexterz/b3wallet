@@ -202,14 +202,14 @@ Generic component styles
 }
 
 //.<alignment> { text-align: <alignment>; }
-@each $alignment in (center, left, right, justify) {
+@each $alignment in $text-alignment {
     .#{$alignment} {
         text-align: $alignment;
     }
 }
 
 //.margin-<direction>-[1-10]
-@each $side in (top, right, bottom, left) {
+@each $side in $directions {
     @for $m from 1 through 10 {
         .margin-#{$side}-#{$m} {
             margin-#{$side}: $m * $margin;

@@ -1,4 +1,4 @@
-<form #notaCorretagemForm="ngForm" (ngSubmit)="save()" class="modal-wrapper">
+<form #notaCorretagemForm="ngForm" (ngSubmit)="save(notaCorretagemForm)" class="modal-wrapper">
   <div class="modal">
     <header class="modal-title">
       <h4>
@@ -9,7 +9,7 @@
     <section class="modal-body">
       <div class="form">
         <div class="form-control g-12 g-m-6 g-l-3">
-          <input id="numeroNotaCorretagem" name="numeroNotaCorretagem" type="text" mask="0*" autofocus="autofocus" [(ngModel)]="notaCorretagem.numero" required>
+          <input id="numeroNotaCorretagem" name="numeroNotaCorretagem" type="text" mask="0*" autofocus="autofocus" autocomplete="off" [(ngModel)]="notaCorretagem.numero" required>
           <label for="dataOperacao">Número</label>
         </div>
         <div class="form-control g-12 g-m-6 g-l-3">
@@ -37,7 +37,7 @@
           <label for="emolumentos">Emolumentos</label>
         </div>
         <div class="form-control g-12 g-m-6 g-l-2">
-          <input id="corretagem" name="corretagem" type="number" min="0" step="0.01" [(ngModel)]="notaCorretagem.corretagem" required>
+          <input id="corretagem" name="corretagem" type="number" min="0" step="0.01" [(ngModel)]="notaCorretagem.corregatem" required>
           <label for="corretagem">Corretagem</label>
         </div>
         <div class="form-control g-12 g-m-6 g-l-2">
@@ -57,14 +57,18 @@
           
           <legend>Operações</legend>
 
-          <table class="table editable">
+          <table #operacoes class="table editable">
             <thead>
               <tr>
                 <th class="left">Código</th>
                 <th class="left">Operação</th>
                 <th class="right">Valor</th>
                 <th class="right">Quantidade</th>
-                <th><button class="btn btn-flat" title="Nova Operação" type="button" (click)="newOperacao()"><i class="fa fa-plus-circle"></i></button></th>
+                <th class="center">
+                  <button class="btn btn-flat" title="Adicionar operação" type="button" (click)="newOperacao()">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </th>
               </tr>
             </thead>
             <tfoot>
@@ -78,20 +82,8 @@
                 <th class="right" colspan="5">Total líquido: R$ 0.00</th>
               </tr>
             </tfoot>
-            <tbody *ngIf="operacoes">
-              <tr *ngFor="let operacao of operacoes">
-                <td><span class="static-text">{{operacao.papel ? operacao.papel.codigo : ''}}</span></td>
-                <td><span class="static-text">{{operacao.tipoOperacao}}</span></td>
-                <td class="right"><span class="static-text">{{operacao.valor}}</span></td>
-                <td class="right"><span class="static-text">{{operacao.quantidade}}</span></td>
-                <td class="table-action center">
-                  <button type="button" class="btn btn-flat"><i class="fa fa-pencil"></i></button>
-                  <button type="button" class="btn btn-flat margin-left-3"><i class="fa fa-trash"></i></button>
-                </td>
-              </tr>
-            </tbody>
             <tbody>
-              <tr *ngIf="selectedOperacao">
+              <tr *ngIf="isNew()" class="active">
                 <td>
                   <div class="form-control">
                     <select id="papel" name="papel" [(ngModel)]="selectedOperacao.papel" required>
@@ -99,26 +91,74 @@
                     </select>
                   </div>
                 </td>
+
                 <td>
                   <div class="form-control">
                     <select id="tipoOperacao" name="tipoOperacao" [(ngModel)]="selectedOperacao.tipoOperacao" required>
-                        <option *ngFor="let option of optionsTipoOperacao" [value]="option.value">{{option.description}}</option>
+                      <option *ngFor="let option of optionsTipoOperacao" [value]="option.value">{{option.description}}</option>
                     </select>
                   </div>
                 </td>
+
                 <td>
                   <div class="form-control">
                     <input id="valor" name="valor" [(ngModel)]="selectedOperacao.valor" type="number" min="0.01" step="0.01" required>
                   </div>
                 </td>
+                
                 <td>
                   <div class="form-control">
                     <input id="quantidade" name="quantidade" [(ngModel)]="selectedOperacao.quantidade" type="number" min="1" step="1" required>
                   </div>
                 </td>
+
                 <td class="center">
-                  <button type="button" class="btn btn-flat" (click)="addEditOperacao()"><i class="fa fa-check"></i></button>
-                  <button type="button" class="btn btn-flat margin-left-3" title="cancelar edição" (click)="removeCancelOperacao()"><i class="fa fa-close"></i></button>
+                  <button class="btn btn-flat" title="Adicionar operação" type="button" (click)="confirmOperacao()" [disabled]="!selectedOperacaoModelValid()">
+                    <i class="fa fa-check"></i>
+                  </button>
+                  <button class="btn btn-flat margin-left-2" title="Cancelar esta operação" type="button" (click)="cancelOperacao()">
+                    <i class="fa fa-close"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+
+            <tbody>
+              <tr *ngFor="let operacao of notaCorretagem.operacoes" [ngClass]="{'active': isEditing() && operacao == selectedOperacao}">
+                <td>
+                  <div class="form-control">
+                    <span class="static-text" *ngIf="!(isEditing() && operacao == selectedOperacao)">{{operacao.papel ? operacao.papel.codigo : ''}}</span>
+                    <select id="papel" name="papel" *ngIf="(isEditing() && operacao == selectedOperacao)" [(ngModel)]="selectedOperacao.papel" required>
+                      <option *ngFor="let papel of papeis" [ngValue]="papel">{{papel.codigo}}</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-control">
+                    <span class="static-text" *ngIf="!(isEditing() && operacao == selectedOperacao)">{{operacao.tipoOperacao}}</span>
+                    <select id="tipoOperacao" name="tipoOperacao" *ngIf="(isEditing() && operacao == selectedOperacao)" [(ngModel)]="selectedOperacao.tipoOperacao" required>
+                      <option *ngFor="let option of optionsTipoOperacao" [value]="option.value">{{option.description}}</option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-control">
+                    <span class="static-text right" *ngIf="!(isEditing() && operacao == selectedOperacao)">{{operacao.valor | currency:'BRL':'symbol':'1.2-2'}}</span>
+                    <input id="valor" name="valor" *ngIf="(isEditing() && operacao == selectedOperacao)" [(ngModel)]="selectedOperacao.valor" type="number" min="0.01" step="0.01" required>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-control">
+                    <span class="static-text right" *ngIf="!(isEditing() && operacao == selectedOperacao)">{{operacao.quantidade}}</span>
+                    <input id="quantidade" name="quantidade" *ngIf="(isEditing() && operacao == selectedOperacao)" [(ngModel)]="selectedOperacao.quantidade" type="number" min="1" step="1" required>
+                  </div>
+                </td>
+                <td class="center">
+                  <button type="button" class="btn btn-flat" title="confirmar alteração" *ngIf="(isEditing() && operacao == selectedOperacao)" (click)="confirmOperacao()"><i class="fa fa-check"></i></button>
+                  <button type="button" class="btn btn-flat" title="editar esta operação" *ngIf="!(isEditing() && operacao == selectedOperacao)" (click)="editOperacao(operacao)"><i class="fa fa-pencil"></i></button>
+                  <button type="button" class="btn btn-flat margin-left-2" title="remover esta operação" (click)="removeOperacao(operacao)" [disabled]="!isOperacaoRemovable()">
+                    <i class="fa fa-trash"></i>
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -127,7 +167,7 @@
       </div>
     </section>
     <footer class="modal-footer">
-      <button type="submit" [disabled]="!notaCorretagemForm.valid" class="btn btn-primary">salvar</button>
+      <button type="submit" [disabled]="!notaCorretagemForm.valid || selectedOperacao != null || notaCorretagem.operacoes.length == 0" class="btn btn-primary">salvar</button>
     </footer>
   </div>
 </form>

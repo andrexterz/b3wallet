@@ -53,10 +53,10 @@ Navbar component styles
   margin-right: 5px;
 }
 .navbar-nav .nav-item a:hover {
-  color: #eee;
+  color: #eeeeee;
 }
 .navbar-nav .nav-item.active a {
-  color: #ff5;
+  color: #ffff55;
 }
 .navbar-nav .nav-item:not(:first-child) {
   margin-left: 20px;
@@ -95,7 +95,7 @@ Navbar component styles
   padding: 5px;
 }
 .navbar-login:hover {
-  color: #ff5;
+  color: #ffff55;
 }
 .navbar-login-user {
   display: none;
@@ -256,7 +256,7 @@ Table component styles
   }
   .table th, .table td {
     display: table-cell;
-    vertical-align: baseline;
+    vertical-align: middle;
   }
   .table th::before, .table td::before {
     display: none;
@@ -310,6 +310,10 @@ Table component styles
   border-top: 1px solid #9c9c9c;
   border-bottom: 1px solid #9c9c9c;
 }
+.table.editable tr.active {
+  border-bottom-width: 2px;
+  background-color: #fff8b6;
+}
 .table.editable td:not(:first-child), .table.editable th:not(:first-child) {
   border-left: 1px solid #9c9c9c;
 }
@@ -333,16 +337,7 @@ Table component styles
 .table.editable tbody td .form-control textarea,
 .table.editable tbody td .form-control select {
   border-width: 0;
-  background-color: #f5f5f5;
-}
-.table.editable tbody td .form-control input[type=text]:focus,
-.table.editable tbody td .form-control input[type=number]:focus,
-.table.editable tbody td .form-control input[type=password]:focus,
-.table.editable tbody td .form-control input[type=date]:focus,
-.table.editable tbody td .form-control input[type=month]:focus,
-.table.editable tbody td .form-control textarea:focus,
-.table.editable tbody td .form-control select:focus {
-  background-color: white;
+  color: initial;
 }
 
 /*
@@ -455,7 +450,7 @@ Form component styles
 .form-control input[type=month].ng-touched.ng-dirty:invalid,
 .form-control textarea.ng-touched.ng-dirty:invalid,
 .form-control select.ng-touched.ng-dirty:invalid {
-  border-color: #cc0000;
+  border-color: #ee3333;
 }
 .form-control label {
   user-select: none;
@@ -536,6 +531,16 @@ Form component styles
   align-items: center;
   height: 28px;
   min-height: 28px;
+  color: initial;
+}
+.static-text.left {
+  justify-content: flex-start;
+}
+.static-text.center {
+  justify-content: flex-center;
+}
+.static-text.right {
+  justify-content: flex-end;
 }
 
 .form-title {
@@ -821,7 +826,7 @@ Toast messages
   bottom: 2em;
   margin: 0.75em;
   width: auto;
-  color: #333;
+  color: #333333;
   background-color: #fefefe;
   border: 1px solid #9c9c9c;
   border-radius: 3px;
@@ -854,7 +859,7 @@ Toast messages
   border-radius: 50%;
   background: none;
   cursor: pointer;
-  color: #777;
+  color: #777777;
 }
 .message-close:focus, .message-close:active, .message-close:hover {
   outline: none;
@@ -1214,7 +1219,7 @@ Generic component styles
 
 .link {
   cursor: pointer;
-  color: #777;
+  color: #777777;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
@@ -1233,7 +1238,7 @@ Generic component styles
   border: thin solid #9c9c9c;
   border-radius: 3px;
   color: #efefef;
-  background: #333;
+  background: #333333;
 }
 
 .circle {

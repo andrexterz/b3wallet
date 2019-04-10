@@ -188,6 +188,13 @@ Form component styles
     align-items: center;
     height: $form-control-height;
     min-height: $form-control-height;
+    color: initial;
+    
+    @each $k, $v in $horizontal-flex-alignment {
+      &.#{$k} {
+        justify-content: flex-#{$v};
+      }
+    }
   }
 
   &-title {
