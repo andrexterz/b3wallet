@@ -1,7 +1,8 @@
-import { Papel } from '.';
+import { Papel, NotaCorretagem } from '.';
 
 export class Operacao {
   id: number;
+  notaCorretagem: NotaCorretagem;
   papel: Papel;
   valor: number = 0;
   quantidade: number = 0;

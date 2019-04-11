@@ -31,17 +31,13 @@ export class OperacaoComponent implements OnInit {
 
       this.operacaoService.listOptionsTipoOperacao().subscribe(response => {
         this.optionsTipoOperacao = response.body;
-        this.tipoOperacaoFilter = this.optionsTipoOperacao.find(option => option.value == localStorage.getItem('tipoOperacaoFilter'));
+        this.tipoOperacaoFilter = this.optionsTipoOperacao.find(option => option.value === localStorage.getItem('tipoOperacaoFilter'));
       });
 
       this.operacaoService.listOptionsDataOperacao().subscribe(response => {
         this.optionsDataOperacao = response.body.sort((current, next) => current.value > next.value ? 1 : -1);
-        this.dataOperacaoFilter = this.optionsDataOperacao.find(option => option.value == localStorage.getItem('dataOperacaoFilter'));
+        this.dataOperacaoFilter = this.optionsDataOperacao.find(option => option.value === localStorage.getItem('dataOperacaoFilter'));
       });
-
-      // delete this after implementation
-      this.selectedNotaCorretagem = new NotaCorretagem();
-      // end delete this
     }
 
     updateServices(): void {
@@ -59,13 +55,13 @@ export class OperacaoComponent implements OnInit {
           let title = moment(operacao.dataOperacao).format('MM/YYYY');
           if (obj.hasOwnProperty(key)) {
             obj[key].items.push(operacao);
-            operacao.tipoOperacao == 'COMPRA' ? obj[key].totalCompra += operacao.totalOperacao : obj[key].totalVenda += operacao.totalOperacao;
+            operacao.tipoOperacao === 'COMPRA' ? obj[key].totalCompra += operacao.totalOperacao : obj[key].totalVenda += operacao.totalOperacao;
           } else {
             obj[key] = {
               title: title,
               items: [operacao],
-              totalCompra: operacao.tipoOperacao == 'COMPRA' ? operacao.totalOperacao : 0,
-              totalVenda: operacao.tipoOperacao == 'VENDA' ? operacao.totalOperacao : 0
+              totalCompra: operacao.tipoOperacao === 'COMPRA' ? operacao.totalOperacao : 0,
+              totalVenda: operacao.tipoOperacao === 'VENDA' ? operacao.totalOperacao : 0
             };
           }
         });
@@ -74,13 +70,13 @@ export class OperacaoComponent implements OnInit {
 
     getTotalCompra(): number {
       let total = 0;
-      this.operacoes.forEach(op => total += op.tipoOperacao == 'COMPRA' ? op.totalOperacao : 0);
+      this.operacoes.forEach(op => total += op.tipoOperacao === 'COMPRA' ? op.totalOperacao : 0);
       return total;
     }
 
     getTotalVenda(): number {
       let total = 0;
-      this.operacoes.forEach(op => total += op.tipoOperacao == 'VENDA' ? op.totalOperacao : 0);
+      this.operacoes.forEach(op => total += op.tipoOperacao === 'VENDA' ? op.totalOperacao : 0);
       return total;
     }
 
@@ -94,52 +90,12 @@ export class OperacaoComponent implements OnInit {
 
     getTotalCustodia(): number {
       let total = 0;
-      this.operacoes.forEach(op => total += op.tipoOperacao == 'COMPRA' ? op.totalOperacao : -op.totalOperacao);
+      this.operacoes.forEach(op => total += op.tipoOperacao === 'COMPRA' ? op.totalOperacao : -op.totalOperacao);
       return total;
     }
 
     getPerformance(): number {
       return 0;
-    }
-
-    add(): void {
-      this.selectedOperacao = new Operacao();
-      this.selectedNotaCorretagem = new NotaCorretagem();
-    }
-
-    edit(operacao: Operacao): void {
-      this.selectedOperacao = Object.assign(new Operacao(), operacao);
-    }
-
-    save(): void {
-        if (this.selectedOperacao) {
-            this.operacaoService.save(this.selectedOperacao).subscribe(response => {
-                let savedObj: Operacao = Object.assign(new Operacao(), response.body);
-                  this.updateServices();
-                this.mensagemService.showMessage(savedObj.papel.codigo, 'Operação salva com sucesso.', 'success');
-            }, error => {
-                this.mensagemService.showMessage('Erro ao salvar operação', error.message, 'error');
-                console.log(error);
-              });
-        }
-        this.close();
-    }
-
-    delete(operacao: Operacao): void {
-      let confirmDelete = confirm('Remover operacão ' + operacao.papel.codigo + ': ' + operacao.tipoOperacao + '?');
-      if (confirmDelete) {
-        this.operacaoService.delete(operacao).subscribe(() => {
-            // this.operacoes.splice(index, 1);
-            this.updateServices();
-            this.mensagemService.showMessage(
-              'Item removido', 'Operação de ' +
-              operacao.tipoOperacao + ': '    +
-              operacao.papel.codigo + ' removida com sucesso.', 'success');
-        }, error => {
-            this.mensagemService.showMessage('Erro ao remover operação', error.message, 'error');
-            console.log(error);
-        });
-      }
     }
 
     filter(): void {
@@ -166,15 +122,18 @@ export class OperacaoComponent implements OnInit {
       this.tipoOperacaoFilter = null;
     }
 
+    add(): void {
+      this.selectedNotaCorretagem = new NotaCorretagem();
+    }
+
     close(): void {
-      this.selectedOperacao = null;
       this.selectedNotaCorretagem = null;
     }
 
     // compare method for directive compareWith
     comparator(itemA: any, itemB: any) {
         try {
-            return itemA.id == itemB.id;
+            return itemA.id === itemB.id;
         } catch (e) {
             return false;
         }

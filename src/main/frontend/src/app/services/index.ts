@@ -1,6 +1,7 @@
 export * from './empresa.service';
 export * from './papel.service';
 export * from './nota.service';
+export * from './nota-corretagem.service';
 export * from './provento.service';
 export * from './login.service';
 export * from './mensagem.service';

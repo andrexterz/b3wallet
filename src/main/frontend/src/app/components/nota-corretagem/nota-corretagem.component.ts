@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { OperacaoService, PapelService } from '../../services';
+import { OperacaoService,PapelService } from '../../services';
 import { NotaCorretagem, Papel, Operacao, Option } from '../../models';
-import { NgForm } from '@angular/forms';
-import { NotaComponent } from '../nota/nota.component';
 
 @Component({
   selector: 'nota-corretagem',
@@ -25,8 +23,8 @@ export class NotaCorretagemComponent implements OnInit {
   optionsTipoOperacao: Option[] = [];
 
   constructor (
-    private papelService: PapelService,
-    private operacaoService: OperacaoService
+    private operacaoService: OperacaoService,
+    private papelService: PapelService
   ) {}
 
   ngOnInit() {
@@ -35,14 +33,14 @@ export class NotaCorretagemComponent implements OnInit {
     this.newOperacao();
   }
 
-  save(form: NgForm): void {
-    // console.log(form.invalid);
-    console.log("implementar salvar");
+  save(): void {
+    console.log(this.notaCorretagem);
   }
 
   newOperacao(): void {
     this.newOperacaoFlag = true;
     this.selectedOperacao = new Operacao();
+    this.selectedOperacao.notaCorretagem = this.notaCorretagem;
   }
 
   confirmOperacao(): void {
@@ -58,7 +56,6 @@ export class NotaCorretagemComponent implements OnInit {
   }
 
   editOperacao(operacao: Operacao): void {
-    console.log('implementando edit:', operacao);
     this.selectedOperacao = operacao;
     this.editingOperacaoFlag = true;
   }
@@ -75,7 +72,6 @@ export class NotaCorretagemComponent implements OnInit {
     if (index !== undefined && this.isOperacaoRemovable()) {
       this.notaCorretagem.operacoes.splice(index, 1);
     }
-    console.log('implementar remove', operacao, ' --> index:', index);
   }
 
   isNew(): boolean {

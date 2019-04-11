@@ -12,11 +12,11 @@ export class EmpresaService {
     constructor(private http: HttpClient) { }
 
     save(empresa: Empresa): Observable<HttpResponse<Empresa>> {
-        return this.http.post<Empresa>("/api/empresas/save", empresa, { observe: 'response' });
+        return this.http.post<Empresa>('/api/empresas/save', empresa, { observe: 'response' });
     }
 
     list(): Observable<HttpResponse<Empresa[]>> {
-        return this.http.get<Empresa[]>("/api/empresas", { observe: 'response' });
+        return this.http.get<Empresa[]>('/api/empresas', { observe: 'response' });
     }
     listOptionsTipoPapel(): Observable<HttpResponse<Option[]>> {
         return this.http.get<Option[]>('/api/empresas/tipos', { observe: 'response' });
