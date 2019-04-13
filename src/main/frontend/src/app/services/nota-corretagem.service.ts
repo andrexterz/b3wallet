@@ -9,6 +9,7 @@ export class NotaCorretagemService {
     constructor(private http: HttpClient) {}
 
     save(notaCorretagem: NotaCorretagem): Observable<HttpResponse<NotaCorretagem>>  {
+        notaCorretagem.operacoes.forEach(op => op.dataOperacao = notaCorretagem.dataPregao);
         return this.http.post<NotaCorretagem>('/api/notas-de-corretagem/save', notaCorretagem, {observe: 'response'});
     }
 

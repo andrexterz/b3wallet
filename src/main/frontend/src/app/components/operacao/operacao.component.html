@@ -64,7 +64,6 @@
             <th class="center">Data da operação</th>
             <th class="right">Preço</th>
             <th class="right">Total</th>
-            <th></th>
           </tr>
         </thead>
         <tfoot>
@@ -84,10 +83,6 @@
             <td title="Preço" class="right">{{operacao.valor | currency:'BRL':'symbol':'1.2-2'}}</td>
             <td title="Total" class="right">
               <b>{{operacao.quantidade * operacao.valor | currency:'BRL':'symbol':'1.2-2'}}</b>
-            </td>
-            <td class="table-action center">
-              <a title="editar operação" class="link" (click)="edit(operacao)"><i class="fa fa-pencil"></i></a>
-              <a title="remover operação" class="margin-left-3 link" (click)="delete(operacao)"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
         </tbody>

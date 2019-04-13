@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { OperacaoService,PapelService } from '../../services';
+import { NotaCorretagemService, OperacaoService,PapelService } from '../../services';
 import { NotaCorretagem, Papel, Operacao, Option } from '../../models';
 
 @Component({
@@ -23,6 +23,7 @@ export class NotaCorretagemComponent implements OnInit {
   optionsTipoOperacao: Option[] = [];
 
   constructor (
+    private notaCorretagemService: NotaCorretagemService,
     private operacaoService: OperacaoService,
     private papelService: PapelService
   ) {}
@@ -35,12 +36,16 @@ export class NotaCorretagemComponent implements OnInit {
 
   save(): void {
     console.log(this.notaCorretagem);
+    this.notaCorretagemService.save(this.notaCorretagem).subscribe(response => {
+      console.log(response.body);
+    }, error => {
+      console.log(error);
+    });
   }
 
   newOperacao(): void {
     this.newOperacaoFlag = true;
     this.selectedOperacao = new Operacao();
-    this.selectedOperacao.notaCorretagem = this.notaCorretagem;
   }
 
   confirmOperacao(): void {

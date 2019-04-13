@@ -15,7 +15,7 @@ export class AppComponent {
       { title: 'Papeis', route:  'papeis', icon: 'fa fa-puzzle-piece'},
       { title: 'Operações', route: 'operacoes', icon: 'fa fa-exchange'},
       {title: 'Proventos', route: 'proventos', icon: 'fa fa-usd'},
-      {title: 'Notas', route: 'notas', icon: 'fa fa-sticky-note'},
+      {title: 'Anotações', route: 'anotacoes', icon: 'fa fa-sticky-note'},
     ];
 
     constructor () {}

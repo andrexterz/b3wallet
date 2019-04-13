@@ -24,6 +24,7 @@ import {
 import {
   PapelService,
   EmpresaService,
+  NotaCorretagemService,
   OperacaoService,
   ProventoService,
   NotaService,
@@ -58,14 +59,14 @@ registerLocaleData(localePt, 'pt-BR');
       {path: 'empresas', component: EmpresaComponent},
       {path: 'operacoes', component: OperacaoComponent},
       {path: 'proventos', component: ProventoComponent},
-      {path: 'notas', component: NotaComponent},
+      {path: 'anotacoes', component: NotaComponent},
       {path: 'login', component: LoginComponent},
       {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
     ])
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pt-BR'},
               {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
-              LoginService, EmpresaService, PapelService, OperacaoService, ProventoService, NotaService],
+    LoginService, EmpresaService, PapelService, NotaCorretagemService, OperacaoService, ProventoService, NotaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

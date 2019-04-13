@@ -27,6 +27,7 @@ public class Operacao extends Base {
 
 	public Operacao() {
         this.papel = null;
+        this.notaCorretagem = null;
         this.valor = 0.0;
         this.quantidade = 0;
         this.custoOperacao = 0.0;
@@ -46,6 +47,7 @@ public class Operacao extends Base {
 
     @ManyToOne
     @JoinColumn(name = "NOTA_CORRETAGEM_ID")
+    @JsonIgnoreProperties({"operacoes"})
     private NotaCorretagem notaCorretagem;
     
     @ManyToOne
