@@ -2,7 +2,7 @@ import { Component,  OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
-import { OperacaoService, PapelService, MensagemService } from '../../services';
+import { OperacaoService, NotaCorretagemService, PapelService, MensagemService } from '../../services';
 import { Operacao, NotaCorretagem, Papel, Option } from '../../models';
 
 @Component({
@@ -10,6 +10,7 @@ import { Operacao, NotaCorretagem, Papel, Option } from '../../models';
   templateUrl: './operacao.component.html'
 })
 export class OperacaoComponent implements OnInit {
+    notasCorretagem: NotaCorretagem[] = [];
     operacoes: Operacao[] = [];
     papeis: Papel[] = [];
     optionsDataOperacao: Option[] = [];
@@ -20,12 +21,14 @@ export class OperacaoComponent implements OnInit {
     tipoOperacaoFilter: Option = null;
 
     constructor (
+      private notaCorretagemService: NotaCorretagemService,
       private operacaoService: OperacaoService,
       private papelService: PapelService,
       private mensagemService: MensagemService
     ) {}
 
     ngOnInit(): void {
+      this.notaCorretagemService.list().subscribe(response => this.notasCorretagem = response.body);
       this.papelService.list().subscribe(response => this.papeis = response.body);
       this.operacaoService.list().subscribe(response => this.operacoes = response.body);
 
@@ -45,7 +48,7 @@ export class OperacaoComponent implements OnInit {
       this.operacaoService.listOptionsDataOperacao().subscribe(response => this.optionsDataOperacao = response.body);
     }
 
-    list(): Object {
+    listOperacoes(): Object {
       let obj: Object = new Object();
       this.operacoes
         .filter(operacao => this.tipoOperacaoFilter ? operacao.tipoOperacao == this.tipoOperacaoFilter.value : true)
@@ -66,6 +69,10 @@ export class OperacaoComponent implements OnInit {
           }
         });
       return obj;
+    }
+
+    listNotasCorretagem(): Object {
+      return this.notasCorretagem;
     }
 
     getTotalCompra(): number {
@@ -124,6 +131,10 @@ export class OperacaoComponent implements OnInit {
 
     add(): void {
       this.selectedNotaCorretagem = new NotaCorretagem();
+    }
+
+    edit(notaCorretagem: NotaCorretagem): void {
+      this.notaCorretagemService.get(notaCorretagem).subscribe(response => this.selectedNotaCorretagem = response.body);
     }
 
     close(): void {

@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import * as moment from 'moment';
 import { Papel, Provento, Option } from '../../models';
-import { PapelService, ProventoService, MensagemService } from '../../services';
+import { PapelService, ProventoService, MensagemService, Util } from '../../services';
 
 @Component({
   selector: 'provento',
@@ -23,6 +23,7 @@ export class ProventoComponent implements OnInit {
     private proventoService: ProventoService,
     private papelService: PapelService,
     private mensagemService: MensagemService,
+    private util: Util,
     @Inject(LOCALE_ID) private locale: string
   ) { }
 
@@ -93,15 +94,6 @@ export class ProventoComponent implements OnInit {
 
   close(): void {
     this.selectedProvento = null;
-  }
-
-  //compare method for directive compareWith
-  comparator(itemA: any, itemB: any): boolean {
-    try {
-      return itemA.id == itemB.id;
-    } catch (e) {
-      return false;
-    }
   }
 
   expandListItem(item: string): void {

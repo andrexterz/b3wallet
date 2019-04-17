@@ -7,3 +7,4 @@ export * from './login.service';
 export * from './mensagem.service';
 export * from './operacao.service';
 export * from './tokenInterceptor';
+export * from './util';

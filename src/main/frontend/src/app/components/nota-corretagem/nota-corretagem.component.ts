@@ -31,11 +31,9 @@ export class NotaCorretagemComponent implements OnInit {
   ngOnInit() {
     this.operacaoService.listOptionsTipoOperacao().subscribe(response => this.optionsTipoOperacao = response.body);
     this.papelService.list().subscribe(response => this.papeis = response.body);
-    this.newOperacao();
   }
 
   save(): void {
-    console.log(this.notaCorretagem);
     this.notaCorretagemService.save(this.notaCorretagem).subscribe(response => {
       console.log(response.body);
     }, error => {

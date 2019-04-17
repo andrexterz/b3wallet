@@ -60,7 +60,7 @@
 										<label for="tipo">Tipo</label>
 								</div>
                 <div class="form-control g-12 g-l-4">
-                    <select id="papel" name="papel" [compareWith]="comparator" [(ngModel)]="selectedProvento.papel" autofocus="autofocus" required>
+                    <select id="papel" name="papel" [compareWith]="util.comparator" [(ngModel)]="selectedProvento.papel" autofocus="autofocus" required>
                         <option *ngFor="let papel of papeis" [ngValue]="papel">{{papel.codigo}}</option>
                     </select>
                     <label for="papel">Ação</label>

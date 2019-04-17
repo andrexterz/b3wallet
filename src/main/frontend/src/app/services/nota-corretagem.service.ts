@@ -17,8 +17,11 @@ export class NotaCorretagemService {
         return this.http.delete<boolean>('/api/notas-de-corretagem/delete/' + notaCorretagem.id, {observe: 'response'});
     }
 
+    get(notaCorretagem: NotaCorretagem): Observable<HttpResponse<NotaCorretagem>> {
+        return this.http.get<NotaCorretagem>('/api/notas-de-corretagem/' + notaCorretagem.id, {observe: 'response'});
+    }
     list(): Observable<HttpResponse<NotaCorretagem[]>> {
-        return this.http.get<NotaCorretagem[]>('/api/operacoes', {observe: 'response'});
+        return this.http.get<NotaCorretagem[]>('/api/notas-de-corretagem', {observe: 'response'});
     }
 
     listOptionsDataNotaCorretagem(): Observable<HttpResponse<Option[]>> {

@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import {NgxMaskModule} from 'ngx-mask';
 import { AppComponent } from './app.component';
 
+
 import {
   PapelComponent,
   EmpresaComponent,
@@ -29,8 +30,11 @@ import {
   ProventoService,
   NotaService,
   LoginService,
-  TokenInterceptor
+  TokenInterceptor,
+  Util
 } from './services';
+
+
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -64,9 +68,18 @@ registerLocaleData(localePt, 'pt-BR');
       {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
     ])
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'},
-              {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
-    LoginService, EmpresaService, PapelService, NotaCorretagemService, OperacaoService, ProventoService, NotaService],
+  providers: [
+    {provide: LOCALE_ID, useValue: 'pt-BR'},
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    LoginService,
+    EmpresaService,
+    PapelService,
+    NotaCorretagemService,
+    OperacaoService,
+    ProventoService,
+    NotaService,
+    Util
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
