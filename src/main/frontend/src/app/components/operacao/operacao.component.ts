@@ -135,8 +135,13 @@ export class OperacaoComponent implements OnInit {
       this.selectedNotaCorretagem = new NotaCorretagem();
     }
 
+    //edit nota
     edit(notaCorretagem: NotaCorretagem): void {
       this.notaCorretagemService.get(notaCorretagem).subscribe(response => this.selectedNotaCorretagem = response.body);
+    }
+
+    delete(notaCorretagem: NotaCorretagem): void {
+      console.log('implementar delete', notaCorretagem.numero);
     }
 
     close(): void {
