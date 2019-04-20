@@ -26,7 +26,6 @@ public class NotaCorretagemService {
 
 	@RequestMapping(value = "/api/notas-de-corretagem/save", method = RequestMethod.POST)
 	public ResponseEntity<?> save(@RequestBody NotaCorretagem notaCorretagem) throws JsonProcessingException {
-        System.out.println("Nota de corretagem save() service called");
 		NotaCorretagem savedObj = notaCorretagemRepository.save(notaCorretagem);
 		return new ResponseEntity<>(savedObj, HttpStatus.CREATED);
 	}
@@ -41,6 +40,12 @@ public class NotaCorretagemService {
 			return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>(removed, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/api/notas-de-corretagem/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> get(@PathVariable long id) {
+		NotaCorretagem notaCorretagem = this.notaCorretagemRepository.getById(id);
+		return new ResponseEntity<>(notaCorretagem, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/api/notas-de-corretagem", produces = MediaType.APPLICATION_JSON_VALUE)

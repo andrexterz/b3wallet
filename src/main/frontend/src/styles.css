@@ -367,6 +367,11 @@ Form component styles
 .form fieldset legend * + * {
   margin-left: 10px;
 }
+.form-group {
+  display: inherit;
+  flex-wrap: inherit;
+  flex: inherit;
+}
 .form-control {
   position: relative;
   display: flex;
@@ -507,7 +512,7 @@ Form component styles
   flex-direction: row;
   margin: 0 10px;
 }
-.form-control.inline * + * {
+.form-control.inline > * + * {
   margin-left: 5px;
 }
 .form-control.inline input, .form-control.inline textarea, .form-control.inline select {
@@ -732,6 +737,7 @@ Form component styles
 }
 .option-button-item {
   padding: inherit;
+  margin-left: 0;
 }
 
 /*

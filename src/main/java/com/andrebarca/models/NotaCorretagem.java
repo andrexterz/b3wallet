@@ -57,7 +57,7 @@ public class NotaCorretagem extends Base {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")    
     private Date dataPregao;
 
-    @OneToMany(mappedBy = "notaCorretagem", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "notaCorretagem", cascade = CascadeType.ALL)
     @JsonIgnoreProperties({ "notaCorretagem" })
     private Set<Operacao> operacoes;
 

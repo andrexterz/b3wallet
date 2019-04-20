@@ -19,6 +19,7 @@ export class OperacaoComponent implements OnInit {
     selectedOperacao: Operacao = null;
     dataOperacaoFilter: Option = null;
     tipoOperacaoFilter: Option = null;
+    exibeNotaCorretagemOperacaoFilter: number = 0;
 
     constructor (
       private notaCorretagemService: NotaCorretagemService,
@@ -127,6 +128,7 @@ export class OperacaoComponent implements OnInit {
       localStorage.removeItem('tipoOperacaoFilter');
       this.dataOperacaoFilter = null;
       this.tipoOperacaoFilter = null;
+      this.exibeNotaCorretagemOperacaoFilter = 0;
     }
 
     add(): void {
@@ -139,14 +141,5 @@ export class OperacaoComponent implements OnInit {
 
     close(): void {
       this.selectedNotaCorretagem = null;
-    }
-
-    // compare method for directive compareWith
-    comparator(itemA: any, itemB: any) {
-        try {
-            return itemA.id === itemB.id;
-        } catch (e) {
-            return false;
-        }
     }
 }

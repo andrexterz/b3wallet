@@ -27,7 +27,14 @@ Form component styles
         margin-left: #{$margin};
       }
     }
-  }  
+  }
+
+  &-group {
+    display: inherit;
+    flex-wrap: inherit;
+    flex: inherit;
+  }
+
 
   @at-root
   &-control {
@@ -157,7 +164,7 @@ Form component styles
       //  align-items: center;
        margin: 0 #{$margin};
 
-       * + * {
+       & > * + * {
          margin-left: #{$margin / 2};
        }
 

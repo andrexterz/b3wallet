@@ -2,12 +2,19 @@
     <h4 class="title">
       <span>Operações</span>
       <form #formFilter="ngForm" class="title-detail" (change)="filter()">
-        <div class="form-control inline">
-          <button title="limpar filtros" class="btn btn-flat" type="reset" (click)="resetFilter()">
-            <i class="fa fa-times-circle"></i>
-            <span class="hidden-m">Limpar filtros</span>
-          </button>
+        
+        <div class="form-group">
+          <div class="form-control inline">
+            <input name="exibeNotaCorretagemOperacao" type="radio" id="exibeNotaCorretagem" [value]="0" [(ngModel)]="exibeNotaCorretagemOperacaoFilter">
+            <label for="exibeNotaCorretagem">Exibindo notas</label>
+          </div>
+  
+          <div class="form-control inline">
+            <input name="exibeNotaCorretagemOperacao" type="radio" id="exibeOperacao" [value]="1" [(ngModel)]="exibeNotaCorretagemOperacaoFilter">
+            <label for="exibeOperacao">Exibindo operações</label>
+          </div>
         </div>
+
         <div class="form-control inline">
           <i class="fa fa-calendar-o"></i>
           <option-button title="mês/ano" name="dataOperacao" label="mês/ano" [options]="optionsDataOperacao" [(value)]="dataOperacaoFilter"></option-button>
@@ -17,20 +24,56 @@
           <i class="fa fa-exchange"></i>
           <option-button title="Operacao" name="tipoOperacao" label="Operação" [options]="optionsTipoOperacao" [(value)]="tipoOperacaoFilter"></option-button>
         </div>
-        <!-- <div class="form-control inline" *ngFor="let option of optionsTipoOperacao">
-          <input name="tipoOperacao" type="radio" [id]="option.value" [value]="option" [(ngModel)]="tipoOperacaoFilter">
-          <label [for]="option.value">{{option.description}}</label>
-        </div>
+
         <div class="form-control inline">
-          <input name="tipoOperacao" type="radio" id="todosFiltrosTipoOperacao" [value]="null" [(ngModel)]="tipoOperacaoFilter">
-          <label for="todosFiltrosTipoOperacao">Todas</label>
-        </div> -->
+          <button title="limpar filtros" class="btn btn-flat" type="button" (click)="resetFilter()">
+            <i class="fa fa-times-circle"></i>
+            <span class="hidden-m">Limpar filtros</span>
+          </button>
+        </div>
       </form>
       <a class="title-action" title="adicionar operação" (click)="add()"><i class="fa fa-plus-circle"></i></a>
     </h4>
+
     <p class="note" *ngIf="operacoes.length == 0"><i class="fa fa-info-circle"></i><span class="margin-left-1">Você ainda não cadastrou nenhum item.</span></p>
-    <ng-container *ngIf="operacoes.length > 0">
-      
+    
+    <ng-container *ngIf="operacoes.length > 0 && exibeNotaCorretagemOperacaoFilter == 0">
+      <!-- tabela notas de corretagem -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="7" class="left">Notas de Corretagem</th>
+          </tr>
+          <tr>
+            <th class="left">Número</th>
+            <th class="left">Data do Pregão</th>
+            <th class="right">Taxas</th>
+            <th class="right">I.S.S.</th>
+            <th class="right">I.R.R.F</th>
+            <th class="right">Total Operações</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let notaCorretagem of listNotasCorretagem()">
+            <td title="Número">{{notaCorretagem.numero}}</td>
+            <td title="Data do Pregão">{{notaCorretagem.dataPregao | date: 'dd/MM/yyyy'}}</td>
+            <td title="Taxas" class="right">{{(notaCorretagem.taxaLiquidacao + notaCorretagem.taxaRegistro) | currency:'BRL':'symbol':'1.2-2' }}</td>
+            <td title="ISS" class="right">{{notaCorretagem.iss | currency:'BRL':'symbol':'1.2-2' }}</td>
+            <td title="IRRF" class="right">{{notaCorretagem.irrf | currency:'BRL':'symbol':'1.2-2' }}</td>
+            <td title="Total" class="right">{{0 | currency:'BRL':'symbol':'1.2-2' }}</td>
+            <td class="table-action center">
+              <a title="editar nota de corretagem" class="link" (click)="edit(notaCorretagem)"><i class="fa fa-pencil"></i></a>
+              <a title="remover nota de corretagem" class="margin-left-3 link" (click)="delete(notaCorretagem)"><i class="fa fa-trash"></i></a>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+      <!-- fim tabela notas de corretagem -->
+    </ng-container>
+
+    <ng-container *ngIf="operacoes.length > 0 && exibeNotaCorretagemOperacaoFilter == 1">
       <!-- tabela totais -->
       <table class="table">
         <thead>
@@ -58,7 +101,7 @@
       <hr>
 
       <!-- tabela mensal operacoes -->
-      <table class="table" *ngFor="let entry of listOperacoes() | keyvalue" >
+      <table class="table" *ngFor="let entry of listOperacoes() | keyvalue">
         <thead>
           <tr>
             <th class="left" colspan="7">Mês: {{entry.value.title}}</th>
@@ -70,7 +113,6 @@
             <th class="center">Data da operação</th>
             <th class="right">Preço</th>
             <th class="right">Total</th>
-            <th></th>
           </tr>
         </thead>
         <tfoot>
@@ -91,43 +133,10 @@
             <td title="Total" class="right">
               <b>{{operacao.quantidade * operacao.valor | currency:'BRL':'symbol':'1.2-2'}}</b>
             </td>
-            <td class="table-action center">
-              <a title="editar nota de corretagem" class="link" (click)="edit(operacao.notaCorretagem)"><i class="fa fa-pencil"></i></a>
-              <a title="remover nota de corretagem" class="margin-left-3 link" (click)="delete(operacao.notaCorretagem)"><i class="fa fa-trash"></i></a>
-            </td>
           </tr>
         </tbody>
       </table>
       <!-- fim tabela mensal operacoes -->
     </ng-container>
-
-    <ng-container>
-      <!-- tabela notas de corretagem -->
-      <table class="table">
-        <thead>
-          <tr>
-            <th title="Número" class="left">Número</th>
-            <th class="left">Data do Pregão</th>
-            <th class="right">Taxas</th>
-            <th class="right">I.S.S.</th>
-            <th class="right">I.R.R.F</th>
-            <th class="right">Total Operações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let notaCorretagem of listNotasCorretagem()">
-            <td>{{notaCorretagem.numero}}</td>
-            <td>{{notaCorretagem.dataPregao | date: 'dd/MM/yyyy'}}</td>
-            <td class="right">{{(notaCorretagem.taxaLiquidacao + notaCorretagem.taxaRegistro) | currency:'BRL':'symbol':'1.2-2' }}</td>
-            <td class="right">{{notaCorretagem.iss | currency:'BRL':'symbol':'1.2-2' }}</td>
-            <td class="right">{{notaCorretagem.irrf | currency:'BRL':'symbol':'1.2-2' }}</td>
-            <td class="right">{{0 | currency:'BRL':'symbol':'1.2-2' }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- fim tabela notas de corretagem -->
-
-    </ng-container>
-
 </div>
 <nota-corretagem *ngIf="selectedNotaCorretagem" [(notaCorretagem)]="selectedNotaCorretagem"></nota-corretagem>
