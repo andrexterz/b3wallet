@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/map';
-import { PapelService, EmpresaService, MensagemService } from '../../services';
+import { PapelService, EmpresaService, MensagemService, Util } from '../../services';
 import { Papel, Empresa } from '../../models';
 
 @Component({
@@ -19,6 +19,7 @@ export class PapelComponent implements OnInit {
     constructor(
       private route: ActivatedRoute,
       private location: Location,
+      private util: Util,
       private papelService: PapelService,
       private empresaoService: EmpresaService,
       private mensagemService: MensagemService
@@ -27,8 +28,10 @@ export class PapelComponent implements OnInit {
 
     ngOnInit(): void {
       this.papelService.list().subscribe(response => this.papeis = response.body.map(papel => Object.assign(new Papel(), papel)));
-      this.empresaoService.list().subscribe(response => this.empresas = response.body.map(empresa => Object.assign(new Empresa(), empresa)));
-      eval(localStorage.getItem('custodiaFilter')) ? this.custodiaFilter = eval(localStorage.getItem('custodiaFilter')): false;
+      this.empresaoService.list().subscribe(response => this.empresas = response.body.map(
+        empresa => Object.assign(new Empresa(), empresa))
+      );
+      eval(localStorage.getItem('custodiaFilter')) ? this.custodiaFilter = eval(localStorage.getItem('custodiaFilter')) : false;
     }
 
     list(): Object {
@@ -45,12 +48,9 @@ export class PapelComponent implements OnInit {
 
     save(): void {
       if (this.selectedPapel) {
-        // delete
-        console.log(this.selectedPapel);
-        // fim delete
         this.papelService.save(this.selectedPapel).subscribe(response => {
-            let savedObj: Papel = Object.assign(new Papel(), response.body);
-            let index = this.papeis.findIndex(o => o.id == savedObj.id);
+            const savedObj: Papel = Object.assign(new Papel(), response.body);
+            const index = this.papeis.findIndex(o => o.id == savedObj.id);
             if (index >= 0) {
                 this.papeis[index] = savedObj;
             } else {
@@ -73,13 +73,4 @@ export class PapelComponent implements OnInit {
       this.custodiaFilter = !this.custodiaFilter;
       localStorage.setItem('custodiaFilter', this.custodiaFilter.toString());
     }
-
-  // compare method for directive compareWith (mover para Util.ts)
-  comparator(itemA: any, itemB: any) {
-    try {
-      return itemA.id == itemB.id;
-    } catch (e) {
-      return false;
-    }
-  }
 }

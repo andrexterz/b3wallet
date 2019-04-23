@@ -29,14 +29,16 @@ export class ProventoComponent implements OnInit {
 
   ngOnInit() {
     this.papelService.list().subscribe(response => this.papeis = response.body.map(papel => Object.assign(new Papel(), papel)));
-    this.proventoService.list().subscribe(response => this.proventos = response.body.map(provento => Object.assign(new Provento(), provento)));
-    this.proventoService.listOptions().subscribe(response => this.options = response.body.map(option => Object.assign(new Option(), option)));
+    this.proventoService.list()
+    .subscribe(response => this.proventos = response.body.map(provento => Object.assign(new Provento(), provento)));
+    this.proventoService.listOptions()
+    .subscribe(response => this.options = response.body.map(option => Object.assign(new Option(), option)));
   }
 
   list(): Object {
     let obj: Object = new Object();
     this.proventos.forEach(provento => {
-      let key = moment(provento.dataPagamento).format("MM/YYYY");
+      let key = moment(provento.dataPagamento).format('MM/YYYY');
       if (obj.hasOwnProperty(key)) {
         obj[key].items.push(provento);
         obj[key].total += provento.valor;
@@ -50,8 +52,7 @@ export class ProventoComponent implements OnInit {
   add(): void {
     this.selectedProvento = new Provento();
     this.selectedProvento.valor = 0.01;
-    let option: Option = this.options[0];
-    this.selectedProvento.tipoProvento = option.value;
+    this.selectedProvento.tipoProvento = this.options[0].value;
   }
 
   edit(provento: Provento): void {
@@ -62,16 +63,16 @@ export class ProventoComponent implements OnInit {
   save(): void {
     if (this.selectedProvento) {
         this.proventoService.save(this.selectedProvento).subscribe(response => {
-            let savedObj: Provento = Object.assign(new Provento(), response.body);
-            let index = this.proventos.findIndex(o => o.id == savedObj.id);
+            const savedObj: Provento = Object.assign(new Provento(), response.body);
+            const index = this.proventos.findIndex(o => o.id === savedObj.id);
             if (index >= 0) {
                 this.proventos[index] = savedObj;
             } else {
                 this.proventos.push(savedObj);
             }
-            this.mensagemService.showMessage(savedObj.papel.codigo, "Provento salvo com sucesso.", "success");
+            this.mensagemService.showMessage(savedObj.papel.codigo, 'Provento salvo com sucesso.', 'success');
         }, error => {
-            this.mensagemService.showMessage("Erro ao salvar provento", error.message, "error");
+            this.mensagemService.showMessage('Erro ao salvar provento', error.message, 'error');
             console.log(error);
           });
     }
@@ -79,15 +80,16 @@ export class ProventoComponent implements OnInit {
   }
 
   delete(provento: Provento): void {
-    let valor = formatCurrency(provento.valor, this.locale, getCurrencySymbol('BRL', 'narrow', this.locale));
-    let confirmDelete = confirm("Remover provento " + provento.papel.codigo + ": " + valor + "?");
+    const valor = formatCurrency(provento.valor, this.locale, getCurrencySymbol('BRL', 'narrow', this.locale));
+    const confirmDelete = confirm('Remover provento ' + provento.papel.codigo + ': ' + valor + '?');
     if (confirmDelete) {
-      let index = this.proventos.findIndex(o => o.id == provento.id);
+      const index = this.proventos.findIndex(o => o.id === provento.id);
       this.proventoService.delete(provento).subscribe(response => {
         this.proventos.splice(index, 1);
-        this.mensagemService.showMessage("Item removido", "Provento de " + provento.papel.codigo + ": " + valor +  " removido com sucesso.", "success");
+        this.mensagemService
+        .showMessage('Item removido', 'Provento de ' + provento.papel.codigo + ': ' + valor +  ' removido com sucesso.', 'success');
       }, error => {
-        this.mensagemService.showMessage("Erro ao remover provento", error.message, "error");
+        this.mensagemService.showMessage('Erro ao remover provento', error.message, 'error');
       });
     }
   }

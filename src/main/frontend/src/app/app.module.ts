@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 
 
 import {
+  DashboardComponent,
   PapelComponent,
   EmpresaComponent,
   OperacaoComponent,
@@ -35,12 +36,12 @@ import {
 } from './services';
 
 
-
 registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
     PapelComponent,
     OperacaoComponent,
     NotaCorretagemComponent,
@@ -58,7 +59,7 @@ registerLocaleData(localePt, 'pt-BR');
     FormsModule,
      NgxMaskModule.forRoot({}),
     RouterModule.forRoot([
-      {path: 'dashboard', component: PapelComponent},
+      {path: 'dashboard', component: DashboardComponent},
       {path:  'papeis', component: PapelComponent},
       {path: 'empresas', component: EmpresaComponent},
       {path: 'operacoes', component: OperacaoComponent},

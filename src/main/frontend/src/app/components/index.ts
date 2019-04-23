@@ -1,3 +1,4 @@
+export * from './dashboard/dashboard.component';
 export * from './empresa/empresa.component';
 export * from './papel/papel.component';
 export * from './operacao/operacao.component';

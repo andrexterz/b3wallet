@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { Nota, Empresa } from '../../models';
-import { EmpresaService, NotaService, MensagemService } from '../../services';
+import { EmpresaService, NotaService, MensagemService, Util } from '../../services';
 
 @Component({
   selector: 'nota-component',
@@ -17,6 +17,7 @@ export class NotaComponent implements OnInit {
     constructor(
       private route: ActivatedRoute,
       private location: Location,
+      private util: Util,
       private notaService: NotaService,
       private empresaService: EmpresaService,
       private mensagemService: MensagemService
@@ -50,7 +51,7 @@ export class NotaComponent implements OnInit {
     save(): void {
       if (this.selectedNota) {
         this.notaService.save(this.selectedNota).subscribe(response => {
-          let savedObj: Nota = Object.assign(new Nota(), response.body);
+          const savedObj: Nota = Object.assign(new Nota(), response.body);
           let index  = this.notas.findIndex(o => o.id == savedObj.id);
           if (index >= 0) {
             this.notas[index] = savedObj;
@@ -67,12 +68,15 @@ export class NotaComponent implements OnInit {
     }
 
     delete(nota: Nota): void {
-      let confirmDelete = confirm('Remover nota ' + nota.empresa.nome + ': ' + (nota.anotacao.length <= 10 ? nota.anotacao: nota.anotacao.slice(0, 10).trim()) + '...?');
+      const confirmDelete = confirm('Remover nota ' + nota.empresa.nome + ': ' +
+      (nota.anotacao.length <= 10 ? nota.anotacao : nota.anotacao.slice(0, 10).trim()) + '...?');
       if (confirmDelete) {
-        let index = this.notas.findIndex(o => o.id == nota.id);
+        const index = this.notas.findIndex(o => o.id === nota.id);
         this.notaService.delete(nota).subscribe(response => {
             this.notas.splice(index, 1);
-            this.mensagemService.showMessage('Anotação de ' + nota.empresa.nome, (nota.anotacao.length <= 10 ? nota.anotacao: nota.anotacao.slice(0, 10).trim()) + ' removida com sucesso.', 'success');
+            this.mensagemService.showMessage('Anotação de ' +
+            nota.empresa.nome, (nota.anotacao.length <= 10 ?
+            nota.anotacao : nota.anotacao.slice(0, 10).trim()) + ' removida com sucesso.', 'success');
         }, error => {
             this.mensagemService.showMessage('Erro ao remover nota', error.message, 'error');
         });
@@ -82,15 +86,6 @@ export class NotaComponent implements OnInit {
     close(): void {
         this.selectedNota = null;
      }
-
-    //compare method for directive compareWith
-    comparator(itemA: any, itemB: any): boolean {
-        try {
-            return itemA.id == itemB.id;
-        } catch (e) {
-            return false;
-        }
-    }
 
     expandListItem(item: string): void {
       if (this.selectedListItem.has(item)) {

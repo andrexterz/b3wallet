@@ -2,7 +2,7 @@ import { Component,  OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
-import { OperacaoService, NotaCorretagemService, PapelService, MensagemService } from '../../services';
+import { OperacaoService, NotaCorretagemService, PapelService, MensagemService, Util } from '../../services';
 import { Operacao, NotaCorretagem, Papel, Option } from '../../models';
 
 @Component({
@@ -22,6 +22,7 @@ export class OperacaoComponent implements OnInit {
     exibeNotaCorretagemOperacaoFilter: number = 0;
 
     constructor (
+      private util: Util,
       private notaCorretagemService: NotaCorretagemService,
       private operacaoService: OperacaoService,
       private papelService: PapelService,
@@ -52,14 +53,16 @@ export class OperacaoComponent implements OnInit {
     listOperacoes(): Object {
       let obj: Object = new Object();
       this.operacoes
-        .filter(operacao => this.tipoOperacaoFilter ? operacao.tipoOperacao == this.tipoOperacaoFilter.value : true)
-        .filter(operacao => this.dataOperacaoFilter ? moment(operacao.dataOperacao).format('YYYY-MM') == this.dataOperacaoFilter.value : true)
+        .filter(operacao => this.tipoOperacaoFilter ? operacao.tipoOperacao === this.tipoOperacaoFilter.value : true)
+        .filter(operacao => this.dataOperacaoFilter ?
+          moment(operacao.dataOperacao).format('YYYY-MM') === this.dataOperacaoFilter.value : true)
         .forEach(operacao => {
           let key = moment(operacao.dataOperacao).format('YYYY-MM');
           let title = moment(operacao.dataOperacao).format('MM/YYYY');
           if (obj.hasOwnProperty(key)) {
             obj[key].items.push(operacao);
-            operacao.tipoOperacao === 'COMPRA' ? obj[key].totalCompra += operacao.totalOperacao : obj[key].totalVenda += operacao.totalOperacao;
+            operacao.tipoOperacao === 'COMPRA' ?
+            obj[key].totalCompra += operacao.totalOperacao : obj[key].totalVenda += operacao.totalOperacao;
           } else {
             obj[key] = {
               title: title,
@@ -141,7 +144,16 @@ export class OperacaoComponent implements OnInit {
     }
 
     delete(notaCorretagem: NotaCorretagem): void {
-      console.log('implementar delete', notaCorretagem.numero);
+      const confirmDelete = confirm('Remover nota de corretagem' + notaCorretagem.numero + '...?');
+      if (confirmDelete) {
+        let index = this.notasCorretagem.findIndex(o => o.id === notaCorretagem.id);
+        this.notaCorretagemService.delete(notaCorretagem).subscribe(response => {
+          this.notasCorretagem.splice(index, 1);
+          this.mensagemService.showMessage('Nota de corretagem' + notaCorretagem.numero + ' removida com sucesso.', 'success');
+        }, error => {
+          this.mensagemService.showMessage('Erro ao remover nota de corretagem', error.message, 'error');
+        });
+      }
     }
 
     close(): void {
