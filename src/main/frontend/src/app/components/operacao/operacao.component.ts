@@ -30,7 +30,9 @@ export class OperacaoComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-      this.notaCorretagemService.list().subscribe(response => this.notasCorretagem = response.body);
+      this.notaCorretagemService.list().subscribe(response => {
+        response.body.forEach(notaCorretagem => this.notasCorretagem.push(Object.assign(new NotaCorretagem(), notaCorretagem)));
+      });
       this.papelService.list().subscribe(response => this.papeis = response.body);
       this.operacaoService.list().subscribe(response => this.operacoes = response.body);
 

@@ -370,7 +370,10 @@ Form component styles
 .form-group {
   display: inherit;
   flex-wrap: inherit;
-  flex: inherit;
+  flex: 1 0 100%;
+  padding: 10px 0;
+  justify-content: space-between;
+  border-top: thin solid #9c9c9c;
 }
 .form-control {
   position: relative;
@@ -484,6 +487,7 @@ Form component styles
   cursor: pointer;
   height: initial;
   transform: translateY(0);
+  margin-left: 0;
 }
 .form-control input[type=checkbox] ~ label::before, .form-control input[type=radio] ~ label::before {
   content: " ";
@@ -559,6 +563,12 @@ Form component styles
   justify-content: flex-end;
   flex: 1 0 auto;
   padding: 10px;
+}
+@media (min-width: 768px) {
+  .form-group {
+    flex: inherit;
+    border-top: none;
+  }
 }
 
 /*
@@ -1169,6 +1179,7 @@ Generic component styles
 .title {
   display: flex;
   flex: 1 0 auto;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
   font-size: 1.5em;
@@ -1177,16 +1188,30 @@ Generic component styles
   width: 100%;
   font-weight: normal;
 }
-.title-detail, .title-action {
+.title-text {
+  text-align: left;
+  padding: 10px 0;
+}
+.title-text-block {
+  flex: 1 0 100%;
+  padding: 10px;
+  text-align: center;
+}
+.title-detail {
+  margin-left: auto;
+}
+.title-detail-block, .title-action {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 5px;
 }
-.title-detail {
-  margin-left: auto;
+.title-detail-block {
+  flex: 1;
+  flex-wrap: wrap;
+  align-content: center;
 }
-:not(.title-detail) + .title-action {
+:not(.title-detail-block) + .title-action {
   margin-left: auto;
 }
 .title-action {
@@ -1217,6 +1242,14 @@ Generic component styles
     background: initial;
     margin: 0 -10px;
     border-bottom: 0;
+  }
+  .title-text-block {
+    padding: initial;
+    flex: initial;
+  }
+  .title-detail-block {
+    flex: initial;
+    margin-left: auto;
   }
   .title-action {
     position: initial;
@@ -1256,7 +1289,7 @@ Generic component styles
   height: 2rem;
   background: #fefefe;
   border: 1px solid #9c9c9c;
-  font-size: 0.8em;
+  font-size: 0.75em;
 }
 
 .center {

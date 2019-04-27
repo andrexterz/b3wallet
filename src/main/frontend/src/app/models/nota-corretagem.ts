@@ -16,4 +16,20 @@ export class NotaCorretagem {
     outrasDespesas: number = 0;
     dataCriacao: Date;
     dataAtualizacao: Date;
+
+    totalTaxas(): number {
+        return (
+            this.taxaLiquidacao +
+            this.taxaRegistro +
+            this.taxaTermo +
+            this.taxaAna +
+            this.emolumentos +
+            this.corregatem +
+            this.outrasDespesas
+        );
+    }
+
+    totalNota(): number {
+        return 0;
+    }
 }

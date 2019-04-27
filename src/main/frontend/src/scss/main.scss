@@ -102,6 +102,7 @@ Generic component styles
 .title {
     display: flex;
     flex: 1 0 auto;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: flex-start;
     font-size: 1.5em;
@@ -110,18 +111,35 @@ Generic component styles
     width: 100%;
     font-weight: normal;
 
-    &-detail, &-action {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 $margin/2;
+    &-text {
+      text-align: left;
+      padding: $padding 0;
+    }
+
+    &-text-block {
+      flex: 1 0 100%;
+      padding: $padding;
+      text-align: center;
     }
 
     &-detail {
       margin-left: auto;
     }
 
-    :not(&-detail) + &-action {
+    &-detail-block, &-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 $margin/2;
+    }
+
+    &-detail-block {
+      flex: 1;
+      flex-wrap: wrap;
+      align-content: center;
+    }
+
+    :not(&-detail-block) + &-action {
       margin-left: auto;
     }
 
@@ -157,6 +175,16 @@ Generic component styles
       background: initial;
       margin: 0 -#{$margin};
       border-bottom: 0;
+
+      &-text-block {
+        padding: initial;
+        flex: initial;
+      }
+
+      &-detail-block {
+        flex: initial;
+        margin-left: auto;
+      }
 
       &-action {
         position: initial;
@@ -198,7 +226,7 @@ Generic component styles
     height: $circle-size;
     background: lighten($list-background-color, 5%);
     border: 1px solid $list-border-color;
-    font-size: 0.8em;
+    font-size: 0.75em;
 }
 
 //.<alignment> { text-align: <alignment>; }

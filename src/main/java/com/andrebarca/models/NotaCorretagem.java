@@ -3,7 +3,6 @@ package com.andrebarca.models;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -11,6 +10,7 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 public class NotaCorretagem extends Base {
@@ -57,7 +57,7 @@ public class NotaCorretagem extends Base {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")    
     private Date dataPregao;
 
-    @OneToMany(mappedBy = "notaCorretagem", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "notaCorretagem", orphanRemoval = true)
     @JsonIgnoreProperties({ "notaCorretagem" })
     private Set<Operacao> operacoes;
 

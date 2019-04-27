@@ -35,7 +35,7 @@ export class NotaCorretagemComponent implements OnInit {
 
   save(): void {
     this.notaCorretagemService.save(this.notaCorretagem).subscribe(response => {
-      console.log(response.body);
+      this.close();
     }, error => {
       console.log(error);
     });
