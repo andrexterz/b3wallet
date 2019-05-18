@@ -3,6 +3,7 @@ package com.andrebarca.models;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -57,7 +58,7 @@ public class NotaCorretagem extends Base {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")    
     private Date dataPregao;
 
-    @OneToMany(mappedBy = "notaCorretagem", orphanRemoval = true)
+    @OneToMany(mappedBy = "notaCorretagem", orphanRemoval = true, cascade = CascadeType.ALL )
     @JsonIgnoreProperties({ "notaCorretagem" })
     private Set<Operacao> operacoes;
 

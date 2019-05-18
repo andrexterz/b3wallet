@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NotaCorretagemService, OperacaoService,PapelService } from '../../services';
 import { NotaCorretagem, Papel, Operacao, Option } from '../../models';
+import { OperacaoComponent } from '../operacao/operacao.component';
 
 @Component({
   selector: 'nota-corretagem',
@@ -25,7 +26,8 @@ export class NotaCorretagemComponent implements OnInit {
   constructor (
     private notaCorretagemService: NotaCorretagemService,
     private operacaoService: OperacaoService,
-    private papelService: PapelService
+    private papelService: PapelService,
+    private operacaoComponent: OperacaoComponent
   ) {}
 
   ngOnInit() {
@@ -35,6 +37,7 @@ export class NotaCorretagemComponent implements OnInit {
 
   save(): void {
     this.notaCorretagemService.save(this.notaCorretagem).subscribe(response => {
+      this.operacaoComponent.updateServices();
       this.close();
     }, error => {
       console.log(error);

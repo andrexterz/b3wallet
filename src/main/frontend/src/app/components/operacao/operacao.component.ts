@@ -1,4 +1,4 @@
-import { Component,  OnInit } from '@angular/core';
+import { Component,  OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
@@ -9,6 +9,7 @@ import { Operacao, NotaCorretagem, Papel, Option } from '../../models';
   selector: 'operacao-component',
   templateUrl: './operacao.component.html'
 })
+@Injectable()
 export class OperacaoComponent implements OnInit {
     notasCorretagem: NotaCorretagem[] = [];
     operacoes: Operacao[] = [];
@@ -50,6 +51,9 @@ export class OperacaoComponent implements OnInit {
     updateServices(): void {
       this.operacaoService.list().subscribe(response => this.operacoes = response.body);
       this.operacaoService.listOptionsDataOperacao().subscribe(response => this.optionsDataOperacao = response.body);
+      this.notaCorretagemService.list().subscribe(response => {
+        response.body.forEach(notaCorretagem => this.notasCorretagem.push(Object.assign(new NotaCorretagem(), notaCorretagem)));
+      });
     }
 
     listOperacoes(): Object {
