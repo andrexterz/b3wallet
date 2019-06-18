@@ -123,13 +123,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let notaCorretagem of listNotasCorretagem()">
+          <tr *ngFor="let notaCorretagem of listNotasCorretagem()" [ngClass]="{'text-error': notaCorretagem.totalNota < 0}">
             <td title="Número">{{notaCorretagem.numero}}</td>
             <td title="Data do Pregão">{{notaCorretagem.dataPregao | date: 'dd/MM/yyyy'}}</td>
-            <td title="Taxas" class="right">{{(notaCorretagem.totalTaxas()) | currency:'BRL':'symbol':'1.2-2' }}</td>
+            <td title="Taxas" class="right">{{(notaCorretagem.totalTaxas) | currency:'BRL':'symbol':'1.2-2' }}</td>
             <td title="ISS" class="right">{{notaCorretagem.iss | currency:'BRL':'symbol':'1.2-2' }}</td>
             <td title="IRRF" class="right">{{notaCorretagem.irrf | currency:'BRL':'symbol':'1.2-2' }}</td>
-            <td title="Total" class="right">{{notaCorretagem.totalNota() | currency:'BRL':'symbol':'1.2-2'}}</td>
+            <td title="Total" class="right" >{{notaCorretagem.totalNota | currency:'BRL':'symbol':'1.2-2'}}</td>
             <td class="table-action center">
               <a title="editar nota de corretagem" class="link" (click)="edit(notaCorretagem)"><i class="fa fa-pencil"></i></a>
               <a title="remover nota de corretagem" class="margin-left-3 link" (click)="delete(notaCorretagem)"><i class="fa fa-trash"></i></a>

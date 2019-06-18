@@ -17,7 +17,7 @@ export class NotaCorretagem {
     dataCriacao: Date;
     dataAtualizacao: Date;
 
-    totalTaxas(): number {
+    get totalTaxas(): number {
         return (
             this.taxaLiquidacao +
             this.taxaRegistro +
@@ -29,7 +29,12 @@ export class NotaCorretagem {
         );
     }
 
-    totalNota(): number {
-        return 0;
+    get totalNota(): number {
+        const t = (total, value) => total + value;
+        let totalOperacoes: number[] = [];
+        this.operacoes.forEach(o => {
+            totalOperacoes.push(o.tipoOperacao == 'COMPRA' ? o.totalOperacao * -1: o.totalOperacao);
+        });
+        return (totalOperacoes.reduce(t) - this.totalTaxas);
     }
 }

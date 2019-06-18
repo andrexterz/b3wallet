@@ -192,6 +192,24 @@ Generic component styles
     }
 }
 
+.text {
+  &-info {
+    color: $text-info-color;
+  }
+  
+  &-success {
+    color: $text-success-color;
+  }
+
+  &-warning {
+    color: $text-warning-color;
+  }
+
+  &-error {
+    color: $text-error-color;
+  }
+}
+
 .link {
     cursor: pointer;
     color: $link-color;
