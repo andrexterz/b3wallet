@@ -23,7 +23,7 @@
     "@angular/router": "^7.1.4",
     "core-js": "^2.5.7",
     "font-awesome": "^4.7.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ngx-mask": "^7.3.6",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.0.0-rc.0",
